@@ -1,9 +1,0 @@
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\Models\obj\Debug\DataModels.csprojResolveAssemblyReference.cache
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\Models\bin\Debug\DataModels.dll
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\Models\bin\Debug\DataModels.pdb
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\Models\obj\Debug\DataModels.dll
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\Models\obj\Debug\DataModels.pdb
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\BusinessModels\bin\Debug\DataModels.dll
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\BusinessModels\bin\Debug\DataModels.pdb
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\BusinessModels\obj\Debug\DataModels.dll
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\BusinessModels\obj\Debug\DataModels.pdb

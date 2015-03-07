@@ -1,5 +1,0 @@
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\Interface\bin\Debug\Interface.dll
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\Interface\bin\Debug\Interface.pdb
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\Interface\obj\Debug\Interface.csprojResolveAssemblyReference.cache
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\Interface\obj\Debug\Interface.dll
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\Interface\obj\Debug\Interface.pdb
