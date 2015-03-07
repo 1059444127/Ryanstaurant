@@ -1,0 +1,5 @@
+C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\BusinessModels\bin\Debug\BusinessModels.dll
+C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\BusinessModels\bin\Debug\BusinessModels.pdb
+C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\BusinessModels\obj\Debug\BusinessModels.dll
+C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\BusinessModels\obj\Debug\BusinessModels.pdb
+C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\BusinessModels\obj\Debug\BusinessModels.csprojResolveAssemblyReference.cache
