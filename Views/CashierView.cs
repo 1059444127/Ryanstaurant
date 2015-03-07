@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using UIEntity;
 
 namespace Views
 {
@@ -26,41 +25,45 @@ namespace Views
         }
 
 
-        public void LoadNavigator(List<Navigator> navs)
+        private List<Navigator> _Navigators = new List<Navigator>();
+
+        public List<Navigator> Navigators
         {
-            foreach(Navigator nav in navs)
+            get { return _Navigators; }
+            set
             {
-                BSE.Windows.Forms.XPanderPanel xp = new BSE.Windows.Forms.XPanderPanel();
-                xp.Text = nav.Label;
-                xp.Tag = nav;
-                xp.Dock = DockStyle.Fill;
-
-                DevComponents.DotNetBar.ItemPanel ip = new DevComponents.DotNetBar.ItemPanel();
-                ip.Dock = DockStyle.Fill;
-                xp.Controls.Add(ip);
-
-                if (nav.Child.Count>0)
+                _Navigators = value;
+                foreach (Navigator nav in _Navigators)
                 {
-                    foreach(Navigator navchild in nav.Child)
+                    BSE.Windows.Forms.XPanderPanel xp = new BSE.Windows.Forms.XPanderPanel();
+                    xp.Text = nav.Label;
+                    xp.Tag = nav;
+                    xp.Dock = DockStyle.Fill;
+
+                    DevComponents.DotNetBar.ItemPanel ip = new DevComponents.DotNetBar.ItemPanel();
+                    ip.Dock = DockStyle.Fill;
+                    xp.Controls.Add(ip);
+
+                    if (nav.Child.Count > 0)
                     {
-                        DevComponents.DotNetBar.ButtonItem bi =new  DevComponents.DotNetBar.ButtonItem();
-                        bi.Text = navchild.Label;
-                        bi.Name =  "BTN_" + navchild.ID.ToString();
-                        ip.Items.Add(bi);
+                        foreach (Navigator navchild in nav.Child)
+                        {
+                            DevComponents.DotNetBar.ButtonItem bi = new DevComponents.DotNetBar.ButtonItem();
+                            bi.Text = navchild.Label;
+                            bi.Name = "BTN_" + navchild.ID.ToString();
+                            ip.Items.Add(bi);
+                        }
+
+                        xplMainMenu.XPanderPanels.Add(xp);
                     }
 
-                    xplMainMenu.XPanderPanels.Add(xp);
+
                 }
 
-
+                if (xplMainMenu.XPanderPanels.Count > 0)
+                    xplMainMenu.XPanderPanels[0].Select();
             }
-
-            if (xplMainMenu.XPanderPanels.Count > 0)
-                xplMainMenu.XPanderPanels[0].Select();
         }
-
-
-
 
 
 
