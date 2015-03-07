@@ -1,0 +1,10 @@
+C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\WorkSpace\bin\Debug\WorkSpace.dll
+C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\WorkSpace\bin\Debug\WorkSpace.pdb
+C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\WorkSpace\bin\Debug\DataBase.dll
+C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\WorkSpace\bin\Debug\MySql.Data.dll
+C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\WorkSpace\bin\Debug\DataBase.pdb
+C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\WorkSpace\obj\Debug\WorkSpace.csprojResolveAssemblyReference.cache
+C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\WorkSpace\obj\Debug\WorkSpace.dll
+C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\WorkSpace\obj\Debug\WorkSpace.pdb
+C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\WorkSpace\bin\Debug\BusinessModels.dll
+C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\WorkSpace\bin\Debug\BusinessModels.pdb
