@@ -1,5 +1,0 @@
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\UIEntity\bin\Debug\UIEntity.dll
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\UIEntity\bin\Debug\UIEntity.pdb
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\UIEntity\obj\Debug\UIEntity.dll
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\UIEntity\obj\Debug\UIEntity.pdb
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\UIEntity\obj\Debug\UIEntity.csprojResolveAssemblyReference.cache

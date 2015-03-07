@@ -1,9 +1,0 @@
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\DataBase\bin\Debug\DataBase.dll
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\DataBase\bin\Debug\DataBase.pdb
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\DataBase\bin\Debug\MySql.Data.dll
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\DataBase\bin\Debug\MySql.Data.Entity.dll
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\DataBase\bin\Debug\MySql.Data.Entity.EF6.dll
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\DataBase\bin\Debug\MySql.Fabric.Plugin.dll
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\DataBase\bin\Debug\MySql.Web.dll
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\DataBase\obj\Debug\DataBase.dll
-C:\Users\Ryan&Poppy\Documents\Visual Studio 2013\Projects\Ryansturant\DataBase\obj\Debug\DataBase.pdb
