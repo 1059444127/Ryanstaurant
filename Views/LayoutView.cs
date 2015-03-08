@@ -30,9 +30,41 @@ namespace Views
         }
 
 
+        private List<Table> _Tables = new List<Table>();
+        public List<Table> Tables
+        {
+            get { return _Tables; }
+            set
+            {
+                _Tables = value;
+                PutTables(_Tables);
+            }
+        }
 
 
-        public void PutTables(List<Table> tables)
+
+        private List<Seat> _Seats = new List<Seat>();
+
+        public List<Seat> Seats
+        {
+            get { return _Seats; }
+            set
+            {
+                _Seats = value;
+                PutSeats(_Seats);
+            }
+        }
+
+        
+
+
+
+
+
+
+
+
+        private void PutTables(List<Table> tables)
         {
             foreach (Table t in tables)
             {
@@ -42,7 +74,7 @@ namespace Views
 
 
 
-        public void PutSeats(List<Seat> seats)
+        private void PutSeats(List<Seat> seats)
         {
 
             foreach (Seat s in seats)
@@ -52,7 +84,7 @@ namespace Views
         }
 
 
-        public void PutTable(Table table)
+        private void PutTable(Table table)
         {
             Button btnTable = new Button();
             //string strURL = table.PicURL;
@@ -66,7 +98,7 @@ namespace Views
         }
 
 
-        public void PutSeat(Seat seat)
+        private void PutSeat(Seat seat)
         {
             Button btnSeat = new Button();
            // string strURL = seat.PicURL;
@@ -79,7 +111,7 @@ namespace Views
             plFloor.Controls.Add(btnSeat);
         }
 
-        public void PutTableWithSeats(Table table)
+        private void PutTableWithSeats(Table table)
         {
             PutTable(table);
             foreach (Seat se in table.SeatList)

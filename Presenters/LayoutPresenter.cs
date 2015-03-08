@@ -22,9 +22,9 @@ namespace Presenters
         {
             this.View = view;
             LoadLayout();
-            
-            this.View.PutTables(Tables);
-            this.View.PutSeats(Seats);
+
+            this.View.Tables = Tables;
+            this.View.Seats = Seats;
             this.View.LinkButtonClickEvent();
             this.View.ButtonClicked += delegate
             {
