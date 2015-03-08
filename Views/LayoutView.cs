@@ -149,6 +149,20 @@ namespace Views
 
 
 
+        private string _BackGroundURL = "";
+
+        public string BackGroundURL
+        {
+            get { return _BackGroundURL; }
+            set
+            {
+                _BackGroundURL = value;
+                this.BackgroundImage = Image.FromFile(_BackGroundURL);
+            }
+        }
+
+
+
 
 
 

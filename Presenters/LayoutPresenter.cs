@@ -25,6 +25,7 @@ namespace Presenters
 
             this.View.Tables = Tables;
             this.View.Seats = Seats;
+            this.View.BackGroundURL = model.BackGroundURL;
             this.View.LinkButtonClickEvent();
             this.View.ButtonClicked += delegate
             {
