@@ -75,7 +75,7 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(116, 196);
+            this.btnLogin.Location = new System.Drawing.Point(57, 196);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(162, 58);
             this.btnLogin.TabIndex = 5;
@@ -84,7 +84,8 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(284, 196);
+            this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnExit.Location = new System.Drawing.Point(303, 196);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(162, 58);
             this.btnExit.TabIndex = 5;
@@ -93,8 +94,10 @@
             // 
             // LoginView
             // 
+            this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnExit;
             this.ClientSize = new System.Drawing.Size(523, 296);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label2);
