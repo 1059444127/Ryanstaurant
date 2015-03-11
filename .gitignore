@@ -155,3 +155,5 @@ Temporary Items
 /WorkSpace/obj/Debug/WorkSpace.csprojResolveAssemblyReference.cache
 /WorkSpace/obj/Debug/WorkSpace.dll
 /WorkSpace/obj/Debug/WorkSpace.pdb
+*.cache
+WPFViews/obj/Debug/App.g.i.cs
