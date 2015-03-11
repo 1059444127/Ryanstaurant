@@ -14,7 +14,13 @@ namespace Views
         public CashierView()
         {
             InitializeComponent();
+
+
+
         }
+
+        public EventHandler ViewClosed;
+        public EventHandler CashierViewExit;
 
 
         public void ShiftView(Form form)
@@ -65,6 +71,26 @@ namespace Views
             }
         }
 
+        public void CloseView()
+        {
+            foreach (Control cr in this.plMain.Controls)
+            {
+                plMain.Controls.Remove(cr);
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            if (this.ViewClosed != null)
+                ViewClosed(this, e);
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+
+            if (this.CashierViewExit != null)
+                CashierViewExit(this, e);
+        }
 
 
 
