@@ -17,10 +17,20 @@ namespace Presenters
         public CashierPresenter(CashierView view)
         {
             this.View = view;
+            this.View.ViewClosed += new EventHandler((o, e) => 
+            {
+                this.View.CloseView();
+            });
+            this.View.CashierViewExit += new EventHandler((o, e) => 
+            {
+                this.View.Close();
+            });
             LoadNavigator();
             ShowFloor();
             this.View.ShowDialog();
         }
+
+
 
 
 

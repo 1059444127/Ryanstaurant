@@ -157,7 +157,8 @@ namespace Views
             set
             {
                 _BackGroundURL = value;
-                this.BackgroundImage = Image.FromFile(_BackGroundURL);
+                if (!string.IsNullOrEmpty(_BackGroundURL))
+                    this.BackgroundImage = Image.FromFile(_BackGroundURL);
             }
         }
 

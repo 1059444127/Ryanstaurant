@@ -26,6 +26,7 @@ namespace Presenters
                 if (strResult.Contains("成功"))
                 {
                     CashierPresenter capre = new CashierPresenter(new CashierView());
+                    this.View.Close();
                 }
 
             };
