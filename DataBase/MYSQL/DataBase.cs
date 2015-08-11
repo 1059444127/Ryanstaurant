@@ -53,7 +53,7 @@ namespace DataBase.MYSQL
         
 
 
-        public DataTable ReadDataTableBySQL(string strSQL)
+        public DataTable ReadDataTableBySQL(string strSql)
         {
 
             try
@@ -63,7 +63,7 @@ namespace DataBase.MYSQL
 
 
                 DataSet dsReturn = new DataSet();
-                dsReturn = MySqlHelper.ExecuteDataset(conn, strSQL);
+                dsReturn = MySqlHelper.ExecuteDataset(conn, strSql);
                 if (dsReturn.Tables.Count == 0)
                     return null;
                 return dsReturn.Tables[0];

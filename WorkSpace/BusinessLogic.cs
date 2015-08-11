@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DataBase;
+﻿using DataBase;
 using BusinessModels;
 using System.Data;
 
@@ -10,15 +6,14 @@ namespace WorkSpace
 {
     public class BusinessLogic
     {
+        readonly IDataBase _db = DataBaseFactory.CreateDataBase(DBType.MYSQL);
 
-        IDataBase db = DataBaseFactory.CreateDataBase(DBType.MYSQL);
-
-        public Employee GetEmployee(string EmployeeName)
+        public Employee GetEmployee(string employeeName)
         {
-            Employee emp = new Employee();
+            var emp = new Employee();
 
-            string strSQL = "select id,name,password from employee where name = '" + EmployeeName.Replace("'", "") + "'";
-            DataTable dt = db.ReadDataTableBySQL(strSQL);
+            string strSQL = "select id,name,password from employee where name = '" + employeeName.Replace("'", "") + "'";
+            DataTable dt = _db.ReadDataTableBySql(strSQL);
             if (dt == null || dt.Rows.Count == 0)
                 return null;
 
@@ -37,8 +32,8 @@ namespace WorkSpace
 
         public DataTable GetFloorLayout()
         {
-            string strSQL = "Select * from v_TableSeats";
-            DataTable dt = db.ReadDataTableBySQL(strSQL);
+            const string strSQL = "Select * from v_TableSeats";
+            DataTable dt = _db.ReadDataTableBySql(strSQL);
             return dt;
 
         }
@@ -49,8 +44,8 @@ namespace WorkSpace
 
         public DataTable GetNavigations()
         {
-            string strSQL = "select * from Navigator";
-            DataTable dt = db.ReadDataTableBySQL(strSQL);
+            const string strSQL = "select * from Navigator";
+            DataTable dt = _db.ReadDataTableBySql(strSQL);
             return dt;
         }
 

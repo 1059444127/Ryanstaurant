@@ -6,6 +6,6 @@ namespace DataBase
     {
         int ErrorCode { get; }
         string ErrorMessage { get; }
-        DataTable ReadDataTableBySQL(string strSQL);
+        DataTable ReadDataTableBySql(string strSql);
     }
 }
