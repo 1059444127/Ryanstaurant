@@ -158,3 +158,13 @@ Temporary Items
 *.cache
 WPFViews/obj/Debug/App.g.i.cs
 Views/obj/Debug/TempPE/Properties.Resources.Designer.cs.dll
+*.pdb
+RyanstaurantServer/bin/Debug/RyanstaurantServer.exe
+*.dll
+RyanstaurantServer/obj/Debug/RyanstaurantServer.csproj.FileListAbsolute.txt
+RyanstaurantServer/obj/Debug/RyanstaurantServer.exe
+RyanstaurantServer/obj/Debug/RyanstaurantServer.Properties.Resources.resources
+RyanstaurantServer/obj/Debug/RyanstaurantServer.Form1.resources
+*.config
+RyanstaurantService/obj/Debug/RyanstaurantService.csproj.FileListAbsolute.txt
+RyanstaurantService/RyanstaurantService.csproj.user
