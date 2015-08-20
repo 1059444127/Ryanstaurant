@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Ryanstaurant.DataBase.EF.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="authority">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Dishes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="ShortCall" Type="varchar" MaxLength="10" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="MainType" Type="varchar" MaxLength="20" />
+          <Property Name="SubType" Type="varchar" MaxLength="20" />
+          <Property Name="Photo" Type="image" />
+        </EntityType>
+        <EntityType Name="emp_auth">
+          <Key>
+            <PropertyRef Name="Emp_id" />
+            <PropertyRef Name="Auth_id" />
+          </Key>
+          <Property Name="Emp_id" Type="int" Nullable="false" />
+          <Property Name="Auth_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="emp_role">
+          <Key>
+            <PropertyRef Name="emp_id" />
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="emp_id" Type="int" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="menu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="MType" Type="varchar" MaxLength="100" />
+          <Property Name="DishID" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="200" />
+          <Property Name="SubDescription" Type="varchar" MaxLength="500" />
+          <Property Name="SuiteID" Type="int" />
+        </EntityType>
+        <EntityType Name="navigator">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="Label" Type="varchar" MaxLength="100" />
+          <Property Name="ClassName" Type="varchar" MaxLength="200" />
+          <Property Name="AuthorityID" Type="int" />
+          <Property Name="SortNumber" Type="int" />
+          <Property Name="PicURL" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="role_auth">
+          <Key>
+            <PropertyRef Name="role_id" />
+            <PropertyRef Name="auth_id" />
+          </Key>
+          <Property Name="role_id" Type="int" Nullable="false" />
+          <Property Name="auth_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="seatimageconfig">
+          <Key>
+            <PropertyRef Name="Direction" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Direction" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="PicURL" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SeatList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="DisplayNo" Type="varchar" MaxLength="50" />
+          <Property Name="Direction" Type="int" />
+          <Property Name="Width" Type="int" />
+          <Property Name="Length" Type="int" />
+          <Property Name="PosX" Type="int" />
+          <Property Name="PosY" Type="int" />
+        </EntityType>
+        <EntityType Name="sysconfig">
+          <Key>
+            <PropertyRef Name="ShortCall" />
+          </Key>
+          <Property Name="ShortCall" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="ConfigValue" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="table_seats">
+          <Key>
+            <PropertyRef Name="TableID" />
+            <PropertyRef Name="SeatID" />
+          </Key>
+          <Property Name="TableID" Type="int" Nullable="false" />
+          <Property Name="SeatID" Type="int" Nullable="false" />
+          <Property Name="CurrentStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tableimageconfig">
+          <Key>
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="PicURL" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="tablelist">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="DisplayNo" Type="varchar" MaxLength="50" />
+          <Property Name="PosX" Type="int" />
+          <Property Name="PosY" Type="int" />
+          <Property Name="Width" Type="int" />
+          <Property Name="Length" Type="int" />
+        </EntityType>
+        <EntityContainer Name="RyanstaurantDataBaseEFStoreContainer">
+          <EntitySet Name="authority" EntityType="Self.authority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dishes" EntityType="Self.Dishes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="emp_auth" EntityType="Self.emp_auth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="emp_role" EntityType="Self.emp_role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="menu" EntityType="Self.menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="navigator" EntityType="Self.navigator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role_auth" EntityType="Self.role_auth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="seatimageconfig" EntityType="Self.seatimageconfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SeatList" EntityType="Self.SeatList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysconfig" EntityType="Self.sysconfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="table_seats" EntityType="Self.table_seats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tableimageconfig" EntityType="Self.tableimageconfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tablelist" EntityType="Self.tablelist" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Ryanstaurant.DataBase.EF" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="authority">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Dishes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ShortCall" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="MainType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SubType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="emp_auth">
+          <Key>
+            <PropertyRef Name="Emp_id" />
+            <PropertyRef Name="Auth_id" />
+          </Key>
+          <Property Name="Emp_id" Type="Int32" Nullable="false" />
+          <Property Name="Auth_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="emp_role">
+          <Key>
+            <PropertyRef Name="emp_id" />
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="emp_id" Type="Int32" Nullable="false" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="menu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DishID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SubDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SuiteID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="navigator">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="Label" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ClassName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AuthorityID" Type="Int32" />
+          <Property Name="SortNumber" Type="Int32" />
+          <Property Name="PicURL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="role_auth">
+          <Key>
+            <PropertyRef Name="role_id" />
+            <PropertyRef Name="auth_id" />
+          </Key>
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <Property Name="auth_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="seatimageconfig">
+          <Key>
+            <PropertyRef Name="Direction" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Direction" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="PicURL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SeatList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DisplayNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Direction" Type="Int32" />
+          <Property Name="Width" Type="Int32" />
+          <Property Name="Length" Type="Int32" />
+          <Property Name="PosX" Type="Int32" />
+          <Property Name="PosY" Type="Int32" />
+        </EntityType>
+        <EntityType Name="sysconfig">
+          <Key>
+            <PropertyRef Name="ShortCall" />
+          </Key>
+          <Property Name="ShortCall" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ConfigValue" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="table_seats">
+          <Key>
+            <PropertyRef Name="TableID" />
+            <PropertyRef Name="SeatID" />
+          </Key>
+          <Property Name="TableID" Type="Int32" Nullable="false" />
+          <Property Name="SeatID" Type="Int32" Nullable="false" />
+          <Property Name="CurrentStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tableimageconfig">
+          <Key>
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="PicURL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tablelist">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DisplayNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PosX" Type="Int32" />
+          <Property Name="PosY" Type="Int32" />
+          <Property Name="Width" Type="Int32" />
+          <Property Name="Length" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="ryanstaurantEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="authority" EntityType="Self.authority" />
+          <EntitySet Name="Dishes" EntityType="Self.Dishes" />
+          <EntitySet Name="emp_auth" EntityType="Self.emp_auth" />
+          <EntitySet Name="emp_role" EntityType="Self.emp_role" />
+          <EntitySet Name="employee" EntityType="Self.employee" />
+          <EntitySet Name="menu" EntityType="Self.menu" />
+          <EntitySet Name="navigator" EntityType="Self.navigator" />
+          <EntitySet Name="role" EntityType="Self.role" />
+          <EntitySet Name="role_auth" EntityType="Self.role_auth" />
+          <EntitySet Name="seatimageconfig" EntityType="Self.seatimageconfig" />
+          <EntitySet Name="SeatList" EntityType="Self.SeatList" />
+          <EntitySet Name="sysconfig" EntityType="Self.sysconfig" />
+          <EntitySet Name="table_seats" EntityType="Self.table_seats" />
+          <EntitySet Name="tableimageconfig" EntityType="Self.tableimageconfig" />
+          <EntitySet Name="tablelist" EntityType="Self.tablelist" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RyanstaurantDataBaseEFStoreContainer" CdmEntityContainer="ryanstaurantEntities">
+          <EntitySetMapping Name="authority">
+            <EntityTypeMapping TypeName="Ryanstaurant.DataBase.EF.authority">
+              <MappingFragment StoreEntitySet="authority">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dishes">
+            <EntityTypeMapping TypeName="Ryanstaurant.DataBase.EF.Dishes">
+              <MappingFragment StoreEntitySet="Dishes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ShortCall" ColumnName="ShortCall" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="MainType" ColumnName="MainType" />
+                <ScalarProperty Name="SubType" ColumnName="SubType" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="emp_auth">
+            <EntityTypeMapping TypeName="Ryanstaurant.DataBase.EF.emp_auth">
+              <MappingFragment StoreEntitySet="emp_auth">
+                <ScalarProperty Name="Emp_id" ColumnName="Emp_id" />
+                <ScalarProperty Name="Auth_id" ColumnName="Auth_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="emp_role">
+            <EntityTypeMapping TypeName="Ryanstaurant.DataBase.EF.emp_role">
+              <MappingFragment StoreEntitySet="emp_role">
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employee">
+            <EntityTypeMapping TypeName="Ryanstaurant.DataBase.EF.employee">
+              <MappingFragment StoreEntitySet="employee">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="menu">
+            <EntityTypeMapping TypeName="Ryanstaurant.DataBase.EF.menu">
+              <MappingFragment StoreEntitySet="menu">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MType" ColumnName="MType" />
+                <ScalarProperty Name="DishID" ColumnName="DishID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SubDescription" ColumnName="SubDescription" />
+                <ScalarProperty Name="SuiteID" ColumnName="SuiteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="navigator">
+            <EntityTypeMapping TypeName="Ryanstaurant.DataBase.EF.navigator">
+              <MappingFragment StoreEntitySet="navigator">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="AuthorityID" ColumnName="AuthorityID" />
+                <ScalarProperty Name="SortNumber" ColumnName="SortNumber" />
+                <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="role">
+            <EntityTypeMapping TypeName="Ryanstaurant.DataBase.EF.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="role_auth">
+            <EntityTypeMapping TypeName="Ryanstaurant.DataBase.EF.role_auth">
+              <MappingFragment StoreEntitySet="role_auth">
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="auth_id" ColumnName="auth_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seatimageconfig">
+            <EntityTypeMapping TypeName="Ryanstaurant.DataBase.EF.seatimageconfig">
+              <MappingFragment StoreEntitySet="seatimageconfig">
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SeatList">
+            <EntityTypeMapping TypeName="Ryanstaurant.DataBase.EF.SeatList">
+              <MappingFragment StoreEntitySet="SeatList">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DisplayNo" ColumnName="DisplayNo" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="PosX" ColumnName="PosX" />
+                <ScalarProperty Name="PosY" ColumnName="PosY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysconfig">
+            <EntityTypeMapping TypeName="Ryanstaurant.DataBase.EF.sysconfig">
+              <MappingFragment StoreEntitySet="sysconfig">
+                <ScalarProperty Name="ShortCall" ColumnName="ShortCall" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ConfigValue" ColumnName="ConfigValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="table_seats">
+            <EntityTypeMapping TypeName="Ryanstaurant.DataBase.EF.table_seats">
+              <MappingFragment StoreEntitySet="table_seats">
+                <ScalarProperty Name="TableID" ColumnName="TableID" />
+                <ScalarProperty Name="SeatID" ColumnName="SeatID" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tableimageconfig">
+            <EntityTypeMapping TypeName="Ryanstaurant.DataBase.EF.tableimageconfig">
+              <MappingFragment StoreEntitySet="tableimageconfig">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tablelist">
+            <EntityTypeMapping TypeName="Ryanstaurant.DataBase.EF.tablelist">
+              <MappingFragment StoreEntitySet="tablelist">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DisplayNo" ColumnName="DisplayNo" />
+                <ScalarProperty Name="PosX" ColumnName="PosX" />
+                <ScalarProperty Name="PosY" ColumnName="PosY" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

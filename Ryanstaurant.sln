@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "DataBase\DataBase.csproj", "{89592B56-7ABE-4983-B154-510A7029E538}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkSpace", "WorkSpace\WorkSpace.csproj", "{772B34CA-AAD7-4F80-B041-BFF6E457B0A1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessModels", "BusinessModels\BusinessModels.csproj", "{FEB75CC5-86C9-4BA4-90DF-78B884DA500D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Views", "Views\Views.csproj", "{02F30597-BCD7-4095-A3F4-AF1AC23CB8FB}"
@@ -24,9 +22,75 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB", "DB", "{F25DA500-0427-
 		DB\ryanstaurant.sql = DB\ryanstaurant.sql
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RyanstaurantService", "RyanstaurantService\RyanstaurantService.csproj", "{FC209D07-B7A9-491E-BF57-18D4D91D08B7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ORG", "ORG", "{94919789-C925-42DE-A994-44F5205C8A9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RyanstaurantServer", "RyanstaurantServer\RyanstaurantServer.csproj", "{BEEC8353-474D-4D6B-8151-9294912E34BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryanstaurant.UMS.Service", "UserService\Ryanstaurant.UMS.Service.csproj", "{8EE77F78-48DD-45E9-88AB-EDE0196836BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UMS", "UMS", "{084A7870-455F-4D80-962D-E85A0C47C0EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryanstaurant.UMS.Interface", "Ryanstaurant.UMS.Interface\Ryanstaurant.UMS.Interface.csproj", "{24FE75A4-4D04-4006-8518-4340CBD19942}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryanstaurant.UMS.Entity", "Ryanstaurant.UMS.DataContract\Ryanstaurant.UMS.Entity.csproj", "{4277A7A7-AB57-488A-8D33-BCA11F1AC8CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{C0EB7382-1BAD-4DAE-A5EA-40E028A64531}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryanstaurant.UMS.WorkSpace", "Ryanstaurant.UMS.WorkSpace\Ryanstaurant.UMS.WorkSpace.csproj", "{F013490B-FA44-4158-97AE-656168DEAE4A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utility", "Utility", "{03C1AB78-C218-41AA-A608-42C837DC35AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryanstaurant.Utility", "Ryanstaurant.Utility\Ryanstaurant.Utility.csproj", "{DA98A705-F472-4ECE-A15A-0D75DC7B4655}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servers", "Servers", "{5643C18D-17CE-4491-8286-6832649C2632}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryanstaurant.Server", "Ryanstaurant.Server\Ryanstaurant.Server.csproj", "{FEC532C0-890B-4F64-8C54-16C3D30B6BCD}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "UMS_WAS", "http://localhost:21679", "{72770D54-CCD6-4E0A-B478-672A7DFD2049}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{4277a7a7-ab57-488a-8d33-bca11f1ac8cc}|Ryanstaurant.UMS.Entity.dll;{24fe75a4-4d04-4006-8518-4340cbd19942}|Ryanstaurant.UMS.Interface.dll;{8ee77f78-48dd-45e9-88ab-ede0196836bc}|Ryanstaurant.UMS.Service.dll;{F013490B-FA44-4158-97AE-656168DEAE4A}|Ryanstaurant.UMS.WorkSpace.dll;{89592B56-7ABE-4983-B154-510A7029E538}|DataBase.dll;{DA98A705-F472-4ECE-A15A-0D75DC7B4655}|Ryanstaurant.Utility.dll;{5143BD0E-DF9A-4425-9178-075F55E6BFB9}|Ryanstaurant.UMS.DataAccess.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_21679"
+		Debug.AspNetCompiler.PhysicalPath = "Ryanstaurant.Servers\UMS_WAS\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_21679\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_21679"
+		Release.AspNetCompiler.PhysicalPath = "Ryanstaurant.Servers\UMS_WAS\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_21679\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "Ryanstaurant.Servers\UMS_WAS\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryanstaurant.UMS.DataAccess", "Ryanstaurant.UMS.DataAccess\Ryanstaurant.UMS.DataAccess.csproj", "{5143BD0E-DF9A-4425-9178-075F55E6BFB9}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WAS", "http://localhost:7140", "{FB787E92-876D-4541-979A-89777896537E}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{24fe75a4-4d04-4006-8518-4340cbd19942}|Ryanstaurant.UMS.Interface.dll;{4277A7A7-AB57-488A-8D33-BCA11F1AC8CC}|Ryanstaurant.UMS.Entity.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_7140"
+		Debug.AspNetCompiler.PhysicalPath = "Ryanstaurant.Servers\WAS\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_7140\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_7140"
+		Release.AspNetCompiler.PhysicalPath = "Ryanstaurant.Servers\WAS\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_7140\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "Ryanstaurant.Servers\WAS\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,10 +102,6 @@ Global
 		{89592B56-7ABE-4983-B154-510A7029E538}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89592B56-7ABE-4983-B154-510A7029E538}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89592B56-7ABE-4983-B154-510A7029E538}.Release|Any CPU.Build.0 = Release|Any CPU
-		{772B34CA-AAD7-4F80-B041-BFF6E457B0A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{772B34CA-AAD7-4F80-B041-BFF6E457B0A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{772B34CA-AAD7-4F80-B041-BFF6E457B0A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{772B34CA-AAD7-4F80-B041-BFF6E457B0A1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FEB75CC5-86C9-4BA4-90DF-78B884DA500D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FEB75CC5-86C9-4BA4-90DF-78B884DA500D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEB75CC5-86C9-4BA4-90DF-78B884DA500D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -62,16 +122,61 @@ Global
 		{E03CB650-98CC-4773-B61B-1C2C0E38D1E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E03CB650-98CC-4773-B61B-1C2C0E38D1E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E03CB650-98CC-4773-B61B-1C2C0E38D1E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FC209D07-B7A9-491E-BF57-18D4D91D08B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FC209D07-B7A9-491E-BF57-18D4D91D08B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FC209D07-B7A9-491E-BF57-18D4D91D08B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FC209D07-B7A9-491E-BF57-18D4D91D08B7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BEEC8353-474D-4D6B-8151-9294912E34BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BEEC8353-474D-4D6B-8151-9294912E34BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BEEC8353-474D-4D6B-8151-9294912E34BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BEEC8353-474D-4D6B-8151-9294912E34BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EE77F78-48DD-45E9-88AB-EDE0196836BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EE77F78-48DD-45E9-88AB-EDE0196836BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EE77F78-48DD-45E9-88AB-EDE0196836BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EE77F78-48DD-45E9-88AB-EDE0196836BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24FE75A4-4D04-4006-8518-4340CBD19942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24FE75A4-4D04-4006-8518-4340CBD19942}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24FE75A4-4D04-4006-8518-4340CBD19942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24FE75A4-4D04-4006-8518-4340CBD19942}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4277A7A7-AB57-488A-8D33-BCA11F1AC8CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4277A7A7-AB57-488A-8D33-BCA11F1AC8CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4277A7A7-AB57-488A-8D33-BCA11F1AC8CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4277A7A7-AB57-488A-8D33-BCA11F1AC8CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F013490B-FA44-4158-97AE-656168DEAE4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F013490B-FA44-4158-97AE-656168DEAE4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F013490B-FA44-4158-97AE-656168DEAE4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F013490B-FA44-4158-97AE-656168DEAE4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA98A705-F472-4ECE-A15A-0D75DC7B4655}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA98A705-F472-4ECE-A15A-0D75DC7B4655}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA98A705-F472-4ECE-A15A-0D75DC7B4655}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA98A705-F472-4ECE-A15A-0D75DC7B4655}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEC532C0-890B-4F64-8C54-16C3D30B6BCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEC532C0-890B-4F64-8C54-16C3D30B6BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEC532C0-890B-4F64-8C54-16C3D30B6BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEC532C0-890B-4F64-8C54-16C3D30B6BCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72770D54-CCD6-4E0A-B478-672A7DFD2049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72770D54-CCD6-4E0A-B478-672A7DFD2049}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72770D54-CCD6-4E0A-B478-672A7DFD2049}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{72770D54-CCD6-4E0A-B478-672A7DFD2049}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{5143BD0E-DF9A-4425-9178-075F55E6BFB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5143BD0E-DF9A-4425-9178-075F55E6BFB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5143BD0E-DF9A-4425-9178-075F55E6BFB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5143BD0E-DF9A-4425-9178-075F55E6BFB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB787E92-876D-4541-979A-89777896537E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB787E92-876D-4541-979A-89777896537E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB787E92-876D-4541-979A-89777896537E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB787E92-876D-4541-979A-89777896537E}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{89592B56-7ABE-4983-B154-510A7029E538} = {C0EB7382-1BAD-4DAE-A5EA-40E028A64531}
+		{FEB75CC5-86C9-4BA4-90DF-78B884DA500D} = {94919789-C925-42DE-A994-44F5205C8A9F}
+		{02F30597-BCD7-4095-A3F4-AF1AC23CB8FB} = {94919789-C925-42DE-A994-44F5205C8A9F}
+		{41D7D369-D409-4BA0-87AC-4F0D0EB1C8EF} = {94919789-C925-42DE-A994-44F5205C8A9F}
+		{4F914959-A109-4C24-94CF-2361084B3943} = {94919789-C925-42DE-A994-44F5205C8A9F}
+		{E03CB650-98CC-4773-B61B-1C2C0E38D1E6} = {94919789-C925-42DE-A994-44F5205C8A9F}
+		{8EE77F78-48DD-45E9-88AB-EDE0196836BC} = {084A7870-455F-4D80-962D-E85A0C47C0EF}
+		{24FE75A4-4D04-4006-8518-4340CBD19942} = {084A7870-455F-4D80-962D-E85A0C47C0EF}
+		{4277A7A7-AB57-488A-8D33-BCA11F1AC8CC} = {084A7870-455F-4D80-962D-E85A0C47C0EF}
+		{F013490B-FA44-4158-97AE-656168DEAE4A} = {084A7870-455F-4D80-962D-E85A0C47C0EF}
+		{DA98A705-F472-4ECE-A15A-0D75DC7B4655} = {03C1AB78-C218-41AA-A608-42C837DC35AF}
+		{FEC532C0-890B-4F64-8C54-16C3D30B6BCD} = {5643C18D-17CE-4491-8286-6832649C2632}
+		{72770D54-CCD6-4E0A-B478-672A7DFD2049} = {5643C18D-17CE-4491-8286-6832649C2632}
+		{5143BD0E-DF9A-4425-9178-075F55E6BFB9} = {084A7870-455F-4D80-962D-E85A0C47C0EF}
+		{FB787E92-876D-4541-979A-89777896537E} = {5643C18D-17CE-4491-8286-6832649C2632}
 	EndGlobalSection
 EndGlobal

@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MySql.Data">
       <HintPath>..\..\..\..\..\..\..\Software\Mysql\MysqlConnector\mysql-connector-net-commercial-6.9.5-noinstall\v4.0\MySql.Data.dll</HintPath>
     </Reference>
@@ -46,7 +54,10 @@
       <HintPath>..\..\..\..\..\..\..\Software\Mysql\MysqlConnector\mysql-connector-net-commercial-6.9.5-noinstall\v4.0\MySql.Web.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,13 +65,100 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataBaseFactory.cs" />
-    <Compile Include="MSSQL\DataBase.cs" />
-    <Compile Include="IDataBase.cs" />
+    <Compile Include="EF\authority.cs">
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Dishes.cs">
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\EF_UMSEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EF_UMSEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\EF_UMSEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\EF_UMSEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EF_UMSEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EF\employee.cs">
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\emp_auth.cs">
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\emp_role.cs">
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\menu.cs">
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\navigator.cs">
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\role.cs">
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\role_auth.cs">
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\seatimageconfig.cs">
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SeatList.cs">
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\sysconfig.cs">
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\tableimageconfig.cs">
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\tablelist.cs">
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\table_seats.cs">
+      <DependentUpon>EF_UMSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORG\DataBaseFactory.cs" />
+    <Compile Include="ORG\MSSQL\DataBase.cs" />
+    <Compile Include="ORG\IDataBase.cs" />
+    <Compile Include="ORG\MSSQL\MSSQLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="MYSQL\" />
+    <Folder Include="ORG\MYSQL\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="EF\EF_UMSEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EF_UMSEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="EF\EF_UMSEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EF_UMSEntities.edmx</DependentUpon>
+      <LastGenOutput>EF_UMSEntities.Context.cs</LastGenOutput>
+    </None>
+    <None Include="EF\EF_UMSEntities.edmx.diagram">
+      <DependentUpon>EF_UMSEntities.edmx</DependentUpon>
+    </None>
+    <None Include="EF\EF_UMSEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EF_UMSEntities.edmx</DependentUpon>
+      <LastGenOutput>EF_UMSEntities.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -49,10 +49,6 @@
       <Project>{feb75cc5-86c9-4ba4-90df-78b884da500d}</Project>
       <Name>BusinessModels</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WorkSpace\WorkSpace.csproj">
-      <Project>{772b34ca-aad7-4f80-b041-bff6e457b0a1}</Project>
-      <Name>WorkSpace</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

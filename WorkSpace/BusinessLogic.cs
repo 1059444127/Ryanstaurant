@@ -12,8 +12,8 @@ namespace WorkSpace
         {
             var emp = new Employee();
 
-            string strSQL = "select id,name,password from employee where name = '" + employeeName.Replace("'", "") + "'";
-            DataTable dt = _db.ReadDataTableBySql(strSQL);
+            var strSQL = "select id,name,password from employee where name = '" + employeeName.Replace("'", "") + "'";
+            var dt = _db.ReadDataTableBySql(strSQL);
             if (dt == null || dt.Rows.Count == 0)
                 return null;
 
