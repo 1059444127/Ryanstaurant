@@ -79,10 +79,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ryanstaurant.UMS.DataContract\Ryanstaurant.UMS.Entity.csproj">
-      <Project>{4277a7a7-ab57-488a-8d33-bca11f1ac8cc}</Project>
-      <Name>Ryanstaurant.UMS.Entity</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ryanstaurant.UMS.Interface\Ryanstaurant.UMS.Interface.csproj">
       <Project>{24fe75a4-4d04-4006-8518-4340cbd19942}</Project>
       <Name>Ryanstaurant.UMS.Interface</Name>

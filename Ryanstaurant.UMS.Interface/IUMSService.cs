@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
-using Ryanstaurant.UMS.Entity;
+using Ryanstaurant.Utility.DataContract;
+using Ryanstaurant.UMS.DataContract;
 
 namespace Ryanstaurant.UMS.Interface
 {
@@ -11,6 +9,17 @@ namespace Ryanstaurant.UMS.Interface
     public interface IUMSService
     {
         [OperationContract]
-        Employee GetEmployee(string employeeName);
+        ResultEntity<Employee> GetEmployee(string employeeName);
+
+        [OperationContract]
+        ResultEntity<List<Employee>> AddEmployees(List<Employee> employees);
+
+        [OperationContract]
+        ResultEntity<List<Employee>> ModifyEmployees(List<Employee> employees);
+
+        [OperationContract]
+        ResultEntity<List<Employee>> DeleteEmployees(List<Employee> employees);
+
+
     }
 }

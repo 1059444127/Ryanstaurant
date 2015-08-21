@@ -49,9 +49,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ryanstaurant.UMS.DataContract\Ryanstaurant.UMS.Entity.csproj">
-      <Project>{4277a7a7-ab57-488a-8d33-bca11f1ac8cc}</Project>
-      <Name>Ryanstaurant.UMS.Entity</Name>
+    <ProjectReference Include="..\Ryanstaurant.UMS.DataContract\Ryanstaurant.UMS.DataContract.csproj">
+      <Project>{f2fe3d45-0fed-4072-9c04-7636d4df6589}</Project>
+      <Name>Ryanstaurant.UMS.DataContract</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ryanstaurant.UMS.Interface\Ryanstaurant.UMS.Interface.csproj">
       <Project>{24fe75a4-4d04-4006-8518-4340cbd19942}</Project>
@@ -60,6 +60,10 @@
     <ProjectReference Include="..\Ryanstaurant.UMS.WorkSpace\Ryanstaurant.UMS.WorkSpace.csproj">
       <Project>{f013490b-fa44-4158-97ae-656168deae4a}</Project>
       <Name>Ryanstaurant.UMS.WorkSpace</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ryanstaurant.Utility\Ryanstaurant.Utility.csproj">
+      <Project>{da98a705-f472-4ece-a15a-0d75dc7b4655}</Project>
+      <Name>Ryanstaurant.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
