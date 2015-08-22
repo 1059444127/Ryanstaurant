@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonUtil.cs" />
     <Compile Include="DataContract\ResultContent.cs" />
     <Compile Include="DataContract\ResultEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
