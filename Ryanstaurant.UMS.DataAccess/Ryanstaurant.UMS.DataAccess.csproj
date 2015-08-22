@@ -38,6 +38,9 @@
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data.Entity, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -51,92 +54,144 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF\authority.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <DependentUpon>EFmysql_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="EF\Dishes.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <DependentUpon>EFmysql_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EF\EFmysql_UMS_Entities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EFmysql_UMS_Entities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\EFmysql_UMS_Entities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EFmysql_UMS_Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\EFmysql_UMS_Entities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EFmysql_UMS_Entities.edmx</DependentUpon>
     </Compile>
     <Compile Include="EF\EF_UMS_Entities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>EF_UMS_Entities.Context.tt</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="EF\EF_UMS_Entities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="EF\EF_UMS_Entities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>EF_UMS_Entities.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="EF\employee.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <DependentUpon>EFmysql_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="EF\emp_auth.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <DependentUpon>EFmysql_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="EF\emp_role.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <DependentUpon>EFmysql_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="EF\menu.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <DependentUpon>EFmysql_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="EF\navigator.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <DependentUpon>EFmysql_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="EF\role.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <DependentUpon>EFmysql_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="EF\role_auth.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <DependentUpon>EFmysql_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="EF\seatimageconfig.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <DependentUpon>EFmysql_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="EF\SeatList.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <DependentUpon>EFmysql_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="EF\sysconfig.cs">
       <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="EF\tableimageconfig.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <DependentUpon>EFmysql_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="EF\tablelist.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <DependentUpon>EFmysql_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="EF\table_seats.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <DependentUpon>EFmysql_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="EF\EF_UMS_Entities.edmx">
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="EF\EFmysql_UMS_Entities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EF_UMS_Entities.Designer.cs</LastGenOutput>
+      <LastGenOutput>EFmysql_UMS_Entities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="EF\EF_UMS_Entities.Context.tt">
+    <None Include="EF\EFmysql_UMS_Entities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EFmysql_UMS_Entities.edmx</DependentUpon>
+      <LastGenOutput>EFmysql_UMS_Entities.Context.cs</LastGenOutput>
+    </None>
+    <None Include="EF\EFmysql_UMS_Entities.edmx.diagram">
+      <DependentUpon>EFmysql_UMS_Entities.edmx</DependentUpon>
+    </None>
+    <None Include="EF\EFmysql_UMS_Entities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EFmysql_UMS_Entities.edmx</DependentUpon>
+      <LastGenOutput>EFmysql_UMS_Entities.cs</LastGenOutput>
+    </None>
+    <None Include="EF\EF_UMS_Entities.Context.tt">
       <DependentUpon>EF_UMS_Entities.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EF_UMS_Entities.Context.cs</LastGenOutput>
     </None>
     <None Include="EF\EF_UMS_Entities.edmx.diagram">
       <DependentUpon>EF_UMS_Entities.edmx</DependentUpon>
     </None>
     <None Include="EF\EF_UMS_Entities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EF_UMS_Entities.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EF_UMS_Entities.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EntityDeploy Include="EF\EF_UMS_Entities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EF_UMS_Entities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

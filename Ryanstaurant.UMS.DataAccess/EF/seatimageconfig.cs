@@ -14,8 +14,8 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     
     public partial class seatimageconfig
     {
-        public int Direction { get; set; }
-        public int Status { get; set; }
+        public string Direction { get; set; }
+        public string Status { get; set; }
         public string PicURL { get; set; }
     }
 }

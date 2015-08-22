@@ -14,7 +14,7 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     
     public partial class emp_role
     {
-        public int emp_id { get; set; }
-        public int role_id { get; set; }
+        public int EMP_ID { get; set; }
+        public int ROLE_ID { get; set; }
     }
 }

@@ -14,10 +14,10 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     
     public partial class menu
     {
-        public int id { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public string MType { get; set; }
-        public Nullable<int> DishID { get; set; }
+        public int DishID { get; set; }
         public string Description { get; set; }
         public string SubDescription { get; set; }
         public Nullable<int> SuiteID { get; set; }

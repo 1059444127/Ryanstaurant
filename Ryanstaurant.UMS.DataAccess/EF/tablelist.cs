@@ -15,10 +15,10 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     public partial class tablelist
     {
         public int ID { get; set; }
-        public string DisplayNo { get; set; }
-        public Nullable<int> PosX { get; set; }
-        public Nullable<int> PosY { get; set; }
-        public Nullable<int> Width { get; set; }
-        public Nullable<int> Length { get; set; }
+        public int No { get; set; }
+        public int PosX { get; set; }
+        public int PosY { get; set; }
+        public int Width { get; set; }
+        public int Length { get; set; }
     }
 }

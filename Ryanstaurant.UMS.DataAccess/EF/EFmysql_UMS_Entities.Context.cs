@@ -13,10 +13,10 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ryanstaurantEntities : DbContext
+    public partial class ryanstaurantEntitiesMysql : DbContext
     {
-        public ryanstaurantEntities()
-            : base("name=ryanstaurantEntities")
+        public ryanstaurantEntitiesMysql()
+            : base("name=ryanstaurantEntitiesMysql")
         {
         }
     
@@ -26,7 +26,7 @@ namespace Ryanstaurant.UMS.DataAccess.EF
         }
     
         public virtual DbSet<authority> authority { get; set; }
-        public virtual DbSet<Dishes> Dishes { get; set; }
+        public virtual DbSet<dishes> dishes { get; set; }
         public virtual DbSet<emp_auth> emp_auth { get; set; }
         public virtual DbSet<emp_role> emp_role { get; set; }
         public virtual DbSet<employee> employee { get; set; }
@@ -35,10 +35,9 @@ namespace Ryanstaurant.UMS.DataAccess.EF
         public virtual DbSet<role> role { get; set; }
         public virtual DbSet<role_auth> role_auth { get; set; }
         public virtual DbSet<seatimageconfig> seatimageconfig { get; set; }
-        public virtual DbSet<SeatList> SeatList { get; set; }
-        public virtual DbSet<sysconfig> sysconfig { get; set; }
-        public virtual DbSet<table_seats> table_seats { get; set; }
+        public virtual DbSet<seatlist> seatlist { get; set; }
         public virtual DbSet<tableimageconfig> tableimageconfig { get; set; }
         public virtual DbSet<tablelist> tablelist { get; set; }
+        public virtual DbSet<table_seats> table_seats { get; set; }
     }
 }

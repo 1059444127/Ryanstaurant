@@ -14,7 +14,7 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     
     public partial class tableimageconfig
     {
-        public int Status { get; set; }
+        public string Status { get; set; }
         public string PicURL { get; set; }
     }
 }

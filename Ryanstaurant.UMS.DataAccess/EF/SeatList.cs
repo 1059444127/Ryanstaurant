@@ -12,14 +12,14 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class SeatList
+    public partial class seatlist
     {
         public int ID { get; set; }
-        public string DisplayNo { get; set; }
-        public Nullable<int> Direction { get; set; }
-        public Nullable<int> Width { get; set; }
-        public Nullable<int> Length { get; set; }
-        public Nullable<int> PosX { get; set; }
-        public Nullable<int> PosY { get; set; }
+        public int No { get; set; }
+        public int Direction { get; set; }
+        public int Width { get; set; }
+        public int Length { get; set; }
+        public int PosX { get; set; }
+        public int PosY { get; set; }
     }
 }

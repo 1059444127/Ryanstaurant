@@ -12,7 +12,7 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Dishes
+    public partial class dishes
     {
         public int ID { get; set; }
         public string Name { get; set; }

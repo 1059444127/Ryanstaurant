@@ -14,10 +14,9 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     
     public partial class employee
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
+        public int id { get; set; }
+        public string NAME { get; set; }
         public string Password { get; set; }
         public string Description { get; set; }
-        public string LoginName { get; set; }
     }
 }
