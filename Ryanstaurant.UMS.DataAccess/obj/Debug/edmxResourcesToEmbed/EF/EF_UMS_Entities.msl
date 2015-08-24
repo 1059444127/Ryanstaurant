@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ryanstaurantModelStoreContainer" CdmEntityContainer="ryanstaurantEntities">
+    <EntitySetMapping Name="authority">
+      <EntityTypeMapping TypeName="ryanstaurantModel.authority">
+        <MappingFragment StoreEntitySet="authority">
+          <ScalarProperty Name="KeyCode" ColumnName="KeyCode" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dishes">
+      <EntityTypeMapping TypeName="ryanstaurantModel.Dishes">
+        <MappingFragment StoreEntitySet="Dishes">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ShortCall" ColumnName="ShortCall" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="MainType" ColumnName="MainType" />
+          <ScalarProperty Name="SubType" ColumnName="SubType" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="emp_auth">
+      <EntityTypeMapping TypeName="ryanstaurantModel.emp_auth">
+        <MappingFragment StoreEntitySet="emp_auth">
+          <ScalarProperty Name="Emp_id" ColumnName="Emp_id" />
+          <ScalarProperty Name="Auth_id" ColumnName="Auth_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="emp_role">
+      <EntityTypeMapping TypeName="ryanstaurantModel.emp_role">
+        <MappingFragment StoreEntitySet="emp_role">
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="employee">
+      <EntityTypeMapping TypeName="ryanstaurantModel.employee">
+        <MappingFragment StoreEntitySet="employee">
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="menu">
+      <EntityTypeMapping TypeName="ryanstaurantModel.menu">
+        <MappingFragment StoreEntitySet="menu">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="MType" ColumnName="MType" />
+          <ScalarProperty Name="DishID" ColumnName="DishID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="SubDescription" ColumnName="SubDescription" />
+          <ScalarProperty Name="SuiteID" ColumnName="SuiteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="navigator">
+      <EntityTypeMapping TypeName="ryanstaurantModel.navigator">
+        <MappingFragment StoreEntitySet="navigator">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="AuthorityID" ColumnName="AuthorityID" />
+          <ScalarProperty Name="SortNumber" ColumnName="SortNumber" />
+          <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="role">
+      <EntityTypeMapping TypeName="ryanstaurantModel.role">
+        <MappingFragment StoreEntitySet="role">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="role_auth">
+      <EntityTypeMapping TypeName="ryanstaurantModel.role_auth">
+        <MappingFragment StoreEntitySet="role_auth">
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="auth_id" ColumnName="auth_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seatimageconfig">
+      <EntityTypeMapping TypeName="ryanstaurantModel.seatimageconfig">
+        <MappingFragment StoreEntitySet="seatimageconfig">
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SeatList">
+      <EntityTypeMapping TypeName="ryanstaurantModel.SeatList">
+        <MappingFragment StoreEntitySet="SeatList">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DisplayNo" ColumnName="DisplayNo" />
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="PosX" ColumnName="PosX" />
+          <ScalarProperty Name="PosY" ColumnName="PosY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysconfig">
+      <EntityTypeMapping TypeName="ryanstaurantModel.sysconfig">
+        <MappingFragment StoreEntitySet="sysconfig">
+          <ScalarProperty Name="ShortCall" ColumnName="ShortCall" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ConfigValue" ColumnName="ConfigValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="table_seats">
+      <EntityTypeMapping TypeName="ryanstaurantModel.table_seats">
+        <MappingFragment StoreEntitySet="table_seats">
+          <ScalarProperty Name="TableID" ColumnName="TableID" />
+          <ScalarProperty Name="SeatID" ColumnName="SeatID" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tableimageconfig">
+      <EntityTypeMapping TypeName="ryanstaurantModel.tableimageconfig">
+        <MappingFragment StoreEntitySet="tableimageconfig">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tablelist">
+      <EntityTypeMapping TypeName="ryanstaurantModel.tablelist">
+        <MappingFragment StoreEntitySet="tablelist">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DisplayNo" ColumnName="DisplayNo" />
+          <ScalarProperty Name="PosX" ColumnName="PosX" />
+          <ScalarProperty Name="PosY" ColumnName="PosY" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

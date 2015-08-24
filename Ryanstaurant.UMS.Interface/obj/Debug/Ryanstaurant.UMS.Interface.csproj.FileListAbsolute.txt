@@ -1,0 +1,9 @@
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.Interface\bin\Debug\Ryanstaurant.UMS.Interface.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.Interface\bin\Debug\Ryanstaurant.UMS.Interface.pdb
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.Interface\obj\Debug\Ryanstaurant.UMS.Interface.csprojResolveAssemblyReference.cache
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.Interface\obj\Debug\Ryanstaurant.UMS.Interface.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.Interface\obj\Debug\Ryanstaurant.UMS.Interface.pdb
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.Interface\bin\Debug\Ryanstaurant.Utility.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.Interface\bin\Debug\Ryanstaurant.Utility.pdb
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.Interface\bin\Debug\Ryanstaurant.UMS.DataContract.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.Interface\bin\Debug\Ryanstaurant.UMS.DataContract.pdb

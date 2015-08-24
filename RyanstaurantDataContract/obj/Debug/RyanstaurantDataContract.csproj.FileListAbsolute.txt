@@ -1,0 +1,5 @@
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\RyanstaurantDataContract\obj\Debug\RyanstaurantDataContract.csprojResolveAssemblyReference.cache
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\RyanstaurantDataContract\bin\Debug\RyanstaurantDataContract.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\RyanstaurantDataContract\bin\Debug\RyanstaurantDataContract.pdb
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\RyanstaurantDataContract\obj\Debug\RyanstaurantDataContract.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\RyanstaurantDataContract\obj\Debug\RyanstaurantDataContract.pdb

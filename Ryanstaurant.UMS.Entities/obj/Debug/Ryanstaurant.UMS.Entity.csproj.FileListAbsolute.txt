@@ -1,0 +1,8 @@
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataContract\bin\Debug\Ryanstaurant.UMS.Entity.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataContract\bin\Debug\Ryanstaurant.UMS.Entity.pdb
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataContract\obj\Debug\Ryanstaurant.UMS.Entity.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataContract\obj\Debug\Ryanstaurant.UMS.Entity.pdb
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.Entities\bin\Debug\Ryanstaurant.UMS.Entity.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.Entities\bin\Debug\Ryanstaurant.UMS.Entity.pdb
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.Entities\obj\Debug\Ryanstaurant.UMS.Entity.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.Entities\obj\Debug\Ryanstaurant.UMS.Entity.pdb
