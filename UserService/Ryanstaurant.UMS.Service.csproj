@@ -61,10 +61,6 @@
       <Project>{f013490b-fa44-4158-97ae-656168deae4a}</Project>
       <Name>Ryanstaurant.UMS.WorkSpace</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ryanstaurant.Utility\Ryanstaurant.Utility.csproj">
-      <Project>{da98a705-f472-4ece-a15a-0d75dc7b4655}</Project>
-      <Name>Ryanstaurant.Utility</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

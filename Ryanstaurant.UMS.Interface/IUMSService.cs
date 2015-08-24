@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
-using Ryanstaurant.Utility.DataContract;
+using Ryanstaurant.DataContract;
+using Ryanstaurant.DataContract.Utility;
 using Ryanstaurant.UMS.DataContract;
 
 namespace Ryanstaurant.UMS.Interface
@@ -10,6 +11,9 @@ namespace Ryanstaurant.UMS.Interface
     {
         [OperationContract]
         ResultEntity<Employee> GetEmployee(string employeeName);
+
+        [OperationContract]
+        ResultEntity<List<Employee>> GetEmployees(List<Employee> employees);
 
         [OperationContract]
         ResultEntity<List<Employee>> AddEmployees(List<Employee> employees);

@@ -15,6 +15,5 @@ G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.WorkSpace\bin\Debug\R
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.WorkSpace\bin\Debug\EntityFramework.xml
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.WorkSpace\bin\Debug\EntityFramework.SqlServer.xml
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.WorkSpace\bin\Debug\zh-Hans\EntityFramework.resources.dll
-G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\Ryanstaurant.UMS.WorkSpace.dll.config
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\Ryanstaurant.UMS.WorkSpace.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\Ryanstaurant.UMS.WorkSpace.pdb

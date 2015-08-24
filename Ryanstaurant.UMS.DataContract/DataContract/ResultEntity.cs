@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Ryanstaurant.Utility.DataContract
+namespace Ryanstaurant.DataContract.Utility
 {
     public enum ResultState
     {

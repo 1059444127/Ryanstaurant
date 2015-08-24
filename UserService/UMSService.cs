@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
+using Ryanstaurant.DataContract.Utility;
 using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.Interface;
 using Ryanstaurant.UMS.WorkSpace;
-using Ryanstaurant.Utility.DataContract;
-using Ryanstaurant.Utility;
 
 
 namespace Ryanstaurant.UMS.Service
@@ -41,17 +39,17 @@ namespace Ryanstaurant.UMS.Service
         public ResultEntity<List<Employee>> AddEmployees(List<Employee> employees)
         {
 
-            return LoadBusinessMethod<List<Employee>>(() => new BllEmployee().AddEmployees(employees));
+            return LoadBusinessMethod(() => new BllEmployee().AddEmployees(employees));
         }
 
         public ResultEntity<List<Employee>> ModifyEmployees(List<Employee> employees)
         {
-            return LoadBusinessMethod<List<Employee>>(() => new BllEmployee().ModifyEmployees(employees));
+            return LoadBusinessMethod(() => new BllEmployee().ModifyEmployees(employees));
         }
 
         public ResultEntity<List<Employee>> DeleteEmployees(List<Employee> employees)
         {
-            return LoadBusinessMethod<List<Employee>>(() => new BllEmployee().DeleteEmployees(employees));
+            return LoadBusinessMethod(() => new BllEmployee().DeleteEmployees(employees));
         }
 
 
@@ -76,6 +74,12 @@ namespace Ryanstaurant.UMS.Service
                     State = ResultState.Fail
                 };
             }
+        }
+
+
+        public ResultEntity<List<Employee>> GetEmployees(List<Employee> employees)
+        {
+            return LoadBusinessMethod(() => new BllEmployee().Get(employees));
         }
     }
 }

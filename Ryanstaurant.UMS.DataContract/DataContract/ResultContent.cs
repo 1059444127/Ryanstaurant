@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Ryanstaurant.Utility.DataContract
+namespace Ryanstaurant.DataContract.Utility
 {
     [DataContract]
     public class ResultItem<T>
