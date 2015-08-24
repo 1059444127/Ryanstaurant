@@ -57,19 +57,21 @@
       <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\EF_UMS_Entities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>EF_UMS_Entities.Context.tt</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="EF\EF_UMS_Entities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="EF\EF_UMS_Entities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>EF_UMS_Entities.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="EF\employee.cs">
       <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
@@ -100,6 +102,7 @@
     </Compile>
     <Compile Include="EF\sysconfig.cs">
       <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="EF\tableimageconfig.cs">
       <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
@@ -113,30 +116,33 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="EF\EF_UMS_Entities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EF_UMS_Entities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="EF\EF_UMS_Entities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EF_UMS_Entities.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EF_UMS_Entities.Context.cs</LastGenOutput>
     </None>
     <None Include="EF\EF_UMS_Entities.edmx.diagram">
       <DependentUpon>EF_UMS_Entities.edmx</DependentUpon>
     </None>
     <None Include="EF\EF_UMS_Entities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EF_UMS_Entities.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EF_UMS_Entities.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EntityDeploy Include="EF\EF_UMS_Entities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EF_UMS_Entities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
