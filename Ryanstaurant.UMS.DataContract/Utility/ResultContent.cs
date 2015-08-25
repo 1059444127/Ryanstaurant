@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
+﻿using System.Runtime.Serialization;
 
-namespace Ryanstaurant.DataContract.Utility
+namespace Ryanstaurant.UMS.DataContract.Utility
 {
     [DataContract]
     public class ResultItem<T>

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Ryanstaurant.DataContract.Utility;
+using System.Linq;
 using Ryanstaurant.UMS.DataContract;
+using Ryanstaurant.UMS.DataContract.Utility;
 using Ryanstaurant.UMS.Interface;
 using Ryanstaurant.UMS.WorkSpace;
 
@@ -15,12 +16,12 @@ namespace Ryanstaurant.UMS.Service
         {
             try
             {
-                var employee = new Employee {Name = employeeName, ID = -1};
-                employee = new BllEmployee().Get(employee);
+                var employees = new List<Employee> {new Employee {Name = employeeName, ID = -1}};
+                employees = new BllEmployee().Get(employees);
                 return new ResultEntity<Employee>
                 {
                     ErrorMessage = string.Empty,
-                    ResultObject = employee,
+                    ResultObject = employees.FirstOrDefault(),
                     State = ResultState.Success
                 };
             }

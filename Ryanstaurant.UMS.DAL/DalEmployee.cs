@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ryanstaurant.UMS.DataAccess.EF;
-using Ryanstaurant.UMS.DataContract;
+using Ryanstaurant.UMS.Entity;
+using Ryanstaurant.UMS.Interface;
 
 namespace Ryanstaurant.UMS.DAL
 {
@@ -60,28 +61,28 @@ namespace Ryanstaurant.UMS.DAL
                     currentEmployee.Description = employeeFound.Description;
                     currentEmployee.LoginName = employeeFound.LoginName;
 
-                    //加载权限
-                    //获取人员的角色列表
-                    var employeeRoles = from e in entities.emp_role.ToList()
-                                        where e.emp_id == employeeFound.ID
-                                        select e.role_id;
+                    ////加载权限
+                    ////获取人员的角色列表
+                    //var employeeRoles = from e in entities.emp_role.ToList()
+                    //                    where e.emp_id == employeeFound.ID
+                    //                    select e.role_id;
 
-                    //获取人员的权限
-                    var employeeRoleAuths = from e in entities.role_auth.ToList()
-                                            where employeeRoles.ToList().Contains(e.role_id)
-                                            select e.auth_id;
+                    ////获取人员的权限
+                    //var employeeRoleAuths = from e in entities.role_auth.ToList()
+                    //                        where employeeRoles.ToList().Contains(e.role_id)
+                    //                        select e.auth_id;
 
-                    var employeeAuths = from e in entities.emp_auth.ToList()
-                                        where e.Emp_id == employeeFound.ID
-                                        select e.Auth_id;
+                    //var employeeAuths = from e in entities.emp_auth.ToList()
+                    //                    where e.Emp_id == employeeFound.ID
+                    //                    select e.Auth_id;
 
-                    //人员权限
-                    var auths = employeeAuths.Union(employeeRoleAuths).ToList();
+                    ////人员权限
+                    //var auths = employeeAuths.Union(employeeRoleAuths).ToList();
 
-                    foreach (var auth in auths)
-                    {
-                        currentEmployee.Authority |= auth;
-                    }
+                    //foreach (var auth in auths)
+                    //{
+                    //    currentEmployee.Authority |= auth;
+                    //}
                 }
 
                 return employees;
@@ -89,15 +90,41 @@ namespace Ryanstaurant.UMS.DAL
             }
         }
 
-        public List<Employee> AddEmployees(List<Employee> employees)
+        public List<Employee> GetById(int[] arrEmployeeId)
         {
+            var listEmployee = arrEmployeeId.Select(employeeId => new Employee
+            {
+                ID = employeeId
+            }).ToList();
+
+            return Get(listEmployee);
+        }
+
+
+        public List<Employee> GetByName(string[] arrEmployeeName)
+        {
+            var listEmployee = arrEmployeeName.Select(employeeName => new Employee
+            {
+                ID = -1,
+                Name = employeeName
+            }).ToList();
+
+            return Get(listEmployee);
+        }
+
+
+
+        public List<Employee> Add(List<Employee> employees)
+        {
+            var employeeList = Get(employees);
+
             using (var entities = new ryanstaurantEntities())
             {
-                foreach (var currentEmployee in employees)
+                foreach (var currentEmployee in employeeList)
                 {
                     currentEmployee.Exception = string.Empty;
 
-                    if ((from e in entities.employee where e.Name == currentEmployee.Name select e).FirstOrDefault() != null)
+                    if (currentEmployee.ExpType != ExceptionType.NotExist)
                     {
                         currentEmployee.Exception = "用户名为" + currentEmployee.Name + "的用户已经存在";
                         continue;
@@ -105,7 +132,7 @@ namespace Ryanstaurant.UMS.DAL
 
                     try
                     {
-                        entities.employee.Add(new employee
+                        var resultEmp = entities.employee.Add(new employee
                         {
                             Description = currentEmployee.Description,
                             Name = currentEmployee.Name,
@@ -113,23 +140,27 @@ namespace Ryanstaurant.UMS.DAL
                             LoginName = currentEmployee.LoginName
                         });
                         currentEmployee.Exception = string.Empty;
+                        currentEmployee.ID = resultEmp.ID;
+                        currentEmployee.ExpType = ExceptionType.None;
                     }
                     catch (Exception ex)
                     {
                         currentEmployee.Exception = ex.Message;
+                        currentEmployee.ExceptionStackTrace = ex.StackTrace;
+                        currentEmployee.ExpType= ExceptionType.Failed;
                     }
                 }
                 var result = entities.SaveChanges();
                 if (result <= 0)
                 {
-                    throw new Exception("添加用户失败");
+                    throw new Exception("添加用户信息失败");
                 }
 
             }
             return employees;
         }
 
-        public List<Employee> ModifyEmployees(List<Employee> employees)
+        public List<Employee> Modify(List<Employee> employees)
         {
             using (var entities = new ryanstaurantEntities())
             {
@@ -168,7 +199,7 @@ namespace Ryanstaurant.UMS.DAL
             return employees;
         }
 
-        public List<Employee> DeleteEmployees(List<Employee> employees)
+        public List<Employee> Delete(List<Employee> employees)
         {
             using (var entities = new ryanstaurantEntities())
             {

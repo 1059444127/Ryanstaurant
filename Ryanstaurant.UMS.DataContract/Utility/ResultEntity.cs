@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
-namespace Ryanstaurant.DataContract.Utility
+namespace Ryanstaurant.UMS.DataContract.Utility
 {
     public enum ResultState
     {

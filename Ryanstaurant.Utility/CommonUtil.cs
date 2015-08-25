@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Reflection;
+﻿using System.Data;
 using System.Linq;
-using System.Text;
 
 namespace Ryanstaurant.Utility
 {
     public static class CommonUtil
     {
+
+
         public static void LoadTypeFromTable(object obj, DataTable dtdataTable)
         {
             var type = obj.GetType();
@@ -18,10 +16,6 @@ namespace Ryanstaurant.Utility
                 property.SetValue(obj, dtdataTable.Rows[0][property.Name], null);
             }
         }
-
-
-
-
 
     }
 }

@@ -1,82 +1,45 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Ryanstaurant.UMS.DAL;
-using Ryanstaurant.UMS.DataContract;
+using Ryanstaurant.UMS.Interface;
 
 namespace Ryanstaurant.UMS.WorkSpace
 {
     public class BllEmployee
     {
-        public Employee Get(Employee employee)
+
+        public List<DataContract.Employee> Get(List<DataContract.Employee> employees)
         {
-            #region ORG
-            //var employeeFound = new Employee();
-            //using (var entities = new ryanstaurantEntities())
-            //{
-
-                //    //获取人员基本属性
-                //    var employeeEntity = (from e in entities.employee.ToList()
-                //        where string.Equals(e.Name, employee.Name, StringComparison.InvariantCultureIgnoreCase)
-                //        select e).FirstOrDefault();
-                //    if (employeeEntity == null)
-                //        return employeeFound;
-
-
-                //    employeeFound.ID = employeeEntity.ID;
-                //    employeeFound.Name = employeeEntity.Name;
-                //    employeeFound.Password = employeeEntity.Password;
-                //    employeeFound.Description = employeeEntity.Description;
-
-                //    //获取人员的角色列表
-                //    var employeeRoles = from e in entities.emp_role.ToList()
-                //        where e.emp_id == employeeFound.ID
-                //        select e.role_id;
-
-                //    //获取人员的权限
-                //    var employeeRoleAuths = from e in entities.role_auth.ToList()
-                //        where employeeRoles.ToList().Contains(e.role_id)
-                //        select e.auth_id;
-
-                //    var employeeAuths = from e in entities.emp_auth.ToList()
-                //        where e.Emp_id == employeeFound.ID
-                //        select e.Auth_id;
-
-                //    //人员权限
-                //    var auths = employeeAuths.Union(employeeRoleAuths).ToList();
-
-                //    foreach (var auth in auths)
-                //    {
-                //        employeeFound.Authority |= auth;
-                //    }
-
-
-                //}
-                //return employeeFound;
-            #endregion
-            return Get(new List<Employee> {employee}).FirstOrDefault();
-
+            return LoadDalMethod(employees, list => new DalEmployee().Get(list));
         }
 
 
-        public List<Employee> Get(List<Employee> employees)
+        public List<DataContract.Employee> AddEmployees(List<DataContract.Employee> employees)
         {
-            return new DalEmployee().Get(employees);
+            return LoadDalMethod(employees, list => new DalEmployee().Add(list));
         }
 
-        public List<Employee> AddEmployees(List<Employee> employees)
+        public List<DataContract.Employee> ModifyEmployees(List<DataContract.Employee> employees)
         {
-            return new DalEmployee().AddEmployees(employees);
+            return LoadDalMethod(employees, list => new DalEmployee().Modify(list));
         }
 
-        public List<Employee> ModifyEmployees(List<Employee> employees)
+        public List<DataContract.Employee> DeleteEmployees(List<DataContract.Employee> employees)
         {
-            return new DalEmployee().ModifyEmployees(employees);
+            return LoadDalMethod(employees, list => new DalEmployee().Delete(list));
         }
 
-        public List<Employee> DeleteEmployees(List<Employee> employees)
+
+
+        protected List<DataContract.Employee> LoadDalMethod(List<DataContract.Employee> employees,
+            Func<List<Entity.Employee>, List<Entity.Employee>> methodHandler)
         {
-            return new DalEmployee().DeleteEmployees(employees);
+            var entityList = (from e in employees select e.ConvertToDataContract<Entity.Employee>()).ToList();
+            var resultEntities = methodHandler(entityList);
+            return (from e in resultEntities select e.ConvertToDataContract<DataContract.Employee>()).ToList();
         }
+
 
 
 

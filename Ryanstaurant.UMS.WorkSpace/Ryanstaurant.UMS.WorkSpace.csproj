@@ -52,6 +52,14 @@
       <Project>{f2fe3d45-0fed-4072-9c04-7636d4df6589}</Project>
       <Name>Ryanstaurant.UMS.DataContract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ryanstaurant.UMS.Entity\Ryanstaurant.UMS.Entity.csproj">
+      <Project>{a593e12f-dbe2-4b89-855f-f1c037a9fbad}</Project>
+      <Name>Ryanstaurant.UMS.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ryanstaurant.Utility\Ryanstaurant.Utility.csproj">
+      <Project>{da98a705-f472-4ece-a15a-0d75dc7b4655}</Project>
+      <Name>Ryanstaurant.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

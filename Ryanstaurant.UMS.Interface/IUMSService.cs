@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
-using Ryanstaurant.DataContract;
-using Ryanstaurant.DataContract.Utility;
 using Ryanstaurant.UMS.DataContract;
+using Ryanstaurant.UMS.DataContract.Utility;
 
 namespace Ryanstaurant.UMS.Interface
 {
