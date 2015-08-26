@@ -5,13 +5,9 @@ G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.Entity.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.Interface.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.WorkSpace.dll
-G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\DataBase.dll
-G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.Utility.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.Entity.pdb
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.Interface.pdb
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.WorkSpace.pdb
-G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\DataBase.pdb
-G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.Utility.pdb
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\obj\Debug\Ryanstaurant.UMS.Service.csprojResolveAssemblyReference.cache
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\obj\Debug\Ryanstaurant.UMS.Service.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\obj\Debug\Ryanstaurant.UMS.Service.pdb
@@ -19,3 +15,12 @@ G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\App.confi
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\Ryanstaurant.UMS.Service.dll.config
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\Ryanstaurant.UMS.Service.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\Ryanstaurant.UMS.Service.pdb
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.DataContract.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.DAL.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.DataAccess.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\EntityFramework.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.DataContract.pdb
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.DAL.pdb
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.DataAccess.pdb
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\EntityFramework.xml
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\zh-Hans\EntityFramework.resources.dll

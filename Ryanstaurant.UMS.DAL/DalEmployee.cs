@@ -10,6 +10,31 @@ namespace Ryanstaurant.UMS.DAL
     public class DalEmployee
     {
 
+        public List<Employee> GetAll()
+        {
+            using (var entities = new ryanstaurantEntities())
+            {
+                //从数据库获取相关人员的信息
+                var employeeList =
+                    (from e in entities.employee
+                     select e).ToList();
+
+
+                return employeeList.Select(employee => new Employee
+                {
+                    Description = employee.Description,
+                    Exception = string.Empty,
+                    ExceptionStackTrace = string.Empty,
+                    ExpType = ExceptionType.None,
+                    ID = employee.ID,
+                    LoginName = employee.LoginName,
+                    Name = employee.Name,
+                    Password = employee.Password
+                }).ToList();
+            }
+        }
+
+
         public List<Employee> Get(List<Employee> employees)
         {
             using (var entities = new ryanstaurantEntities())
@@ -61,58 +86,12 @@ namespace Ryanstaurant.UMS.DAL
                     currentEmployee.Description = employeeFound.Description;
                     currentEmployee.LoginName = employeeFound.LoginName;
 
-                    ////加载权限
-                    ////获取人员的角色列表
-                    //var employeeRoles = from e in entities.emp_role.ToList()
-                    //                    where e.emp_id == employeeFound.ID
-                    //                    select e.role_id;
-
-                    ////获取人员的权限
-                    //var employeeRoleAuths = from e in entities.role_auth.ToList()
-                    //                        where employeeRoles.ToList().Contains(e.role_id)
-                    //                        select e.auth_id;
-
-                    //var employeeAuths = from e in entities.emp_auth.ToList()
-                    //                    where e.Emp_id == employeeFound.ID
-                    //                    select e.Auth_id;
-
-                    ////人员权限
-                    //var auths = employeeAuths.Union(employeeRoleAuths).ToList();
-
-                    //foreach (var auth in auths)
-                    //{
-                    //    currentEmployee.Authority |= auth;
-                    //}
                 }
 
                 return employees;
 
             }
         }
-
-        public List<Employee> GetById(int[] arrEmployeeId)
-        {
-            var listEmployee = arrEmployeeId.Select(employeeId => new Employee
-            {
-                ID = employeeId
-            }).ToList();
-
-            return Get(listEmployee);
-        }
-
-
-        public List<Employee> GetByName(string[] arrEmployeeName)
-        {
-            var listEmployee = arrEmployeeName.Select(employeeName => new Employee
-            {
-                ID = -1,
-                Name = employeeName
-            }).ToList();
-
-            return Get(listEmployee);
-        }
-
-
 
         public List<Employee> Add(List<Employee> employees)
         {

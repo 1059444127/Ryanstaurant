@@ -9,7 +9,6 @@ namespace Ryanstaurant.UMS.Entity
         public string LoginName { get; set; }
         public string Password { get; set; }
         public string Description { get; set; }
-        public int Authority { get; set; }
         public string Exception { get; set; }
 
         public ExceptionType ExpType { get; set; }

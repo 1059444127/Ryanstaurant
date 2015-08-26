@@ -8,10 +8,10 @@ namespace Ryanstaurant.UMS.WorkSpace
 {
     public class BllEmployee
     {
-
         public List<DataContract.Employee> Get(List<DataContract.Employee> employees)
         {
-            return LoadDalMethod(employees, list => new DalEmployee().Get(list));
+            return LoadDalMethod(employees,
+                list => (list == null || list.Count == 0) ? new DalEmployee().GetAll() : new DalEmployee().Get(list));
         }
 
 
