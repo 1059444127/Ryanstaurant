@@ -42,13 +42,37 @@ website.publishproj
     </AssemblyAttributes>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Ryanstaurant.UMS.DataContract\Ryanstaurant.UMS.Entity.csproj">
-      <Project>{4277A7A7-AB57-488A-8D33-BCA11F1AC8CC}</Project>
+    <ProjectReference Include="..\..\Ryanstaurant.UMS.DAL\Ryanstaurant.UMS.DAL.csproj">
+      <Project>{2B0AE487-FE7B-43A8-A407-DB3559886B4E}</Project>
+      <Name>Ryanstaurant.UMS.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ryanstaurant.UMS.DataAccess\Ryanstaurant.UMS.DataAccess.csproj">
+      <Project>{5143BD0E-DF9A-4425-9178-075F55E6BFB9}</Project>
+      <Name>Ryanstaurant.UMS.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ryanstaurant.UMS.DataContract\Ryanstaurant.UMS.DataContract.csproj">
+      <Project>{F2FE3D45-0FED-4072-9C04-7636D4DF6589}</Project>
+      <Name>Ryanstaurant.UMS.DataContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ryanstaurant.UMS.Entity\Ryanstaurant.UMS.Entity.csproj">
+      <Project>{A593E12F-DBE2-4B89-855F-F1C037A9FBAD}</Project>
       <Name>Ryanstaurant.UMS.Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Ryanstaurant.UMS.Interface\Ryanstaurant.UMS.Interface.csproj">
       <Project>{24FE75A4-4D04-4006-8518-4340CBD19942}</Project>
       <Name>Ryanstaurant.UMS.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ryanstaurant.UMS.WorkSpace\Ryanstaurant.UMS.WorkSpace.csproj">
+      <Project>{F013490B-FA44-4158-97AE-656168DEAE4A}</Project>
+      <Name>Ryanstaurant.UMS.WorkSpace</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ryanstaurant.Utility\Ryanstaurant.Utility.csproj">
+      <Project>{DA98A705-F472-4ECE-A15A-0D75DC7B4655}</Project>
+      <Name>Ryanstaurant.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UserService\Ryanstaurant.UMS.Service.csproj">
+      <Project>{8EE77F78-48DD-45E9-88AB-EDE0196836BC}</Project>
+      <Name>Ryanstaurant.UMS.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(_WebPublishTargetsPath)\Web\Microsoft.WebSite.Publishing.targets" />

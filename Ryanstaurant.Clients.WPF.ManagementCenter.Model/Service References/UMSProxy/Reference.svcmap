@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="c2698c76-7d2a-4203-8668-24ae7f016dd7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/RyanstaurantApplicationServer/UMS/UMSService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="UMSService.xsd" MetadataType="Schema" ID="a40cf575-1390-4ce4-8b5e-6bbbf7af3df5" SourceId="1" SourceUrl="http://localhost/RyanstaurantApplicationServer/UMS/UMSService.svc?xsd=xsd1" />
+    <MetadataFile FileName="UMSService.disco" MetadataType="Disco" ID="19fdf333-3ae1-4add-a99b-357b08c315c0" SourceId="1" SourceUrl="http://localhost/RyanstaurantApplicationServer/UMS/UMSService.svc?disco" />
+    <MetadataFile FileName="UMSService1.xsd" MetadataType="Schema" ID="b64268e9-20af-4a39-a608-71c81b8c4250" SourceId="1" SourceUrl="http://localhost/RyanstaurantApplicationServer/UMS/UMSService.svc?xsd=xsd3" />
+    <MetadataFile FileName="UMSService2.xsd" MetadataType="Schema" ID="30dff48f-ab89-4fc0-a072-8070dde25db0" SourceId="1" SourceUrl="http://localhost/RyanstaurantApplicationServer/UMS/UMSService.svc?xsd=xsd2" />
+    <MetadataFile FileName="UMSService.wsdl" MetadataType="Wsdl" ID="9536e0c9-f452-4922-ac3c-c288c1ce2894" SourceId="1" SourceUrl="http://localhost/RyanstaurantApplicationServer/UMS/UMSService.svc?wsdl" />
+    <MetadataFile FileName="UMSService3.xsd" MetadataType="Schema" ID="c6e6e3b7-f6aa-4e13-8afb-04b3a9b35a74" SourceId="1" SourceUrl="http://localhost/RyanstaurantApplicationServer/UMS/UMSService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

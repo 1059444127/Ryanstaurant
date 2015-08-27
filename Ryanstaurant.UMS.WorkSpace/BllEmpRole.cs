@@ -15,18 +15,18 @@ namespace Ryanstaurant.UMS.WorkSpace
         }
 
 
-        public List<DataContract.EmpRole> AddEmployees(List<DataContract.EmpRole> empRoles)
+        public List<DataContract.EmpRole> Add(List<DataContract.EmpRole> empRoles)
         {
             return LoadDalMethod(empRoles, list => new DalEmpRole().Add(list));
         }
 
-        public List<DataContract.EmpRole> ModifyEmployees(List<DataContract.EmpRole> empRoles)
+        public List<DataContract.EmpRole> Modify(List<DataContract.EmpRole> empRoles)
         {
             LoadDalMethod(empRoles, list => new DalEmpRole().Delete(list));
             return LoadDalMethod(empRoles, list => new DalEmpRole().Add(list));
         }
 
-        public List<DataContract.EmpRole> DeleteEmployees(List<DataContract.EmpRole> empRoles)
+        public List<DataContract.EmpRole> Delete(List<DataContract.EmpRole> empRoles)
         {
             return LoadDalMethod(empRoles, list => new DalEmpRole().Delete(list));
         }

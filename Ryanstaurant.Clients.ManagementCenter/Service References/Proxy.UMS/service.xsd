@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract.Utility" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract" />
+  <xs:element name="GetAllEmployees">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllEmployeesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract.Utility" minOccurs="0" name="GetAllEmployeesResult" nillable="true" type="q1:ResultEntityOfArrayOfEmployeekB23VQsu" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEmployees">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract" minOccurs="0" name="employees" nillable="true" type="q2:ArrayOfEmployee" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEmployeesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract.Utility" minOccurs="0" name="GetEmployeesResult" nillable="true" type="q3:ResultEntityOfArrayOfEmployeekB23VQsu" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddEmployees">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract" minOccurs="0" name="employees" nillable="true" type="q4:ArrayOfEmployee" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddEmployeesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract.Utility" minOccurs="0" name="AddEmployeesResult" nillable="true" type="q5:ResultEntityOfArrayOfEmployeekB23VQsu" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModifyEmployees">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract" minOccurs="0" name="employees" nillable="true" type="q6:ArrayOfEmployee" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModifyEmployeesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract.Utility" minOccurs="0" name="ModifyEmployeesResult" nillable="true" type="q7:ResultEntityOfArrayOfEmployeekB23VQsu" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteEmployees">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract" minOccurs="0" name="employees" nillable="true" type="q8:ArrayOfEmployee" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteEmployeesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract.Utility" minOccurs="0" name="DeleteEmployeesResult" nillable="true" type="q9:ResultEntityOfArrayOfEmployeekB23VQsu" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Ryanstaurant.Clients.WPF.ManagementCenter.Pages.EmployeeListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+
+    <DataGrid x:Name="DgEmployee" Margin="0,0,0,0" ItemsSource="{Binding Path=EmployeeList}" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False" CanUserAddRows="False" Width="Auto">
+        <DataGrid.Columns>
+            <mui:DataGridTextColumn Header="ID" Width="SizeToHeader" Binding="{Binding Path=Id}" IsReadOnly="True" Visibility="Hidden"/>
+            <mui:DataGridTextColumn Header="用户名称" Width="SizeToHeader" Binding="{Binding Path=Name}" IsReadOnly="True"/>
+            <mui:DataGridTextColumn Header="登录名称" Width="SizeToHeader" Binding="{Binding Path=LoginName}" IsReadOnly="True"/>
+            <mui:DataGridTextColumn Header="详细信息" Width="SizeToHeader" Binding="{Binding Path=Description}" IsReadOnly="True" />
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

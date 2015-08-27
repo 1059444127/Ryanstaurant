@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UMSService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IUMSService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract.Utility" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IUMSService_GetAllEmployees_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllEmployees" />
+  </wsdl:message>
+  <wsdl:message name="IUMSService_GetAllEmployees_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUMSService_GetEmployees_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployees" />
+  </wsdl:message>
+  <wsdl:message name="IUMSService_GetEmployees_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUMSService_AddEmployees_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddEmployees" />
+  </wsdl:message>
+  <wsdl:message name="IUMSService_AddEmployees_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUMSService_ModifyEmployees_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyEmployees" />
+  </wsdl:message>
+  <wsdl:message name="IUMSService_ModifyEmployees_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUMSService_DeleteEmployees_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEmployees" />
+  </wsdl:message>
+  <wsdl:message name="IUMSService_DeleteEmployees_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IUMSService">
+    <wsdl:operation name="GetAllEmployees">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUMSService/GetAllEmployees" message="tns:IUMSService_GetAllEmployees_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUMSService/GetAllEmployeesResponse" message="tns:IUMSService_GetAllEmployees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmployees">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUMSService/GetEmployees" message="tns:IUMSService_GetEmployees_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUMSService/GetEmployeesResponse" message="tns:IUMSService_GetEmployees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddEmployees">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUMSService/AddEmployees" message="tns:IUMSService_AddEmployees_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUMSService/AddEmployeesResponse" message="tns:IUMSService_AddEmployees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyEmployees">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUMSService/ModifyEmployees" message="tns:IUMSService_ModifyEmployees_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUMSService/ModifyEmployeesResponse" message="tns:IUMSService_ModifyEmployees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEmployees">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUMSService/DeleteEmployees" message="tns:IUMSService_DeleteEmployees_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUMSService/DeleteEmployeesResponse" message="tns:IUMSService_DeleteEmployees_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IUMSService" type="tns:IUMSService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IUMSService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetAllEmployees">
+      <soap12:operation soapAction="http://tempuri.org/IUMSService/GetAllEmployees" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmployees">
+      <soap12:operation soapAction="http://tempuri.org/IUMSService/GetEmployees" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddEmployees">
+      <soap12:operation soapAction="http://tempuri.org/IUMSService/AddEmployees" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyEmployees">
+      <soap12:operation soapAction="http://tempuri.org/IUMSService/ModifyEmployees" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEmployees">
+      <soap12:operation soapAction="http://tempuri.org/IUMSService/DeleteEmployees" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UMSService">
+    <wsdl:port name="NetTcpBinding_IUMSService" binding="tns:NetTcpBinding_IUMSService">
+      <soap12:address location="net.tcp://localhost:8890/UMS/Service" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8890/UMS/Service</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Dns>
+          </Dns>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

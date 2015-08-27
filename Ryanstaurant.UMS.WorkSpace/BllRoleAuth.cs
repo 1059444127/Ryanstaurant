@@ -14,18 +14,18 @@ namespace Ryanstaurant.UMS.WorkSpace
         }
 
 
-        public List<DataContract.RoleAuth> AddEmployees(List<DataContract.RoleAuth> roleAuths)
+        public List<DataContract.RoleAuth> Add(List<DataContract.RoleAuth> roleAuths)
         {
             return LoadDalMethod(roleAuths, list => new DalRoleAuth().Add(list));
         }
 
-        public List<DataContract.RoleAuth> ModifyEmployees(List<DataContract.RoleAuth> roleAuths)
+        public List<DataContract.RoleAuth> Modify(List<DataContract.RoleAuth> roleAuths)
         {
             LoadDalMethod(roleAuths, list => new DalRoleAuth().Delete(list));
             return LoadDalMethod(roleAuths, list => new DalRoleAuth().Add(list));
         }
 
-        public List<DataContract.RoleAuth> DeleteEmployees(List<DataContract.RoleAuth> roleAuths)
+        public List<DataContract.RoleAuth> Delete(List<DataContract.RoleAuth> roleAuths)
         {
             return LoadDalMethod(roleAuths, list => new DalRoleAuth().Delete(list));
         }

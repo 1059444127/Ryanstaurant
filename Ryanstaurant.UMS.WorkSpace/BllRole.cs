@@ -6,7 +6,7 @@ using Ryanstaurant.UMS.Interface;
 
 namespace Ryanstaurant.UMS.WorkSpace
 {
-    class BllRole
+    public class BllRole
     {
         public List<DataContract.Role> Get(List<DataContract.Role> roles)
         {
@@ -14,17 +14,17 @@ namespace Ryanstaurant.UMS.WorkSpace
         }
 
 
-        public List<DataContract.Role> AddEmployees(List<DataContract.Role> roles)
+        public List<DataContract.Role> Add(List<DataContract.Role> roles)
         {
             return LoadDalMethod(roles, list => new DalRole().Add(list));
         }
 
-        public List<DataContract.Role> ModifyEmployees(List<DataContract.Role> roles)
+        public List<DataContract.Role> Modify(List<DataContract.Role> roles)
         {
             return LoadDalMethod(roles, list => new DalRole().Modify(list));
         }
 
-        public List<DataContract.Role> DeleteEmployees(List<DataContract.Role> roles)
+        public List<DataContract.Role> Delete(List<DataContract.Role> roles)
         {
             return LoadDalMethod(roles, list => new DalRole().Delete(list));
         }
