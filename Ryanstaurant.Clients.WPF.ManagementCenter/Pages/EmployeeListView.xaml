@@ -6,14 +6,32 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-
-
-    <DataGrid x:Name="DgEmployee" Margin="0,0,0,0" ItemsSource="{Binding Path=EmployeeList}" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False" CanUserAddRows="False" Width="Auto">
-        <DataGrid.Columns>
-            <mui:DataGridTextColumn Header="ID" Width="SizeToHeader" Binding="{Binding Path=Id}" IsReadOnly="True" Visibility="Hidden"/>
-            <mui:DataGridTextColumn Header="用户名称" Width="SizeToHeader" Binding="{Binding Path=Name}" IsReadOnly="True"/>
-            <mui:DataGridTextColumn Header="登录名称" Width="SizeToHeader" Binding="{Binding Path=LoginName}" IsReadOnly="True"/>
-            <mui:DataGridTextColumn Header="详细信息" Width="SizeToHeader" Binding="{Binding Path=Description}" IsReadOnly="True" />
-        </DataGrid.Columns>
-    </DataGrid>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid x:Name="DgEmployee" Margin="0,0,0,0" ItemsSource="{Binding Path=EmployeeList}" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False" CanUserAddRows="False" Width="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <mui:DataGridTextColumn Header="ID" Width="SizeToHeader" Binding="{Binding Path=Id}" IsReadOnly="True" Visibility="Hidden"/>
+                <mui:DataGridTextColumn Header="用户名称" Width="SizeToHeader" Binding="{Binding Path=Name}" IsReadOnly="True"/>
+                <mui:DataGridTextColumn Header="登录名称" Width="SizeToHeader" Binding="{Binding Path=LoginName}" IsReadOnly="True"/>
+                <mui:DataGridTextColumn Header="详细信息" Width="SizeToHeader" Binding="{Binding Path=Description}" IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="DgRole" Margin="0,0,0,0" ItemsSource="{Binding Path=EmployeeList}" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False" CanUserAddRows="False" Width="Auto" Grid.Row="1" Grid.Column="0" >
+            <DataGrid.Columns>
+                <mui:DataGridTextColumn Header="ID" Width="SizeToHeader" Binding="{Binding Path=Id}" IsReadOnly="True" Visibility="Hidden"/>
+                <mui:DataGridTextColumn Header="用户名称" Width="SizeToHeader" Binding="{Binding Path=Name}" IsReadOnly="True"/>
+                <mui:DataGridTextColumn Header="登录名称" Width="SizeToHeader" Binding="{Binding Path=LoginName}" IsReadOnly="True"/>
+                <mui:DataGridTextColumn Header="详细信息" Width="SizeToHeader" Binding="{Binding Path=Description}" IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="2" Grid.Column="0" Content="test" Command="{Binding Path=testCommand}"></Button>
+    </Grid>
 </UserControl>

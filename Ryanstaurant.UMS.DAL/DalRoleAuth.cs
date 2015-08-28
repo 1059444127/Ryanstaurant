@@ -17,10 +17,23 @@ namespace Ryanstaurant.UMS.DAL
                 var listRoleId = (from a in roleAuths select a.RoleID).ToList();
                 var listAuthId = (from a in roleAuths select a.AuthID).ToList();
 
-                var listRoleAuths =
-                    (from e in entities.role_auth
-                     where listRoleId.Contains(e.role_id) && listAuthId.Contains(e.auth_id)
-                     select e).ToList();
+
+
+                List<role_auth> listRoleAuths;
+
+                if (roleAuths.Count == 0)
+                {
+                    listRoleAuths =
+                        (from e in entities.role_auth
+                         select e).ToList();
+                }
+                else
+                {
+                    listRoleAuths =
+                        (from e in entities.role_auth
+                         where listRoleId.Contains(e.role_id) && listAuthId.Contains(e.auth_id)
+                         select e).ToList();
+                }
 
 
                 foreach (var rA in roleAuths)

@@ -16,10 +16,22 @@ namespace Ryanstaurant.UMS.DAL
                 var listEmpId = (from a in empAuth select a.EmpID).ToList();
                 var listAuthId = (from a in empAuth select a.AuthID).ToList();
 
-                var listEmpAuths =
+
+
+                List<emp_auth> listEmpAuths;
+                if (empAuth.Count == 0)
+                {
+                    listEmpAuths =
                     (from e in entities.emp_auth
-                        where listEmpId.Contains(e.Emp_id) && listAuthId.Contains(e.Auth_id)
+                     select e).ToList();
+                }
+                else
+                {
+                    listEmpAuths =
+                    (from e in entities.emp_auth
+                        where  listEmpId.Contains(e.Emp_id) && listAuthId.Contains(e.Auth_id)
                         select e).ToList();
+                }
 
 
                 foreach (var eA in empAuth)

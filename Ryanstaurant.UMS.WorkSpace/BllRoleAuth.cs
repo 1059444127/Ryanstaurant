@@ -10,7 +10,7 @@ namespace Ryanstaurant.UMS.WorkSpace
     {
         public List<DataContract.RoleAuth> Get(List<DataContract.RoleAuth> roleAuths)
         {
-            return LoadDalMethod(roleAuths, list => new DalRoleAuth().Get(list));
+            return LoadDalMethod(roleAuths ?? new List<DataContract.RoleAuth>(), list => new DalRoleAuth().Get(list));
         }
 
 

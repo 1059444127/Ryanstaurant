@@ -33,6 +33,9 @@
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\packages\ModernUI.WPF.1.0.6\lib\net40\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
+    <Reference Include="MicroMvvm">
+      <HintPath>..\Ryanstaurant.Clients.WCFClient\ExternalDll\MicroMvvm.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -45,8 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorityViewModel.cs" />
     <Compile Include="EmployeeListViewModel.cs" />
     <Compile Include="EmployeeViewModel.cs" />
+    <Compile Include="RoleViewModel.cs" />
+    <Compile Include="ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

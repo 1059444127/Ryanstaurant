@@ -11,7 +11,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
         public List<DataContract.Authority> Get(List<DataContract.Authority> authorities)
         {
-            return LoadDalMethod(authorities, list => new DalAuthority().Get(list));
+            return LoadDalMethod(authorities ?? new List<DataContract.Authority>(), list => (list == null || list.Count == 0) ? new DalAuthority().GetAll() : new DalAuthority().Get(list));
         }
 
 

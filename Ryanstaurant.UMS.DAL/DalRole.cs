@@ -9,6 +9,33 @@ namespace Ryanstaurant.UMS.DAL
 {
     public class DalRole
     {
+
+        public List<Role> GetAll()
+        {
+            using (var entities = new ryanstaurantEntities())
+            {
+                //从数据库获取相关人员的信息
+                var roleList =
+                    (from e in entities.role
+                     select e).ToList();
+
+
+                return roleList.Select(role => new Role
+                {
+                    Description = role.Description,
+                    Exception = string.Empty,
+                    ExceptionStackTrace = string.Empty,
+                    ExpType = ExceptionType.None,
+                    ID = role.id,
+                    Name = role.Name
+                }).ToList();
+            }
+        }
+
+
+
+
+
         public List<Role> Get(List<Role> roles)
         {
             using (var entities = new ryanstaurantEntities())

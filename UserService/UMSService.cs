@@ -121,22 +121,22 @@ namespace Ryanstaurant.UMS.Service
             return LoadBusinessMethod(() => new BllEmpRole().Delete(empRoles));
         }
 
-        public ResultEntity<List<RoleAuth>> GetRolAuths(List<RoleAuth> roleAuths)
+        public ResultEntity<List<RoleAuth>> GetRoleAuths(List<RoleAuth> roleAuths)
         {
             return LoadBusinessMethod(() => new BllRoleAuth().Get(roleAuths));
         }
 
-        public ResultEntity<List<RoleAuth>> AddRolAuths(List<RoleAuth> roleAuths)
+        public ResultEntity<List<RoleAuth>> AddRoleAuths(List<RoleAuth> roleAuths)
         {
             return LoadBusinessMethod(() => new BllRoleAuth().Add(roleAuths));
         }
 
-        public ResultEntity<List<RoleAuth>> ModifyRolAuths(List<RoleAuth> roleAuths)
+        public ResultEntity<List<RoleAuth>> ModifyRoleAuths(List<RoleAuth> roleAuths)
         {
             return LoadBusinessMethod(() => new BllRoleAuth().Modify(roleAuths));
         }
 
-        public ResultEntity<List<RoleAuth>> DeleteRolAuths(List<RoleAuth> roleAuths)
+        public ResultEntity<List<RoleAuth>> DeleteRoleAuths(List<RoleAuth> roleAuths)
         {
             return LoadBusinessMethod(() => new BllRoleAuth().Delete(roleAuths));
         }

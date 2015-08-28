@@ -11,7 +11,7 @@ namespace Ryanstaurant.UMS.WorkSpace
     {
         public List<DataContract.EmpRole> Get(List<DataContract.EmpRole> empRoles)
         {
-            return LoadDalMethod(empRoles, list => new DalEmpRole().Get(list));
+            return LoadDalMethod(empRoles ?? new List<DataContract.EmpRole>(), list => new DalEmpRole().Get(list));
         }
 
 

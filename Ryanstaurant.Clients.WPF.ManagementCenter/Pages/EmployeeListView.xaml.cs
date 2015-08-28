@@ -43,7 +43,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Pages
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            ViewModel.LoadAll();
+            
         }
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

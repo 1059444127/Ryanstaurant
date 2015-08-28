@@ -9,6 +9,33 @@ namespace Ryanstaurant.UMS.DAL
 {
     public class DalAuthority
     {
+
+        public List<Authority> GetAll()
+        {
+            using (var entities = new ryanstaurantEntities())
+            {
+                //从数据库获取相关人员的信息
+                var authorityList =
+                    (from e in entities.authority
+                     select e).ToList();
+
+
+                return authorityList.Select(authority => new Authority
+                {
+                    Description = authority.Description,
+                    Exception = string.Empty,
+                    ExceptionStackTrace = string.Empty,
+                    ExpType = ExceptionType.None,
+                    ID = authority.id,
+                    KeyCode =authority.KeyCode.GetValueOrDefault(),
+                    Name = authority.Name
+                }).ToList();
+            }
+        }
+
+
+
+
         public List<Authority> Get(List<Authority> authorities)
         {
             using (var entities = new ryanstaurantEntities())

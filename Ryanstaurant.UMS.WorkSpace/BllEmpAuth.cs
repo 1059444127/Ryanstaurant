@@ -10,7 +10,7 @@ namespace Ryanstaurant.UMS.WorkSpace
     {
         public List<DataContract.EmpAuth> Get(List<DataContract.EmpAuth> empAuths)
         {
-            return LoadDalMethod(empAuths, list => new DalEmpAuth().Get(list));
+            return LoadDalMethod(empAuths ?? new List<DataContract.EmpAuth>(), list => new DalEmpAuth().Get(list));
         }
 
 

@@ -16,10 +16,22 @@ namespace Ryanstaurant.UMS.DAL
                 var listEmpId = (from a in empRole select a.EmpID).ToList();
                 var listRoleId = (from a in empRole select a.RoleID).ToList();
 
-                var listEmpRoles =
-                    (from e in entities.emp_role
-                     where listEmpId.Contains(e.emp_id) && listRoleId.Contains(e.role_id)
-                     select e).ToList();
+
+                List<emp_role> listEmpRoles;
+
+                if (empRole.Count == 0)
+                {
+                    listEmpRoles =
+                          (from e in entities.emp_role
+                           select e).ToList();
+                }
+                else
+                {
+                    listEmpRoles =
+                        (from e in entities.emp_role
+                         where listEmpId.Contains(e.emp_id) && listRoleId.Contains(e.role_id)
+                         select e).ToList();
+                }
 
 
                 foreach (var eA in empRole)

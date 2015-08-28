@@ -63,17 +63,17 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model.UMSProxy {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUMSService/DeleteEmpRoles", ReplyAction="http://tempuri.org/IUMSService/DeleteEmpRolesResponse")]
         Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.EmpRole[]> DeleteEmpRoles(Ryanstaurant.UMS.DataContract.EmpRole[] empRoles);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUMSService/GetRolAuths", ReplyAction="http://tempuri.org/IUMSService/GetRolAuthsResponse")]
-        Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> GetRolAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUMSService/GetRoleAuths", ReplyAction="http://tempuri.org/IUMSService/GetRoleAuthsResponse")]
+        Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> GetRoleAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUMSService/AddRolAuths", ReplyAction="http://tempuri.org/IUMSService/AddRolAuthsResponse")]
-        Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> AddRolAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUMSService/AddRoleAuths", ReplyAction="http://tempuri.org/IUMSService/AddRoleAuthsResponse")]
+        Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> AddRoleAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUMSService/ModifyRolAuths", ReplyAction="http://tempuri.org/IUMSService/ModifyRolAuthsResponse")]
-        Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> ModifyRolAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUMSService/ModifyRoleAuths", ReplyAction="http://tempuri.org/IUMSService/ModifyRoleAuthsResponse")]
+        Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> ModifyRoleAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUMSService/DeleteRolAuths", ReplyAction="http://tempuri.org/IUMSService/DeleteRolAuthsResponse")]
-        Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> DeleteRolAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUMSService/DeleteRoleAuths", ReplyAction="http://tempuri.org/IUMSService/DeleteRoleAuthsResponse")]
+        Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> DeleteRoleAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUMSService/GetEmpAuths", ReplyAction="http://tempuri.org/IUMSService/GetEmpAuthsResponse")]
         Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.EmpAuth[]> GetEmpAuths(Ryanstaurant.UMS.DataContract.EmpAuth[] empAuths);
@@ -179,20 +179,20 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model.UMSProxy {
             return base.Channel.DeleteEmpRoles(empRoles);
         }
         
-        public Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> GetRolAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths) {
-            return base.Channel.GetRolAuths(roleAuths);
+        public Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> GetRoleAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths) {
+            return base.Channel.GetRoleAuths(roleAuths);
         }
         
-        public Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> AddRolAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths) {
-            return base.Channel.AddRolAuths(roleAuths);
+        public Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> AddRoleAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths) {
+            return base.Channel.AddRoleAuths(roleAuths);
         }
         
-        public Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> ModifyRolAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths) {
-            return base.Channel.ModifyRolAuths(roleAuths);
+        public Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> ModifyRoleAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths) {
+            return base.Channel.ModifyRoleAuths(roleAuths);
         }
         
-        public Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> DeleteRolAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths) {
-            return base.Channel.DeleteRolAuths(roleAuths);
+        public Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.RoleAuth[]> DeleteRoleAuths(Ryanstaurant.UMS.DataContract.RoleAuth[] roleAuths) {
+            return base.Channel.DeleteRoleAuths(roleAuths);
         }
         
         public Ryanstaurant.UMS.DataContract.Utility.ResultEntity<Ryanstaurant.UMS.DataContract.EmpAuth[]> GetEmpAuths(Ryanstaurant.UMS.DataContract.EmpAuth[] empAuths) {

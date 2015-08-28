@@ -10,7 +10,7 @@ namespace Ryanstaurant.UMS.WorkSpace
     {
         public List<DataContract.Role> Get(List<DataContract.Role> roles)
         {
-            return LoadDalMethod(roles, list => new DalRole().Get(list));
+            return LoadDalMethod(roles ?? new List<DataContract.Role>(), list => (list == null || list.Count == 0) ? new DalRole().GetAll() : new DalRole().Get(list));
         }
 
 

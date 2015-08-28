@@ -104,29 +104,29 @@
   <wsdl:message name="IUMSService_DeleteEmpRoles_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteEmpRolesResponse" />
   </wsdl:message>
-  <wsdl:message name="IUMSService_GetRolAuths_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetRolAuths" />
+  <wsdl:message name="IUMSService_GetRoleAuths_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleAuths" />
   </wsdl:message>
-  <wsdl:message name="IUMSService_GetRolAuths_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetRolAuthsResponse" />
+  <wsdl:message name="IUMSService_GetRoleAuths_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleAuthsResponse" />
   </wsdl:message>
-  <wsdl:message name="IUMSService_AddRolAuths_InputMessage">
-    <wsdl:part name="parameters" element="tns:AddRolAuths" />
+  <wsdl:message name="IUMSService_AddRoleAuths_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRoleAuths" />
   </wsdl:message>
-  <wsdl:message name="IUMSService_AddRolAuths_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AddRolAuthsResponse" />
+  <wsdl:message name="IUMSService_AddRoleAuths_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRoleAuthsResponse" />
   </wsdl:message>
-  <wsdl:message name="IUMSService_ModifyRolAuths_InputMessage">
-    <wsdl:part name="parameters" element="tns:ModifyRolAuths" />
+  <wsdl:message name="IUMSService_ModifyRoleAuths_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyRoleAuths" />
   </wsdl:message>
-  <wsdl:message name="IUMSService_ModifyRolAuths_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ModifyRolAuthsResponse" />
+  <wsdl:message name="IUMSService_ModifyRoleAuths_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyRoleAuthsResponse" />
   </wsdl:message>
-  <wsdl:message name="IUMSService_DeleteRolAuths_InputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteRolAuths" />
+  <wsdl:message name="IUMSService_DeleteRoleAuths_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRoleAuths" />
   </wsdl:message>
-  <wsdl:message name="IUMSService_DeleteRolAuths_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteRolAuthsResponse" />
+  <wsdl:message name="IUMSService_DeleteRoleAuths_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRoleAuthsResponse" />
   </wsdl:message>
   <wsdl:message name="IUMSService_GetEmpAuths_InputMessage">
     <wsdl:part name="parameters" element="tns:GetEmpAuths" />
@@ -217,21 +217,21 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUMSService/DeleteEmpRoles" message="tns:IUMSService_DeleteEmpRoles_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUMSService/DeleteEmpRolesResponse" message="tns:IUMSService_DeleteEmpRoles_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetRolAuths">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUMSService/GetRolAuths" message="tns:IUMSService_GetRolAuths_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUMSService/GetRolAuthsResponse" message="tns:IUMSService_GetRolAuths_OutputMessage" />
+    <wsdl:operation name="GetRoleAuths">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUMSService/GetRoleAuths" message="tns:IUMSService_GetRoleAuths_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUMSService/GetRoleAuthsResponse" message="tns:IUMSService_GetRoleAuths_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="AddRolAuths">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUMSService/AddRolAuths" message="tns:IUMSService_AddRolAuths_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUMSService/AddRolAuthsResponse" message="tns:IUMSService_AddRolAuths_OutputMessage" />
+    <wsdl:operation name="AddRoleAuths">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUMSService/AddRoleAuths" message="tns:IUMSService_AddRoleAuths_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUMSService/AddRoleAuthsResponse" message="tns:IUMSService_AddRoleAuths_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ModifyRolAuths">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUMSService/ModifyRolAuths" message="tns:IUMSService_ModifyRolAuths_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUMSService/ModifyRolAuthsResponse" message="tns:IUMSService_ModifyRolAuths_OutputMessage" />
+    <wsdl:operation name="ModifyRoleAuths">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUMSService/ModifyRoleAuths" message="tns:IUMSService_ModifyRoleAuths_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUMSService/ModifyRoleAuthsResponse" message="tns:IUMSService_ModifyRoleAuths_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="DeleteRolAuths">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUMSService/DeleteRolAuths" message="tns:IUMSService_DeleteRolAuths_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUMSService/DeleteRolAuthsResponse" message="tns:IUMSService_DeleteRolAuths_OutputMessage" />
+    <wsdl:operation name="DeleteRoleAuths">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUMSService/DeleteRoleAuths" message="tns:IUMSService_DeleteRoleAuths_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUMSService/DeleteRoleAuthsResponse" message="tns:IUMSService_DeleteRoleAuths_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetEmpAuths">
       <wsdl:input wsaw:Action="http://tempuri.org/IUMSService/GetEmpAuths" message="tns:IUMSService_GetEmpAuths_InputMessage" />
@@ -396,8 +396,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetRolAuths">
-      <soap:operation soapAction="http://tempuri.org/IUMSService/GetRolAuths" style="document" />
+    <wsdl:operation name="GetRoleAuths">
+      <soap:operation soapAction="http://tempuri.org/IUMSService/GetRoleAuths" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -405,8 +405,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="AddRolAuths">
-      <soap:operation soapAction="http://tempuri.org/IUMSService/AddRolAuths" style="document" />
+    <wsdl:operation name="AddRoleAuths">
+      <soap:operation soapAction="http://tempuri.org/IUMSService/AddRoleAuths" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -414,8 +414,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ModifyRolAuths">
-      <soap:operation soapAction="http://tempuri.org/IUMSService/ModifyRolAuths" style="document" />
+    <wsdl:operation name="ModifyRoleAuths">
+      <soap:operation soapAction="http://tempuri.org/IUMSService/ModifyRoleAuths" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -423,8 +423,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="DeleteRolAuths">
-      <soap:operation soapAction="http://tempuri.org/IUMSService/DeleteRolAuths" style="document" />
+    <wsdl:operation name="DeleteRoleAuths">
+      <soap:operation soapAction="http://tempuri.org/IUMSService/DeleteRoleAuths" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -226,59 +226,59 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetRolAuths">
+  <xs:element name="GetRoleAuths">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract" minOccurs="0" name="roleAuths" nillable="true" type="q33:ArrayOfRoleAuth" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetRolAuthsResponse">
+  <xs:element name="GetRoleAuthsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract.Utility" minOccurs="0" name="GetRolAuthsResult" nillable="true" type="q34:ResultEntityOfArrayOfRoleAuthkB23VQsu" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract.Utility" minOccurs="0" name="GetRoleAuthsResult" nillable="true" type="q34:ResultEntityOfArrayOfRoleAuthkB23VQsu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AddRolAuths">
+  <xs:element name="AddRoleAuths">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract" minOccurs="0" name="roleAuths" nillable="true" type="q35:ArrayOfRoleAuth" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AddRolAuthsResponse">
+  <xs:element name="AddRoleAuthsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract.Utility" minOccurs="0" name="AddRolAuthsResult" nillable="true" type="q36:ResultEntityOfArrayOfRoleAuthkB23VQsu" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract.Utility" minOccurs="0" name="AddRoleAuthsResult" nillable="true" type="q36:ResultEntityOfArrayOfRoleAuthkB23VQsu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ModifyRolAuths">
+  <xs:element name="ModifyRoleAuths">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract" minOccurs="0" name="roleAuths" nillable="true" type="q37:ArrayOfRoleAuth" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ModifyRolAuthsResponse">
+  <xs:element name="ModifyRoleAuthsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract.Utility" minOccurs="0" name="ModifyRolAuthsResult" nillable="true" type="q38:ResultEntityOfArrayOfRoleAuthkB23VQsu" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract.Utility" minOccurs="0" name="ModifyRoleAuthsResult" nillable="true" type="q38:ResultEntityOfArrayOfRoleAuthkB23VQsu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DeleteRolAuths">
+  <xs:element name="DeleteRoleAuths">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract" minOccurs="0" name="roleAuths" nillable="true" type="q39:ArrayOfRoleAuth" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DeleteRolAuthsResponse">
+  <xs:element name="DeleteRoleAuthsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract.Utility" minOccurs="0" name="DeleteRolAuthsResult" nillable="true" type="q40:ResultEntityOfArrayOfRoleAuthkB23VQsu" />
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/Ryanstaurant.UMS.DataContract.Utility" minOccurs="0" name="DeleteRoleAuthsResult" nillable="true" type="q40:ResultEntityOfArrayOfRoleAuthkB23VQsu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

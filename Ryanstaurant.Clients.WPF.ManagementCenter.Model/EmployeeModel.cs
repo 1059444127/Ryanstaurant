@@ -7,7 +7,7 @@ using Ryanstaurant.UMS.DataContract.Utility;
 
 namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 {
-    public class EmployeeModel:ModelBase
+    public class EmployeeModel
     {
         private int _id = -1;
         private string _name = string.Empty;
@@ -15,22 +15,11 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
         private string _password = string.Empty;
         private string _description = string.Empty;
         protected readonly UMSServiceClient ServiceClient = new UMSServiceClient();
-        private List<RoleModel> _roleList;
-        private List<AuthorityModel> _authorityList;
 
 
-        public int ID
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-                OnPropertyChanged("ID");
-            }
-        }
+
+        #region 属性
+        public int ID { get; set; }
 
         public string Name
         {
@@ -41,7 +30,6 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             set
             {
                 _name = value;
-                OnPropertyChanged("Name");
             }
         }
 
@@ -54,7 +42,6 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             set
             {
                 _loginName = value;
-                OnPropertyChanged("LoginName");
             }
         }
         public string Password
@@ -66,9 +53,9 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             set
             {
                 _password = value;
-                OnPropertyChanged("Password");
             }
         }
+
         public string Description
         {
             get
@@ -78,119 +65,119 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             set
             {
                 _description = value;
-                OnPropertyChanged("Description");
             }
         }
 
-        public List<RoleModel> RoleList
+
+        #endregion
+
+
+        public void Add()
         {
-            get
+            var arrEmployee = new Employee[1];
+            arrEmployee[0] =new Employee
             {
-                return _roleList;
-            }
-            set
-            {
-                _roleList = value;
-                OnPropertyChanged("RoleList");
-            }
+                Description = Description,
+                ID = ID,
+                LoginName = LoginName,
+                Name = Name,
+                Password = Password
+            };
+
+            var results = ServiceClient.AddEmployees(arrEmployee);
+
+            if (results.State == ResultState.Fail)
+                throw new Exception(results.ErrorMessage);
+
+            Refresh();
         }
 
 
-        public List<AuthorityModel> AuthorityList
+        public void Refresh()
         {
-            get
+            var arrEmployee = new Employee[1];
+            arrEmployee[0] = new Employee
             {
-                return _authorityList;
-            }
-            set
+                ID = ID,
+                Name = Name
+            };
+
+            var results = ServiceClient.GetEmployees(arrEmployee);
+            if (results.State == ResultState.Fail)
+                throw new Exception(results.ErrorMessage);
+
+            var empReturn = results.ResultObject.FirstOrDefault();
+
+
+            if (empReturn == null)
             {
-                _authorityList = value;
-                OnPropertyChanged("AuthorityList");
+                throw new Exception(ID == -1 ? "没有找到名称为[" + Name + "]对应的人员" : "没有找到ID为[" + ID + "]对应的人员");
             }
+
+            ID = empReturn.ID;
+            this.Description = empReturn.Description;
+            this.LoginName = empReturn.LoginName;
+            this.Name = empReturn.Name;
+            this.Password = empReturn.Password;
+
         }
 
+    
 
-
-
-
-        public List<EmployeeModel> GetAllEmployees()
+        public void Modify()
         {
-            //获取EMP基本信息
-            var result = ServiceClient.GetEmployees(null);
-            if (result.State != ResultState.Success)
+            var arrEmployee = new Employee[1];
+            arrEmployee[0] = new Employee
             {
-                throw new Exception(result.ErrorMessage);
-            }
-
-            var employeesReturn = result.ResultObject.ToList();
-
-            //写入基本信息
-            var employeeList = employeesReturn.Select(employee => new EmployeeModel
-            {
-                _description = employee.Description,
-                _id = employee.ID,
-                _loginName = employee.LoginName,
-                _name = employee.Name,
-                _password = employee.Password
-            }).ToList();
-
-
-            //获取EMP相关的角色信息
-            var roles = employeesReturn.Select(e => new EmpRole
-            {
-                EmpID = e.ID
-            }).Select(er => new Role
-            {
-                ID = er.RoleID
-            }).ToList();
-
-             ServiceClient.GetRoles(roles.ToArray());
+                Description = Description,
+                ID = ID,
+                LoginName = LoginName,
+                Name = Name,
+                Password = Password
+            };
 
 
 
-            //获取EMP相关权限信息
-            var auths = employeesReturn.Select(e => new EmpAuth
-            {
-                EmpID = e.ID
-            }).Select(er => new Authority
-            {
-                ID = er.AuthID
-            }).ToList();
+            var results = ServiceClient.ModifyEmployees(arrEmployee);
 
-            //获取用户角色相关信息
-            var roleauths = roles.Select(r => new RoleAuth
-            {
-                RoleID = r.ID
-            }).Select(ra => new Authority
-            {
-                ID = ra.AuthID
-            }).ToList();
+            if (results.State == ResultState.Fail)
+                throw new Exception(results.ErrorMessage);
 
-            auths = auths.Concat(roleauths).ToList();
-
-
-
-
-
-
-            return null;
-
+            Refresh();
         }
 
-
-
-        public void AddEmployees(List<EmployeeModel> employeeModels)
+        public void Delete()
         {
-            var results = ServiceClient.AddEmployees(employeeModels.Select(employeeModel => new Employee
+            var arrEmployee = new Employee[1];
+            arrEmployee[0] = new Employee
             {
-                ID = employeeModel.ID,
-                Description = employeeModel.Description,
-                LoginName = employeeModel.LoginName,
-                Name = employeeModel.Name,
-                Password = employeeModel.Password
-            }).ToArray());
+                Description = Description,
+                ID = ID,
+                LoginName = LoginName,
+                Name = Name,
+                Password = Password
+            };
 
+
+
+            var results = ServiceClient.DeleteEmployees(arrEmployee);
+
+            if (results.State == ResultState.Fail)
+                throw new Exception(results.ErrorMessage);
+
+           Reset();
         }
+
+
+        public void Reset()
+        {
+            _description = string.Empty;
+            _id = -1;
+            _loginName = string.Empty;
+            _name = string.Empty;
+            _password = string.Empty;
+        }
+
 
 
     }

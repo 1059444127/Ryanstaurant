@@ -68,16 +68,16 @@ namespace Ryanstaurant.UMS.Interface
 
 
         [OperationContract]
-        ResultEntity<List<RoleAuth>> GetRolAuths(List<RoleAuth> roleAuths);
+        ResultEntity<List<RoleAuth>> GetRoleAuths(List<RoleAuth> roleAuths);
 
         [OperationContract]
-        ResultEntity<List<RoleAuth>> AddRolAuths(List<RoleAuth> roleAuths);
+        ResultEntity<List<RoleAuth>> AddRoleAuths(List<RoleAuth> roleAuths);
 
         [OperationContract]
-        ResultEntity<List<RoleAuth>> ModifyRolAuths(List<RoleAuth> roleAuths);
+        ResultEntity<List<RoleAuth>> ModifyRoleAuths(List<RoleAuth> roleAuths);
 
         [OperationContract]
-        ResultEntity<List<RoleAuth>> DeleteRolAuths(List<RoleAuth> roleAuths);
+        ResultEntity<List<RoleAuth>> DeleteRoleAuths(List<RoleAuth> roleAuths);
 
 
         [OperationContract]
