@@ -63,6 +63,7 @@ namespace Ryanstaurant.UMS.DAL
                         if (avaliablList.Count == 0)
                         {
                             currentEmployee.Exception = "错误的ID,如果希望通过姓名进行查询，请将ID处设置为-1";
+                            currentEmployee.ExpType= ExceptionType.NotExist;
                             continue;
                         }
                     }
@@ -73,6 +74,7 @@ namespace Ryanstaurant.UMS.DAL
                         if (avaliablList.Count == 0)
                         {
                             currentEmployee.Exception = "错误的姓名";
+                            currentEmployee.ExpType = ExceptionType.NotExist;
                             continue;
                         }
                     }

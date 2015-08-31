@@ -23,8 +23,8 @@ namespace Ryanstaurant.UMS.DAL
                 if (empRole.Count == 0)
                 {
                     listEmpRoles =
-                          (from e in entities.emp_role
-                           select e).ToList();
+                        (from e in entities.emp_role
+                            select e).ToList();
                 }
                 else
                 {
@@ -38,7 +38,7 @@ namespace Ryanstaurant.UMS.DAL
                 foreach (var eA in empRole)
                 {
                     List<emp_role> matchedEmpRoles;
-                    string exception;
+                    var exception = string.Empty;
                     if (eA.EmpID == -1)
                     {
                         matchedEmpRoles =
@@ -46,7 +46,8 @@ namespace Ryanstaurant.UMS.DAL
                                 where a.role_id == eA.RoleID
                                 select a).ToList();
 
-                        exception = "Role_id为[" + eA.RoleID + "]的对应关系不存在";
+                        if (matchedEmpRoles.Count == 0)
+                            exception = "Role_id为[" + eA.RoleID + "]的对应关系不存在";
 
                     }
                     else if (eA.RoleID == -1)
@@ -56,7 +57,8 @@ namespace Ryanstaurant.UMS.DAL
                                 where a.emp_id == eA.EmpID
                                 select a).ToList();
 
-                        exception = "Emp_id为[" + eA.EmpID + "]的对应关系不存在";
+                        if (matchedEmpRoles.Count == 0)
+                            exception = "Emp_id为[" + eA.EmpID + "]的对应关系不存在";
 
                     }
                     else
@@ -66,7 +68,8 @@ namespace Ryanstaurant.UMS.DAL
                                 where a.emp_id == eA.EmpID && a.role_id == eA.RoleID
                                 select a).ToList();
 
-                        exception = "Emp_id为[" + eA.EmpID + "],Role_id为[" + eA.RoleID + "]的对应关系不存在";
+                        if (matchedEmpRoles.Count == 0)
+                            exception = "Emp_id为[" + eA.EmpID + "],Role_id为[" + eA.RoleID + "]的对应关系不存在";
 
                     }
 

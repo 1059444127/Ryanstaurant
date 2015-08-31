@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -15,23 +16,55 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="DgEmployee" Margin="0,0,0,0" ItemsSource="{Binding Path=EmployeeList}" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False" CanUserAddRows="False" Width="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <DataGrid.Columns>
-                <mui:DataGridTextColumn Header="ID" Width="SizeToHeader" Binding="{Binding Path=Id}" IsReadOnly="True" Visibility="Hidden"/>
-                <mui:DataGridTextColumn Header="用户名称" Width="SizeToHeader" Binding="{Binding Path=Name}" IsReadOnly="True"/>
-                <mui:DataGridTextColumn Header="登录名称" Width="SizeToHeader" Binding="{Binding Path=LoginName}" IsReadOnly="True"/>
-                <mui:DataGridTextColumn Header="详细信息" Width="SizeToHeader" Binding="{Binding Path=Description}" IsReadOnly="True" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <DataGrid x:Name="DgRole" Margin="0,0,0,0" ItemsSource="{Binding Path=EmployeeList}" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False" CanUserAddRows="False" Width="Auto" Grid.Row="1" Grid.Column="0" >
-            <DataGrid.Columns>
-                <mui:DataGridTextColumn Header="ID" Width="SizeToHeader" Binding="{Binding Path=Id}" IsReadOnly="True" Visibility="Hidden"/>
-                <mui:DataGridTextColumn Header="用户名称" Width="SizeToHeader" Binding="{Binding Path=Name}" IsReadOnly="True"/>
-                <mui:DataGridTextColumn Header="登录名称" Width="SizeToHeader" Binding="{Binding Path=LoginName}" IsReadOnly="True"/>
-                <mui:DataGridTextColumn Header="详细信息" Width="SizeToHeader" Binding="{Binding Path=Description}" IsReadOnly="True" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Grid.Row="2" Grid.Column="0" Content="test" Command="{Binding Path=testCommand}"></Button>
+        <GroupBox Header="人员列表" Margin="10,5,10,5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <DataGrid x:Name="DgEmployee" Margin="0,0,0,0" SelectionUnit="FullRow"  ItemsSource="{Binding Path = EmployeeList}" SelectedItem="{Binding Path =CurrentEmployee}" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False" CanUserAddRows="False" Width="Auto" >
+                <DataGrid.Columns>
+                    <mui:DataGridTextColumn Header="ID" Width="SizeToHeader" Binding="{Binding Path =ID}" IsReadOnly="True" Visibility="Hidden"/>
+                    <mui:DataGridTextColumn Header="用户名称" Width="SizeToHeader" Binding="{Binding Path =Name}" IsReadOnly="True"/>
+                    <mui:DataGridTextColumn Header="登录名称" Width="SizeToHeader" Binding="{Binding Path =LoginName}" IsReadOnly="True"/>
+                    <mui:DataGridTextColumn Header="详细信息" Width="SizeToHeader" Binding="{Binding Path =Description}" IsReadOnly="True" />
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding Path =RoleListChanged, Mode=OneWay}"
+                                   CommandParameter="{Binding Path =RoleList}"/>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding Path =AuthorityChanged, Mode=OneWay}"
+                                   CommandParameter="{Binding Path =AuthorityList}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+        </GroupBox>
+        <GroupBox Header="当前角色" Margin="10,5,10,5" Grid.Row="1" Grid.Column="0">
+            <DataGrid x:Name="DgRole" Margin="0,0,0,0" ItemsSource="{Binding Path =RoleList}" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False" CanUserAddRows="False" Width="Auto"  >
+                <DataGrid.Columns>
+                    <mui:DataGridTextColumn Header="EmpID" Width="SizeToHeader" Binding="{Binding Path =ID}" IsReadOnly="True"/>
+                    <mui:DataGridTextColumn Header="RoleId" Width="SizeToHeader" Binding="{Binding Path =Name}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <GroupBox Header="当前权限" Margin="10,5,10,5" Grid.Row="1" Grid.Column="1">
+            <DataGrid x:Name="DgAuth" Margin="0,0,0,0" ItemsSource="{Binding Path =AuthorityList}" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False" CanUserAddRows="False" Width="Auto">
+                <DataGrid.Columns>
+                    <mui:DataGridTextColumn Header="EmpID" Width="SizeToHeader" Binding="{Binding Path =ID}" IsReadOnly="True"/>
+                    <mui:DataGridTextColumn Header="RoleId" Width="SizeToHeader" Binding="{Binding Path =Name}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <GroupBox Header="当前权限" Margin="10,5,10,5" Grid.Row="3" Grid.Column="0">
+            <TreeView>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate  ItemsSource="{Binding Path=AllRoleList}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Tag="{Binding Path=ID}" VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </GroupBox>
+        <Button Grid.Row="2" Grid.Column="0" Content="test" Command="{Binding Path =testCommand}"></Button>
     </Grid>
 </UserControl>

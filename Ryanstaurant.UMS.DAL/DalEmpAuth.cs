@@ -21,48 +21,51 @@ namespace Ryanstaurant.UMS.DAL
                 if (empAuth.Count == 0)
                 {
                     listEmpAuths =
-                    (from e in entities.emp_auth
-                     select e).ToList();
+                        (from e in entities.emp_auth
+                            select e).ToList();
                 }
                 else
                 {
                     listEmpAuths =
-                    (from e in entities.emp_auth
-                        where  listEmpId.Contains(e.Emp_id) || listAuthId.Contains(e.Auth_id)
-                        select e).ToList();
+                        (from e in entities.emp_auth
+                            where listEmpId.Contains(e.Emp_id) || listAuthId.Contains(e.Auth_id)
+                            select e).ToList();
                 }
 
 
                 foreach (var eA in empAuth)
                 {
                     List<emp_auth> matchedEmpAuths;
-                    string exception;
+                    var exception = string.Empty;
                     if (eA.EmpID == -1)
                     {
                         matchedEmpAuths =
                             (from a in listEmpAuths
-                             where a.Auth_id == eA.AuthID
-                             select a).ToList();
+                                where a.Auth_id == eA.AuthID
+                                select a).ToList();
 
-                        exception = "Auth_id为[" + eA.AuthID + "]的对应关系不存在";
+                        if (matchedEmpAuths.Count == 0)
+                            exception = "Auth_id为[" + eA.AuthID + "]的对应关系不存在";
                     }
-                    else if (eA.AuthID==-1)
+                    else if (eA.AuthID == -1)
                     {
                         matchedEmpAuths =
                             (from a in listEmpAuths
-                             where a.Emp_id == eA.EmpID
-                             select a).ToList();
+                                where a.Emp_id == eA.EmpID
+                                select a).ToList();
 
-                        exception = "Emp_id为[" + eA.AuthID + "]的对应关系不存在";
+                        if (matchedEmpAuths.Count == 0)
+                            exception = "Emp_id为[" + eA.AuthID + "]的对应关系不存在";
                     }
                     else
                     {
                         matchedEmpAuths =
-                           (from a in listEmpAuths
-                            where a.Emp_id == eA.EmpID && a.Auth_id == eA.AuthID
-                            select a).ToList();
+                            (from a in listEmpAuths
+                                where a.Emp_id == eA.EmpID && a.Auth_id == eA.AuthID
+                                select a).ToList();
 
-                        exception = "不存在Emp_id为[" + eA.EmpID + "],Auth_id为[" + eA.AuthID + "]的对应关系";
+                        if (matchedEmpAuths.Count == 0)
+                            exception = "不存在Emp_id为[" + eA.EmpID + "],Auth_id为[" + eA.AuthID + "]的对应关系";
 
                     }
 
