@@ -11,12 +11,11 @@ namespace Ryanstaurant.UMS.DAL
     {
         public List<EmpAuth> Get(List<EmpAuth> empAuth)
         {
+            var returnEmpAuths = new List<EmpAuth>();
             using (var entities = new ryanstaurantEntities())
             {
-                var listEmpId = (from a in empAuth select a.EmpID).ToList();
-                var listAuthId = (from a in empAuth select a.AuthID).ToList();
-
-
+                var listEmpId = (from a in empAuth where a.EmpID != -1 select a.EmpID).ToList();
+                var listAuthId = (from a in empAuth where a.AuthID != -1 select a.AuthID).ToList();
 
                 List<emp_auth> listEmpAuths;
                 if (empAuth.Count == 0)
@@ -29,33 +28,69 @@ namespace Ryanstaurant.UMS.DAL
                 {
                     listEmpAuths =
                     (from e in entities.emp_auth
-                        where  listEmpId.Contains(e.Emp_id) && listAuthId.Contains(e.Auth_id)
+                        where  listEmpId.Contains(e.Emp_id) || listAuthId.Contains(e.Auth_id)
                         select e).ToList();
                 }
 
 
                 foreach (var eA in empAuth)
                 {
-                    var matchedEmpAuth =
-                        (from a in listEmpAuths where a.Emp_id == eA.EmpID && a.Auth_id==eA.AuthID select a).FirstOrDefault();
-
-
-                    if (matchedEmpAuth == null)
+                    List<emp_auth> matchedEmpAuths;
+                    string exception;
+                    if (eA.EmpID == -1)
                     {
-                        eA.Exception = "不存在Emp_id为[" + eA.EmpID + "],Auth_id为["+eA.AuthID+"]的对应关系";
-                        eA.ExpType = ExceptionType.NotExist;
-                        continue;
+                        matchedEmpAuths =
+                            (from a in listEmpAuths
+                             where a.Auth_id == eA.AuthID
+                             select a).ToList();
+
+                        exception = "Auth_id为[" + eA.AuthID + "]的对应关系不存在";
+                    }
+                    else if (eA.AuthID==-1)
+                    {
+                        matchedEmpAuths =
+                            (from a in listEmpAuths
+                             where a.Emp_id == eA.EmpID
+                             select a).ToList();
+
+                        exception = "Emp_id为[" + eA.AuthID + "]的对应关系不存在";
+                    }
+                    else
+                    {
+                        matchedEmpAuths =
+                           (from a in listEmpAuths
+                            where a.Emp_id == eA.EmpID && a.Auth_id == eA.AuthID
+                            select a).ToList();
+
+                        exception = "不存在Emp_id为[" + eA.EmpID + "],Auth_id为[" + eA.AuthID + "]的对应关系";
+
                     }
 
 
-                    eA.Exception = string.Empty;
-                    eA.ExpType = ExceptionType.None;
-                    eA.EmpID = matchedEmpAuth.Emp_id;
-                    eA.AuthID = matchedEmpAuth.Auth_id;
+                    if (!string.IsNullOrEmpty(exception))
+                    {
+                        returnEmpAuths.Add(new EmpAuth
+                        {
+                            EmpID = eA.EmpID,
+                            Exception = exception,
+                            ExceptionStackTrace = string.Empty,
+                            ExpType = ExceptionType.NotExist,
+                            AuthID = eA.AuthID
+                        });
+                        continue;
+                    }
 
+                    returnEmpAuths.AddRange(matchedEmpAuths.Select(matchedEmpAuth => new EmpAuth
+                    {
+                        EmpID = matchedEmpAuth.Emp_id,
+                        Exception = string.Empty,
+                        ExceptionStackTrace = string.Empty,
+                        ExpType = ExceptionType.None,
+                        AuthID = matchedEmpAuth.Auth_id
+                    }));
                 }
             }
-            return empAuth;
+            return returnEmpAuths;
         }
 
 

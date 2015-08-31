@@ -11,10 +11,11 @@ namespace Ryanstaurant.UMS.DAL
     {
         public List<EmpRole> Get(List<EmpRole> empRole)
         {
+            var returnEmpRoles = new List<EmpRole>();
             using (var entities = new ryanstaurantEntities())
             {
-                var listEmpId = (from a in empRole select a.EmpID).ToList();
-                var listRoleId = (from a in empRole select a.RoleID).ToList();
+                var listEmpId = (from a in empRole where a.EmpID != -1 select a.EmpID).ToList();
+                var listRoleId = (from a in empRole where a.RoleID != -1 select a.RoleID).ToList();
 
 
                 List<emp_role> listEmpRoles;
@@ -29,35 +30,71 @@ namespace Ryanstaurant.UMS.DAL
                 {
                     listEmpRoles =
                         (from e in entities.emp_role
-                         where listEmpId.Contains(e.emp_id) && listRoleId.Contains(e.role_id)
-                         select e).ToList();
+                            where listEmpId.Contains(e.emp_id) || listRoleId.Contains(e.role_id)
+                            select e).ToList();
                 }
 
 
                 foreach (var eA in empRole)
                 {
-                    var matchedEmpRole =
-                        (from a in listEmpRoles where a.emp_id == eA.EmpID && a.role_id == eA.RoleID select a).FirstOrDefault();
-
-
-                    if (matchedEmpRole == null)
+                    List<emp_role> matchedEmpRoles;
+                    string exception;
+                    if (eA.EmpID == -1)
                     {
-                        eA.Exception = "Emp_id为[" + eA.EmpID + "],Role_id为[" + eA.RoleID + "]的对应关系不存在";
-                        eA.ExpType = ExceptionType.NotExist;
+                        matchedEmpRoles =
+                            (from a in listEmpRoles
+                                where a.role_id == eA.RoleID
+                                select a).ToList();
+
+                        exception = "Role_id为[" + eA.RoleID + "]的对应关系不存在";
+
+                    }
+                    else if (eA.RoleID == -1)
+                    {
+                        matchedEmpRoles =
+                            (from a in listEmpRoles
+                                where a.emp_id == eA.EmpID
+                                select a).ToList();
+
+                        exception = "Emp_id为[" + eA.EmpID + "]的对应关系不存在";
+
+                    }
+                    else
+                    {
+                        matchedEmpRoles =
+                            (from a in listEmpRoles
+                                where a.emp_id == eA.EmpID && a.role_id == eA.RoleID
+                                select a).ToList();
+
+                        exception = "Emp_id为[" + eA.EmpID + "],Role_id为[" + eA.RoleID + "]的对应关系不存在";
+
+                    }
+
+                    if (!string.IsNullOrEmpty(exception))
+                    {
+                        returnEmpRoles.Add(new EmpRole
+                        {
+                            EmpID = eA.EmpID,
+                            Exception = exception,
+                            ExceptionStackTrace = string.Empty,
+                            ExpType = ExceptionType.NotExist,
+                            RoleID = eA.RoleID
+                        });
                         continue;
                     }
 
-
-                    eA.Exception = string.Empty;
-                    eA.ExpType = ExceptionType.None;
-                    eA.EmpID = matchedEmpRole.emp_id;
-                    eA.RoleID = matchedEmpRole.role_id;
-
+                    returnEmpRoles.AddRange(matchedEmpRoles.Select(matchedEmpRole => new EmpRole
+                    {
+                        EmpID = matchedEmpRole.emp_id,
+                        Exception = string.Empty,
+                        ExceptionStackTrace = string.Empty,
+                        ExpType = ExceptionType.None,
+                        RoleID = matchedEmpRole.role_id
+                    }));
                 }
             }
-            return empRole;
+            return returnEmpRoles;
         }
-
 
 
         public List<EmpRole> Add(List<EmpRole> empRoles)
@@ -136,8 +173,6 @@ namespace Ryanstaurant.UMS.DAL
             }
             return empRoles;
         }
-
-
 
 
     }

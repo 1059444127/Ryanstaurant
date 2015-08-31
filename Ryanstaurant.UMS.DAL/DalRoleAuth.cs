@@ -12,6 +12,7 @@ namespace Ryanstaurant.UMS.DAL
     {
         public List<RoleAuth> Get(List<RoleAuth> roleAuths)
         {
+            var returnRoleAuths = new List<RoleAuth>();
             using (var entities = new ryanstaurantEntities())
             {
                 var listRoleId = (from a in roleAuths select a.RoleID).ToList();
@@ -31,33 +32,72 @@ namespace Ryanstaurant.UMS.DAL
                 {
                     listRoleAuths =
                         (from e in entities.role_auth
-                         where listRoleId.Contains(e.role_id) && listAuthId.Contains(e.auth_id)
+                         where listRoleId.Contains(e.role_id) || listAuthId.Contains(e.auth_id)
                          select e).ToList();
                 }
 
 
                 foreach (var rA in roleAuths)
                 {
-                    var matchedRoleAuth =
-                        (from a in listRoleAuths where a.auth_id == rA.AuthID && a.role_id == rA.RoleID select a).FirstOrDefault();
 
-
-                    if (matchedRoleAuth == null)
+                    List<role_auth> matchedRoleAuths;
+                    string exception;
+                    if (rA.AuthID == -1)
                     {
-                        rA.Exception = "Auth_id为[" + rA.AuthID + "],Role_id为[" + rA.RoleID + "]的对应关系不存在";
-                        rA.ExpType = ExceptionType.NotExist;
+
+                        matchedRoleAuths =
+                            (from a in listRoleAuths
+                             where a.role_id == rA.RoleID
+                             select a).ToList();
+
+                        exception = "Role_id为[" + rA.RoleID + "]的对应关系不存在";
+                    }
+                    else if (rA.RoleID==-1)
+                    {
+
+                        matchedRoleAuths =
+                            (from a in listRoleAuths
+                             where a.auth_id == rA.AuthID
+                             select a).ToList();
+
+                        exception = "Auth_id为[" + rA.AuthID + "]的对应关系不存在";
+                    }
+                    else
+                    {
+                        matchedRoleAuths =
+                            (from a in listRoleAuths
+                            where a.auth_id == rA.AuthID && a.role_id == rA.RoleID
+                            select a).ToList();
+
+                        exception = "Auth_id为[" + rA.AuthID + "],Role_id为[" + rA.RoleID + "]的对应关系不存在";
+
+                    }
+
+                    if (!string.IsNullOrEmpty(exception))
+                    {
+                        returnRoleAuths.Add(new RoleAuth
+                        {
+                            AuthID = rA.AuthID,
+                            Exception = exception,
+                            ExceptionStackTrace = string.Empty,
+                            ExpType = ExceptionType.NotExist,
+                            RoleID = rA.RoleID
+                        });
                         continue;
                     }
 
-
-                    rA.Exception = string.Empty;
-                    rA.ExpType = ExceptionType.None;
-                    rA.AuthID = matchedRoleAuth.auth_id;
-                    rA.RoleID = matchedRoleAuth.role_id;
+                    returnRoleAuths.AddRange(matchedRoleAuths.Select(matchedRoleAuth => new RoleAuth
+                    {
+                        AuthID = matchedRoleAuth.auth_id,
+                        Exception = string.Empty,
+                        ExceptionStackTrace = string.Empty,
+                        ExpType = ExceptionType.None,
+                        RoleID = matchedRoleAuth.role_id
+                    }));
 
                 }
             }
-            return roleAuths;
+            return returnRoleAuths;
         }
 
 

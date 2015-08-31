@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Ryanstaurant.Clients.WPF.ManagementCenter.Model.UMSProxy;
 using Ryanstaurant.UMS.DataContract;
@@ -67,13 +66,6 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                 _description = value;
             }
         }
-
-
-
-        public List<Role> Roles { get; set; }
-        public List<Authority> Authorities { get; set; }
-
-
 
 
         #endregion

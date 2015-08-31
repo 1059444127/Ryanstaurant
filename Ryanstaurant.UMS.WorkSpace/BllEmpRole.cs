@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Ryanstaurant.UMS.DAL;
+using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.Interface;
 
 namespace Ryanstaurant.UMS.WorkSpace
 {
     public class BllEmpRole
     {
+
         public List<DataContract.EmpRole> Get(List<DataContract.EmpRole> empRoles)
         {
-            return LoadDalMethod(empRoles ?? new List<DataContract.EmpRole>(), list => new DalEmpRole().Get(list));
+            return LoadDalMethod(empRoles ?? new List<DataContract.EmpRole> {new EmpRole {EmpID = -1, RoleID = -1}},
+                list => new DalEmpRole().Get(list));
         }
 
 

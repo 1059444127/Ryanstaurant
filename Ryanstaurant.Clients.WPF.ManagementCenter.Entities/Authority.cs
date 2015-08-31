@@ -8,16 +8,12 @@ using Ryanstaurant.UMS.DataContract.Utility;
 
 namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 {
-    public class RoleModel
+    public class AuthorityModel
     {
+
         protected readonly UMSServiceClient ServiceClient = new UMSServiceClient();
 
         private int _id = -1;
-
-
-        
-
-
 
         public int ID
         {
@@ -29,20 +25,22 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
         public string Description { get; set; }
 
+        public int KeyCode { get; set; }
 
 
 
         public void Add()
         {
-            var arrRoles = new Role[1];
-            arrRoles[0] = new Role
+            var arrAuthorities = new Authority[1];
+            arrAuthorities[0] = new Authority
             {
                 Description = Description,
                 ID = ID,
-                Name = Name
+                Name = Name,
+                KeyCode = KeyCode
             };
 
-            var results = ServiceClient.AddRoles(arrRoles);
+            var results = ServiceClient.AddAuthorities(arrAuthorities);
 
             if (results.State == ResultState.Fail)
                 throw new Exception(results.ErrorMessage);
@@ -53,14 +51,14 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
         public void Refresh()
         {
-            var arrRoles = new Role[1];
-            arrRoles[0] = new Role
+            var arrAuthorities = new Authority[1];
+            arrAuthorities[0] = new Authority
             {
                 ID = ID,
                 Name = Name
             };
 
-            var results = ServiceClient.GetRoles(arrRoles);
+            var results = ServiceClient.GetAuthorities(arrAuthorities);
             if (results.State == ResultState.Fail)
                 throw new Exception(results.ErrorMessage);
 
@@ -70,12 +68,13 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             if (authReturn == null)
             {
                 throw new Exception(
-                    ID == -1 ? "没有找到名称为[" + Name + "]对应的角色" : "没有找到ID为[" + ID + "]对应的角色");
+                    ID == -1 ? "没有找到名称为[" + Name + "]对应的权限" : "没有找到ID为[" + ID + "]对应的人员");
             }
 
             ID = authReturn.ID;
             Description = authReturn.Description;
             Name = authReturn.Name;
+            KeyCode = authReturn.KeyCode;
 
         }
 
@@ -83,16 +82,17 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
         public void Modify()
         {
-            var arrRole = new Role[1];
-            arrRole[0] = new Role
+            var arrAuthority = new Authority[1];
+            arrAuthority[0] = new Authority
             {
                 ID = ID,
                 Name = Name,
-                Description = Description
+                Description=Description,
+                KeyCode = KeyCode
             };
 
 
-            var results = ServiceClient.ModifyRoles(arrRole);
+            var results = ServiceClient.ModifyAuthorities(arrAuthority);
 
             if (results.State == ResultState.Fail)
                 throw new Exception(results.ErrorMessage);
@@ -102,17 +102,18 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
         public void Delete()
         {
-            var arrRole = new Role[1];
-            arrRole[0] = new Role
+            var arrAuthority = new Authority[1];
+            arrAuthority[0] = new Authority
             {
                 Description = Description,
                 ID = ID,
-                Name = Name
+                Name = Name,
+                KeyCode = KeyCode
             };
 
 
 
-            var results = ServiceClient.DeleteRoles(arrRole);
+            var results = ServiceClient.DeleteAuthorities(arrAuthority);
 
             if (results.State == ResultState.Fail)
                 throw new Exception(results.ErrorMessage);
@@ -126,11 +127,8 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             _id = -1;
             Name = string.Empty;
             Description = string.Empty;
+            KeyCode = 0;
         }
-
-
-
-
 
 
 

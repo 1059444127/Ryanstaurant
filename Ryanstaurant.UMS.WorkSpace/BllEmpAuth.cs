@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ryanstaurant.UMS.DAL;
+using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.Interface;
 
 namespace Ryanstaurant.UMS.WorkSpace
@@ -10,7 +11,14 @@ namespace Ryanstaurant.UMS.WorkSpace
     {
         public List<DataContract.EmpAuth> Get(List<DataContract.EmpAuth> empAuths)
         {
-            return LoadDalMethod(empAuths ?? new List<DataContract.EmpAuth>(), list => new DalEmpAuth().Get(list));
+            return LoadDalMethod(empAuths ?? new List<DataContract.EmpAuth>
+            {
+                new EmpAuth
+                {
+                    AuthID = -1,
+                    EmpID = -1
+                }
+            }, list => new DalEmpAuth().Get(list));
         }
 
 

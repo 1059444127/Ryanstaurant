@@ -14,11 +14,6 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
         private int _id = -1;
 
-
-        
-
-
-
         public int ID
         {
             get { return _id; }

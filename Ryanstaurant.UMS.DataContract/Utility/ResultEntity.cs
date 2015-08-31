@@ -20,7 +20,10 @@ namespace Ryanstaurant.UMS.DataContract.Utility
         public ResultState State { get; set; }
 
         [DataMember]
-        public T ResultObject { get; set; } 
+        public T ResultObject { get; set; }
+
+        [DataMember]
+        public string InnerErrorMessage { get; set; }
 
 
     }

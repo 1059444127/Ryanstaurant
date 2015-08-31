@@ -45,6 +45,7 @@ namespace Ryanstaurant.UMS.Service
             {
                 return new ResultEntity<T>
                 {
+                    InnerErrorMessage = ex.InnerException == null ? string.Empty : ex.InnerException.Message,
                     ErrorMessage = ex.Message,
                     ResultObject = default(T),
                     State = ResultState.Fail

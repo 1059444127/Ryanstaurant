@@ -19,7 +19,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Pages
     /// <summary>
     /// EmployeeListView.xaml 的交互逻辑
     /// </summary>
-    public partial class EmployeeListView : UserControl,IContent
+    public partial class EmployeeListView : UserControl
     {
         public EmployeeListView()
         {
@@ -30,24 +30,5 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Pages
 
         public EmployeeListViewModel ViewModel = new EmployeeListViewModel();
 
-
-
-
-        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
-        {
-        }
-
-        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
-        {
-        }
-
-        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
-        {
-            
-        }
-
-        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
-        {
-        }
     }
 }
