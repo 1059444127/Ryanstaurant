@@ -131,9 +131,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utils\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="ExternalDll\GalaSoft.MvvmLight.Extras.WPF4.dll" />
     <Content Include="ExternalDll\GalaSoft.MvvmLight.WPF4.dll" />

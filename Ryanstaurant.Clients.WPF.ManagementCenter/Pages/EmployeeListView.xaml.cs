@@ -24,12 +24,9 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Pages
         public EmployeeListView()
         {
             InitializeComponent();
-            ViewModel= new EmployeeListViewModel();
-            base.DataContext = ViewModel;
+            base.DataContext = new EmployeeListViewModel();
         }
 
-
-        public EmployeeListViewModel ViewModel;
 
     }
 }

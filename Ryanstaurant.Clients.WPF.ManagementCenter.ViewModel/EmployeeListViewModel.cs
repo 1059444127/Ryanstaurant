@@ -11,6 +11,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
 {
     public class EmployeeListViewModel
     {
+        #region 属性
         /// <summary>
         /// 人员基本信息
         /// </summary>
@@ -41,7 +42,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
         /// 所有权限列表
         /// </summary>
         public List<AuthorityViewModel> AllAuthorityList { get; set; }
-
+        #endregion
 
 
 
@@ -67,33 +68,33 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
 
             CurrentRoleList = new ObservableCollection<RoleViewModel>();
             CurrentAuthorityList = new ObservableCollection<AuthorityViewModel>();
-            AllRoleList = new List<RoleViewModel>();
-            AllAuthorityList = new List<AuthorityViewModel>();
 
-            var roleList = new RoleListModel().GetAllRoles();
-            foreach (var roleModel in roleList)
+
+            var allroles = new RoleListModel().GetAllRoles();
+            AllRoleList = new List<RoleViewModel>();
+            foreach (var roleModel in allroles)
             {
                 AllRoleList.Add(new RoleViewModel(roleModel.ID, roleModel.Name)
                 {
+                    IsChecked = (from c in CurrentRoleList where c.ID == roleModel.ID select c).Any(),
                     Description = roleModel.Description
                 });
             }
 
+            AllAuthorityList = new List<AuthorityViewModel>();
             var authList = new AuthorityListModel().GetAllAuthorities();
-
             foreach (var authModel in authList)
             {
                 AllAuthorityList.Add(new AuthorityViewModel(authModel.ID, authModel.Name)
                 {
+                    IsChecked = (from c in CurrentAuthorityList where c.ID == authModel.ID select c).Any(),
                     Description = authModel.Description
                 });
             }
-
-
         }
 
 
-
+        #region COMMAND
         public ICommand testCommand
         {
             get
@@ -120,9 +121,6 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
             }
         }
 
-
-
-
         public ICommand RoleListChanged
         {
             get
@@ -143,12 +141,16 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
                         });
                     }
 
+
+                    foreach (var roleViewModel in AllRoleList)
+                    {
+                        roleViewModel.IsChecked = roleIdList.Contains(roleViewModel.ID);
+                    }
+
+
                 });
             }
         }
-
-
-
 
         public ICommand AuthorityChanged
         {
@@ -169,13 +171,16 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
                             Description = authModel.Description
                         });
                     }
-                    
+
+                    foreach (var authViewModel in AllAuthorityList)
+                    {
+                        authViewModel.IsChecked = authIdList.Contains(authViewModel.ID);
+                    }
 
                 });
             }
         }
-
-
+        #endregion
 
 
     }
