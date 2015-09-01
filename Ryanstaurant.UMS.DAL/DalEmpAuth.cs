@@ -18,7 +18,7 @@ namespace Ryanstaurant.UMS.DAL
                 var listAuthId = (from a in empAuth where a.AuthID != -1 select a.AuthID).ToList();
 
                 List<emp_auth> listEmpAuths;
-                if (empAuth.Count == 0)
+                if (empAuth.Count == 0 || (listEmpId.Count == 0 && listEmpId.Count == 0))
                 {
                     listEmpAuths =
                         (from e in entities.emp_auth
@@ -37,7 +37,12 @@ namespace Ryanstaurant.UMS.DAL
                 {
                     List<emp_auth> matchedEmpAuths;
                     var exception = string.Empty;
-                    if (eA.EmpID == -1)
+
+                    if (eA.AuthID == -1 && eA.EmpID == -1)
+                    {
+                        matchedEmpAuths = listEmpAuths;
+                    }
+                    else if (eA.EmpID == -1)
                     {
                         matchedEmpAuths =
                             (from a in listEmpAuths

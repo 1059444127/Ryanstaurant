@@ -42,9 +42,11 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
         /// 所有权限列表
         /// </summary>
         public List<AuthorityViewModel> AllAuthorityList { get; set; }
+
         #endregion
 
 
+        private List<RoleAuthModel> _roleAuthList; 
 
 
         public EmployeeListViewModel()
@@ -91,6 +93,9 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
                     Description = authModel.Description
                 });
             }
+
+            _roleAuthList = new RoleAuthListModel().Collection;
+
         }
 
 
@@ -180,6 +185,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
                 });
             }
         }
+
         #endregion
 
 

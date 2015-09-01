@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel;
 
 namespace Ryanstaurant.Clients.WPF.ManagementCenter.Pages
 {
@@ -19,9 +20,16 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Pages
     /// </summary>
     public partial class EmployeeView : UserControl
     {
+        public EmployeeView(int id,string name)
+        {
+            InitializeComponent();
+            base.DataContext = new EmployeeViewModel(id, name);
+        }
+
         public EmployeeView()
         {
             InitializeComponent();
+            base.DataContext = new EmployeeViewModel();
         }
     }
 }

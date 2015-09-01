@@ -20,7 +20,7 @@ namespace Ryanstaurant.UMS.DAL
 
                 List<emp_role> listEmpRoles;
 
-                if (empRole.Count == 0)
+                if (empRole.Count == 0 || (listRoleId.Count == 0 && listEmpId.Count == 0))
                 {
                     listEmpRoles =
                         (from e in entities.emp_role
@@ -39,7 +39,11 @@ namespace Ryanstaurant.UMS.DAL
                 {
                     List<emp_role> matchedEmpRoles;
                     var exception = string.Empty;
-                    if (eA.EmpID == -1)
+                    if (eA.RoleID == -1 && eA.EmpID == -1)
+                    {
+                        matchedEmpRoles = listEmpRoles;
+                    }
+                    else if (eA.EmpID == -1)
                     {
                         matchedEmpRoles =
                             (from a in listEmpRoles

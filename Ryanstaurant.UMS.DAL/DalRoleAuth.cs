@@ -15,14 +15,14 @@ namespace Ryanstaurant.UMS.DAL
             var returnRoleAuths = new List<RoleAuth>();
             using (var entities = new ryanstaurantEntities())
             {
-                var listRoleId = (from a in roleAuths select a.RoleID).ToList();
-                var listAuthId = (from a in roleAuths select a.AuthID).ToList();
+                var listRoleId = (from a in roleAuths where a.RoleID != -1 select a.RoleID).ToList();
+                var listAuthId = (from a in roleAuths where a.AuthID != -1 select a.AuthID).ToList();
 
 
 
                 List<role_auth> listRoleAuths;
 
-                if (roleAuths.Count == 0)
+                if (roleAuths.Count == 0 || (listRoleId.Count == 0 && listAuthId.Count == 0))
                 {
                     listRoleAuths =
                         (from e in entities.role_auth
@@ -42,7 +42,11 @@ namespace Ryanstaurant.UMS.DAL
 
                     List<role_auth> matchedRoleAuths;
                     var exception = string.Empty;
-                    if (rA.AuthID == -1)
+                    if (rA.AuthID == -1 && rA.RoleID == -1)
+                    {
+                        matchedRoleAuths = listRoleAuths;
+                    }
+                     else if (rA.AuthID == -1)
                     {
 
                         matchedRoleAuths =

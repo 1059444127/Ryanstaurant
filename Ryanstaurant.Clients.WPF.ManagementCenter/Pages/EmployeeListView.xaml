@@ -7,8 +7,10 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Margin="0,0,0,0">
+    
     <Grid Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -37,29 +39,39 @@
             </DataGrid>
         </GroupBox>
         <GroupBox Header="当前角色" Margin="10,5,10,5" Grid.Row="0" Grid.Column="1">
-            <TreeView ItemsSource="{Binding Path=AllRoleList}">
+            <ListBox ItemsSource="{Binding Path=AllRoleList}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox IsChecked="{Binding Path=IsChecked}" Command="{Binding Path=RoleSelectionChangedCommand}" CommandParameter="{Binding ElementName=testv,Path=DataContext}"></CheckBox>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"  Text="{Binding Path=ID}" Visibility="Hidden"></TextBlock>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"  Text="{Binding Path=Name}"></TextBlock>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"  Text="{Binding Path=Description}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+            
+        </GroupBox>
+        <GroupBox Header="当前权限" Margin="10,5,10,5" Grid.Row="0" Grid.Column="2">
+            <TreeView ItemsSource="{Binding Path=AllAuthorityList}" x:Name="testv">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <CheckBox IsChecked="{Binding Path=IsChecked}"></CheckBox>
-                            <TextBlock Tag="{Binding Path=ID}" VerticalAlignment="Center" HorizontalAlignment="Left"  Text="{Binding Path=Name}"></TextBlock>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=ID}" Visibility="Hidden"></TextBlock>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Name}"></TextBlock>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Description}"></TextBlock>
                         </StackPanel>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>
         </GroupBox>
-        <GroupBox Header="当前权限" Margin="10,5,10,5" Grid.Row="1" Grid.Column="1">
-            <TreeView ItemsSource="{Binding Path=AllAuthorityList}">
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <CheckBox IsChecked="{Binding Path=IsChecked}"></CheckBox>
-                            <TextBlock Tag="{Binding Path=ID}" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Name}"></TextBlock>
-                        </StackPanel>
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
-        </GroupBox>
-        <Button Grid.Row="3" Grid.Column="0" Content="test" Command="{Binding Path =testCommand}"></Button>
+        <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
+            <Button Content="添加"></Button>
+            <Button Content="修改"></Button>
+            <Button Content="删除"></Button>
+        </StackPanel>
     </Grid>
 </UserControl>
