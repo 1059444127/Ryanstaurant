@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Authority.cs" />
     <Compile Include="IDataContract.cs" />
+    <Compile Include="Utility\RequestContent.cs" />
+    <Compile Include="Utility\RequestEntitiy.cs" />
     <Compile Include="Utility\ResultContent.cs" />
     <Compile Include="Utility\ResultEntity.cs" />
     <Compile Include="Employee.cs" />

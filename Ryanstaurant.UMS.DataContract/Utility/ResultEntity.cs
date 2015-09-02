@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Ryanstaurant.UMS.DataContract.Utility
 {
@@ -20,7 +21,7 @@ namespace Ryanstaurant.UMS.DataContract.Utility
         public ResultState State { get; set; }
 
         [DataMember]
-        public T ResultObject { get; set; }
+        public List<ResultContent<T>> ResultObject { get; set; }
 
         [DataMember]
         public string InnerErrorMessage { get; set; }

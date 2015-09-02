@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Ryanstaurant.UMS.Interface;
 
 namespace Ryanstaurant.UMS.DataContract
@@ -15,5 +16,7 @@ namespace Ryanstaurant.UMS.DataContract
         public string Description { get; set; }
         [DataMember]
         public string Exception { get; set; }
+        [DataMember]
+        public List<Authority> Authorities { get; set; } 
     }
 }

@@ -30,7 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,25 +46,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BllAuthority.cs" />
-    <Compile Include="BllEmpAuth.cs" />
     <Compile Include="BllEmployee.cs" />
-    <Compile Include="BllEmpRole.cs" />
     <Compile Include="BllRole.cs" />
-    <Compile Include="BllRoleAuth.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ryanstaurant.UMS.DAL\Ryanstaurant.UMS.DAL.csproj">
-      <Project>{2b0ae487-fe7b-43a8-a407-db3559886b4e}</Project>
-      <Name>Ryanstaurant.UMS.DAL</Name>
+    <ProjectReference Include="..\Ryanstaurant.UMS.DataAccess\Ryanstaurant.UMS.DataAccess.csproj">
+      <Project>{5143bd0e-df9a-4425-9178-075f55e6bfb9}</Project>
+      <Name>Ryanstaurant.UMS.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ryanstaurant.UMS.DataContract\Ryanstaurant.UMS.DataContract.csproj">
       <Project>{f2fe3d45-0fed-4072-9c04-7636d4df6589}</Project>
       <Name>Ryanstaurant.UMS.DataContract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ryanstaurant.UMS.Entity\Ryanstaurant.UMS.Entity.csproj">
-      <Project>{a593e12f-dbe2-4b89-855f-f1c037a9fbad}</Project>
-      <Name>Ryanstaurant.UMS.Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ryanstaurant.Utility\Ryanstaurant.Utility.csproj">
       <Project>{da98a705-f472-4ece-a15a-0d75dc7b4655}</Project>
