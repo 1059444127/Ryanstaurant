@@ -3,12 +3,8 @@
 namespace Ryanstaurant.UMS.DataContract.Utility
 {
     [DataContract]
-    public class ResultContent<T>
+    public class ResultContent
     {
-        [DataMember]
-        public T Item { get; set; }
-
-
         [DataMember]
         public string Exception { get; set; }
 

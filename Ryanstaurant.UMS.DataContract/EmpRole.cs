@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Ryanstaurant.UMS.Interface;
+﻿using System.Runtime.Serialization;
+using Ryanstaurant.UMS.DataContract.Utility;
 
 namespace Ryanstaurant.UMS.DataContract
 {
     [DataContract]
-    public class EmpRole : IDataContract
+    public class EmpRole : ItemContent
     {
         [DataMember]
         public int EmpID { get; set; }
@@ -13,5 +12,7 @@ namespace Ryanstaurant.UMS.DataContract
         public int RoleID { get; set; }
         [DataMember]
         public string Exception { get; set; }
+        public RequestOperation Operation
+        { get; set; }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using Ryanstaurant.UMS.Interface;
+using Ryanstaurant.UMS.DataContract.Utility;
 
 namespace Ryanstaurant.UMS.DataContract
 {
     [DataContract]
-    public class RoleAuth : IDataContract
+    public class RoleAuth : ItemContent
     {
         [DataMember]
         public int RoleID { get; set; }
@@ -12,5 +12,7 @@ namespace Ryanstaurant.UMS.DataContract
         public int AuthID { get; set; }
         [DataMember]
         public string Exception { get; set; }
+        public RequestOperation Operation
+        { get; set; }
     }
 }

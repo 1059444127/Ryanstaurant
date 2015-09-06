@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using Ryanstaurant.UMS.Interface;
+using Ryanstaurant.UMS.DataContract.Utility;
 
 
 namespace Ryanstaurant.UMS.DataContract
 {
     [DataContract]
-    public class Employee : IDataContract
+    public class Employee : ItemContent
     {
         [DataMember]
         public int ID { get; set; }
@@ -24,6 +23,8 @@ namespace Ryanstaurant.UMS.DataContract
         [DataMember]
         public List<Role> Roles { get; set; }
         [DataMember]
-        public List<Authority> Authorities { get; set; } 
+        public List<Authority> Authorities { get; set; }
+        public RequestOperation Operation
+        { get; set; }
     }
 }

@@ -54,60 +54,24 @@
     <Compile Include="RoleAuthModel.cs" />
     <Compile Include="RoleListModel.cs" />
     <Compile Include="RoleModel.cs" />
-    <Compile Include="Service References\UMSProxy\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
+    <Compile Include="UMSProxy.cs" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\DataSources\Ryanstaurant.UMS.DataContract.Authority.datasource" />
     <None Include="Properties\DataSources\Ryanstaurant.UMS.DataContract.EmpAuth.datasource" />
     <None Include="Properties\DataSources\Ryanstaurant.UMS.DataContract.Employee.datasource" />
     <None Include="Properties\DataSources\Ryanstaurant.UMS.DataContract.EmpRole.datasource" />
     <None Include="Properties\DataSources\Ryanstaurant.UMS.DataContract.Role.datasource" />
     <None Include="Properties\DataSources\Ryanstaurant.UMS.DataContract.RoleAuth.datasource" />
-    <None Include="Service References\UMSProxy\UMSService.wsdl" />
-    <None Include="Service References\UMSProxy\UMSService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UMSProxy\UMSService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UMSProxy\UMSService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UMSProxy\UMSService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ryanstaurant.UMS.DataContract\Ryanstaurant.UMS.DataContract.csproj">
       <Project>{f2fe3d45-0fed-4072-9c04-7636d4df6589}</Project>
       <Name>Ryanstaurant.UMS.DataContract</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\UMSProxy\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\UMSProxy\UMSService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\UMSProxy\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\UMSProxy\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\UMSProxy\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

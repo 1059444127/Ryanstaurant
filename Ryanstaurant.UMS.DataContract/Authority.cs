@@ -1,10 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using Ryanstaurant.UMS.Interface;
+using Ryanstaurant.UMS.DataContract.Utility;
 
 namespace Ryanstaurant.UMS.DataContract
 {
     [DataContract]
-    public class Authority:IDataContract
+    public class Authority:ItemContent
     {
         [DataMember]
         public int ID { get; set; }
@@ -17,8 +17,5 @@ namespace Ryanstaurant.UMS.DataContract
 
         [DataMember]
         public int KeyCode { get; set; }
-
-        [DataMember]
-        public string Exception { get; set; }
     }
 }

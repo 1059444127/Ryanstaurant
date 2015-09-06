@@ -1,10 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using Ryanstaurant.UMS.Interface;
+using Ryanstaurant.UMS.DataContract.Utility;
 
 namespace Ryanstaurant.UMS.DataContract
 {
     [DataContract]
-    public class EmpAuth : IDataContract
+    public class EmpAuth :ItemContent
     {
 
         [DataMember]
@@ -13,5 +13,7 @@ namespace Ryanstaurant.UMS.DataContract
         public int AuthID { get; set; }
         [DataMember]
         public string Exception { get; set; }
+        public RequestOperation Operation
+        { get; set; }
     }
 }

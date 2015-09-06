@@ -4,7 +4,6 @@ using System.Linq;
 using Ryanstaurant.UMS.DataAccess.EF;
 using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.DataContract.Utility;
-using Ryanstaurant.UMS.Interface;
 
 namespace Ryanstaurant.UMS.WorkSpace
 {
@@ -12,33 +11,31 @@ namespace Ryanstaurant.UMS.WorkSpace
     {
 
 
-        public List<ResultContent<Role>> QueryRoles(RequestEntitiy<Role> roles)
+        public List<ItemContent> QueryRole(List<ItemContent> roles)
         {
-            if (roles.RequestContents == null || roles.RequestContents.Count == 0)
+            if (roles == null || roles.Count == 0)
             {
                 throw new Exception("没有找到需要的操作", new Exception("RequestContents为空"));
             }
 
-            if (roles.RequestContents.Count == 1 && roles.RequestContents[0] == null)
+            if (roles.Count == 1 && roles[0] == null)
             {
                 throw new Exception("没有找到需要的操作", new Exception("RequestContents没有包含操作"));
             }
 
 
-            var resultEntity = new List<ResultContent<Role>>();
 
-            if (roles.QueryContentList != null)
-            {
-                resultEntity = Query(roles.QueryContentList);
-            }
+            var queries =
+                (from e in roles
+                 where e.RequestInfo != null && e.RequestInfo.Operation == RequestOperation.Query
+                 select e).ToList();
 
-
-            return resultEntity;
+            return Query(!queries.Any() ? null : queries.ToList());
         }
 
-        internal List<ResultContent<Role>> Query(List<Role> roles)
+        internal List<ItemContent> Query(List<ItemContent> itemContents)
         {
-            var resultEntity = new List<ResultContent<Role>>();
+            var resultEntity = new List<ItemContent>();
 
             using (var entities = new ryanstaurantEntities())
             {
@@ -46,8 +43,10 @@ namespace Ryanstaurant.UMS.WorkSpace
                 List<role> roleList;
                 List<authority> authList;
 
+
+
                 //没有指定，则返回所有查询结果
-                if (!roles.Any())
+                if (itemContents == null)
                 {
                     roleAuthList = (from e in entities.role_auth select e).ToList();
                     roleList = (from e in entities.role select e).ToList();
@@ -55,6 +54,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                 }
                 else//有指定，则从传送的数据处进行查询
                 {
+                    var roles = itemContents.Cast<Role>().ToList();
                     var roleIDList = (from e in roles
                                      select e.ID).ToList();
 
@@ -75,24 +75,24 @@ namespace Ryanstaurant.UMS.WorkSpace
                 {
                     var currentRole = role;
 
-                    var resultRole = new ResultContent<Role>
+                    var resultRole = new Role
                     {
-                        State = ResultState.Success,
-                        Exception = string.Empty,
-                        InnerErrorMessage = string.Empty,
-                        Item = new Role
+                        ResultInfo = new ResultContent
                         {
-                            ID = currentRole.id,
-                            Description = currentRole.Description,
-                            Name = currentRole.Name
-                        }
+                            State = ResultState.Success,
+                            Exception = string.Empty,
+                            InnerErrorMessage = string.Empty,
+                        },
+                        ID = currentRole.id,
+                        Description = currentRole.Description,
+                        Name = currentRole.Name
                     };
 
                     var authIDList = (from er in roleAuthList
                                       where er.role_id == currentRole.id
                                       select er.auth_id).ToList();
 
-                    resultRole.Item.Authorities = (from r in authList
+                    resultRole.Authorities = (from r in authList
                         where authIDList.Contains(r.id)
                         select new Authority
                         {
@@ -110,94 +110,119 @@ namespace Ryanstaurant.UMS.WorkSpace
         }
 
 
-        public List<ResultContent<Role>> ExcuteRoles(RequestEntitiy<Role> roles)
+        public List<ItemContent> ExecuteRole(List<ItemContent> roles)
         {
-            if (roles.RequestContents == null || roles.RequestContents.Count == 0)
+            if (roles == null || roles.Count == 0)
             {
                 throw new Exception("没有找到需要的操作", new Exception("RequestContents为空"));
             }
 
-            if (roles.RequestContents.Count == 1 && roles.RequestContents[0] == null)
+            if (roles.Count == 1 && roles[0] == null)
             {
                 throw new Exception("没有找到需要的操作", new Exception("RequestContents没有包含操作"));
             }
 
 
-            var resultEntity = new List<ResultContent<Role>>();
+            var queries =
+            (from e in roles
+             where e.RequestInfo != null && e.RequestInfo.Operation != RequestOperation.Query
+             select e).ToList();
 
-            resultEntity = Save(roles);
+            if (!queries.Any())
+            {
+                throw new Exception("没有找到需要的操作", new Exception("RequestContents没有包含执行(add,modify或者delete)操作"));
+            }
+
+            var resultEntity = Save(roles);
+
             return resultEntity;
         }
 
-        private List<ResultContent<Role>> Save(RequestEntitiy<Role> requestEntitiies)
+        private static List<ItemContent> Save(IEnumerable<ItemContent> requestEntitiies)
         {
-            var resultEntity = new List<ResultContent<Role>>();
+            var resultEntity = new List<ItemContent>();
 
             using (var entities = new ryanstaurantEntities())
             {
 
-                foreach (var content in requestEntitiies.RequestContents)
+                foreach (var content in requestEntitiies)
                 {
-                    var resultcontent = new ResultContent<Role>();
+                    var resultcontent = new ItemContent();
 
 
                     if (content == null)
                     {
-                        resultcontent.Exception = "未设置操作类型";
-                        resultcontent.InnerErrorMessage = "ResultContent为NULL";
-                        resultcontent.Item = null;
-                        resultcontent.State = ResultState.Fail;
-                    }
+                        resultcontent.ResultInfo.Exception = "未设置操作类型";
+                        resultcontent.ResultInfo.InnerErrorMessage = "ResultContent为NULL";
+                        resultcontent.ResultInfo.State = ResultState.Fail;
 
-                    switch (content.Operation)
+
+                    }
+                    else
                     {
-                        case RequestOperation.Add:
+                        switch (content.RequestInfo.Operation)
+                        {
+                            case RequestOperation.Add:
                             {
                                 resultcontent = AddRole(entities, content);
                             }
-                            break;
-                        case RequestOperation.Modify:
+                                break;
+                            case RequestOperation.Modify:
                             {
                                 resultcontent = ModifyRole(entities, content);
                             }
-                            break;
-                        case RequestOperation.Delete:
+                                break;
+                            case RequestOperation.Delete:
                             {
                                 resultcontent = DeleteRole(entities, content);
                             }
-                            break;
-                        default:
+                                break;
+                            default:
                             {
-                                resultcontent.Exception = "错误的操作类型";
-                                resultcontent.InnerErrorMessage = "RequestOperation=" +
-                                                                  Enum.GetName(typeof(RequestOperation), content.Operation);
-                                resultcontent.Item = null;
-                                resultcontent.State = ResultState.Fail;
+                                resultcontent.ResultInfo.Exception = "错误的操作类型";
+                                resultcontent.ResultInfo.InnerErrorMessage = "RequestOperation=" +
+                                                                             Enum.GetName(typeof (RequestOperation),
+                                                                                 content.RequestInfo.Operation);
+                                resultcontent.ResultInfo.State = ResultState.Fail;
                             }
-                            break;
+                                break;
+                        }
                     }
-                    resultEntity.Add(resultcontent);
-
+                        resultEntity.Add(resultcontent);
                 }
             }
             return resultEntity;
         }
 
-        private static ResultContent<Role> DeleteRole(ryanstaurantEntities entities, RequestContent<Role> content)
+        private static ItemContent DeleteRole(ryanstaurantEntities entities, ItemContent content)
         {
-            var role = content.RequestObject;
+            var role = content as Role;
 
-            var roleInDb = (from e in entities.role where e.id == content.RequestObject.ID select e).FirstOrDefault();
+            if (role == null)
+            {
+                return new Role
+                {
+                    ResultInfo = new ResultContent
+                    {
+                        Exception = "错误的数据类型，没有进行删除操作",
+                        InnerErrorMessage = string.Empty,
+                        State = ResultState.Success
+                    }
+
+                };
+            }
+
+            var roleInDb = (from e in entities.role where e.id == role.ID select e).FirstOrDefault();
 
             if (roleInDb == null)
             {
-                return new ResultContent<Role>
+                role.ResultInfo = new ResultContent
                 {
                     Exception = "ID为[" + role.ID + "]的角色不存在，没有进行删除操作",
                     InnerErrorMessage = string.Empty,
-                    Item = role,
                     State = ResultState.Success
                 };
+                return role;
             }
 
 
@@ -215,33 +240,51 @@ namespace Ryanstaurant.UMS.WorkSpace
             entities.SaveChanges();
 
 
-            return new ResultContent<Role>
+            role.ResultInfo = new ResultContent
             {
                 Exception = string.Empty,
                 InnerErrorMessage = string.Empty,
-                Item = role,
                 State = ResultState.Success
-
             };
+
+            return role;
         }
 
-        private static ResultContent<Role> ModifyRole(ryanstaurantEntities entities, RequestContent<Role> content)
+        private static ItemContent ModifyRole(ryanstaurantEntities entities, ItemContent content)
         {
-            var role = content.RequestObject;
+            var role = content as Role;
 
-            var roleInDb = (from e in entities.role where e.id == content.RequestObject.ID select e).FirstOrDefault();
-
-            if (roleInDb == null)
+            if (role == null)
             {
-                return new ResultContent<Role>
+                return new Role
                 {
-                    Exception = "ID为[" + role.ID + "]的角色不存在，没有进行修改操作",
-                    InnerErrorMessage = string.Empty,
-                    Item = role,
-                    State = ResultState.Success
+                    ResultInfo = new ResultContent
+                    {
+                        Exception = "错误的数据类型，没有进行修改操作",
+                        InnerErrorMessage = string.Empty,
+                        State = ResultState.Success
+                    }
+
                 };
             }
 
+
+
+            var roleInDb = (from e in entities.role where e.id == role.ID select e).FirstOrDefault();
+
+            if (roleInDb == null)
+            {
+                role.ResultInfo = new ResultContent
+                {
+                    Exception = "ID为[" + role.ID + "]的角色不存在，没有进行修改操作",
+                    InnerErrorMessage = string.Empty,
+                    State = ResultState.Success
+                };
+                return role;
+            }
+
+
+             
 
             roleInDb.Description = role.Description;
             roleInDb.Name = role.Name;
@@ -271,20 +314,34 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             entities.SaveChanges();
 
-
-            return new ResultContent<Role>
+            role.ResultInfo = new ResultContent
             {
                 Exception = string.Empty,
                 InnerErrorMessage = string.Empty,
-                Item = role,
                 State = ResultState.Success
-
             };
+
+            return role;
         }
 
-        private static ResultContent<Role> AddRole(ryanstaurantEntities entities, RequestContent<Role> content)
+        private static ItemContent AddRole(ryanstaurantEntities entities, ItemContent content)
         {
-            var role = content.RequestObject;
+            var role = content as Role;
+
+            if (role == null)
+            {
+                return new Role
+                {
+                    ResultInfo = new ResultContent
+                    {
+                        Exception = "错误的数据类型，没有进行添加操作",
+                        InnerErrorMessage = string.Empty,
+                        State = ResultState.Success
+                    }
+
+                };
+            }
+
 
 
             var roleToAdd = new role
@@ -310,14 +367,22 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             entities.SaveChanges();
 
-            role.ID = roleToAdd.id;
 
-            return new ResultContent<Role>
+            return new Role
             {
-                Exception = string.Empty,
-                InnerErrorMessage = string.Empty,
-                Item = role,
-                State = ResultState.Success
+                ResultInfo = new ResultContent
+                {
+                    Exception = string.Empty,
+                    InnerErrorMessage = string.Empty,
+                    State = ResultState.Success
+                },
+                ID=roleToAdd.id,
+                Authorities=role.Authorities,
+                Description = roleToAdd.Description,
+                Name = roleToAdd.Name
+
+
+               
 
             };
         }

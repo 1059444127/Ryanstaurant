@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
-using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.DataContract.Utility;
 
 namespace Ryanstaurant.UMS.Interface
@@ -9,12 +8,20 @@ namespace Ryanstaurant.UMS.Interface
     public interface IUMSService
     {
         [OperationContract]
-        ResultEntity<Employee> ExecuteEmployees(RequestEntitiy<Employee> employees);
+        ResultEntity Execute(List<ItemContent> requestEntitiy);
 
         [OperationContract]
-        ResultEntity<Employee> QueryEmployees(RequestEntitiy<Employee> employees);
+        ResultEntity Query(List<ItemContent> requestEntitiy);
             
             
+
+
+
+
+
+
+
+
             
 
 

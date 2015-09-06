@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
+﻿using System.Runtime.Serialization;
 
 namespace Ryanstaurant.UMS.DataContract.Utility
 {
-    [DataContract]
-    public class RequestContent<T>
+    public enum RequestOperation
     {
-        [DataMember]
-        public T RequestObject { get; set; }
+        Query,
+        Add,
+        Modify,
+        Delete
+    }
+
+
+
+    [DataContract]
+    public class RequestContent
+    {
         [DataMember]
         public RequestOperation Operation { get; set; }
 

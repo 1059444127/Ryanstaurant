@@ -1,69 +1,68 @@
 ﻿using System;
-using System.Activities.Statements;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Core.Metadata.Edm;
-using System.Diagnostics;
 using System.Linq;
-using System.Security.Cryptography;
 using Ryanstaurant.UMS.DataAccess.EF;
 using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.DataContract.Utility;
-using Ryanstaurant.UMS.Interface;
 
 namespace Ryanstaurant.UMS.WorkSpace
 {
     public class BllEmployee
     {
 
-        public List<ResultContent<Employee>> QueryEmployees(RequestEntitiy<Employee> employees)
+        public List<ItemContent> QueryEmployee(List<ItemContent> employees)
         {
-            if (employees.RequestContents == null || employees.RequestContents.Count == 0)
+            if (employees == null || employees.Count == 0)
             {
                 throw new Exception("没有找到需要的操作", new Exception("RequestContents为空"));
             }
 
-            if (employees.RequestContents.Count == 1 && employees.RequestContents[0] == null)
+            if (employees.Count == 1 && employees[0] == null)
             {
                 throw new Exception("没有找到需要的操作", new Exception("RequestContents没有包含操作"));
             }
 
 
-            var resultEntity = new List<ResultContent<Employee>>();
+            var queries =
+                (from e in employees
+                    where e.RequestInfo != null && e.RequestInfo.Operation == RequestOperation.Query
+                    select e).ToList();
 
-            if (employees.QueryContentList != null)
-            {
-                resultEntity = Query(employees.QueryContentList);
-            }
-
-
-            return resultEntity;
+            return Query(!queries.Any() ? null : queries.ToList());
         }
 
 
-        public List<ResultContent<Employee>> ExcuteEmployees(RequestEntitiy<Employee> employees)
+        public List<ItemContent> ExecuteEmployee(List<ItemContent> employees)
         {
-            if (employees.RequestContents == null || employees.RequestContents.Count == 0)
+            if (employees == null || employees.Count == 0)
             {
                 throw new Exception("没有找到需要的操作", new Exception("RequestContents为空"));
             }
 
-            if (employees.RequestContents.Count == 1 && employees.RequestContents[0] == null)
+            if (employees.Count == 1 && employees[0] == null)
             {
                 throw new Exception("没有找到需要的操作", new Exception("RequestContents没有包含操作"));
             }
 
+            var queries =
+                (from e in employees
+                where e.RequestInfo != null && e.RequestInfo.Operation != RequestOperation.Query
+                select e).ToList();
 
-            var resultEntity = new List<ResultContent<Employee>>();
+            if (!queries.Any())
+            {
+                throw new Exception("没有找到需要的操作", new Exception("RequestContents没有包含执行(add,modify或者delete)操作"));
+            }
 
-            resultEntity = Save(employees);
+            var resultEntity = Save(employees);
+
             return resultEntity;
         }
 
 
-        internal List<ResultContent<Employee>> Query(List<Employee> employees)
+        internal List<ItemContent> Query(List<ItemContent> itemContents)
         {
-            var resultEntity = new List<ResultContent<Employee>>();
+            var resultEntity = new List<ItemContent>();
 
             using (var entities = new ryanstaurantEntities())
             {
@@ -74,8 +73,12 @@ namespace Ryanstaurant.UMS.WorkSpace
                 List<role> roleList;
                 List<authority> authList;
 
+
+                
+
+
                 //没有指定，则返回所有查询结果
-                if (!employees.Any())
+                if (itemContents == null)
                 {
                     empList = (from e in entities.employee select e).ToList();
                     empRoleList = (from e in entities.emp_role select e).ToList();
@@ -84,16 +87,21 @@ namespace Ryanstaurant.UMS.WorkSpace
                     roleList = (from e in entities.role select e).ToList();
                     authList = (from e in entities.authority select e).ToList();
                 }
-                else//有指定，则从传送的数据处进行查询
+                else //有指定，则从传送的数据处进行查询
                 {
+                    var employees = itemContents.Cast<Employee>().ToList();
+
                     var empIDList = (from e in employees
                         select e.ID).ToList();
 
                     var empNameList = (from e in employees
-                                     select e.Name).ToList();
+                        select e.Name).ToList();
 
 
-                    empList = (from e in entities.employee where empIDList.Contains(e.ID) || empNameList.Contains(e.Name) select e).ToList();
+                    empList =
+                        (from e in entities.employee
+                            where empIDList.Contains(e.ID) || empNameList.Contains(e.Name)
+                            select e).ToList();
                     empRoleList = (from e in entities.emp_role where empIDList.Contains(e.emp_id) select e).ToList();
                     empAuthList = (from e in entities.emp_auth where empIDList.Contains(e.Emp_id) select e).ToList();
                     roleAuthList = (from e in entities.role_auth select e).ToList();
@@ -108,26 +116,26 @@ namespace Ryanstaurant.UMS.WorkSpace
                 {
                     var currentEmp = employee;
 
-                    var resultEmployee = new ResultContent<Employee>
+                    var resultEmployee = new Employee
                     {
-                        State = ResultState.Success,
-                        Exception = string.Empty,
-                        InnerErrorMessage = string.Empty,
-                        Item = new Employee
+                        ResultInfo = new ResultContent
                         {
-                            ID = currentEmp.ID,
-                            Description = currentEmp.Description,
-                            LoginName = currentEmp.LoginName,
-                            Name = currentEmp.Name,
-                            Password = currentEmp.Password
-                        }
+                            State = ResultState.Success,
+                            Exception = string.Empty,
+                            InnerErrorMessage = string.Empty
+                        },
+                        ID = currentEmp.ID,
+                        Description = currentEmp.Description,
+                        LoginName = currentEmp.LoginName,
+                        Name = currentEmp.Name,
+                        Password = currentEmp.Password
                     };
 
                     var roleIDList = (from er in empRoleList
                         where er.emp_id == currentEmp.ID
                         select er.role_id).ToList();
 
-                    resultEmployee.Item.Roles = (from r in roleList
+                    resultEmployee.Roles = (from r in roleList
                         where roleIDList.Contains(r.id)
                         select new Role
                         {
@@ -137,7 +145,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                         }).ToList();
 
 
-                    foreach (var role in resultEmployee.Item.Roles)
+                    foreach (var role in resultEmployee.Roles)
                     {
                         var rAuthIDList = (from a in roleAuthList
                             where role.ID == a.role_id
@@ -158,7 +166,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                         where a.Emp_id == currentEmp.ID
                         select a.Auth_id).ToList();
 
-                    resultEmployee.Item.Authorities = (from a in authList
+                    resultEmployee.Authorities = (from a in authList
                         where authIDList.Contains(a.id)
                         select new Authority
                         {
@@ -178,52 +186,55 @@ namespace Ryanstaurant.UMS.WorkSpace
         }
 
 
-        internal List<ResultContent<Employee>> Save(RequestEntitiy<Employee> requestEntitiies)
+        internal List<ItemContent> Save(List<ItemContent> requestEntitiies)
         {
-            var resultEntity = new List<ResultContent<Employee>>();
+            var resultEntity = new List<ItemContent>();
 
             using (var entities = new ryanstaurantEntities())
             {
 
-                foreach (var content in requestEntitiies.RequestContents)
+                foreach (var content in requestEntitiies)
                 {
-                    var resultcontent = new ResultContent<Employee>();
+                    var resultcontent = new ItemContent();
 
 
                     if (content == null)
                     {
-                        resultcontent.Exception = "未设置操作类型";
-                        resultcontent.InnerErrorMessage = "ResultContent为NULL";
-                        resultcontent.Item = null;
-                        resultcontent.State = ResultState.Fail;
-                    }
+                        resultcontent.ResultInfo.Exception = "未设置操作类型";
+                        resultcontent.ResultInfo.InnerErrorMessage = "ResultContent为NULL";
+                        resultcontent.ResultInfo.State = ResultState.Fail;
 
-                    switch (content.Operation)
+                    }
+                    else
                     {
-                        case RequestOperation.Add:
+
+                        switch (content.RequestInfo.Operation)
                         {
-                            resultcontent = AddEmployee(entities, content);
+                            case RequestOperation.Add:
+                            {
+                                resultcontent = AddEmployee(entities, content);
+                            }
+                                break;
+                            case RequestOperation.Modify:
+                            {
+                                resultcontent = ModifyEmployee(entities, content);
+                            }
+                                break;
+                            case RequestOperation.Delete:
+                            {
+                                resultcontent = DeleteEmployee(entities, content);
+                            }
+                                break;
+                            default:
+                            {
+                                resultcontent.ResultInfo.Exception = "错误的操作类型";
+                                resultcontent.ResultInfo.InnerErrorMessage = "RequestOperation=" +
+                                                                             Enum.GetName(typeof (RequestOperation),
+                                                                                 content.RequestInfo.Operation);
+                                resultcontent.ResultInfo.State = ResultState.Fail;
+                            }
+                                break;
                         }
-                            break;
-                        case RequestOperation.Modify:
-                        {
-                            resultcontent = ModifyEmployee(entities, content);
-                        }
-                            break;
-                        case RequestOperation.Delete:
-                        {
-                            resultcontent = DeleteEmployee(entities, content);
-                        }
-                            break;
-                        default:
-                        {
-                            resultcontent.Exception = "错误的操作类型";
-                            resultcontent.InnerErrorMessage = "RequestOperation=" +
-                                                              Enum.GetName(typeof (RequestOperation), content.Operation);
-                            resultcontent.Item = null;
-                            resultcontent.State = ResultState.Fail;
-                        }
-                            break;
                     }
                     resultEntity.Add(resultcontent);
 
@@ -233,19 +244,34 @@ namespace Ryanstaurant.UMS.WorkSpace
         }
 
 
-        private static ResultContent<Employee> DeleteEmployee(ryanstaurantEntities entities, RequestContent<Employee> employeeContent)
+        private static ItemContent DeleteEmployee(ryanstaurantEntities entities, ItemContent employeeContent)
         {
-            var employee = employeeContent.RequestObject;
+            var employee = employeeContent as Employee;
 
-            var employeeInDb = (from e in entities.employee where e.ID == employeeContent.RequestObject.ID select e).FirstOrDefault();
+            if (employee == null)
+            {
+                return new Employee
+                {
+                    ResultInfo = new ResultContent
+                    {
+                        Exception = "错误的数据类型，没有进行添加操作",
+                        InnerErrorMessage = string.Empty,
+                        State = ResultState.Success
+                    }
+
+                };
+            }
+
+
+
+            var employeeInDb = (from e in entities.employee where e.ID == employee.ID select e).FirstOrDefault();
 
             if (employeeInDb == null)
             {
-                return new ResultContent<Employee>
+                employee.ResultInfo = new ResultContent
                 {
                     Exception = "ID为[" + employee.ID + "]的人员不存在，没有进行删除操作",
                     InnerErrorMessage = string.Empty,
-                    Item = employee,
                     State = ResultState.Success
                 };
             }
@@ -271,33 +297,52 @@ namespace Ryanstaurant.UMS.WorkSpace
             entities.SaveChanges();
 
 
-            return new ResultContent<Employee>
+            employee.ResultInfo = new ResultContent
             {
                 Exception = string.Empty,
                 InnerErrorMessage = string.Empty,
-                Item = employee,
                 State = ResultState.Success
-
             };
 
+            return employee;
         }
 
-        private static ResultContent<Employee> ModifyEmployee(ryanstaurantEntities entities, RequestContent<Employee> employeeContent)
+        private static ItemContent ModifyEmployee(ryanstaurantEntities entities, ItemContent employeeContent)
         {
 
-            var employee = employeeContent.RequestObject;
+            var employee = employeeContent as Employee;
 
-            var employeeInDb = (from e in entities.employee where e.ID == employeeContent.RequestObject.ID select e).FirstOrDefault();
+
+            if (employee == null)
+            {
+                return new Employee
+                {
+                    ResultInfo = new ResultContent
+                    {
+                        Exception = "错误的数据类型，没有进行添加操作",
+                        InnerErrorMessage = string.Empty,
+                        State = ResultState.Success
+                    }
+
+                };
+            }
+
+
+
+
+
+            var employeeInDb = (from e in entities.employee where e.ID == employee.ID select e).FirstOrDefault();
 
             if (employeeInDb == null)
             {
-                return new ResultContent<Employee>
+                employee.ResultInfo = new ResultContent
                 {
-                    Exception = "ID为["+employee.ID+"]的人员不存在，没有进行修改操作",
+                    Exception = "ID为[" + employee.ID + "]的人员不存在，没有进行修改操作",
                     InnerErrorMessage = string.Empty,
-                    Item = employee,
                     State = ResultState.Success
                 };
+
+                return employee;
             }
 
 
@@ -349,21 +394,38 @@ namespace Ryanstaurant.UMS.WorkSpace
             entities.SaveChanges();
 
 
-            return new ResultContent<Employee>
+            employee.ResultInfo = new ResultContent
             {
                 Exception = string.Empty,
                 InnerErrorMessage = string.Empty,
-                Item = employee,
                 State = ResultState.Success
-
             };
 
+            return employee;
 
         }
 
-        private static ResultContent<Employee> AddEmployee(ryanstaurantEntities entities, RequestContent<Employee> employeeContent)
+        private static ItemContent AddEmployee(ryanstaurantEntities entities, ItemContent employeeContent)
         {
-            var employee = employeeContent.RequestObject;
+            var employee = employeeContent as Employee;
+
+
+
+            if (employee == null)
+            {
+                return new Employee
+                {
+                    ResultInfo = new ResultContent
+                    {
+                        Exception = "错误的数据类型，没有进行添加操作",
+                        InnerErrorMessage = string.Empty,
+                        State = ResultState.Success
+                    }
+
+                };
+            }
+
+
 
 
             var empToAdd = new employee
@@ -400,14 +462,14 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             employee.ID = empToAdd.ID;
 
-            return new ResultContent<Employee>
+            employee.ResultInfo = new ResultContent
             {
                 Exception = string.Empty,
                 InnerErrorMessage = string.Empty,
-                Item = employee,
                 State = ResultState.Success
-                
             };
+
+            return employee;
         }
     }
 }

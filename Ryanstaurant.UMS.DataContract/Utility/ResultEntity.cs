@@ -10,7 +10,7 @@ namespace Ryanstaurant.UMS.DataContract.Utility
     }
 
     [DataContract]
-    public class ResultEntity<T>
+    public class ResultEntity
     {
 
         [DataMember]
@@ -21,7 +21,7 @@ namespace Ryanstaurant.UMS.DataContract.Utility
         public ResultState State { get; set; }
 
         [DataMember]
-        public List<ResultContent<T>> ResultObject { get; set; }
+        public List<ItemContent> ResultObject { get; set; }
 
         [DataMember]
         public string InnerErrorMessage { get; set; }

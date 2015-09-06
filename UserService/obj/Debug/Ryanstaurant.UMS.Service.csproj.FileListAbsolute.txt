@@ -2,8 +2,6 @@ G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\App.confi
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\Ryanstaurant.UMS.Service.dll.config
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\Ryanstaurant.UMS.Service.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\Ryanstaurant.UMS.Service.pdb
-G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\obj\Debug\Ryanstaurant.UMS.Service.csprojResolveAssemblyReference.cache
-G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\App.config
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.Service.dll.config
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.Service.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.Service.pdb
@@ -18,5 +16,6 @@ G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\Ryanstaurant.UMS.DataAccess.pdb
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\EntityFramework.xml
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\bin\Debug\zh-Hans\EntityFramework.resources.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\obj\Debug\Ryanstaurant.UMS.Service.csprojResolveAssemblyReference.cache
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\obj\Debug\Ryanstaurant.UMS.Service.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\UserService\obj\Debug\Ryanstaurant.UMS.Service.pdb

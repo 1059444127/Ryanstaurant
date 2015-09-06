@@ -4,56 +4,54 @@ using System.Linq;
 using Ryanstaurant.UMS.DataAccess.EF;
 using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.DataContract.Utility;
-using Ryanstaurant.UMS.Interface;
 
 namespace Ryanstaurant.UMS.WorkSpace
 {
     public class BllAuthority
     {
-        public List<ResultContent<Authority>> QueryAuthorities(RequestEntitiy<Authority> authorities)
+        public List<ItemContent> QueryAuthority(List<ItemContent> authorities)
         {
-            if (authorities.RequestContents == null || authorities.RequestContents.Count == 0)
+            if (authorities == null || authorities.Count == 0)
             {
                 throw new Exception("没有找到需要的操作", new Exception("RequestContents为空"));
             }
 
-            if (authorities.RequestContents.Count == 1 && authorities.RequestContents[0] == null)
+            if (authorities.Count == 1 && authorities[0] == null)
             {
                 throw new Exception("没有找到需要的操作", new Exception("RequestContents没有包含操作"));
             }
 
 
-            var resultEntity = new List<ResultContent<Authority>>();
+            var queries =
+               (from e in authorities
+                where e.RequestInfo != null && e.RequestInfo.Operation == RequestOperation.Query
+                select e).ToList();
 
-            if (authorities.QueryContentList != null)
-            {
-                resultEntity = Query(authorities.QueryContentList);
-            }
-
-
-            return resultEntity;
+            return Query(!queries.Any() ? null : queries.ToList());
         }
 
-        private static List<ResultContent<Authority>> Query(List<Authority> authorities)
+        private static List<ItemContent> Query(IEnumerable<ItemContent> itemContents)
         {
-            var resultEntity = new List<ResultContent<Authority>>();
+            var resultEntity = new List<ItemContent>();
 
             using (var entities = new ryanstaurantEntities())
             {
                 List<authority> authList;
 
+
                 //没有指定，则返回所有查询结果
-                if (!authorities.Any())
+                if (itemContents == null)
                 {
                     authList = (from e in entities.authority select e).ToList();
                 }
                 else//有指定，则从传送的数据处进行查询
                 {
+                    var authorities = itemContents.Cast<Authority>().ToList();
                     var authIDList = (from e in authorities
                                      select e.ID).ToList();
 
                     var authNameList = (from e in authorities
-                                       select e.Name).ToList();
+                                        select e.Name).ToList();
 
                     authList =
                         (from e in entities.authority
@@ -61,17 +59,17 @@ namespace Ryanstaurant.UMS.WorkSpace
                             select e).ToList();
                 }
 
-                resultEntity.AddRange(authList.Select(auth => new ResultContent<Authority>
+                resultEntity.AddRange(authList.Select(auth => new Authority
                 {
-                    State = ResultState.Success,
-                    Exception = string.Empty,
-                    InnerErrorMessage = string.Empty,
-                    Item = new Authority
+                    ResultInfo = new ResultContent
                     {
-                        ID = auth.id,
-                        Description = auth.Description,
-                        Name = auth.Name
-                    }
+                        State = ResultState.Success,
+                        Exception = string.Empty,
+                        InnerErrorMessage = string.Empty
+                    },
+                    ID = auth.id,
+                    Description = auth.Description,
+                    Name = auth.Name
                 }));
             }
 
@@ -79,69 +77,81 @@ namespace Ryanstaurant.UMS.WorkSpace
         }
 
 
-        public List<ResultContent<Authority>> ExcuteAuthorities(RequestEntitiy<Authority> authorities)
+        public List<ItemContent> ExecuteAuthority(List<ItemContent> authorities)
         {
-            if (authorities.RequestContents == null || authorities.RequestContents.Count == 0)
+            if (authorities == null || authorities.Count == 0)
             {
                 throw new Exception("没有找到需要的操作", new Exception("RequestContents为空"));
             }
 
-            if (authorities.RequestContents.Count == 1 && authorities.RequestContents[0] == null)
+            if (authorities.Count == 1 && authorities[0] == null)
             {
                 throw new Exception("没有找到需要的操作", new Exception("RequestContents没有包含操作"));
             }
 
 
+            var queries =
+               (from e in authorities
+                where e.RequestInfo != null && e.RequestInfo.Operation != RequestOperation.Query
+                select e).ToList();
+
+            if (!queries.Any())
+            {
+                throw new Exception("没有找到需要的操作", new Exception("RequestContents没有包含执行(add,modify或者delete)操作"));
+            }
+
             var resultEntity = Save(authorities);
+
             return resultEntity;
         }
 
-        internal List<ResultContent<Authority>> Save(RequestEntitiy<Authority> requestEntitiies)
+        internal List<ItemContent> Save(List<ItemContent> requestEntitiies)
         {
-            var resultEntity = new List<ResultContent<Authority>>();
+            var resultEntity = new List<ItemContent>();
 
             using (var entities = new ryanstaurantEntities())
             {
-
-                foreach (var content in requestEntitiies.RequestContents)
+                foreach (var content in requestEntitiies)
                 {
-                    var resultcontent = new ResultContent<Authority>();
+                    var resultcontent = new ItemContent();
 
 
                     if (content == null)
                     {
-                        resultcontent.Exception = "未设置操作类型";
-                        resultcontent.InnerErrorMessage = "ResultContent为NULL";
-                        resultcontent.Item = null;
-                        resultcontent.State = ResultState.Fail;
-                    }
+                        resultcontent.ResultInfo.Exception = "未设置操作类型";
+                        resultcontent.ResultInfo.InnerErrorMessage = "ResultContent为NULL";
+                        resultcontent.ResultInfo.State = ResultState.Fail;
 
-                    switch (content.Operation)
+                    }
+                    else
                     {
-                        case RequestOperation.Add:
+                        switch (content.RequestInfo.Operation)
+                        {
+                            case RequestOperation.Add:
                             {
                                 resultcontent = AddAuthorities(entities, content);
                             }
-                            break;
-                        case RequestOperation.Modify:
+                                break;
+                            case RequestOperation.Modify:
                             {
                                 resultcontent = ModifyAuthorities(entities, content);
                             }
-                            break;
-                        case RequestOperation.Delete:
+                                break;
+                            case RequestOperation.Delete:
                             {
                                 resultcontent = DeleteAuthorities(entities, content);
                             }
-                            break;
-                        default:
+                                break;
+                            default:
                             {
-                                resultcontent.Exception = "错误的操作类型";
-                                resultcontent.InnerErrorMessage = "RequestOperation=" +
-                                                                  Enum.GetName(typeof(RequestOperation), content.Operation);
-                                resultcontent.Item = null;
-                                resultcontent.State = ResultState.Fail;
+                                resultcontent.ResultInfo.Exception = "错误的操作类型";
+                                resultcontent.ResultInfo.InnerErrorMessage = "RequestOperation=" +
+                                                                             Enum.GetName(typeof (RequestOperation),
+                                                                                 content.RequestInfo.Operation);
+                                resultcontent.ResultInfo.State = ResultState.Fail;
                             }
-                            break;
+                                break;
+                        }
                     }
                     resultEntity.Add(resultcontent);
 
@@ -150,20 +160,44 @@ namespace Ryanstaurant.UMS.WorkSpace
             return resultEntity;
         }
 
-        private static ResultContent<Authority> DeleteAuthorities(ryanstaurantEntities entities, RequestContent<Authority> content)
+        private static ItemContent DeleteAuthorities(ryanstaurantEntities entities, ItemContent content)
         {
-            var authority = content.RequestObject;
+            var authority = content as Authority;
 
-            var authorityInDb = (from e in entities.authority where e.id == content.RequestObject.ID select e).FirstOrDefault();
+
+            if (authority == null)
+            {
+                return new Authority
+                {
+                    ResultInfo = new ResultContent
+                    {
+                        Exception = "错误的数据类型，没有进行删除操作",
+                        InnerErrorMessage = string.Empty,
+                        State = ResultState.Success
+                    }
+                    
+                };
+            }
+
+
+
+            var authorityInDb = (from e in entities.authority where e.id == authority.ID select e).FirstOrDefault();
 
             if (authorityInDb == null)
             {
-                return new ResultContent<Authority>
+                return new Authority
                 {
-                    Exception = "ID为[" + authority.ID + "]的权限不存在，没有进行删除操作",
-                    InnerErrorMessage = string.Empty,
-                    Item = authority,
-                    State = ResultState.Success
+                    ResultInfo = new ResultContent
+                    {
+
+                        Exception = "ID为[" + authority.ID + "]的权限不存在，没有进行删除操作",
+                        InnerErrorMessage = string.Empty,
+                        State = ResultState.Success
+                    },
+                    ID = authority.ID,
+                    Description = authority.Description,
+                    KeyCode = authority.KeyCode,
+                    Name = authority.Name
                 };
             }
 
@@ -173,30 +207,60 @@ namespace Ryanstaurant.UMS.WorkSpace
             entities.SaveChanges();
 
 
-            return new ResultContent<Authority>
+            return new Authority
             {
-                Exception = string.Empty,
-                InnerErrorMessage = string.Empty,
-                Item = authority,
-                State = ResultState.Success
+                ResultInfo = new ResultContent
+                {
 
+                    Exception = string.Empty,
+                    InnerErrorMessage = string.Empty,
+                    State = ResultState.Success
+                },
+
+                ID = authority.ID,
+                Description = authority.Description,
+                KeyCode = authority.KeyCode,
+                Name = authority.Name
             };
         }
 
-        private static ResultContent<Authority> ModifyAuthorities(ryanstaurantEntities entities, RequestContent<Authority> content)
+        private static ItemContent ModifyAuthorities(ryanstaurantEntities entities, ItemContent content)
         {
-            var authority = content.RequestObject;
+            var authority = content as Authority;
 
-            var authorityInDb = (from e in entities.employee where e.ID == content.RequestObject.ID select e).FirstOrDefault();
+
+            if (authority == null)
+            {
+                return new Authority
+                {
+                    ResultInfo = new ResultContent
+                    {
+                        Exception = "错误的数据类型，没有进行修改操作",
+                        InnerErrorMessage = string.Empty,
+                        State = ResultState.Success
+                    }
+
+                };
+            }
+
+
+            var authorityInDb = (from e in entities.employee where e.ID == authority.ID select e).FirstOrDefault();
 
             if (authorityInDb == null)
             {
-                return new ResultContent<Authority>
+                return new Authority
                 {
-                    Exception = "ID为[" + authority.ID + "]的权限不存在，没有进行修改操作",
-                    InnerErrorMessage = string.Empty,
-                    Item = authority,
-                    State = ResultState.Success
+                    ResultInfo = new ResultContent
+                    {
+                        Exception = "ID为[" + authority.ID + "]的权限不存在，没有进行修改操作",
+                        InnerErrorMessage = string.Empty,
+                        State = ResultState.Success
+                    },
+                    ID = authority.ID,
+                    Description = authority.Description,
+                    KeyCode = authority.KeyCode,
+                    Name = authority.Name
+
                 };
             }
 
@@ -208,41 +272,66 @@ namespace Ryanstaurant.UMS.WorkSpace
             entities.SaveChanges();
 
 
-            return new ResultContent<Authority>
+            return new Authority
             {
-                Exception = string.Empty,
-                InnerErrorMessage = string.Empty,
-                Item = authority,
-                State = ResultState.Success
+                ResultInfo = new ResultContent
+                {
 
+                    Exception = string.Empty,
+                    InnerErrorMessage = string.Empty,
+                    State = ResultState.Success
+                },
+                ID = authority.ID,
+                Description = authority.Description,
+                KeyCode = authority.KeyCode,
+                Name = authority.Name
             };
         }
 
-        private static ResultContent<Authority> AddAuthorities(ryanstaurantEntities entities, RequestContent<Authority> content)
+        private static ItemContent AddAuthorities(ryanstaurantEntities entities, ItemContent content)
         {
-            var authority = content.RequestObject;
+            var authority = content as Authority;
+
+            if (authority == null)
+            {
+                return new Authority
+                {
+                    ResultInfo = new ResultContent
+                    {
+                        Exception = "错误的数据类型，没有进行添加操作",
+                        InnerErrorMessage = string.Empty,
+                        State = ResultState.Success
+                    }
+
+                };
+            }
 
 
-            var authToAdd = new employee
+            var authToAdd = new authority
             {
                 Description = authority.Description,
                 Name = authority.Name
             };
 
-            entities.employee.Add(authToAdd);
-
+            entities.authority.Add(authToAdd);
 
             entities.SaveChanges();
 
-            authority.ID = authToAdd.ID;
+            authority.ID = authToAdd.id;
 
-            return new ResultContent<Authority>
+            return new Authority
             {
-                Exception = string.Empty,
-                InnerErrorMessage = string.Empty,
-                Item = authority,
-                State = ResultState.Success
+                ResultInfo = new ResultContent
+                {
 
+                    Exception = string.Empty,
+                    InnerErrorMessage = string.Empty,
+                    State = ResultState.Success
+                },
+                ID = authority.ID,
+                Description = authority.Description,
+                KeyCode = authority.KeyCode,
+                Name = authority.Name
             };
         }
 
