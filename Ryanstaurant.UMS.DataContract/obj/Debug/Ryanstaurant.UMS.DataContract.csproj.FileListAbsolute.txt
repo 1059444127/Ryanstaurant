@@ -2,4 +2,3 @@ G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataContract\bin\Debu
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataContract\bin\Debug\Ryanstaurant.UMS.DataContract.pdb
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataContract\obj\Debug\Ryanstaurant.UMS.DataContract.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataContract\obj\Debug\Ryanstaurant.UMS.DataContract.pdb
-G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataContract\obj\Debug\Ryanstaurant.UMS.DataContract.csprojResolveAssemblyReference.cache
