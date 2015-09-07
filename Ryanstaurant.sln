@@ -45,29 +45,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryanstaurant.Server", "Ryan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryanstaurant.UMS.DataAccess", "Ryanstaurant.UMS.DataAccess\Ryanstaurant.UMS.DataAccess.csproj", "{5143BD0E-DF9A-4425-9178-075F55E6BFB9}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WAS", "http://localhost:7140", "{FB787E92-876D-4541-979A-89777896537E}"
-	ProjectSection(WebsiteProperties) = preProject
-		UseIISExpress = "true"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		ProjectReferences = "{8ee77f78-48dd-45e9-88ab-ede0196836bc}|Ryanstaurant.UMS.Service.dll;{F2FE3D45-0FED-4072-9C04-7636D4DF6589}|Ryanstaurant.UMS.DataContract.dll;{24FE75A4-4D04-4006-8518-4340CBD19942}|Ryanstaurant.UMS.Interface.dll;{F013490B-FA44-4158-97AE-656168DEAE4A}|Ryanstaurant.UMS.WorkSpace.dll;{5143BD0E-DF9A-4425-9178-075F55E6BFB9}|Ryanstaurant.UMS.DataAccess.dll;{DA98A705-F472-4ECE-A15A-0D75DC7B4655}|Ryanstaurant.Utility.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_7140"
-		Debug.AspNetCompiler.PhysicalPath = "Ryanstaurant.Servers\WAS\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_7140\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_7140"
-		Release.AspNetCompiler.PhysicalPath = "Ryanstaurant.Servers\WAS\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_7140\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "Ryanstaurant.Servers\WAS\"
-		DefaultWebSiteLanguage = "Visual C#"
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryanstaurant.UMS.DataContract", "Ryanstaurant.UMS.DataContract\Ryanstaurant.UMS.DataContract.csproj", "{F2FE3D45-0FED-4072-9C04-7636D4DF6589}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{1012B5AA-1CB3-453A-8ED8-49F4678DA5BD}"
@@ -149,10 +126,6 @@ Global
 		{5143BD0E-DF9A-4425-9178-075F55E6BFB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5143BD0E-DF9A-4425-9178-075F55E6BFB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5143BD0E-DF9A-4425-9178-075F55E6BFB9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB787E92-876D-4541-979A-89777896537E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB787E92-876D-4541-979A-89777896537E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB787E92-876D-4541-979A-89777896537E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB787E92-876D-4541-979A-89777896537E}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{F2FE3D45-0FED-4072-9C04-7636D4DF6589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F2FE3D45-0FED-4072-9C04-7636D4DF6589}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2FE3D45-0FED-4072-9C04-7636D4DF6589}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -192,13 +165,13 @@ Global
 		{41D7D369-D409-4BA0-87AC-4F0D0EB1C8EF} = {94919789-C925-42DE-A994-44F5205C8A9F}
 		{4F914959-A109-4C24-94CF-2361084B3943} = {94919789-C925-42DE-A994-44F5205C8A9F}
 		{E03CB650-98CC-4773-B61B-1C2C0E38D1E6} = {94919789-C925-42DE-A994-44F5205C8A9F}
+		{94919789-C925-42DE-A994-44F5205C8A9F} = {5643C18D-17CE-4491-8286-6832649C2632}
 		{8EE77F78-48DD-45E9-88AB-EDE0196836BC} = {084A7870-455F-4D80-962D-E85A0C47C0EF}
 		{24FE75A4-4D04-4006-8518-4340CBD19942} = {084A7870-455F-4D80-962D-E85A0C47C0EF}
 		{F013490B-FA44-4158-97AE-656168DEAE4A} = {084A7870-455F-4D80-962D-E85A0C47C0EF}
 		{DA98A705-F472-4ECE-A15A-0D75DC7B4655} = {03C1AB78-C218-41AA-A608-42C837DC35AF}
 		{FEC532C0-890B-4F64-8C54-16C3D30B6BCD} = {5643C18D-17CE-4491-8286-6832649C2632}
 		{5143BD0E-DF9A-4425-9178-075F55E6BFB9} = {084A7870-455F-4D80-962D-E85A0C47C0EF}
-		{FB787E92-876D-4541-979A-89777896537E} = {5643C18D-17CE-4491-8286-6832649C2632}
 		{F2FE3D45-0FED-4072-9C04-7636D4DF6589} = {084A7870-455F-4D80-962D-E85A0C47C0EF}
 		{682E4162-17D9-46DE-84DB-E6039030307D} = {1012B5AA-1CB3-453A-8ED8-49F4678DA5BD}
 		{59DE8F2B-DB18-42C9-806C-EF770255257D} = {8393F83B-598D-44CE-A72F-99A2AF451C74}

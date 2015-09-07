@@ -39,18 +39,14 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             using (var entities = new ryanstaurantEntities())
             {
-                List<role_auth> roleAuthList;
                 List<role> roleList;
-                List<authority> authList;
 
 
 
                 //没有指定，则返回所有查询结果
                 if (itemContents == null)
                 {
-                    roleAuthList = (from e in entities.role_auth select e).ToList();
                     roleList = (from e in entities.role select e).ToList();
-                    authList = (from e in entities.authority select e).ToList();
                 }
                 else//有指定，则从传送的数据处进行查询
                 {
@@ -62,48 +58,21 @@ namespace Ryanstaurant.UMS.WorkSpace
                                        select e.Name).ToList();
 
 
-                    roleAuthList = (from e in entities.role_auth where roleIDList.Contains(e.role_id) select e).ToList();
                     roleList = (from e in entities.role where roleIDList.Contains(e.id)||roleNameList.Contains(e.Name) select e).ToList();
 
-                    authList = (from e in entities.authority select e).ToList();
                 }
 
 
 
                 //人员基本信息
-                foreach (var role in roleList)
+                resultEntity.AddRange(roleList.Select(currentRole => new Role
                 {
-                    var currentRole = role;
-
-                    var resultRole = new Role
+                    ResultInfo = new ResultContent
                     {
-                        ResultInfo = new ResultContent
-                        {
-                            State = ResultState.Success,
-                            Exception = string.Empty,
-                            InnerErrorMessage = string.Empty,
-                        },
-                        ID = currentRole.id,
-                        Description = currentRole.Description,
-                        Name = currentRole.Name
-                    };
-
-                    var authIDList = (from er in roleAuthList
-                                      where er.role_id == currentRole.id
-                                      select er.auth_id).ToList();
-
-                    resultRole.Authorities = (from r in authList
-                        where authIDList.Contains(r.id)
-                        select new Authority
-                        {
-                            Description = r.Description,
-                            ID = r.id,
-                            Name = r.Name
-                        }).ToList();
-
-                    resultEntity.Add(resultRole);
-                }
-
+                        State = ResultState.Success, Exception = string.Empty, InnerErrorMessage = string.Empty,
+                    },
+                    ID = currentRole.id, Description = currentRole.Description, Name = currentRole.Name, Authority = currentRole.Authority.GetValueOrDefault()
+                }));
             }
 
             return resultEntity;
@@ -228,15 +197,6 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             entities.role.Remove(roleInDb);
 
-
-
-            //删除已存在的
-            var roleListExist = (from e in entities.role_auth where e.role_id == role.ID select e).ToList();
-
-            if (roleListExist.Any())
-                entities.role_auth.RemoveRange(roleListExist);
-
-
             entities.SaveChanges();
 
 
@@ -288,28 +248,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             roleInDb.Description = role.Description;
             roleInDb.Name = role.Name;
-
-
-
-            //删除已存在的
-            var roleListExist = (from e in entities.role_auth where e.role_id == role.ID select e).ToList();
-
-
-            if (roleListExist.Any())
-                entities.role_auth.RemoveRange(roleListExist);
-
-
-            //权限关联关系采用先删除再添加的方式处理
-            foreach (var auth in role.Authorities)
-            {
-
-                //添加新的
-                entities.role_auth.Add(new role_auth
-                {
-                    role_id = role.ID,
-                    auth_id = auth.ID
-                });
-            }
+            roleInDb.Authority = role.Authority;
 
 
             entities.SaveChanges();
@@ -347,23 +286,13 @@ namespace Ryanstaurant.UMS.WorkSpace
             var roleToAdd = new role
             {
                 Description = role.Description,
-                Name = role.Name
+                Name = role.Name,
+                Authority = role.Authority
             };
 
             entities.role.Add(roleToAdd);
 
 
-            foreach (var auth in role.Authorities)
-            {
-                entities.role_auth.Add(new role_auth
-                {
-                    role_id = role.ID,
-                    auth_id = auth.ID
-                });
-
-            }
-
-      
 
             entities.SaveChanges();
 
@@ -377,7 +306,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                     State = ResultState.Success
                 },
                 ID=roleToAdd.id,
-                Authorities=role.Authorities,
+                Authority= role.Authority,
                 Description = roleToAdd.Description,
                 Name = roleToAdd.Name
 

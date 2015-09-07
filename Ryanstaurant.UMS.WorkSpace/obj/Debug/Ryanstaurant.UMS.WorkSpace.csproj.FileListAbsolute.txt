@@ -1,7 +1,6 @@
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\Ryanstaurant.UMS.WorkSpace.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\Ryanstaurant.UMS.WorkSpace.pdb
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\App.Config
-G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.WorkSpace\obj\Debug\Ryanstaurant.UMS.WorkSpace.csprojResolveAssemblyReference.cache
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.WorkSpace\bin\Debug\Ryanstaurant.UMS.WorkSpace.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.WorkSpace\bin\Debug\Ryanstaurant.UMS.WorkSpace.pdb
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.WorkSpace\bin\Debug\EntityFramework.dll
@@ -13,5 +12,6 @@ G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.WorkSpace\bin\Debug\R
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.WorkSpace\bin\Debug\Ryanstaurant.Utility.pdb
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.WorkSpace\bin\Debug\EntityFramework.xml
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.WorkSpace\bin\Debug\zh-Hans\EntityFramework.resources.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.WorkSpace\obj\Debug\Ryanstaurant.UMS.WorkSpace.csprojResolveAssemblyReference.cache
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.WorkSpace\obj\Debug\Ryanstaurant.UMS.WorkSpace.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.WorkSpace\obj\Debug\Ryanstaurant.UMS.WorkSpace.pdb

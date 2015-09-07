@@ -27,13 +27,11 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     
         public virtual DbSet<authority> authority { get; set; }
         public virtual DbSet<Dishes> Dishes { get; set; }
-        public virtual DbSet<emp_auth> emp_auth { get; set; }
         public virtual DbSet<emp_role> emp_role { get; set; }
         public virtual DbSet<employee> employee { get; set; }
         public virtual DbSet<menu> menu { get; set; }
         public virtual DbSet<navigator> navigator { get; set; }
         public virtual DbSet<role> role { get; set; }
-        public virtual DbSet<role_auth> role_auth { get; set; }
         public virtual DbSet<seatimageconfig> seatimageconfig { get; set; }
         public virtual DbSet<SeatList> SeatList { get; set; }
         public virtual DbSet<sysconfig> sysconfig { get; set; }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Ryanstaurant.Clients.WPF.ManagementCenter.Model.UMSProxy;
+using Ryanstaurant.UMS.Client;
 using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.DataContract.Utility;
 
@@ -10,14 +10,9 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 {
     public class RoleModel
     {
-        protected readonly UMSServiceClient ServiceClient = new UMSServiceClient();
+        protected readonly UMSClient ServiceClient = new UMSClient();
 
         private int _id = -1;
-
-
-        
-
-
 
         public int ID
         {
@@ -28,21 +23,29 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
         public string Name { get; set; }
 
         public string Description { get; set; }
+        public long Authority { get; set; }
 
 
 
 
         public void Add()
         {
-            var arrRoles = new Role[1];
-            arrRoles[0] = new Role
+            var arrRoles = new List<ItemContent>
             {
-                Description = Description,
-                ID = ID,
-                Name = Name
+                new Role
+                {
+                    Description = Description,
+                    ID = ID,
+                    Name = Name,
+                    Authority = Authority,
+                    RequestInfo = new RequestContent
+                    {
+                        Operation = RequestOperation.Add
+                    }
+                }
             };
 
-            var results = ServiceClient.AddRoles(arrRoles);
+            var results = ServiceClient.Execute(arrRoles);
 
             if (results.State == ResultState.Fail)
                 throw new Exception(results.ErrorMessage);
@@ -53,18 +56,25 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
         public void Refresh()
         {
-            var arrRoles = new Role[1];
-            arrRoles[0] = new Role
+            var arrRoles = new List<ItemContent>
             {
-                ID = ID,
-                Name = Name
+                new Role
+                {
+                    ID = ID,
+                    Name = Name,
+                    Authority = Authority,
+                    RequestInfo=new RequestContent
+                    {
+                        Operation = RequestOperation.Query
+                    }
+                }
             };
 
-            var results = ServiceClient.GetRoles(arrRoles);
+            var results = ServiceClient.Query(arrRoles);
             if (results.State == ResultState.Fail)
                 throw new Exception(results.ErrorMessage);
 
-            var authReturn = results.ResultObject.FirstOrDefault();
+            var authReturn = results.ResultObject.FirstOrDefault() as Role;
 
 
             if (authReturn == null)
@@ -76,23 +86,30 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             ID = authReturn.ID;
             Description = authReturn.Description;
             Name = authReturn.Name;
-
+            Authority = authReturn.Authority;
         }
 
 
 
         public void Modify()
         {
-            var arrRole = new Role[1];
-            arrRole[0] = new Role
+            var arrRole = new List<ItemContent>
             {
-                ID = ID,
-                Name = Name,
-                Description = Description
+                new Role
+                {
+                    ID = ID,
+                    Name = Name,
+                    Description = Description,
+                    Authority = Authority,
+                    RequestInfo = new RequestContent
+                    {
+                        Operation = RequestOperation.Modify
+                    }
+                }
             };
 
 
-            var results = ServiceClient.ModifyRoles(arrRole);
+            var results = ServiceClient.Execute(arrRole);
 
             if (results.State == ResultState.Fail)
                 throw new Exception(results.ErrorMessage);
@@ -102,17 +119,24 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
         public void Delete()
         {
-            var arrRole = new Role[1];
-            arrRole[0] = new Role
+            var arrRole = new List<ItemContent>
             {
-                Description = Description,
-                ID = ID,
-                Name = Name
+                new Role
+                {
+                    Description = Description,
+                    ID = ID,
+                    Name = Name,
+                    Authority = Authority,
+                    RequestInfo = new RequestContent
+                    {
+                        Operation = RequestOperation.Delete
+                    }
+                }
             };
 
 
 
-            var results = ServiceClient.DeleteRoles(arrRole);
+            var results = ServiceClient.Execute(arrRole);
 
             if (results.State == ResultState.Fail)
                 throw new Exception(results.ErrorMessage);
@@ -126,6 +150,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             _id = -1;
             Name = string.Empty;
             Description = string.Empty;
+            Authority = 0;
         }
 
 

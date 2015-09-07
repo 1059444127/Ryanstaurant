@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using Ryanstaurant.UMS.DataContract.Utility;
 
@@ -23,8 +24,13 @@ namespace Ryanstaurant.UMS.DataContract
         [DataMember]
         public List<Role> Roles { get; set; }
         [DataMember]
-        public List<Authority> Authorities { get; set; }
-        public RequestOperation Operation
-        { get; set; }
+        public long EmpAuthority { get; set; }
+        public long Authority {
+            get
+            {
+                return EmpAuthority | Roles.Aggregate((long)0, (current, role) => current | role.Authority);
+            }
+        }
+
     }
 }

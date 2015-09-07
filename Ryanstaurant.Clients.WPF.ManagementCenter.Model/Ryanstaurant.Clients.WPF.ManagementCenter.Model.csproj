@@ -43,18 +43,11 @@
   <ItemGroup>
     <Compile Include="AuthorityListModel.cs" />
     <Compile Include="AuthorityModel.cs" />
-    <Compile Include="EmpAuthListModel.cs" />
-    <Compile Include="EmpAuthModel.cs" />
     <Compile Include="EmployeeListModel.cs" />
     <Compile Include="EmployeeModel.cs" />
-    <Compile Include="EmpRoleListModel.cs" />
-    <Compile Include="EmpRoleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoleAuthListModel.cs" />
-    <Compile Include="RoleAuthModel.cs" />
     <Compile Include="RoleListModel.cs" />
     <Compile Include="RoleModel.cs" />
-    <Compile Include="UMSProxy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -68,9 +61,17 @@
     <None Include="Properties\DataSources\Ryanstaurant.UMS.DataContract.RoleAuth.datasource" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ryanstaurant.UMS.Client\Ryanstaurant.UMS.Client.csproj">
+      <Project>{13270d87-87a3-4337-965c-6540838d9bbb}</Project>
+      <Name>Ryanstaurant.UMS.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ryanstaurant.UMS.DataContract\Ryanstaurant.UMS.DataContract.csproj">
       <Project>{f2fe3d45-0fed-4072-9c04-7636d4df6589}</Project>
       <Name>Ryanstaurant.UMS.DataContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ryanstaurant.UMS.Interface\Ryanstaurant.UMS.Interface.csproj">
+      <Project>{24FE75A4-4D04-4006-8518-4340CBD19942}</Project>
+      <Name>Ryanstaurant.UMS.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

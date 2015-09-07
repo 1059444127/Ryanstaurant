@@ -76,9 +76,6 @@
     <Compile Include="EF\employee.cs">
       <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\emp_auth.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-    </Compile>
     <Compile Include="EF\emp_role.cs">
       <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
     </Compile>
@@ -89,9 +86,6 @@
       <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\role.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\role_auth.cs">
       <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\seatimageconfig.cs">
@@ -116,9 +110,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="EF\EF_UMS_Entities.Context.tt">
       <DependentUpon>EF_UMS_Entities.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>

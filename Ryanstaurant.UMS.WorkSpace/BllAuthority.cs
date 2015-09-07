@@ -196,7 +196,6 @@ namespace Ryanstaurant.UMS.WorkSpace
                     },
                     ID = authority.ID,
                     Description = authority.Description,
-                    KeyCode = authority.KeyCode,
                     Name = authority.Name
                 };
             }
@@ -219,7 +218,6 @@ namespace Ryanstaurant.UMS.WorkSpace
 
                 ID = authority.ID,
                 Description = authority.Description,
-                KeyCode = authority.KeyCode,
                 Name = authority.Name
             };
         }
@@ -258,7 +256,6 @@ namespace Ryanstaurant.UMS.WorkSpace
                     },
                     ID = authority.ID,
                     Description = authority.Description,
-                    KeyCode = authority.KeyCode,
                     Name = authority.Name
 
                 };
@@ -283,7 +280,6 @@ namespace Ryanstaurant.UMS.WorkSpace
                 },
                 ID = authority.ID,
                 Description = authority.Description,
-                KeyCode = authority.KeyCode,
                 Name = authority.Name
             };
         }
@@ -330,7 +326,6 @@ namespace Ryanstaurant.UMS.WorkSpace
                 },
                 ID = authority.ID,
                 Description = authority.Description,
-                KeyCode = authority.KeyCode,
                 Name = authority.Name
             };
         }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Ryanstaurant.UMS.Client;
 using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.DataContract.Utility;
 
@@ -12,9 +14,13 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
         private string _loginName = string.Empty;
         private string _password = string.Empty;
         private string _description = string.Empty;
-        protected readonly UMSServiceClient ServiceClient = new UMSServiceClient();
+        protected readonly UMSClient ServiceClient = new UMSClient();
 
-
+        public EmployeeModel()
+        {
+            Authority = 0;
+            EmpAuthority = 0;
+        }
 
         #region 属性
         public int ID { get { return _id; } set { _id = value; } }
@@ -66,10 +72,13 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             }
         }
 
+        public long EmpAuthority { get; set; }
+
+        public long Authority { get; private set; }
 
 
-        public List<Role> Roles { get; set; }
-        public List<Authority> Authorities { get; set; }
+        public List<RoleModel> Roles { get; set; }
+
 
 
 
@@ -79,17 +88,28 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
         public void Add()
         {
-            var arrEmployee = new Employee[1];
-            arrEmployee[0] =new Employee
+            var arrEmployee = new List<ItemContent>
             {
-                Description = Description,
-                ID = ID,
-                LoginName = LoginName,
-                Name = Name,
-                Password = Password
+                new Employee
+                {
+                    Description = Description,
+                    ID = ID,
+                    LoginName = LoginName,
+                    Name = Name,
+                    Password = Password,
+                    EmpAuthority = EmpAuthority,
+                    Roles = (from r in Roles select new Role
+                    {
+                        ID = r.ID
+                    }).ToList(),
+                    RequestInfo = new RequestContent
+                    {
+                        Operation = RequestOperation.Add
+                    }
+                }
             };
 
-            var results = ServiceClient.AddEmployees(arrEmployee);
+            var results = ServiceClient.Execute(arrEmployee);
 
             if (results.State == ResultState.Fail)
                 throw new Exception(results.ErrorMessage);
@@ -100,18 +120,24 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
         public void Refresh()
         {
-            var arrEmployee = new Employee[1];
-            arrEmployee[0] = new Employee
+            var arrEmployee = new List<ItemContent>
             {
-                ID = ID,
-                Name = Name
+                new Employee
+                {
+                    ID = ID,
+                    Name = Name,
+                    RequestInfo = new RequestContent
+                    {
+                        Operation=RequestOperation.Query
+                    }
+                }
             };
 
-            var results = ServiceClient.GetEmployees(arrEmployee);
+            var results = ServiceClient.Query(arrEmployee);
             if (results.State == ResultState.Fail)
                 throw new Exception(results.ErrorMessage);
 
-            var empReturn = results.ResultObject.FirstOrDefault();
+            var empReturn = results.ResultObject.FirstOrDefault() as Employee;
 
 
             if (empReturn == null)
@@ -120,29 +146,42 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             }
 
             ID = empReturn.ID;
-            this.Description = empReturn.Description;
-            this.LoginName = empReturn.LoginName;
-            this.Name = empReturn.Name;
-            this.Password = empReturn.Password;
+            Description = empReturn.Description;
+            LoginName = empReturn.LoginName;
+            Name = empReturn.Name;
+            Password = empReturn.Password;
+            EmpAuthority = empReturn.EmpAuthority;
+            Authority = empReturn.Authority;
         }
 
     
 
         public void Modify()
         {
-            var arrEmployee = new Employee[1];
-            arrEmployee[0] = new Employee
+            var arrEmployee = new List<ItemContent>
             {
-                Description = Description,
-                ID = ID,
-                LoginName = LoginName,
-                Name = Name,
-                Password = Password
+                new Employee
+                {
+                    Description = Description,
+                    ID = ID,
+                    LoginName = LoginName,
+                    Name = Name,
+                    Password = Password,
+                    EmpAuthority = EmpAuthority,
+                    Roles = (from r in Roles select new Role
+                    {
+                        ID = r.ID
+                    }).ToList(),
+                    RequestInfo=new RequestContent
+                    {
+                        Operation = RequestOperation.Modify
+                    }
+                }
             };
 
 
 
-            var results = ServiceClient.ModifyEmployees(arrEmployee);
+            var results = ServiceClient.Execute(arrEmployee);
 
             if (results.State == ResultState.Fail)
                 throw new Exception(results.ErrorMessage);
@@ -152,19 +191,30 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
         public void Delete()
         {
-            var arrEmployee = new Employee[1];
-            arrEmployee[0] = new Employee
+            var arrEmployee = new List<ItemContent>
             {
-                Description = Description,
-                ID = ID,
-                LoginName = LoginName,
-                Name = Name,
-                Password = Password
+                new Employee
+                {
+                    Description = Description,
+                    ID = ID,
+                    LoginName = LoginName,
+                    Name = Name,
+                    Password = Password,
+                    EmpAuthority = EmpAuthority,
+                    Roles = (from r in Roles select new Role
+                    {
+                        ID = r.ID
+                    }).ToList(),
+                    RequestInfo = new RequestContent
+                    {
+                        Operation = RequestOperation.Delete
+                    }
+                }
             };
 
 
 
-            var results = ServiceClient.DeleteEmployees(arrEmployee);
+            var results = ServiceClient.Execute(arrEmployee);
 
             if (results.State == ResultState.Fail)
                 throw new Exception(results.ErrorMessage);
@@ -180,6 +230,9 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             _loginName = string.Empty;
             _name = string.Empty;
             _password = string.Empty;
+            Roles.Clear();
+            EmpAuthority = 0;
+            Authority = 0;
         }
 
 

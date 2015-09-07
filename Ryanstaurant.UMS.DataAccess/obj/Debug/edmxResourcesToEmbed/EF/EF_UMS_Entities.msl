@@ -4,7 +4,6 @@
     <EntitySetMapping Name="authority">
       <EntityTypeMapping TypeName="ryanstaurantModel.authority">
         <MappingFragment StoreEntitySet="authority">
-          <ScalarProperty Name="KeyCode" ColumnName="KeyCode" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
@@ -26,14 +25,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="emp_auth">
-      <EntityTypeMapping TypeName="ryanstaurantModel.emp_auth">
-        <MappingFragment StoreEntitySet="emp_auth">
-          <ScalarProperty Name="Emp_id" ColumnName="Emp_id" />
-          <ScalarProperty Name="Auth_id" ColumnName="Auth_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="emp_role">
       <EntityTypeMapping TypeName="ryanstaurantModel.emp_role">
         <MappingFragment StoreEntitySet="emp_role">
@@ -45,6 +36,7 @@
     <EntitySetMapping Name="employee">
       <EntityTypeMapping TypeName="ryanstaurantModel.employee">
         <MappingFragment StoreEntitySet="employee">
+          <ScalarProperty Name="Authority" ColumnName="Authority" />
           <ScalarProperty Name="LoginName" ColumnName="LoginName" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -82,17 +74,10 @@
     <EntitySetMapping Name="role">
       <EntityTypeMapping TypeName="ryanstaurantModel.role">
         <MappingFragment StoreEntitySet="role">
+          <ScalarProperty Name="Authority" ColumnName="Authority" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="role_auth">
-      <EntityTypeMapping TypeName="ryanstaurantModel.role_auth">
-        <MappingFragment StoreEntitySet="role_auth">
-          <ScalarProperty Name="role_id" ColumnName="role_id" />
-          <ScalarProperty Name="auth_id" ColumnName="auth_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

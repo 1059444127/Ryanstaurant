@@ -7,13 +7,11 @@
       <Diagram DiagramId="901536a4b8744dc4aef62df7c0504db2" Name="Diagram1">
         <EntityTypeShape EntityType="ryanstaurantModel.authority" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ryanstaurantModel.Dishes" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ryanstaurantModel.emp_auth" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ryanstaurantModel.emp_role" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ryanstaurantModel.employee" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ryanstaurantModel.menu" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ryanstaurantModel.navigator" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ryanstaurantModel.role" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ryanstaurantModel.role_auth" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ryanstaurantModel.seatimageconfig" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ryanstaurantModel.SeatList" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ryanstaurantModel.sysconfig" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />

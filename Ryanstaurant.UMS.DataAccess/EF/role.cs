@@ -17,5 +17,6 @@ namespace Ryanstaurant.UMS.DataAccess.EF
         public int id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public Nullable<long> Authority { get; set; }
     }
 }

@@ -68,13 +68,8 @@ namespace Ryanstaurant.UMS.WorkSpace
             {
                 List<employee> empList;
                 List<emp_role> empRoleList;
-                List<emp_auth> empAuthList;
-                List<role_auth> roleAuthList;
                 List<role> roleList;
-                List<authority> authList;
 
-
-                
 
 
                 //没有指定，则返回所有查询结果
@@ -82,10 +77,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                 {
                     empList = (from e in entities.employee select e).ToList();
                     empRoleList = (from e in entities.emp_role select e).ToList();
-                    empAuthList = (from e in entities.emp_auth select e).ToList();
-                    roleAuthList = (from e in entities.role_auth select e).ToList();
                     roleList = (from e in entities.role select e).ToList();
-                    authList = (from e in entities.authority select e).ToList();
                 }
                 else //有指定，则从传送的数据处进行查询
                 {
@@ -103,10 +95,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                             where empIDList.Contains(e.ID) || empNameList.Contains(e.Name)
                             select e).ToList();
                     empRoleList = (from e in entities.emp_role where empIDList.Contains(e.emp_id) select e).ToList();
-                    empAuthList = (from e in entities.emp_auth where empIDList.Contains(e.Emp_id) select e).ToList();
-                    roleAuthList = (from e in entities.role_auth select e).ToList();
                     roleList = (from e in entities.role select e).ToList();
-                    authList = (from e in entities.authority select e).ToList();
                 }
 
 
@@ -128,7 +117,8 @@ namespace Ryanstaurant.UMS.WorkSpace
                         Description = currentEmp.Description,
                         LoginName = currentEmp.LoginName,
                         Name = currentEmp.Name,
-                        Password = currentEmp.Password
+                        Password = currentEmp.Password,
+                        EmpAuthority = currentEmp.Authority.GetValueOrDefault()
                     };
 
                     var roleIDList = (from er in empRoleList
@@ -141,40 +131,10 @@ namespace Ryanstaurant.UMS.WorkSpace
                         {
                             Description = r.Description,
                             ID = r.id,
-                            Name = r.Name
+                            Name = r.Name,
+                            Authority = r.Authority.GetValueOrDefault()
                         }).ToList();
 
-
-                    foreach (var role in resultEmployee.Roles)
-                    {
-                        var rAuthIDList = (from a in roleAuthList
-                            where role.ID == a.role_id
-                            select a.auth_id).ToList();
-
-                        role.Authorities = (from a in authList
-                            where rAuthIDList.Contains(a.id)
-                            select new Authority
-                            {
-                                Description = a.Description,
-                                ID = a.id,
-                                KeyCode = a.KeyCode.GetValueOrDefault(0),
-                                Name = a.Name
-                            }).ToList();
-                    }
-
-                    var authIDList = (from a in empAuthList
-                        where a.Emp_id == currentEmp.ID
-                        select a.Auth_id).ToList();
-
-                    resultEmployee.Authorities = (from a in authList
-                        where authIDList.Contains(a.id)
-                        select new Authority
-                        {
-                            Description = a.Description,
-                            ID = a.id,
-                            KeyCode = a.KeyCode.GetValueOrDefault(0),
-                            Name = a.Name
-                        }).ToList();
 
                     resultEntity.Add(resultEmployee);
                 }
@@ -288,11 +248,6 @@ namespace Ryanstaurant.UMS.WorkSpace
                 entities.emp_role.RemoveRange(roleListExist);
 
 
-            //删除已存在的
-            var authListExist = (from e in entities.emp_auth where e.Emp_id == employee.ID select e).ToList();
-
-            if (authListExist.Any())
-                entities.emp_auth.RemoveRange(authListExist);
 
             entities.SaveChanges();
 
@@ -350,6 +305,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             employeeInDb.LoginName = employee.LoginName;
             employeeInDb.Name = employee.Name;
             employeeInDb.Password = employee.Password;
+            employeeInDb.Authority = employee.EmpAuthority;
 
 
 
@@ -373,23 +329,6 @@ namespace Ryanstaurant.UMS.WorkSpace
                 });
             }
 
-
-
-            //删除已存在的
-            var authListExist = (from e in entities.emp_auth where e.Emp_id == employee.ID select e).ToList();
-
-            if (authListExist.Any())
-            entities.emp_auth.RemoveRange(authListExist);
-
-            foreach (var auth in employee.Authorities)
-            {
-
-                entities.emp_auth.Add(new emp_auth
-                {
-                    Emp_id = employee.ID,
-                    Auth_id = auth.ID
-                });
-            }
 
             entities.SaveChanges();
 
@@ -433,7 +372,8 @@ namespace Ryanstaurant.UMS.WorkSpace
                 Description = employee.Description,
                 LoginName = employee.LoginName,
                 Name = employee.Name,
-                Password = employee.Password
+                Password = employee.Password,
+                Authority = employee.EmpAuthority
             };
 
             entities.employee.Add(empToAdd);
@@ -443,20 +383,11 @@ namespace Ryanstaurant.UMS.WorkSpace
             {
                 entities.emp_role.Add(new emp_role
                 {
-                    emp_id=employee.ID,
-                    role_id = role.ID
-                });
-
-            }
-
-            foreach (var auth in employee.Authorities)
-            {
-                entities.emp_auth.Add(new emp_auth
-                {
-                    Emp_id = employee.ID,
-                    Auth_id = auth.ID
+                    emp_id = employee.ID,
+                    role_id = role.ID,
                 });
             }
+
 
             entities.SaveChanges();
 

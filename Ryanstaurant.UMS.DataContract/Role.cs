@@ -15,8 +15,6 @@ namespace Ryanstaurant.UMS.DataContract
         [DataMember]
         public string Description { get; set; }
         [DataMember]
-        public List<Authority> Authorities { get; set; }
-        public RequestOperation Operation
-        { get; set; }
+        public long Authority { get; set; }
     }
 }

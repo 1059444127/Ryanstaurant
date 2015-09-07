@@ -12,7 +12,5 @@ namespace Ryanstaurant.UMS.DataContract
         public int RoleID { get; set; }
         [DataMember]
         public string Exception { get; set; }
-        public RequestOperation Operation
-        { get; set; }
     }
 }

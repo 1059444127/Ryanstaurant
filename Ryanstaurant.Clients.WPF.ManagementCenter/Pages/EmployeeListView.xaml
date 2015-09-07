@@ -28,14 +28,6 @@
                     <mui:DataGridTextColumn Header="登录名称" Width="SizeToHeader" Binding="{Binding Path =LoginName}" IsReadOnly="True"/>
                     <mui:DataGridTextColumn Header="详细信息" Width="SizeToHeader" Binding="{Binding Path =Description}" IsReadOnly="True" />
                 </DataGrid.Columns>
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding Path =RoleListChanged, Mode=OneWay}"/>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding Path =AuthorityChanged, Mode=OneWay}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
             </DataGrid>
         </GroupBox>
         <GroupBox Header="当前角色" Margin="10,5,10,5" Grid.Row="0" Grid.Column="1">
@@ -43,7 +35,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <CheckBox IsChecked="{Binding Path=IsChecked}" Command="{Binding Path=RoleSelectionChangedCommand}" CommandParameter="{Binding ElementName=testv,Path=DataContext}"></CheckBox>
+                            <CheckBox IsChecked="{Binding Path=IsChecked}"></CheckBox>
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"  Text="{Binding Path=ID}" Visibility="Hidden"></TextBlock>
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"  Text="{Binding Path=Name}"></TextBlock>
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"  Text="{Binding Path=Description}"></TextBlock>

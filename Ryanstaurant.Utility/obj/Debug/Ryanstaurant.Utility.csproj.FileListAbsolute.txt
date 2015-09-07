@@ -2,4 +2,3 @@ G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Utility\bin\Debug\Ryansta
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Utility\bin\Debug\Ryanstaurant.Utility.pdb
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Utility\obj\Debug\Ryanstaurant.Utility.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Utility\obj\Debug\Ryanstaurant.Utility.pdb
-G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Utility\obj\Debug\Ryanstaurant.Utility.csprojResolveAssemblyReference.cache
