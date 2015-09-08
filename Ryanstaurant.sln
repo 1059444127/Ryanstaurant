@@ -72,6 +72,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RyanstaurantApplicationServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryanstaurant.UMS.Client", "Ryanstaurant.UMS.Client\Ryanstaurant.UMS.Client.csproj", "{13270D87-87A3-4337-965C-6540838D9BBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RyanstaurantWAS", "RyanstaurantWAS\RyanstaurantWAS.csproj", "{FC29D0E6-C49F-4C7D-957C-B1757A83ABD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -154,6 +156,10 @@ Global
 		{13270D87-87A3-4337-965C-6540838D9BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13270D87-87A3-4337-965C-6540838D9BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13270D87-87A3-4337-965C-6540838D9BBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC29D0E6-C49F-4C7D-957C-B1757A83ABD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC29D0E6-C49F-4C7D-957C-B1757A83ABD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC29D0E6-C49F-4C7D-957C-B1757A83ABD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC29D0E6-C49F-4C7D-957C-B1757A83ABD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -181,5 +187,6 @@ Global
 		{5950D476-0329-4146-B3F6-297F0D582A90} = {59DE8F2B-DB18-42C9-806C-EF770255257D}
 		{3A5463E5-4CD6-4F5E-B7CD-5AD5465BB75D} = {5643C18D-17CE-4491-8286-6832649C2632}
 		{13270D87-87A3-4337-965C-6540838D9BBB} = {084A7870-455F-4D80-962D-E85A0C47C0EF}
+		{FC29D0E6-C49F-4C7D-957C-B1757A83ABD0} = {5643C18D-17CE-4491-8286-6832649C2632}
 	EndGlobalSection
 EndGlobal

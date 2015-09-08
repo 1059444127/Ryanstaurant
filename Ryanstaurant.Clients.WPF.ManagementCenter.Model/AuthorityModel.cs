@@ -14,9 +14,9 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
         #region 属性
 
-        private int _id = -1;
+        private long _id = -1;
 
-        public int ID
+        public long ID
         {
             get
             {
@@ -157,5 +157,27 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
 
 
+        public List<AuthorityModel> GetAllAuthorities()
+        {
+            //获取EMP基本信息
+            var result = ServiceClient.GetAllAuthorities();
+            if (result.State != ResultState.Success)
+            {
+                throw new Exception(result.ErrorMessage);
+            }
+
+            var authReturn = result.ResultObject.Cast<Authority>().ToList();
+
+            //写入基本信息
+            var authorityList = authReturn.Select(auth => new AuthorityModel
+            {
+                Description = auth.Description,
+                ID = auth.ID,
+                Name = auth.Name
+            }).ToList();
+
+            return authorityList;
+
+        }
     }
 }

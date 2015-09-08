@@ -41,12 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthorityListModel.cs" />
     <Compile Include="AuthorityModel.cs" />
-    <Compile Include="EmployeeListModel.cs" />
     <Compile Include="EmployeeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoleListModel.cs" />
     <Compile Include="RoleModel.cs" />
   </ItemGroup>
   <ItemGroup>

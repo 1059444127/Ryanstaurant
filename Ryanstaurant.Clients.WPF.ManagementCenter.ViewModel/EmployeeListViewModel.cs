@@ -11,189 +11,155 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
 {
     public class EmployeeListViewModel
     {
-        #region 属性
-        /// <summary>
-        /// 人员基本信息
-        /// </summary>
-        public ObservableCollection<EmployeeViewModel> EmployeeList { get; set; }
+   
+        public ObservableCollection<EmployeeViewModel> EmployeeList
+        { get; set; }
 
-        /// <summary>
-        /// 当前人员角色列表
-        /// </summary>
-        public List<RoleViewModel> CurrentRoleList
+
+        private EmployeeViewModel _currentEmployee;
+
+        public EmployeeViewModel CurrentEmployee
         {
             get
             {
-                return CurrentEmployee.RoleList;
+                return _currentEmployee;
+            }
+            set
+            {
+                _currentEmployee = value;
+                if (_currentEmployee == null) return;
+                SetCurrentRoleCheckes();
+                SetCurrentAuthorityCheckes();
             }
         }
 
-        /// <summary>
-        /// 当前人员权限列表
-        /// </summary>
-        public List<AuthorityViewModel> CurrentAuthorityList {
-            get
-            {
-                return CurrentEmployee.AuthorityList;
-            } 
-        }
-
-        /// <summary>
-        /// 当前人员
-        /// </summary>
-        public EmployeeViewModel CurrentEmployee { get; set; }
 
 
-        /// <summary>
-        /// 所有角色列表
-        /// </summary>
-        public List<RoleViewModel> AllRoleList { get; set; }
+        public ObservableCollection<RoleViewModel> RoleList { get; set; }
 
-        /// <summary>
-        /// 所有权限列表
-        /// </summary>
-        public List<AuthorityViewModel> AllAuthorityList { get; set; }
 
-        #endregion
+
+        public ObservableCollection<AuthorityViewModel> AuthorityList { get; set; }
+
 
 
 
         public EmployeeListViewModel()
         {
-            var emplist = new EmployeeListModel().Collection.Select(em => new EmployeeViewModel(em.ID,em.Name)
-            {
-                Description = em.Description,
-                LoginName = em.LoginName,
-                Password = em.Password,
+            Refresh();
+        }
 
 
-            }).ToList();
-
-
-
-            EmployeeList = new ObservableCollection<EmployeeViewModel>();
-
-
-            foreach (var employee in emplist)
-            {
-                EmployeeList.Add(employee);
-            }
-
-
-
-            var allroles = new RoleListModel().GetAllRoles();
-            AllRoleList = new List<RoleViewModel>();
-            foreach (var roleModel in allroles)
-            {
-                AllRoleList.Add(new RoleViewModel(roleModel.ID, roleModel.Name)
+        private void Refresh()
+        {
+            //获取所有相关数据
+            var empViewModels = (from e in new EmployeeModel().GetAllEmmployees()
+                select new EmployeeViewModel
                 {
-                    IsChecked = false,
-                    Description = roleModel.Description
-                });
-            }
-
-            AllAuthorityList = new List<AuthorityViewModel>();
-            var authList = new AuthorityListModel().GetAllAuthorities();
-            foreach (var authModel in authList)
-            {
-                AllAuthorityList.Add(new AuthorityViewModel(authModel.ID, authModel.Name)
+                    Employee = e
+                }).ToList();
+            var roleViewModels = (from r in new RoleModel().GetAllRoles()
+                select new RoleViewModel
                 {
-                    IsChecked = false,
-                    Description = authModel.Description
-                });
-            }
+                    Role = r
+                }).ToList();
+            var authViewModels = (from a in new AuthorityModel().GetAllAuthorities()
+                select new AuthorityViewModel
+                {
+                    Authority = a
+                }).ToList();
+
+            //设置到基本属性
+            EmployeeList = new ObservableCollection<EmployeeViewModel>(empViewModels);
+            RoleList = new ObservableCollection<RoleViewModel>(roleViewModels);
+            AuthorityList = new ObservableCollection<AuthorityViewModel>(authViewModels);
 
 
         }
 
 
-        #region COMMAND
-        public ICommand testCommand
+
+        private void SetCurrentRoleCheckes()
+        {
+            //勾选所有权限
+            foreach (var roleViewModel in RoleList)
+            {
+                var existRole = (from r in CurrentEmployee.RoleList
+                                 where r.ID == roleViewModel.ID
+                                 select r).ToList();
+
+                roleViewModel.IsChecked = existRole.Any();
+            }
+        }
+
+
+
+        private void SetCurrentAuthorityCheckes()
+        {
+
+            //勾选所有需要的权限
+            foreach (var authorityViewModel in AuthorityList)
+            {
+                authorityViewModel.IsChecked = (authorityViewModel.ID & CurrentEmployee.Employee.Authority) == authorityViewModel.ID;
+            }
+        }
+
+
+
+        public ICommand RoleSelectChangeCommand
         {
             get
             {
-                return new RelayCommand(o =>
+                return new RelayCommand(roleid =>
                 {
-                    var newEmp = new EmployeeViewModel
+                    var selectedRole = (from r in RoleList where r.ID == (int) roleid select r).FirstOrDefault();
+                    var employeeRole = (from r in CurrentEmployee.RoleList where r.ID == (int)roleid select r).FirstOrDefault();
+
+                    if (selectedRole == null) return;
+
+                    if (selectedRole.IsChecked && employeeRole == null)
                     {
-                        Employee = new EmployeeModel
-                        {
-                            Description = Guid.NewGuid().ToString(),
-                            LoginName = "testtest" + DateTime.Now.ToString("yyyy-M-d dddd"),
-                            Name = "a" + (new Random()).Next().ToString("D"),
-                            Password = "******"
-                        }
-                    };
+                        employeeRole = selectedRole;
+                        CurrentEmployee.AddRole(employeeRole);
+                    }
+                    else if (!selectedRole.IsChecked && employeeRole != null)
+                    {
+                        CurrentEmployee.DeleteRole(employeeRole);
+                    }
 
-
-                    newEmp.Employee.Add();
-                    EmployeeList.Add(newEmp);
-
-
+                    SetCurrentAuthorityCheckes();
                 });
             }
         }
 
-        //public ICommand RoleListChanged
-        //{
-        //    get
-        //    {
-        //        return new RelayCommand(rl =>
-        //        {
+        public ICommand AuthSelectChangeCommand
+        {
+            get
+            {
+                return new RelayCommand(au =>
+                {
+                    long authid;
 
-        //            CurrentRoleList.Clear();
-        //            //从关联关系挂载出角色列表
-        //            var roleIdList = (from e in CurrentEmployee.EmpRoleList select e.RoleId).ToList();
-
-        //            var roleList = new RoleListModel().GetRoles(roleIdList);
-        //            foreach (var roleModel in roleList)
-        //            {
-        //                CurrentRoleList.Add(new RoleViewModel(roleModel.ID, roleModel.Name)
-        //                {
-        //                    Description = roleModel.Description
-        //                });
-        //            }
+                    if (!long.TryParse(au.ToString(), out authid))
+                        return;
 
 
-        //            foreach (var roleViewModel in AllRoleList)
-        //            {
-        //                roleViewModel.IsChecked = roleIdList.Contains(roleViewModel.ID);
-        //            }
+                    var selectedAuth = (from a in AuthorityList where a.ID == authid select a).FirstOrDefault();
 
+                    if (selectedAuth == null) return;
 
-        //        });
-        //    }
-        //}
+                    if (selectedAuth.IsChecked)
+                    {
+                        CurrentEmployee.AddAuthority(authid);
+                    }
+                    else
+                    {
+                        CurrentEmployee.DeleteAuthority(authid);
+                    }
 
-        //public ICommand AuthorityChanged
-        //{
-        //    get
-        //    {
-        //        return new RelayCommand(ac =>
-        //        {
-        //            //从关联关系挂载出权限列表
-        //            var authIdList = (from e in CurrentEmployee.EmpAuthorityList select e.AuthId).ToList();
-        //            var authList = new AuthorityListModel().GetAuthorities(authIdList);
-
-        //            foreach (var authModel in authList)
-        //            {
-        //                CurrentAuthorityList.Add(new AuthorityViewModel(authModel.ID, authModel.Name)
-        //                {
-        //                    Description = authModel.Description
-        //                });
-        //            }
-
-        //            foreach (var authViewModel in AllAuthorityList)
-        //            {
-        //                authViewModel.IsChecked = authIdList.Contains(authViewModel.ID);
-        //            }
-
-        //        });
-        //    }
-        //}
-
-        #endregion
-
-
+                    SetCurrentAuthorityCheckes();
+                });
+            }
+        }
     }
 }

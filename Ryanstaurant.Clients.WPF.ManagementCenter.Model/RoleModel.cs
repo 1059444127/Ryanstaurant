@@ -155,9 +155,29 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
 
 
+        public List<RoleModel> GetAllRoles()
+        {
+            //获取EMP基本信息
+            var result = ServiceClient.GetAllRoles();
+            if (result.State != ResultState.Success)
+            {
+                throw new Exception(result.ErrorMessage);
+            }
 
+            var roleReturn = result.ResultObject.Cast<Role>().ToList();
 
+            //写入基本信息
+            var employeeList = roleReturn.Select(role => new RoleModel
+            {
+                Description = role.Description,
+                ID = role.ID,
+                Name = role.Name,
+                Authority = role.Authority
+            }).ToList();
 
+            return employeeList;
+
+        }
 
 
 

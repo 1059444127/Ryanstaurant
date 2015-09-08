@@ -7,7 +7,7 @@ namespace Ryanstaurant.UMS.DataContract
     public class Authority:ItemContent
     {
         [DataMember]
-        public int ID { get; set; }
+        public long ID { get; set; }
 
         [DataMember]
         public string Name { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using Ryanstaurant.UMS.Client;
 using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.DataContract.Utility;
@@ -18,7 +19,6 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
         public EmployeeModel()
         {
-            Authority = 0;
             EmpAuthority = 0;
         }
 
@@ -74,7 +74,14 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
         public long EmpAuthority { get; set; }
 
-        public long Authority { get; private set; }
+        public long Authority
+        {
+            get
+            {
+                var tes = EmpAuthority | Roles.Aggregate((long)0, (current, r) => current | r.Authority);
+                return EmpAuthority | Roles.Aggregate((long) 0, (current, r) => current | r.Authority);
+            }
+        }
 
 
         public List<RoleModel> Roles { get; set; }
@@ -151,7 +158,6 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             Name = empReturn.Name;
             Password = empReturn.Password;
             EmpAuthority = empReturn.EmpAuthority;
-            Authority = empReturn.Authority;
         }
 
     
@@ -230,12 +236,40 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             _loginName = string.Empty;
             _name = string.Empty;
             _password = string.Empty;
-            Roles.Clear();
+            Roles = new List<RoleModel>();
             EmpAuthority = 0;
-            Authority = 0;
         }
 
 
+        public List<EmployeeModel> GetAllEmmployees()
+        {
+
+            var results = ServiceClient.GetAllEmployees();
+
+            if (results.State == ResultState.Fail)
+                throw new Exception(results.ErrorMessage);
+
+            Reset();
+
+            return (from e in results.ResultObject.Cast<Employee>().ToList()
+                select new EmployeeModel
+                {
+                    Description = e.Description,
+                    ID = e.ID,
+                    LoginName = e.LoginName,
+                    Password = e.Password,
+                    EmpAuthority = e.EmpAuthority,
+                    Name = e.Name,
+                    Roles = (from r in e.Roles
+                        select new RoleModel()
+                        {
+                            Authority = r.Authority,
+                            Description = r.Description,
+                            ID = r.ID,
+                            Name = r.Name
+                        }).ToList()
+                }).ToList();
+        }
 
     }
 }

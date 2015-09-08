@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -24,9 +25,8 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Pages
         public EmployeeListView()
         {
             InitializeComponent();
-            base.DataContext = new EmployeeListViewModel();
+            DataContext = new EmployeeListViewModel();
         }
-
 
     }
 }
