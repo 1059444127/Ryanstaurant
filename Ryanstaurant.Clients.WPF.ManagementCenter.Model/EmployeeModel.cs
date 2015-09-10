@@ -83,8 +83,19 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             }
         }
 
+        private List<RoleModel> _roles = new List<RoleModel>();
 
-        public List<RoleModel> Roles { get; set; }
+        public List<RoleModel> Roles
+        {
+            get
+            {
+                return _roles;
+            }
+            set
+            {
+                _roles = value;
+            }
+        }
 
 
 

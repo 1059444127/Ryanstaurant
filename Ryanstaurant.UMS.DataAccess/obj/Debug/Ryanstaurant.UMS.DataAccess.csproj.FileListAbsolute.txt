@@ -10,3 +10,4 @@ G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataAccess\bin\Debug\
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataAccess\bin\Debug\zh-Hans\EntityFramework.resources.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataAccess\obj\Debug\Ryanstaurant.UMS.DataAccess.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataAccess\obj\Debug\Ryanstaurant.UMS.DataAccess.pdb
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataAccess\obj\Debug\Ryanstaurant.UMS.DataAccess.csprojResolveAssemblyReference.cache

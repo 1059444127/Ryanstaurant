@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using FirstFloor.ModernUI.Presentation;
+using MicroMvvm;
 using Ryanstaurant.Clients.WPF.ManagementCenter.Model;
+using RelayCommand = FirstFloor.ModernUI.Presentation.RelayCommand;
 
 namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
 {
     public class EmployeeListViewModel
     {
-   
+
+
         public ObservableCollection<EmployeeViewModel> EmployeeList
-        { get; set; }
+        {
+            get; set;
+        }
 
 
         private EmployeeViewModel _currentEmployee;
@@ -40,6 +45,17 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
 
 
         public ObservableCollection<AuthorityViewModel> AuthorityList { get; set; }
+
+
+        public event ShowEmployeeDetail ShowEmployeeDetailHandler;
+
+        public event ShowMessageBox ShowMessageBoxHandler;
+
+
+        public delegate void ShowEmployeeDetail(EmployeeViewModel employee);
+
+        public delegate MessageBoxResult ShowMessageBox(string msg, string title, MessageBoxButton button, MessageBoxImage img);
+
 
 
 
@@ -70,9 +86,37 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
                 }).ToList();
 
             //设置到基本属性
+            if (EmployeeList==null)
             EmployeeList = new ObservableCollection<EmployeeViewModel>(empViewModels);
+            else
+            {
+                EmployeeList.Clear();
+                foreach (var employeeViewModel in empViewModels)
+                {
+                    EmployeeList.Add(employeeViewModel);
+                }
+            }
+
+            if (RoleList==null)
             RoleList = new ObservableCollection<RoleViewModel>(roleViewModels);
+            else
+            {
+                RoleList.Clear();
+                foreach (var roleViewModel in roleViewModels)
+                {
+                    RoleList.Add(roleViewModel);
+                }
+            }
+            if (AuthorityList==null)
             AuthorityList = new ObservableCollection<AuthorityViewModel>(authViewModels);
+            else
+            {
+                AuthorityList.Clear();
+                foreach (var authViewModel in authViewModels)
+                {
+                    AuthorityList.Add(authViewModel);
+                }
+            }
 
 
         }
@@ -161,5 +205,63 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
                 });
             }
         }
+
+
+        /// <summary>
+        /// 显示窗体命令
+        /// </summary>
+        public ICommand ShowWindowCommand
+        {
+            get
+            {
+                return new RelayCommand(p =>
+                {
+                    switch (int.Parse(p.ToString()))
+                    {
+                        case 0:
+                            CurrentEmployee = null;
+                            break;
+                        case 1:
+
+                            if (CurrentEmployee != null)
+                                CurrentEmployee.Operation = EmployeeViewModel.OperationType.Modify;
+                            break;
+                    }
+
+                    if (ShowEmployeeDetailHandler != null)
+                        ShowEmployeeDetailHandler(CurrentEmployee);
+
+                });
+            }
+        }
+
+
+
+        public ICommand DeleteEmployeeCommand
+        {
+            get
+            {
+                return new RelayCommand(o =>
+                {
+                    if (MessageBoxResult.Cancel ==
+                        ShowMessageBoxHandler("确定删除当前人员信息？", "注意", MessageBoxButton.OKCancel, MessageBoxImage.Asterisk))
+                        return;
+
+                    CurrentEmployee.DeleteEmployee();
+                    if (ShowMessageBoxHandler != null)
+                    {
+                        ShowMessageBoxHandler("删除成功", "操作完成", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    Refresh();
+                });
+            }
+        }
+
+
+
+
+
+
+
     }
 }

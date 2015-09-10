@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FirstFloor.ModernUI.Windows.Controls;
 using Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel;
 
 namespace Ryanstaurant.Clients.WPF.ManagementCenter.Pages
@@ -18,18 +19,19 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Pages
     /// <summary>
     /// EmployeeView.xaml 的交互逻辑
     /// </summary>
-    public partial class EmployeeView : UserControl
+    public partial class EmployeeView : ModernDialog
     {
-        public EmployeeView(int id,string name)
+        public EmployeeView(EmployeeViewModel employee)
         {
             InitializeComponent();
-            base.DataContext = new EmployeeViewModel(id, name);
+            this.Title = "员工信息";
+            if (employee == null)
+                employee = new EmployeeViewModel();
+            employee.Close += Close;
+            base.DataContext = employee;
         }
 
-        public EmployeeView()
-        {
-            InitializeComponent();
-            base.DataContext = new EmployeeViewModel();
-        }
+
+
     }
 }
