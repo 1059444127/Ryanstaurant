@@ -12,7 +12,6 @@ namespace Ryanstaurant.UMS.Service
     {
 
 
-
         protected ResultEntity LoadBusinessMethod(Func<List<ItemContent>> methodHandler)
         {
             try

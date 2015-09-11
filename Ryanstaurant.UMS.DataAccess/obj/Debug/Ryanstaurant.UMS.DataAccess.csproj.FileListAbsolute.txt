@@ -1,3 +1,13 @@
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\Ryanstaurant.UMS.DataAccess.dll.config
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\Ryanstaurant.UMS.DataAccess.dll
 G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.Servers\WAS\Bin\Ryanstaurant.UMS.DataAccess.pdb
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataAccess\bin\Debug\Ryanstaurant.UMS.DataAccess.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataAccess\bin\Debug\Ryanstaurant.UMS.DataAccess.pdb
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataAccess\bin\Debug\EntityFramework.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataAccess\bin\Debug\EntityFramework.xml
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataAccess\bin\Debug\zh-Hans\EntityFramework.resources.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataAccess\obj\Debug\Ryanstaurant.UMS.DataAccess.dll
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataAccess\obj\Debug\Ryanstaurant.UMS.DataAccess.pdb
+G:\Github\Repos\Ryanstaurant\Ryanstaurant\Ryanstaurant.UMS.DataAccess\bin\Debug\Ryanstaurant.UMS.DataAccess.dll.config

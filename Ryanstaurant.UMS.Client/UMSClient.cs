@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.Text;
 using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.DataContract.Utility;
 using Ryanstaurant.UMS.Interface;
@@ -34,6 +32,7 @@ namespace Ryanstaurant.UMS.Client
             }
 
             _serviceClient = new ServiceClient(binding, new EndpointAddress(endpointAddress));
+            
         }
 
 
@@ -93,6 +92,10 @@ namespace Ryanstaurant.UMS.Client
                 new Role()
             });
         }
+
+        
+
+
 
     }
 }

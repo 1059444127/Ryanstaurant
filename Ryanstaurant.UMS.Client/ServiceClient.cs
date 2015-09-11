@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Configuration;
 using Ryanstaurant.UMS.Interface;
 
 namespace Ryanstaurant.UMS.Client
@@ -10,6 +11,7 @@ namespace Ryanstaurant.UMS.Client
         public ServiceClient(Binding binding, EndpointAddress edpAddr)
             : base(binding, edpAddr)
         {
+            base.Endpoint.Behaviors.Add(new WcfClientBehavior());
         }
 
 
@@ -22,5 +24,7 @@ namespace Ryanstaurant.UMS.Client
         {
             return Channel.Query(requestEntitiy);
         }
+
+
     }
 }
