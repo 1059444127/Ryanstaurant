@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using MicroMvvm;
 using Ryanstaurant.Clients.WPF.ManagementCenter.Model;
 using RelayCommand = FirstFloor.ModernUI.Presentation.RelayCommand;
 
 namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
 {
-    public class EmployeeListViewModel
+    public class EmployeeListViewModel:ViewModelBase
     {
 
 
@@ -47,15 +43,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
         public ObservableCollection<AuthorityViewModel> AuthorityList { get; set; }
 
 
-        public event ShowEmployeeDetail ShowEmployeeDetailHandler;
-
-        public event ShowMessageBox ShowMessageBoxHandler;
-
-
-        public delegate void ShowEmployeeDetail(EmployeeViewModel employee);
-
-        public delegate MessageBoxResult ShowMessageBox(string msg, string title, MessageBoxButton button, MessageBoxImage img);
-
+        public event ShowDetail<EmployeeViewModel> ShowEmployeeDetailHandler;
 
 
 
@@ -224,7 +212,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
                         case 1:
 
                             if (CurrentEmployee != null)
-                                CurrentEmployee.Operation = EmployeeViewModel.OperationType.Modify;
+                                CurrentEmployee.Operation = OperationType.Modify;
                             break;
                     }
 
@@ -258,6 +246,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
         }
 
 
+        public event ShowMessageBox ShowMessageBoxHandler;
 
 
 

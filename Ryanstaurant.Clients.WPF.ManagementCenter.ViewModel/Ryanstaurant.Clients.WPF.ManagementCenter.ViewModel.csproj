@@ -53,6 +53,7 @@
     <Compile Include="AuthorityViewModel.cs" />
     <Compile Include="EmployeeListViewModel.cs" />
     <Compile Include="EmployeeViewModel.cs" />
+    <Compile Include="RoleListViewModel.cs" />
     <Compile Include="RoleViewModel.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using Ryanstaurant.UMS.Client;
 using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.DataContract.Utility;
@@ -78,7 +77,6 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
         {
             get
             {
-                var tes = EmpAuthority | Roles.Aggregate((long)0, (current, r) => current | r.Authority);
                 return EmpAuthority | Roles.Aggregate((long) 0, (current, r) => current | r.Authority);
             }
         }
@@ -272,7 +270,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                     EmpAuthority = e.EmpAuthority,
                     Name = e.Name,
                     Roles = (from r in e.Roles
-                        select new RoleModel()
+                        select new RoleModel
                         {
                             Authority = r.Authority,
                             Description = r.Description,

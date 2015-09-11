@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Ryanstaurant.UMS.Client;
 using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.DataContract.Utility;

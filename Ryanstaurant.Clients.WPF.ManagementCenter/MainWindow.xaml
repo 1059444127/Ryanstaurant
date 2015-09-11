@@ -11,6 +11,7 @@
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="home" Source="/Pages/Home.xaml" />
                 <mui:Link DisplayName="Employee" Source="/Pages/EmployeeListView.xaml" />
+                <mui:Link DisplayName="Role" Source="/Pages/RoleListView.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="settings" GroupKey="settings">

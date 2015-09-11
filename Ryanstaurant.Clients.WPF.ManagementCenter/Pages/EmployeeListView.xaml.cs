@@ -1,28 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using FirstFloor.ModernUI.Windows;
-using FirstFloor.ModernUI.Windows.Controls;
-using FirstFloor.ModernUI.Windows.Media;
-using Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel;
+﻿using Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel;
 
 namespace Ryanstaurant.Clients.WPF.ManagementCenter.Pages
 {
     /// <summary>
     /// EmployeeListView.xaml 的交互逻辑
     /// </summary>
-    public partial class EmployeeListView : UserControl
+    public partial class EmployeeListView
     {
 
         private EmployeeListViewModel _viewModel;
@@ -42,7 +25,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Pages
             btnOk.Content = "保存";
             btnOk.Command = employee.SaveCommand;
             view.CloseButton.Content = "关闭";
-            view.Buttons = new Button[]
+            view.Buttons = new[]
             {
                 view.OkButton,view.CloseButton
             };
@@ -55,17 +38,10 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Pages
         {
             _viewModel = new EmployeeListViewModel();
             _viewModel.ShowEmployeeDetailHandler += vm_ShowEmployeeDetailHandler;
-            _viewModel.ShowMessageBoxHandler += ShowMessageBox;
+            _viewModel.ShowMessageBoxHandler += ViewBase.ShowMessageBox;
             DataContext = _viewModel;
         }
 
-
-
-
-        private static MessageBoxResult ShowMessageBox(string msg, string title,MessageBoxButton button,MessageBoxImage img)
-        {
-            return MessageBox.Show(msg, title, button, img);
-        }
 
 
 
