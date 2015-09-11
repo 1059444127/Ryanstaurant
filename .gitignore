@@ -107,7 +107,4 @@ Presenters/bin/
 Presenters/obj/
 UserService/bin/
 UserService/obj/
-
-
 *.exe
-Ryanstaurant.Server/bin/Debug/Ryanstaurant.Server.exe
