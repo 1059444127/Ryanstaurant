@@ -1,4 +1,8 @@
-﻿using Ryanstaurant.Clients.WPF.ManagementCenter.Model;
+﻿using System;
+using System.Windows.Input;
+using System.Windows.Media;
+using FirstFloor.ModernUI.Presentation;
+using Ryanstaurant.Clients.WPF.ManagementCenter.Model;
 
 namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
 {
@@ -74,5 +78,56 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
                 RaisePropertyChanged("IsChecked");
             }
         }
+
+        internal void AddAuthority()
+        {
+            Authority.Add();
+        }
+
+        internal void DeleteAuthority()
+        {
+            Authority.Delete();
+        }
+
+        internal void ModifyAuthority()
+        {
+            Authority.Modify();
+        }
+
+
+        public ICommand SaveCommand
+        {
+            get
+            {
+                return new RelayCommand(o =>
+                {
+                    try
+                    {
+
+                        switch (Operation)
+                        {
+                            case OperationType.Add:
+                                AddAuthority();
+                                break;
+                            case OperationType.Modify:
+                                ModifyAuthority();
+                                break;
+                        }
+
+                        if (Close != null)
+                            Close();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ForeColor = new SolidColorBrush(Color.FromRgb(0xe5, 0x14, 0x00));
+                        Information = ex.Message;
+                    }
+                });
+            }
+        }
+
+
+        public event Action Close; 
     }
 }

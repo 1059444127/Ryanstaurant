@@ -9,9 +9,9 @@
     <mui:ModernWindow.MenuLinkGroups>
         <mui:LinkGroup DisplayName="welcome">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="home" Source="/Pages/Home.xaml" />
-                <mui:Link DisplayName="Employee" Source="/Pages/EmployeeListView.xaml" />
-                <mui:Link DisplayName="Role" Source="/Pages/RoleListView.xaml" />
+                <mui:Link DisplayName="人员配置" Source="/Pages/EmployeeListView.xaml" />
+                <mui:Link DisplayName="角色配置" Source="/Pages/RoleListView.xaml" />
+                <mui:Link DisplayName="权限配置" Source="/Pages/AuthorityListView.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="settings" GroupKey="settings">

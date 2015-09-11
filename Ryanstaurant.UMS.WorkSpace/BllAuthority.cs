@@ -201,6 +201,21 @@ namespace Ryanstaurant.UMS.WorkSpace
             }
 
 
+            //去除所有角色中的当前权限
+            var roles = from e in entities.role select e;
+
+            foreach (var role in roles)
+            {
+                role.Authority &= ~authority.ID;
+            }
+
+            //去除所有人员中的当前权限
+            var employees = from e in entities.employee select e;
+            foreach (var employee in employees)
+            {
+                employee.Authority &= ~authority.ID;
+            }
+
             entities.authority.Remove(authorityInDb);
 
             entities.SaveChanges();
@@ -284,6 +299,23 @@ namespace Ryanstaurant.UMS.WorkSpace
             };
         }
 
+
+
+        private static long GetAvailableAuthId(ryanstaurantEntities entities)
+        {
+            var idList = (from i in entities.authority orderby i.id select i.id).ToList();
+            for (long i = 1; i < long.MaxValue; i = i << 1)
+            {
+                if (idList.Contains(i)) continue;
+                return i;
+            }
+            return 1;
+        }
+
+
+
+
+
         private static ItemContent AddAuthorities(ryanstaurantEntities entities, ItemContent content)
         {
             var authority = content as Authority;
@@ -305,6 +337,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             var authToAdd = new authority
             {
+                id = GetAvailableAuthId(entities),
                 Description = authority.Description,
                 Name = authority.Name
             };

@@ -50,6 +50,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorityListViewModel.cs" />
     <Compile Include="AuthorityViewModel.cs" />
     <Compile Include="EmployeeListViewModel.cs" />
     <Compile Include="EmployeeViewModel.cs" />

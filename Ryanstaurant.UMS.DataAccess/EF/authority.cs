@@ -14,7 +14,7 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     
     public partial class authority
     {
-        public int id { get; set; }
+        public long id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }

@@ -144,10 +144,18 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
             {
                 return new RelayCommand(roleid =>
                 {
+
+
+                    if (CurrentEmployee == null)
+                        return;
+
                     var selectedRole = (from r in RoleList where r.ID == (int) roleid select r).FirstOrDefault();
                     var employeeRole = (from r in CurrentEmployee.RoleList where r.ID == (int)roleid select r).FirstOrDefault();
 
                     if (selectedRole == null) return;
+
+
+
 
                     if (selectedRole.IsChecked && employeeRole == null)
                     {
@@ -175,6 +183,9 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
                     if (!long.TryParse(au.ToString(), out authid))
                         return;
 
+
+                    if (CurrentEmployee == null)
+                        return;
 
                     var selectedAuth = (from a in AuthorityList where a.ID == authid select a).FirstOrDefault();
 

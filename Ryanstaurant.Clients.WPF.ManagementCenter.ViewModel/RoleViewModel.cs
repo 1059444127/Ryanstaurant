@@ -128,46 +128,9 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
             Role.Modify();
         }
 
-        public OperationType Operation
-        {
-            get;
-            set;
-        }
 
 
-        public bool IsModify
-        {
-            get
-            {
-                return Operation == OperationType.Modify;
-            }
-        }
-
-
-        private Brush _forColor = new SolidColorBrush(Color.FromRgb(0x00, 0x50, 0xef));
-
-        public Brush ForeColor
-        {
-            get
-            {
-                return _forColor;
-            }
-            set
-            {
-                _forColor = value;
-                RaisePropertyChanged("ForeColor");
-            }
-        }
-
-        private string _information = string.Empty;
-
-        public string Information
-        {
-            get { return _information; }
-            set { _information = value; RaisePropertyChanged("Information"); }
-
-        }
-
+     
 
 
 

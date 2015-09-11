@@ -16,6 +16,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Pages
             RefreshViewModel();
         }
 
+
         void vm_ShowEmployeeDetailHandler(EmployeeViewModel employee)
         {
             if (employee == null)
@@ -43,7 +44,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Pages
         }
 
 
-
+        
 
 
     }

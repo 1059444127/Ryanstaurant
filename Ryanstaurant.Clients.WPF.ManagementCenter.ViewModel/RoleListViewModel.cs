@@ -113,6 +113,8 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
                     if (!long.TryParse(au.ToString(), out authid))
                         return;
 
+                    if (CurrentRole == null)
+                        return;
 
                     var selectedAuth = (from a in AuthorityList where a.ID == authid select a).FirstOrDefault();
 
@@ -167,7 +169,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.ViewModel
                 return new RelayCommand(o =>
                 {
                     if (MessageBoxResult.Cancel ==
-                        ShowMessageBoxHandler("确定删除当前人员信息？", "注意", MessageBoxButton.OKCancel, MessageBoxImage.Asterisk))
+                        ShowMessageBoxHandler("当前操作将会修改所有相关此角色的人员信息\r\n确定删除当前角色信息？", "注意", MessageBoxButton.OKCancel, MessageBoxImage.Asterisk))
                         return;
 
                     CurrentRole.DeleteEmployee();

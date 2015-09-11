@@ -197,6 +197,15 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             entities.role.Remove(roleInDb);
 
+            //删除人员角色关联
+            var roleInEmpRole = from e in entities.emp_role where e.role_id == role.ID select e;
+
+            if (roleInEmpRole.Any())
+            {
+                entities.emp_role.RemoveRange(roleInEmpRole.ToList());
+            }
+
+
             entities.SaveChanges();
 
 
