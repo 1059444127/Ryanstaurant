@@ -99,4 +99,13 @@ RyanstaurantWAS/bin/
 RyanstaurantWAS/obj/
 WorkSpace/bin/
 WorkSpace/obj/
+MainEntry/bin/
+MainEntry/obj/
+Models/bin/
+Models/obj/
+Presenters/bin/
+Presenters/obj/
+UserService/bin/
+UserService/obj/
+
 
