@@ -107,6 +107,9 @@
     <Compile Include="EF\table_seats.cs">
       <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\UserToken.cs">
+      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

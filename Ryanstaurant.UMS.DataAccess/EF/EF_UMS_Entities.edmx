@@ -135,6 +135,15 @@
           <Property Name="Width" Type="int" />
           <Property Name="Length" Type="int" />
         </EntityType>
+        <EntityType Name="UserToken">
+          <Key>
+            <PropertyRef Name="TokenKey" />
+          </Key>
+          <Property Name="TokenKey" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="CreateTime" Type="smalldatetime" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IsExpired" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="ryanstaurantModelStoreContainer">
           <EntitySet Name="authority" EntityType="Self.authority" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dishes" EntityType="Self.Dishes" Schema="dbo" store:Type="Tables" />
@@ -149,6 +158,7 @@
           <EntitySet Name="table_seats" EntityType="Self.table_seats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tableimageconfig" EntityType="Self.tableimageconfig" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tablelist" EntityType="Self.tablelist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserToken" EntityType="Self.UserToken" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -298,7 +308,17 @@
           <EntitySet Name="table_seats" EntityType="Self.table_seats" />
           <EntitySet Name="tableimageconfig" EntityType="Self.tableimageconfig" />
           <EntitySet Name="tablelist" EntityType="Self.tablelist" />
+          <EntitySet Name="UserToken" EntityType="ryanstaurantModel.UserToken" />
         </EntityContainer>
+        <EntityType Name="UserToken">
+          <Key>
+            <PropertyRef Name="TokenKey" />
+          </Key>
+          <Property Name="TokenKey" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsExpired" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -442,6 +462,16 @@
                 <ScalarProperty Name="PosY" ColumnName="PosY" />
                 <ScalarProperty Name="Width" ColumnName="Width" />
                 <ScalarProperty Name="Length" ColumnName="Length" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserToken">
+            <EntityTypeMapping TypeName="ryanstaurantModel.UserToken">
+              <MappingFragment StoreEntitySet="UserToken">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="IsExpired" ColumnName="IsExpired" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="TokenKey" ColumnName="TokenKey" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

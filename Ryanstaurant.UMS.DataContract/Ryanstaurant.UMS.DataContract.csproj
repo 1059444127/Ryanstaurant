@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authority.cs" />
+    <Compile Include="Login.cs" />
     <Compile Include="Utility\ItemContent.cs" />
     <Compile Include="Utility\RequestContent.cs">
       <SubType>Code</SubType>

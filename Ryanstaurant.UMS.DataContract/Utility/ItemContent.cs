@@ -6,6 +6,7 @@ namespace Ryanstaurant.UMS.DataContract.Utility
     [KnownType(typeof(Employee))]
     [KnownType(typeof(Role))]
     [KnownType(typeof(Authority))]
+    [KnownType(typeof(Login))]
     public class ItemContent
     {
         [DataMember]

@@ -12,18 +12,9 @@ namespace Ryanstaurant.UMS.Interface
 
         [OperationContract]
         ResultEntity Query(List<ItemContent> requestEntitiy);
-            
-            
 
-
-
-
-
-
-
-
-            
-
+        [OperationContract]
+        ResultEntity Login(string userName, string password);
 
     }
 }

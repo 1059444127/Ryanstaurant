@@ -45,8 +45,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceClient.cs" />
     <Compile Include="UMSClient.cs" />
-    <Compile Include="WcfClientBehavior.cs" />
-    <Compile Include="WcfClientInterpector.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ryanstaurant.UMS.DataContract\Ryanstaurant.UMS.DataContract.csproj">

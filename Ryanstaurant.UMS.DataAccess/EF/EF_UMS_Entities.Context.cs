@@ -38,5 +38,6 @@ namespace Ryanstaurant.UMS.DataAccess.EF
         public virtual DbSet<table_seats> table_seats { get; set; }
         public virtual DbSet<tableimageconfig> tableimageconfig { get; set; }
         public virtual DbSet<tablelist> tablelist { get; set; }
+        public virtual DbSet<UserToken> UserToken { get; set; }
     }
 }

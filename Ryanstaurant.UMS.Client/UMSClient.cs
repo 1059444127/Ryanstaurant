@@ -5,11 +5,10 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.DataContract.Utility;
-using Ryanstaurant.UMS.Interface;
 
 namespace Ryanstaurant.UMS.Client
 {
-    public class UMSClient:IUMSService
+    public class UMSClient
     {
         private readonly ServiceClient _serviceClient;
 
@@ -93,9 +92,10 @@ namespace Ryanstaurant.UMS.Client
             });
         }
 
-        
-
-
-
+        public bool Login(string userName, string password)
+        {
+            _serviceClient.Login(userName, password);
+            return !string.IsNullOrEmpty(_serviceClient.SessionToken);
+        }
     }
 }
