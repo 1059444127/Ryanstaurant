@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BllAuthority.cs" />
+    <Compile Include="BllBase.cs" />
     <Compile Include="BllEmployee.cs" />
     <Compile Include="BllLogin.cs" />
     <Compile Include="BllRole.cs" />

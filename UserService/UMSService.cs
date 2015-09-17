@@ -19,33 +19,33 @@ namespace Ryanstaurant.UMS.Service
         {
             try
             {
-                var tokenIndex = OperationContext.Current.IncomingMessageHeaders.FindHeader("SessionToken",
-                    "Ryanstaurant.UMS");
+                //var tokenIndex = OperationContext.Current.IncomingMessageHeaders.FindHeader("SessionToken",
+                //    "Ryanstaurant.UMS");
 
-                if (tokenIndex == -1)
-                {
-                    return new ResultEntity
-                    {
-                        InnerErrorMessage = string.Empty,
-                        ErrorMessage = "协议中没有令牌内容，无法执行操作\r\n如需要令牌，请使用LOGIN接口进行登录",
-                        ResultObject = new List<ItemContent>(),
-                        State = ResultState.Fail
-                    };
-                }
+                //if (tokenIndex == -1)
+                //{
+                //    return new ResultEntity
+                //    {
+                //        InnerErrorMessage = string.Empty,
+                //        ErrorMessage = "协议中没有令牌内容，无法执行操作\r\n如需要令牌，请使用LOGIN接口进行登录",
+                //        ResultObject = new List<ItemContent>(),
+                //        State = ResultState.Fail
+                //    };
+                //}
 
 
-                var sessionToken = OperationContext.Current.IncomingMessageHeaders[tokenIndex] == null ? string.Empty : OperationContext.Current.IncomingMessageHeaders[tokenIndex].ToString();
-                string exception;
-                if (!new BllLogin().ValidToken(sessionToken, out exception))
-                {
-                    return new ResultEntity
-                    {
-                        InnerErrorMessage = string.Empty,
-                        ErrorMessage = exception,
-                        ResultObject = new List<ItemContent>(),
-                        State = ResultState.Fail
-                    };
-                }
+                //var sessionToken = OperationContext.Current.IncomingMessageHeaders[tokenIndex] == null ? string.Empty : OperationContext.Current.IncomingMessageHeaders[tokenIndex].ToString();
+                //string exception;
+                //if (!new BllLogin().ValidToken(sessionToken, out exception))
+                //{
+                    //return new ResultEntity
+                    //{
+                    //    InnerErrorMessage = string.Empty,
+                    //    ErrorMessage = exception,
+                    //    ResultObject = new List<ItemContent>(),
+                    //    State = ResultState.Fail
+                    //};
+                //}
 
                 return new ResultEntity
                 {

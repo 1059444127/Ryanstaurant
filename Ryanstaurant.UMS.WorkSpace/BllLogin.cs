@@ -5,40 +5,25 @@ using Ryanstaurant.UMS.DataAccess.EF;
 
 namespace Ryanstaurant.UMS.WorkSpace
 {
-    public class BllLogin
+    public class BllLogin:BllBase
     {
-        private UmsEntities _entities;
-
         public UmsEntities Entities
         {
             get
             {
-                return _entities;
+                return base.Entities;
             }
             set
             {
-                _entities = value;
+                base.Entities = value;
             }
         }
-
-
-        public BllLogin()
-        {
-            _entities = new UmsEntities();
-        }
-
-
-        ~BllLogin()
-        {
-            _entities.Dispose();
-        }
-
 
 
         public string GetToken(string userName, string password)
         {
             var employee =
-                (from e in _entities.employee where e.LoginName == userName && e.Password == password select e)
+                (from e in Entities.employee where e.LoginName == userName && e.Password == password select e)
                     .FirstOrDefault();
 
 
@@ -48,14 +33,14 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             var token = Guid.NewGuid().ToString();
 
-            _entities.UserToken.Add(new UserToken
+            Entities.UserToken.Add(new UserToken
             {
                 TokenKey = token,
                 UserID = employee.ID,
                 CreateTime = DateTime.Now
             });
 
-            var result = _entities.SaveChanges();
+            var result = Entities.SaveChanges();
             if (result <= 0)
                 throw new Exception("获取令牌失败", new Exception("GetToken Failed"));
 
@@ -65,7 +50,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
         public bool ValidToken(string token, out string exception)
         {
-            var tok = (from t in _entities.UserToken
+            var tok = (from t in Entities.UserToken
                 where t.TokenKey == token
                 select t).FirstOrDefault();
 
@@ -76,7 +61,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             }
 
             var tokenExpireDays =
-                (from c in _entities.sysconfig where c.ShortCall == "tokenExpireDays" select c).FirstOrDefault();
+                (from c in Entities.sysconfig where c.ShortCall == "tokenExpireDays" select c).FirstOrDefault();
 
             var expireHours = 0;
             if (tokenExpireDays != null)

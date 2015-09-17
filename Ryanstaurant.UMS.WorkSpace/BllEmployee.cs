@@ -7,7 +7,7 @@ using Ryanstaurant.UMS.DataContract.Utility;
 
 namespace Ryanstaurant.UMS.WorkSpace
 {
-    public class BllEmployee
+    public class BllEmployee:BllBase
     {
 
         public List<ItemContent> QueryEmployee(List<ItemContent> employees)
@@ -64,8 +64,7 @@ namespace Ryanstaurant.UMS.WorkSpace
         {
             var resultEntity = new List<ItemContent>();
 
-            using (var entities = new UmsEntities())
-            {
+
                 List<employee> empList;
                 List<emp_role> empRoleList;
                 List<role> roleList;
@@ -75,9 +74,9 @@ namespace Ryanstaurant.UMS.WorkSpace
                 //没有指定，则返回所有查询结果
                 if (itemContents == null)
                 {
-                    empList = (from e in entities.employee select e).ToList();
-                    empRoleList = (from e in entities.emp_role select e).ToList();
-                    roleList = (from e in entities.role select e).ToList();
+                    empList = (from e in Entities.employee select e).ToList();
+                    empRoleList = (from e in Entities.emp_role select e).ToList();
+                    roleList = (from e in Entities.role select e).ToList();
                 }
                 else //有指定，则从传送的数据处进行查询
                 {
@@ -91,11 +90,11 @@ namespace Ryanstaurant.UMS.WorkSpace
 
 
                     empList =
-                        (from e in entities.employee
+                        (from e in Entities.employee
                             where empIDList.Contains(e.ID) || empNameList.Contains(e.Name)
                             select e).ToList();
-                    empRoleList = (from e in entities.emp_role where empIDList.Contains(e.emp_id) select e).ToList();
-                    roleList = (from e in entities.role select e).ToList();
+                    empRoleList = (from e in Entities.emp_role where empIDList.Contains(e.emp_id) select e).ToList();
+                    roleList = (from e in Entities.role select e).ToList();
                 }
 
 
@@ -139,7 +138,6 @@ namespace Ryanstaurant.UMS.WorkSpace
                     resultEntity.Add(resultEmployee);
                 }
 
-            }
 
             return resultEntity;
 
@@ -150,8 +148,6 @@ namespace Ryanstaurant.UMS.WorkSpace
         {
             var resultEntity = new List<ItemContent>();
 
-            using (var entities = new UmsEntities())
-            {
 
                 foreach (var content in requestEntitiies)
                 {
@@ -172,17 +168,17 @@ namespace Ryanstaurant.UMS.WorkSpace
                         {
                             case RequestOperation.Add:
                             {
-                                resultcontent = AddEmployee(entities, content);
+                                resultcontent = AddEmployee(Entities, content);
                             }
                                 break;
                             case RequestOperation.Modify:
                             {
-                                resultcontent = ModifyEmployee(entities, content);
+                                resultcontent = ModifyEmployee(Entities, content);
                             }
                                 break;
                             case RequestOperation.Delete:
                             {
-                                resultcontent = DeleteEmployee(entities, content);
+                                resultcontent = DeleteEmployee(Entities, content);
                             }
                                 break;
                             default:
@@ -198,13 +194,13 @@ namespace Ryanstaurant.UMS.WorkSpace
                     }
                     resultEntity.Add(resultcontent);
 
-                }
+
             }
             return resultEntity;
         }
 
 
-        private static ItemContent DeleteEmployee(UmsEntities entities, ItemContent employeeContent)
+        private static ItemContent DeleteEmployee(UmsEntities Entities, ItemContent employeeContent)
         {
             var employee = employeeContent as Employee;
 
@@ -224,7 +220,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
 
 
-            var employeeInDb = (from e in entities.employee where e.ID == employee.ID select e).FirstOrDefault();
+            var employeeInDb = (from e in Entities.employee where e.ID == employee.ID select e).FirstOrDefault();
 
             if (employeeInDb == null)
             {
@@ -237,19 +233,19 @@ namespace Ryanstaurant.UMS.WorkSpace
             }
 
 
-            entities.employee.Remove(employeeInDb);
+            Entities.employee.Remove(employeeInDb);
 
 
 
             //删除已存在的
-            var roleListExist = (from e in entities.emp_role where e.emp_id == employee.ID select e).ToList();
+            var roleListExist = (from e in Entities.emp_role where e.emp_id == employee.ID select e).ToList();
 
             if (roleListExist.Any())
-                entities.emp_role.RemoveRange(roleListExist);
+                Entities.emp_role.RemoveRange(roleListExist);
 
 
 
-            entities.SaveChanges();
+            Entities.SaveChanges();
 
 
             employee.ResultInfo = new ResultContent
@@ -262,7 +258,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             return employee;
         }
 
-        private static ItemContent ModifyEmployee(UmsEntities entities, ItemContent employeeContent)
+        private static ItemContent ModifyEmployee(UmsEntities Entities, ItemContent employeeContent)
         {
 
             var employee = employeeContent as Employee;
@@ -286,7 +282,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
 
 
-            var employeeInDb = (from e in entities.employee where e.ID == employee.ID select e).FirstOrDefault();
+            var employeeInDb = (from e in Entities.employee where e.ID == employee.ID select e).FirstOrDefault();
 
             if (employeeInDb == null)
             {
@@ -310,11 +306,11 @@ namespace Ryanstaurant.UMS.WorkSpace
 
 
             //删除已存在的
-            var roleListExist = (from e in entities.emp_role where e.emp_id == employee.ID select e).ToList();
+            var roleListExist = (from e in Entities.emp_role where e.emp_id == employee.ID select e).ToList();
 
 
             if (roleListExist.Any())
-            entities.emp_role.RemoveRange(roleListExist);
+            Entities.emp_role.RemoveRange(roleListExist);
 
 
             //权限关联关系采用先删除再添加的方式处理
@@ -322,7 +318,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             {
 
                 //添加新的
-                entities.emp_role.Add(new emp_role
+                Entities.emp_role.Add(new emp_role
                 {
                     emp_id = employee.ID,
                     role_id = role.ID
@@ -330,7 +326,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             }
 
 
-            entities.SaveChanges();
+            Entities.SaveChanges();
 
 
             employee.ResultInfo = new ResultContent
@@ -344,7 +340,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
         }
 
-        private static ItemContent AddEmployee(UmsEntities entities, ItemContent employeeContent)
+        private static ItemContent AddEmployee(UmsEntities Entities, ItemContent employeeContent)
         {
             var employee = employeeContent as Employee;
 
@@ -376,12 +372,12 @@ namespace Ryanstaurant.UMS.WorkSpace
                 Authority = employee.EmpAuthority
             };
 
-            entities.employee.Add(empToAdd);
+            Entities.employee.Add(empToAdd);
 
 
             foreach (var role in employee.Roles)
             {
-                entities.emp_role.Add(new emp_role
+                Entities.emp_role.Add(new emp_role
                 {
                     emp_id = employee.ID,
                     role_id = role.ID,
@@ -389,7 +385,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             }
 
 
-            entities.SaveChanges();
+            Entities.SaveChanges();
 
             employee.ID = empToAdd.ID;
 
