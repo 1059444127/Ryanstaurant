@@ -37,7 +37,7 @@ namespace Ryanstaurant.UMS.WorkSpace
         {
             var resultEntity = new List<ItemContent>();
 
-            using (var entities = new ryanstaurantEntities())
+            using (var entities = new UmsEntities())
             {
                 List<role> roleList;
 
@@ -111,7 +111,7 @@ namespace Ryanstaurant.UMS.WorkSpace
         {
             var resultEntity = new List<ItemContent>();
 
-            using (var entities = new ryanstaurantEntities())
+            using (var entities = new UmsEntities())
             {
 
                 foreach (var content in requestEntitiies)
@@ -163,7 +163,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             return resultEntity;
         }
 
-        private static ItemContent DeleteRole(ryanstaurantEntities entities, ItemContent content)
+        private static ItemContent DeleteRole(UmsEntities entities, ItemContent content)
         {
             var role = content as Role;
 
@@ -219,7 +219,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             return role;
         }
 
-        private static ItemContent ModifyRole(ryanstaurantEntities entities, ItemContent content)
+        private static ItemContent ModifyRole(UmsEntities entities, ItemContent content)
         {
             var role = content as Role;
 
@@ -272,7 +272,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             return role;
         }
 
-        private static ItemContent AddRole(ryanstaurantEntities entities, ItemContent content)
+        private static ItemContent AddRole(UmsEntities entities, ItemContent content)
         {
             var role = content as Role;
 

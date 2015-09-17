@@ -64,7 +64,7 @@ namespace Ryanstaurant.UMS.WorkSpace
         {
             var resultEntity = new List<ItemContent>();
 
-            using (var entities = new ryanstaurantEntities())
+            using (var entities = new UmsEntities())
             {
                 List<employee> empList;
                 List<emp_role> empRoleList;
@@ -150,7 +150,7 @@ namespace Ryanstaurant.UMS.WorkSpace
         {
             var resultEntity = new List<ItemContent>();
 
-            using (var entities = new ryanstaurantEntities())
+            using (var entities = new UmsEntities())
             {
 
                 foreach (var content in requestEntitiies)
@@ -204,7 +204,7 @@ namespace Ryanstaurant.UMS.WorkSpace
         }
 
 
-        private static ItemContent DeleteEmployee(ryanstaurantEntities entities, ItemContent employeeContent)
+        private static ItemContent DeleteEmployee(UmsEntities entities, ItemContent employeeContent)
         {
             var employee = employeeContent as Employee;
 
@@ -262,7 +262,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             return employee;
         }
 
-        private static ItemContent ModifyEmployee(ryanstaurantEntities entities, ItemContent employeeContent)
+        private static ItemContent ModifyEmployee(UmsEntities entities, ItemContent employeeContent)
         {
 
             var employee = employeeContent as Employee;
@@ -344,7 +344,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
         }
 
-        private static ItemContent AddEmployee(ryanstaurantEntities entities, ItemContent employeeContent)
+        private static ItemContent AddEmployee(UmsEntities entities, ItemContent employeeContent)
         {
             var employee = employeeContent as Employee;
 

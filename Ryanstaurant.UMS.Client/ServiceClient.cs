@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.ServiceModel.Configuration;
 using Ryanstaurant.UMS.DataContract.Utility;
 using Ryanstaurant.UMS.Interface;
 
@@ -19,14 +18,14 @@ namespace Ryanstaurant.UMS.Client
 
 
 
-        public DataContract.Utility.ResultEntity Execute(List<DataContract.Utility.ItemContent> requestEntitiy)
+        public ResultEntity Execute(List<ItemContent> requestEntitiy)
         {
             OperationContext.Current.OutgoingMessageHeaders.Add(MessageHeader.CreateHeader("SessionToken",
                 "Ryanstaurant.UMS", SessionToken));
             return Channel.Execute(requestEntitiy);
         }
 
-        public DataContract.Utility.ResultEntity Query(List<DataContract.Utility.ItemContent> requestEntitiy)
+        public ResultEntity Query(List<ItemContent> requestEntitiy)
         {
             OperationContext.Current.OutgoingMessageHeaders.Add(MessageHeader.CreateHeader("SessionToken",
                 "Ryanstaurant.UMS", SessionToken));

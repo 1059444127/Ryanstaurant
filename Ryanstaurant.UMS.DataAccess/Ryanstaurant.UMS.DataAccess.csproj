@@ -50,95 +50,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EF\authority.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\Dishes.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\EF_UMS_Entities.Context.cs">
-      <DependentUpon>EF_UMS_Entities.Context.tt</DependentUpon>
-      <SubType>Code</SubType>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="EF\EF_UMS_Entities.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-      <SubType>Code</SubType>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="EF\EF_UMS_Entities.Designer.cs">
-      <DependentUpon>EF_UMS_Entities.edmx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="EF\employee.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\emp_role.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\menu.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\navigator.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\role.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\seatimageconfig.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\SeatList.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\sysconfig.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="EF\tableimageconfig.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\tablelist.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\table_seats.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\UserToken.cs">
-      <DependentUpon>EF_UMS_Entities.tt</DependentUpon>
-    </Compile>
+    <Compile Include="EF\Models\authority.cs" />
+    <Compile Include="EF\Models\Dishes.cs" />
+    <Compile Include="EF\Models\employee.cs" />
+    <Compile Include="EF\Models\emp_role.cs" />
+    <Compile Include="EF\Models\menu.cs" />
+    <Compile Include="EF\Models\navigator.cs" />
+    <Compile Include="EF\Models\role.cs" />
+    <Compile Include="EF\Models\seatimageconfig.cs" />
+    <Compile Include="EF\Models\SeatList.cs" />
+    <Compile Include="EF\Models\sysconfig.cs" />
+    <Compile Include="EF\Models\tableimageconfig.cs" />
+    <Compile Include="EF\Models\tablelist.cs" />
+    <Compile Include="EF\Models\table_seats.cs" />
+    <Compile Include="EF\Models\UserToken.cs" />
+    <Compile Include="EF\UmsEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="EF\EF_UMS_Entities.Context.tt">
-      <DependentUpon>EF_UMS_Entities.edmx</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>EF_UMS_Entities.Context.cs</LastGenOutput>
-    </None>
-    <None Include="EF\EF_UMS_Entities.edmx.diagram">
-      <DependentUpon>EF_UMS_Entities.edmx</DependentUpon>
-    </None>
-    <None Include="EF\EF_UMS_Entities.tt">
-      <DependentUpon>EF_UMS_Entities.edmx</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>EF_UMS_Entities.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <EntityDeploy Include="EF\EF_UMS_Entities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EF_UMS_Entities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

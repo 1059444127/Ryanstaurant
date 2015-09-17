@@ -34,7 +34,7 @@ namespace Ryanstaurant.UMS.WorkSpace
         {
             var resultEntity = new List<ItemContent>();
 
-            using (var entities = new ryanstaurantEntities())
+            using (var entities = new UmsEntities())
             {
                 List<authority> authList;
 
@@ -109,7 +109,7 @@ namespace Ryanstaurant.UMS.WorkSpace
         {
             var resultEntity = new List<ItemContent>();
 
-            using (var entities = new ryanstaurantEntities())
+            using (var entities = new UmsEntities())
             {
                 foreach (var content in requestEntitiies)
                 {
@@ -160,7 +160,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             return resultEntity;
         }
 
-        private static ItemContent DeleteAuthorities(ryanstaurantEntities entities, ItemContent content)
+        private static ItemContent DeleteAuthorities(UmsEntities entities, ItemContent content)
         {
             var authority = content as Authority;
 
@@ -237,7 +237,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             };
         }
 
-        private static ItemContent ModifyAuthorities(ryanstaurantEntities entities, ItemContent content)
+        private static ItemContent ModifyAuthorities(UmsEntities entities, ItemContent content)
         {
             var authority = content as Authority;
 
@@ -301,7 +301,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
 
 
-        private static long GetAvailableAuthId(ryanstaurantEntities entities)
+        private static long GetAvailableAuthId(UmsEntities entities)
         {
             var idList = (from i in entities.authority orderby i.id select i.id).ToList();
             for (long i = 1; i < long.MaxValue; i = i << 1)
@@ -316,7 +316,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
 
 
-        private static ItemContent AddAuthorities(ryanstaurantEntities entities, ItemContent content)
+        private static ItemContent AddAuthorities(UmsEntities entities, ItemContent content)
         {
             var authority = content as Authority;
 
