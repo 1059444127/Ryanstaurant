@@ -108,3 +108,6 @@ Presenters/obj/
 UserService/bin/
 UserService/obj/
 *.exe
+/Ryanstaurant.UMS.WorkSpace/FakesAssemblies
+/Ryanstaurant.UMS.Tests/bin/Debug
+/Ryanstaurant.UMS.Tests/obj/Debug
