@@ -51,7 +51,8 @@ namespace Ryanstaurant.UMS.WorkSpace
             _entities.UserToken.Add(new UserToken
             {
                 TokenKey = token,
-                UserID = employee.ID
+                UserID = employee.ID,
+                CreateTime = DateTime.Now
             });
 
             var result = _entities.SaveChanges();
@@ -65,8 +66,8 @@ namespace Ryanstaurant.UMS.WorkSpace
         public bool ValidToken(string token, out string exception)
         {
             var tok = (from t in _entities.UserToken
-                       where string.Equals(t.TokenKey, token, StringComparison.InvariantCultureIgnoreCase)
-                       select t).FirstOrDefault();
+                where t.TokenKey == token
+                select t).FirstOrDefault();
 
             if (tok == null)
             {
@@ -77,13 +78,13 @@ namespace Ryanstaurant.UMS.WorkSpace
             var tokenExpireDays =
                 (from c in _entities.sysconfig where c.ShortCall == "tokenExpireDays" select c).FirstOrDefault();
 
-            var expireDays = 0;
+            var expireHours = 0;
             if (tokenExpireDays != null)
             {
-                int.TryParse(tokenExpireDays.ConfigValue, out expireDays);
+                int.TryParse(tokenExpireDays.ConfigValue, out expireHours);
             }
 
-            if (tok.CreateTime.AddDays(expireDays) < DateTime.Now.Date)
+            if (tok.CreateTime.AddHours(expireHours) < DateTime.Now.Date)
             {
                 exception = "令牌已经失效，请重新登录";
                 return false;

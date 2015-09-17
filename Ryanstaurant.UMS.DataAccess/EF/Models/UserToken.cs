@@ -28,11 +28,14 @@ namespace Ryanstaurant.UMS.DataAccess.EF
                 if (value > SqlDateTime.MaxValue.Value)
                 {
                     _createTime = SqlDateTime.MaxValue.Value;
+                    return;
                 }
-                if (value > SqlDateTime.MinValue.Value)
+                if (value < SqlDateTime.MinValue.Value)
                 {
                     _createTime = SqlDateTime.MinValue.Value;
+                    return;
                 }
+                _createTime = value;
             }
         }
 
