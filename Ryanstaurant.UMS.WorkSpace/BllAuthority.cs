@@ -7,8 +7,22 @@ using Ryanstaurant.UMS.DataContract.Utility;
 
 namespace Ryanstaurant.UMS.WorkSpace
 {
-    public class BllAuthority
+    public class BllAuthority:BllBase
     {
+
+        public new UmsEntities Entities
+        {
+            get
+            {
+                return base.Entities;
+            }
+            set
+            {
+                base.Entities = value;
+            }
+        }
+
+
         public List<ItemContent> QueryAuthority(List<ItemContent> authorities)
         {
             if (authorities == null || authorities.Count == 0)
@@ -30,19 +44,18 @@ namespace Ryanstaurant.UMS.WorkSpace
             return Query(!queries.Any() ? null : queries.ToList());
         }
 
-        private static List<ItemContent> Query(IEnumerable<ItemContent> itemContents)
+        private List<ItemContent> Query(IEnumerable<ItemContent> itemContents)
         {
             var resultEntity = new List<ItemContent>();
 
-            using (var entities = new UmsEntities())
-            {
+
                 List<authority> authList;
 
 
                 //没有指定，则返回所有查询结果
                 if (itemContents == null)
                 {
-                    authList = (from e in entities.authority select e).ToList();
+                    authList = (from e in Entities.authority select e).ToList();
                 }
                 else//有指定，则从传送的数据处进行查询
                 {
@@ -54,7 +67,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                                         select e.Name).ToList();
 
                     authList =
-                        (from e in entities.authority
+                        (from e in Entities.authority
                             where authIDList.Contains(e.id) || authNameList.Contains(e.Name)
                             select e).ToList();
                 }
@@ -71,7 +84,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                     Description = auth.Description,
                     Name = auth.Name
                 }));
-            }
+
 
             return resultEntity;
         }
@@ -109,8 +122,7 @@ namespace Ryanstaurant.UMS.WorkSpace
         {
             var resultEntity = new List<ItemContent>();
 
-            using (var entities = new UmsEntities())
-            {
+
                 foreach (var content in requestEntitiies)
                 {
                     var resultcontent = new ItemContent();
@@ -129,17 +141,17 @@ namespace Ryanstaurant.UMS.WorkSpace
                         {
                             case RequestOperation.Add:
                             {
-                                resultcontent = AddAuthorities(entities, content);
+                                resultcontent = AddAuthorities( content);
                             }
                                 break;
                             case RequestOperation.Modify:
                             {
-                                resultcontent = ModifyAuthorities(entities, content);
+                                resultcontent = ModifyAuthorities( content);
                             }
                                 break;
                             case RequestOperation.Delete:
                             {
-                                resultcontent = DeleteAuthorities(entities, content);
+                                resultcontent = DeleteAuthorities( content);
                             }
                                 break;
                             default:
@@ -155,12 +167,12 @@ namespace Ryanstaurant.UMS.WorkSpace
                     }
                     resultEntity.Add(resultcontent);
 
-                }
+                
             }
             return resultEntity;
         }
 
-        private static ItemContent DeleteAuthorities(UmsEntities entities, ItemContent content)
+        private ItemContent DeleteAuthorities(ItemContent content)
         {
             var authority = content as Authority;
 
@@ -181,7 +193,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
 
 
-            var authorityInDb = (from e in entities.authority where e.id == authority.ID select e).FirstOrDefault();
+            var authorityInDb = (from e in Entities.authority where e.id == authority.ID select e).FirstOrDefault();
 
             if (authorityInDb == null)
             {
@@ -202,7 +214,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
 
             //去除所有角色中的当前权限
-            var roles = from e in entities.role select e;
+            var roles = from e in Entities.role select e;
 
             foreach (var role in roles)
             {
@@ -210,15 +222,15 @@ namespace Ryanstaurant.UMS.WorkSpace
             }
 
             //去除所有人员中的当前权限
-            var employees = from e in entities.employee select e;
+            var employees = from e in Entities.employee select e;
             foreach (var employee in employees)
             {
                 employee.Authority &= ~authority.ID;
             }
 
-            entities.authority.Remove(authorityInDb);
+            Entities.authority.Remove(authorityInDb);
 
-            entities.SaveChanges();
+            Entities.SaveChanges();
 
 
             return new Authority
@@ -237,7 +249,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             };
         }
 
-        private static ItemContent ModifyAuthorities(UmsEntities entities, ItemContent content)
+        private ItemContent ModifyAuthorities(ItemContent content)
         {
             var authority = content as Authority;
 
@@ -257,7 +269,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             }
 
 
-            var authorityInDb = (from e in entities.employee where e.ID == authority.ID select e).FirstOrDefault();
+            var authorityInDb = (from e in Entities.authority where e.id == authority.ID select e).FirstOrDefault();
 
             if (authorityInDb == null)
             {
@@ -281,7 +293,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             authorityInDb.Name = authority.Name;
 
 
-            entities.SaveChanges();
+            Entities.SaveChanges();
 
 
             return new Authority
@@ -301,9 +313,9 @@ namespace Ryanstaurant.UMS.WorkSpace
 
 
 
-        private static long GetAvailableAuthId(UmsEntities entities)
+        private long GetAvailableAuthId()
         {
-            var idList = (from i in entities.authority orderby i.id select i.id).ToList();
+            var idList = (from i in Entities.authority orderby i.id select i.id).ToList();
             for (long i = 1; i < long.MaxValue; i = i << 1)
             {
                 if (idList.Contains(i)) continue;
@@ -316,7 +328,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
 
 
-        private static ItemContent AddAuthorities(UmsEntities entities, ItemContent content)
+        private  ItemContent AddAuthorities(ItemContent content)
         {
             var authority = content as Authority;
 
@@ -337,14 +349,14 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             var authToAdd = new authority
             {
-                id = GetAvailableAuthId(entities),
+                id = GetAvailableAuthId(),
                 Description = authority.Description,
                 Name = authority.Name
             };
 
-            entities.authority.Add(authToAdd);
+            Entities.authority.Add(authToAdd);
 
-            entities.SaveChanges();
+            Entities.SaveChanges();
 
             authority.ID = authToAdd.id;
 

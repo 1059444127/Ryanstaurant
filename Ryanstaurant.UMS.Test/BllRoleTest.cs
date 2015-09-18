@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Transactions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ryanstaurant.UMS.DataAccess.EF;
 using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.DataContract.Utility;
 using Ryanstaurant.UMS.WorkSpace;
@@ -9,23 +8,18 @@ using Ryanstaurant.UMS.WorkSpace;
 namespace Ryanstaurant.UMS.Test
 {
     [TestClass]
-    public class BllEmployeeTest:BllTestBase
+    public class BllRoleTest:BllTestBase
     {
-
         [TestMethod]
-        public void QueryEmployeeTestSuccess()
+        public void QueryRoleTest()
         {
+
             using (var trans = new TransactionScope())
             {
-                var bllEmployee = new BllEmployee { Entities = base.Entities };
-                //var result = bllEmployee.QueryEmployee(null);
-
-                //Assert.AreEqual(ResultState.Fail, result[0].ResultInfo.State, "返回了错误的状态:" + result[0].ResultInfo.Exception);
-                //result = bllEmployee.QueryEmployee(new List<Employee>().Cast<ItemContent>().ToList());
-                //Assert.AreEqual(ResultState.Fail, result[0].ResultInfo.State, "返回了错误的状态:" + result[0].ResultInfo.Exception);
-                var result = bllEmployee.QueryEmployee(new List<ItemContent>
+                var bllRole = new BllRole { Entities = base.Entities };
+                var result = bllRole.QueryRole(new List<ItemContent>
                 {
-                    new Employee
+                    new Role
                     {
                         ID = 1,
                         RequestInfo=new RequestContent
@@ -33,9 +27,9 @@ namespace Ryanstaurant.UMS.Test
                             Operation = RequestOperation.Query
                         }
                     },
-                    new Employee
+                    new Role
                     {
-                        Name = "RYAN",
+                        Name = "ADMINISTRATOR",
                         RequestInfo=new RequestContent
                         {
                             Operation = RequestOperation.Query
@@ -45,34 +39,27 @@ namespace Ryanstaurant.UMS.Test
 
                 Assert.AreEqual(1, result.Count, "返回了错误的查询个数:" + result.Count);
 
-                Assert.AreEqual(1, (result[0] as Employee).ID, "返回了错误的ID:" + (result[0] as Employee).ID);
+                Assert.AreEqual(1, (result[0] as Role).ID, "返回了错误的ID:" + (result[0] as Role).ID);
 
                 trans.Dispose();
             }
-
-
-
-
         }
 
 
         [TestMethod]
-        public void ExecuteEmployeeAddTest()
+        public void ExecuteRoleAddTest()
         {
             using (var trans = new TransactionScope())
             {
-                var bllEmployee = new BllEmployee { Entities = base.Entities };
+                var bllRole = new BllRole { Entities = base.Entities };
 
-                var result = bllEmployee.ExecuteEmployee(new List<ItemContent>
+                var result = bllRole.ExecuteRole(new List<ItemContent>
                 {
-                    new Employee
+                    new Role
                     {
                         ID = 4,
                         Name = "TestAdd",
                         Description = "TestAdd",
-                        EmpAuthority = 7,
-                        LoginName = "USER3",
-                        Password = "3",
                         RequestInfo =new RequestContent
                         {
                             Operation = RequestOperation.Add
@@ -89,17 +76,16 @@ namespace Ryanstaurant.UMS.Test
 
 
         [TestMethod]
-        public void ExecuteEmployeeModifyTest()
+        public void ExecuteRoleModifyTest()
         {
             using (var trans = new TransactionScope())
             {
-                var bllEmployee = new BllEmployee { Entities = base.Entities };
-                var aimEmployee = bllEmployee.QueryEmployee(new List<ItemContent>
+                var bllRole = new BllRole { Entities = base.Entities };
+                var aimRole = bllRole.QueryRole(new List<ItemContent>
                 {
-                    new Employee
+                    new Role
                     {
-                        ID = 16,
-                        Name = "11",
+                        ID = 7,
                         RequestInfo = new RequestContent
                         {
                             Operation = RequestOperation.Query
@@ -108,21 +94,21 @@ namespace Ryanstaurant.UMS.Test
                 });
 
 
-                var targetEmployee = aimEmployee[0] as Employee;
-                targetEmployee.Password = "*******";
-                targetEmployee.SetModifyState();
+                var targetRole = aimRole[0] as Role;
+                targetRole.Description = "Chef1";
+                targetRole.SetModifyState();
 
-                var result = bllEmployee.ExecuteEmployee(new List<ItemContent>
+                var result = bllRole.ExecuteRole(new List<ItemContent>
                 {
-                   targetEmployee
+                   targetRole
                 });
 
-                aimEmployee = bllEmployee.QueryEmployee(new List<ItemContent>
+                aimRole = bllRole.QueryRole(new List<ItemContent>
                 {
-                    new Employee
+                    new Role
                     {
-                        ID = 16,
-                        Name = "11",
+                        ID = 7,
+                        Description = "Chef1",
                         RequestInfo = new RequestContent
                         {
                             Operation = RequestOperation.Query
@@ -134,25 +120,24 @@ namespace Ryanstaurant.UMS.Test
                     "返回了错误的修改状态:" + result[0].ResultInfo.Exception);
 
                 Assert.AreEqual(1, result.Count, "返回了错误的查询个数:" + result.Count);
-                Assert.AreEqual("*******", (aimEmployee[0] as Employee).Password,
-                    "返回了错误的修改信息:" + (aimEmployee[0] as Employee).Password);
+                Assert.AreEqual("Chef1", (aimRole[0] as Role).Description,
+                    "返回了错误的修改信息:" + (aimRole[0] as Role).Description);
 
                 trans.Dispose();
             }
         }
 
         [TestMethod]
-        public void ExecuteEmployeeDeleteTest()
+        public void ExecuteRoleDeleteTest()
         {
             using (var trans = new TransactionScope())
             {
-                var bllEmployee = new BllEmployee { Entities = base.Entities };
-                var aimEmployee = bllEmployee.QueryEmployee(new List<ItemContent>
+                var bllRole = new BllRole { Entities = base.Entities };
+                var aimRole = bllRole.QueryRole(new List<ItemContent>
                 {
-                    new Employee
+                    new Role
                     {
-                        ID = 16,
-                        Name = "11",
+                        ID = 7,
                         RequestInfo = new RequestContent
                         {
                             Operation = RequestOperation.Query
@@ -161,20 +146,19 @@ namespace Ryanstaurant.UMS.Test
                 });
 
 
-                var targetEmployee = aimEmployee[0] as Employee;
-                targetEmployee.SetDeleteState();
+                var targetRole = aimRole[0] as Role;
+                targetRole.SetDeleteState();
 
-                var result = bllEmployee.ExecuteEmployee(new List<ItemContent>
+                var result = bllRole.ExecuteRole(new List<ItemContent>
                 {
-                   targetEmployee
+                   targetRole
                 });
 
-                aimEmployee = bllEmployee.QueryEmployee(new List<ItemContent>
+                aimRole = bllRole.QueryRole(new List<ItemContent>
                 {
-                    new Employee
+                    new Role
                     {
-                        ID = 16,
-                        Name = "11",
+                        ID = 7,
                         RequestInfo = new RequestContent
                         {
                             Operation = RequestOperation.Query
@@ -185,10 +169,11 @@ namespace Ryanstaurant.UMS.Test
                 Assert.AreEqual(1, result.Count, "返回了错误的查询个数:" + result.Count);
                 Assert.AreEqual(ResultState.Success, result[0].ResultInfo.State,
                     "返回了错误的删除状态:" + result[0].ResultInfo.Exception);
-                Assert.AreEqual(0, aimEmployee.Count, "返回了错误的查询个数:" + result.Count);
+                Assert.AreEqual(0, aimRole.Count, "返回了错误的查询个数:" + result.Count);
 
                 trans.Dispose();
             }
         }
+
     }
 }

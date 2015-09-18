@@ -9,6 +9,24 @@ namespace Ryanstaurant.UMS.WorkSpace
 {
     public class BllEmployee:BllBase
     {
+        public new UmsEntities Entities
+        {
+            get
+            {
+                return base.Entities;
+            }
+            set
+            {
+                base.Entities = value;
+            }
+        }
+
+
+
+
+
+
+
 
         public List<ItemContent> QueryEmployee(List<ItemContent> employees)
         {
@@ -374,14 +392,16 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             Entities.employee.Add(empToAdd);
 
-
-            foreach (var role in employee.Roles)
+            if (employee.Roles!=null && employee.Roles.Count > 0)
             {
-                Entities.emp_role.Add(new emp_role
+                foreach (var role in employee.Roles)
                 {
-                    emp_id = employee.ID,
-                    role_id = role.ID,
-                });
+                    Entities.emp_role.Add(new emp_role
+                    {
+                        emp_id = employee.ID,
+                        role_id = role.ID,
+                    });
+                }
             }
 
 

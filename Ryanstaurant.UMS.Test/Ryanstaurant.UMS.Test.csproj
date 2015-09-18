@@ -65,8 +65,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BllAuthorityTest.cs" />
     <Compile Include="BllEmployeeTest.cs" />
     <Compile Include="BLLLoginTest.cs" />
+    <Compile Include="BllRoleTest.cs" />
+    <Compile Include="BllTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -31,6 +31,5 @@ namespace Ryanstaurant.UMS.DataContract
                 return EmpAuthority | Roles.Aggregate((long)0, (current, role) => current | role.Authority);
             }
         }
-
     }
 }

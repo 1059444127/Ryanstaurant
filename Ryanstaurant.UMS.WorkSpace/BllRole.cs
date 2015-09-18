@@ -7,8 +7,20 @@ using Ryanstaurant.UMS.DataContract.Utility;
 
 namespace Ryanstaurant.UMS.WorkSpace
 {
-    public class BllRole
+    public class BllRole:BllBase
     {
+        public new UmsEntities Entities
+        {
+            get
+            {
+                return base.Entities;
+            }
+            set
+            {
+                base.Entities = value;
+            }
+        }
+
 
 
         public List<ItemContent> QueryRole(List<ItemContent> roles)
@@ -37,8 +49,6 @@ namespace Ryanstaurant.UMS.WorkSpace
         {
             var resultEntity = new List<ItemContent>();
 
-            using (var entities = new UmsEntities())
-            {
                 List<role> roleList;
 
 
@@ -46,7 +56,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                 //没有指定，则返回所有查询结果
                 if (itemContents == null)
                 {
-                    roleList = (from e in entities.role select e).ToList();
+                    roleList = (from e in Entities.role select e).ToList();
                 }
                 else//有指定，则从传送的数据处进行查询
                 {
@@ -58,7 +68,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                                        select e.Name).ToList();
 
 
-                    roleList = (from e in entities.role where roleIDList.Contains(e.id)||roleNameList.Contains(e.Name) select e).ToList();
+                    roleList = (from e in Entities.role where roleIDList.Contains(e.id)||roleNameList.Contains(e.Name) select e).ToList();
 
                 }
 
@@ -73,7 +83,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                     },
                     ID = currentRole.id, Description = currentRole.Description, Name = currentRole.Name, Authority = currentRole.Authority.GetValueOrDefault()
                 }));
-            }
+
 
             return resultEntity;
         }
@@ -107,12 +117,11 @@ namespace Ryanstaurant.UMS.WorkSpace
             return resultEntity;
         }
 
-        private static List<ItemContent> Save(IEnumerable<ItemContent> requestEntitiies)
+        private List<ItemContent> Save(IEnumerable<ItemContent> requestEntitiies)
         {
             var resultEntity = new List<ItemContent>();
 
-            using (var entities = new UmsEntities())
-            {
+
 
                 foreach (var content in requestEntitiies)
                 {
@@ -133,17 +142,17 @@ namespace Ryanstaurant.UMS.WorkSpace
                         {
                             case RequestOperation.Add:
                             {
-                                resultcontent = AddRole(entities, content);
+                                resultcontent = AddRole( content);
                             }
                                 break;
                             case RequestOperation.Modify:
                             {
-                                resultcontent = ModifyRole(entities, content);
+                                resultcontent = ModifyRole( content);
                             }
                                 break;
                             case RequestOperation.Delete:
                             {
-                                resultcontent = DeleteRole(entities, content);
+                                resultcontent = DeleteRole( content);
                             }
                                 break;
                             default:
@@ -159,11 +168,11 @@ namespace Ryanstaurant.UMS.WorkSpace
                     }
                         resultEntity.Add(resultcontent);
                 }
-            }
+
             return resultEntity;
         }
 
-        private static ItemContent DeleteRole(UmsEntities entities, ItemContent content)
+        private ItemContent DeleteRole(ItemContent content)
         {
             var role = content as Role;
 
@@ -181,7 +190,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                 };
             }
 
-            var roleInDb = (from e in entities.role where e.id == role.ID select e).FirstOrDefault();
+            var roleInDb = (from e in Entities.role where e.id == role.ID select e).FirstOrDefault();
 
             if (roleInDb == null)
             {
@@ -195,18 +204,18 @@ namespace Ryanstaurant.UMS.WorkSpace
             }
 
 
-            entities.role.Remove(roleInDb);
+            Entities.role.Remove(roleInDb);
 
             //删除人员角色关联
-            var roleInEmpRole = from e in entities.emp_role where e.role_id == role.ID select e;
+            var roleInEmpRole = from e in Entities.emp_role where e.role_id == role.ID select e;
 
             if (roleInEmpRole.Any())
             {
-                entities.emp_role.RemoveRange(roleInEmpRole.ToList());
+                Entities.emp_role.RemoveRange(roleInEmpRole.ToList());
             }
 
 
-            entities.SaveChanges();
+            Entities.SaveChanges();
 
 
             role.ResultInfo = new ResultContent
@@ -219,7 +228,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             return role;
         }
 
-        private static ItemContent ModifyRole(UmsEntities entities, ItemContent content)
+        private ItemContent ModifyRole(ItemContent content)
         {
             var role = content as Role;
 
@@ -239,7 +248,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
 
 
-            var roleInDb = (from e in entities.role where e.id == role.ID select e).FirstOrDefault();
+            var roleInDb = (from e in Entities.role where e.id == role.ID select e).FirstOrDefault();
 
             if (roleInDb == null)
             {
@@ -260,7 +269,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             roleInDb.Authority = role.Authority;
 
 
-            entities.SaveChanges();
+            Entities.SaveChanges();
 
             role.ResultInfo = new ResultContent
             {
@@ -272,7 +281,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             return role;
         }
 
-        private static ItemContent AddRole(UmsEntities entities, ItemContent content)
+        private ItemContent AddRole(ItemContent content)
         {
             var role = content as Role;
 
@@ -299,11 +308,11 @@ namespace Ryanstaurant.UMS.WorkSpace
                 Authority = role.Authority
             };
 
-            entities.role.Add(roleToAdd);
+            Entities.role.Add(roleToAdd);
 
 
 
-            entities.SaveChanges();
+            Entities.SaveChanges();
 
 
             return new Role

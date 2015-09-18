@@ -15,5 +15,35 @@ namespace Ryanstaurant.UMS.DataContract.Utility
         [DataMember]
         public RequestContent RequestInfo { get; set; }
 
+
+        public void SetAddState()
+        {
+            this.RequestInfo = new RequestContent
+            {
+                Operation = RequestOperation.Add
+            };
+        }
+        public void SetModifyState()
+        {
+            this.RequestInfo = new RequestContent
+            {
+                Operation = RequestOperation.Modify
+            };
+        }
+        public void SetDeleteState()
+        {
+            this.RequestInfo = new RequestContent
+            {
+                Operation = RequestOperation.Delete
+            };
+        }
+        public void SetQueryState()
+        {
+            this.RequestInfo = new RequestContent
+            {
+                Operation = RequestOperation.Query
+            };
+        }
+
     }
 }

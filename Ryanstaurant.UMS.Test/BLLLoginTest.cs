@@ -6,23 +6,8 @@ using Ryanstaurant.UMS.WorkSpace;
 namespace Ryanstaurant.UMS.Test
 {
     [TestClass]
-    public class BLLLoginTest
+    public class BLLLoginTest:BllTestBase
     {
-        private UmsEntities _entities;
-
-
-        [TestInitialize]
-        public void Initial()
-        {
-            _entities = new UmsEntities();
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            _entities.Dispose();
-        }
-
 
 
         [TestMethod]
@@ -30,7 +15,7 @@ namespace Ryanstaurant.UMS.Test
         {
             using (var transaction = new TransactionScope())
             {
-                var login = new BllLogin {Entities = _entities};
+                var login = new BllLogin {Entities = base.Entities};
                 var result = login.GetToken("", "");
                 Assert.IsTrue(string.IsNullOrEmpty(result), "错误的验证信息得到了有效的令牌");
 
@@ -45,7 +30,7 @@ namespace Ryanstaurant.UMS.Test
         {
             using (var transaction = new TransactionScope())
             {
-                var login = new BllLogin {Entities = _entities};
+                var login = new BllLogin { Entities = base.Entities };
 
                 var result = login.GetToken("RYAN", "123456");
                 Assert.IsFalse(string.IsNullOrEmpty(result), "正确验证信息得到了错误的结果");
@@ -62,7 +47,7 @@ namespace Ryanstaurant.UMS.Test
         {
             using (var transaction = new TransactionScope())
             {
-                var login = new BllLogin { Entities = _entities };
+                var login = new BllLogin { Entities = base.Entities };
 
                 var result = login.GetToken("RYAN", "123456");
 
@@ -81,7 +66,7 @@ namespace Ryanstaurant.UMS.Test
         {
             using (var transaction = new TransactionScope())
             {
-                var login = new BllLogin { Entities = _entities };
+                var login = new BllLogin { Entities = base.Entities };
 
                 var result = login.GetToken("", "");
 
