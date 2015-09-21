@@ -8,10 +8,10 @@ namespace Ryanstaurant.UMS.Interface
     public interface IUMSService
     {
         [OperationContract]
-        ResultEntity Execute(List<ItemContent> requestEntitiy);
+        ResultEntity Execute(RequestEntity requestEntitiy);
 
         [OperationContract]
-        ResultEntity Query(List<ItemContent> requestEntitiy);
+        ResultEntity Query(RequestEntity requestEntitiy);
 
         [OperationContract]
         ResultEntity Login(string userName, string password);

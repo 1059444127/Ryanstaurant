@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.ServiceModel;
 using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.DataContract.Utility;
 using Ryanstaurant.UMS.Interface;
@@ -67,66 +66,6 @@ namespace Ryanstaurant.UMS.Service
         }
 
 
-
-
-        public ResultEntity Execute(List<ItemContent> requestEntitiy)
-        {
-            return LoadBusinessMethod(() =>
-            {
-                var sampleObject = requestEntitiy.FirstOrDefault();
-                if (sampleObject == null)
-                {
-                    throw new Exception("错误的参数", new Exception("RequestContents没有元素"));
-                }
-
-
-                var requestTypeName = sampleObject.GetType().Name;
-                var bllModule = Assembly.Load("Ryanstaurant.UMS.WorkSpace").CreateInstance("Ryanstaurant.UMS.WorkSpace.Bll" + requestTypeName);
-
-                if (bllModule == null)
-                {
-                    throw new Exception("没有找到相关模块", new Exception(requestTypeName));
-                }
-
-                return bllModule.GetType()
-                    .GetMethod("Execute" + requestTypeName)
-                    .Invoke(bllModule, new object[] {requestEntitiy}) as List<ItemContent>;
-            });
-        }
-
-        public ResultEntity Query(List<ItemContent> requestEntitiy)
-        {
-            return LoadBusinessMethod(() =>
-            {
-                var sampleObject = requestEntitiy.FirstOrDefault();
-                if (sampleObject == null)
-                {
-                    throw new Exception("错误的参数", new Exception("RequestContents没有元素"));
-                }
-
-
-                var requestTypeName = sampleObject.GetType().Name;
-                var bllModule = Assembly.Load("Ryanstaurant.UMS.WorkSpace").CreateInstance("Ryanstaurant.UMS.WorkSpace.Bll" + requestTypeName);
-
-                if (bllModule == null)
-                {
-                    throw new Exception("没有找到相关模块", new Exception(requestTypeName));
-                }
-
-
-                if (bllModule.GetType()
-                    .GetMethod("Query" + requestTypeName) == null)
-                {
-                    throw new Exception("没有找到相关方法", new Exception(requestTypeName));
-                }
-
-                return bllModule.GetType()
-                    .GetMethod("Query" + requestTypeName)
-                    .Invoke(bllModule, new object[] { requestEntitiy }) as List<ItemContent>;
-            });
-        }
-
-
         public ResultEntity Login(string userName, string password)
         {
             try
@@ -166,6 +105,63 @@ namespace Ryanstaurant.UMS.Service
                     State = ResultState.Fail
                 };
             }
+        }
+
+        public ResultEntity Execute(RequestEntity requestEntitiy)
+        {
+            return LoadBusinessMethod(() =>
+            {
+                var sampleObject = requestEntitiy.RequestObjects.FirstOrDefault();
+                if (sampleObject == null)
+                {
+                    throw new Exception("错误的参数", new Exception("RequestContents没有元素"));
+                }
+
+
+                var requestTypeName = sampleObject.GetType().Name;
+                var bllModule = Assembly.Load("Ryanstaurant.UMS.WorkSpace").CreateInstance("Ryanstaurant.UMS.WorkSpace.Bll" + requestTypeName);
+
+                if (bllModule == null)
+                {
+                    throw new Exception("没有找到相关模块", new Exception(requestTypeName));
+                }
+
+                return bllModule.GetType()
+                    .GetMethod("Execute" + requestTypeName)
+                    .Invoke(bllModule, new object[] { requestEntitiy.RequestObjects }) as List<ItemContent>;
+            });
+        }
+
+        public ResultEntity Query(RequestEntity requestEntitiy)
+        {
+            return LoadBusinessMethod(() =>
+            {
+                var sampleObject = requestEntitiy.RequestObjects.FirstOrDefault();
+                if (sampleObject == null)
+                {
+                    throw new Exception("错误的参数", new Exception("RequestContents没有元素"));
+                }
+
+
+                var requestTypeName = sampleObject.GetType().Name;
+                var bllModule = Assembly.Load("Ryanstaurant.UMS.WorkSpace").CreateInstance("Ryanstaurant.UMS.WorkSpace.Bll" + requestTypeName);
+
+                if (bllModule == null)
+                {
+                    throw new Exception("没有找到相关模块", new Exception(requestTypeName));
+                }
+
+
+                if (bllModule.GetType()
+                    .GetMethod("Query" + requestTypeName) == null)
+                {
+                    throw new Exception("没有找到相关方法", new Exception(requestTypeName));
+                }
+
+                return bllModule.GetType()
+                    .GetMethod("Query" + requestTypeName)
+                    .Invoke(bllModule, new object[] { requestEntitiy.RequestObjects }) as List<ItemContent>;
+            });
         }
     }
 }

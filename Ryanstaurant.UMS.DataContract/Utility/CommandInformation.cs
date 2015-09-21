@@ -2,8 +2,17 @@
 
 namespace Ryanstaurant.UMS.DataContract.Utility
 {
+    public enum RequestOperation
+    {
+        Query,
+        Add,
+        Modify,
+        Delete
+    }
+
+
     [DataContract]
-    public class ResultContent
+    public class CommandInformation
     {
         [DataMember]
         public string Exception { get; set; }
@@ -16,6 +25,8 @@ namespace Ryanstaurant.UMS.DataContract.Utility
         public string InnerErrorMessage { get; set; }
 
 
+        [DataMember]
+        public RequestOperation Operation { get; set; }
 
     }
 }

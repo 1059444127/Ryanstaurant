@@ -39,7 +39,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             var queries =
                 (from e in roles
-                 where e.RequestInfo != null && e.RequestInfo.Operation == RequestOperation.Query
+                 where e.CommandInfo != null && e.CommandInfo.Operation == RequestOperation.Query
                  select e).ToList();
 
             return Query(!queries.Any() ? null : queries.ToList());
@@ -77,7 +77,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                 //人员基本信息
                 resultEntity.AddRange(roleList.Select(currentRole => new Role
                 {
-                    ResultInfo = new ResultContent
+                    CommandInfo = new CommandInformation
                     {
                         State = ResultState.Success, Exception = string.Empty, InnerErrorMessage = string.Empty,
                     },
@@ -104,7 +104,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             var queries =
             (from e in roles
-             where e.RequestInfo != null && e.RequestInfo.Operation != RequestOperation.Query
+             where e.CommandInfo != null && e.CommandInfo.Operation != RequestOperation.Query
              select e).ToList();
 
             if (!queries.Any())
@@ -130,15 +130,15 @@ namespace Ryanstaurant.UMS.WorkSpace
 
                     if (content == null)
                     {
-                        resultcontent.ResultInfo.Exception = "未设置操作类型";
-                        resultcontent.ResultInfo.InnerErrorMessage = "ResultContent为NULL";
-                        resultcontent.ResultInfo.State = ResultState.Fail;
+                        resultcontent.CommandInfo.Exception = "未设置操作类型";
+                        resultcontent.CommandInfo.InnerErrorMessage = "ResultContent为NULL";
+                        resultcontent.CommandInfo.State = ResultState.Fail;
 
 
                     }
                     else
                     {
-                        switch (content.RequestInfo.Operation)
+                        switch (content.CommandInfo.Operation)
                         {
                             case RequestOperation.Add:
                             {
@@ -157,11 +157,11 @@ namespace Ryanstaurant.UMS.WorkSpace
                                 break;
                             default:
                             {
-                                resultcontent.ResultInfo.Exception = "错误的操作类型";
-                                resultcontent.ResultInfo.InnerErrorMessage = "RequestOperation=" +
+                                resultcontent.CommandInfo.Exception = "错误的操作类型";
+                                resultcontent.CommandInfo.InnerErrorMessage = "RequestOperation=" +
                                                                              Enum.GetName(typeof (RequestOperation),
-                                                                                 content.RequestInfo.Operation);
-                                resultcontent.ResultInfo.State = ResultState.Fail;
+                                                                                 content.CommandInfo.Operation);
+                                resultcontent.CommandInfo.State = ResultState.Fail;
                             }
                                 break;
                         }
@@ -180,7 +180,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             {
                 return new Role
                 {
-                    ResultInfo = new ResultContent
+                    CommandInfo = new CommandInformation
                     {
                         Exception = "错误的数据类型，没有进行删除操作",
                         InnerErrorMessage = string.Empty,
@@ -194,7 +194,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             if (roleInDb == null)
             {
-                role.ResultInfo = new ResultContent
+                role.CommandInfo = new CommandInformation
                 {
                     Exception = "ID为[" + role.ID + "]的角色不存在，没有进行删除操作",
                     InnerErrorMessage = string.Empty,
@@ -218,7 +218,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             Entities.SaveChanges();
 
 
-            role.ResultInfo = new ResultContent
+            role.CommandInfo = new CommandInformation
             {
                 Exception = string.Empty,
                 InnerErrorMessage = string.Empty,
@@ -236,7 +236,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             {
                 return new Role
                 {
-                    ResultInfo = new ResultContent
+                    CommandInfo = new CommandInformation
                     {
                         Exception = "错误的数据类型，没有进行修改操作",
                         InnerErrorMessage = string.Empty,
@@ -252,7 +252,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             if (roleInDb == null)
             {
-                role.ResultInfo = new ResultContent
+                role.CommandInfo = new CommandInformation
                 {
                     Exception = "ID为[" + role.ID + "]的角色不存在，没有进行修改操作",
                     InnerErrorMessage = string.Empty,
@@ -271,7 +271,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             Entities.SaveChanges();
 
-            role.ResultInfo = new ResultContent
+            role.CommandInfo = new CommandInformation
             {
                 Exception = string.Empty,
                 InnerErrorMessage = string.Empty,
@@ -289,7 +289,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             {
                 return new Role
                 {
-                    ResultInfo = new ResultContent
+                    CommandInfo = new CommandInformation
                     {
                         Exception = "错误的数据类型，没有进行添加操作",
                         InnerErrorMessage = string.Empty,
@@ -317,7 +317,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
             return new Role
             {
-                ResultInfo = new ResultContent
+                CommandInfo = new CommandInformation
                 {
                     Exception = string.Empty,
                     InnerErrorMessage = string.Empty,

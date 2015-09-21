@@ -43,7 +43,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                     Description = Description,
                     ID = ID,
                     Name = Name,
-                    RequestInfo = new RequestContent
+                    CommandInfo = new CommandInformation()
                     {
                         Operation = RequestOperation.Add
                     }
@@ -52,8 +52,8 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
             var results = ServiceClient.Execute(arrAuthorities);
 
-            if (results.State == ResultState.Fail)
-                throw new Exception(results.ErrorMessage);
+            if (ServiceClient.State == ResultState.Fail)
+                throw new Exception(ServiceClient.ErrorMessage);
 
             Refresh();
         }
@@ -67,7 +67,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                 {
                     ID = ID,
                     Name = Name,
-                    RequestInfo =new RequestContent
+                    CommandInfo =new CommandInformation
                     {
                         Operation = RequestOperation.Query
                     }
@@ -75,10 +75,10 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             };
 
             var results = ServiceClient.Query(arrAuthorities);
-            if (results.State == ResultState.Fail)
-                throw new Exception(results.ErrorMessage);
+            if (ServiceClient.State == ResultState.Fail)
+                throw new Exception(ServiceClient.ErrorMessage);
 
-            var authReturn = results.ResultObject.FirstOrDefault() as Authority;
+            var authReturn = results.FirstOrDefault() as Authority;
 
             if (authReturn == null)
             {
@@ -103,7 +103,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                     ID = ID,
                     Name = Name,
                     Description = Description,
-                    RequestInfo = new RequestContent
+                    CommandInfo = new CommandInformation
                     {
                         Operation = RequestOperation.Modify
                     }
@@ -113,8 +113,8 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
             var results = ServiceClient.Execute(arrAuthority);
 
-            if (results.State == ResultState.Fail)
-                throw new Exception(results.ErrorMessage);
+            if (ServiceClient.State == ResultState.Fail)
+                throw new Exception(ServiceClient.ErrorMessage);
 
             Refresh();
         }
@@ -128,7 +128,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                     Description = Description,
                     ID = ID,
                     Name = Name,
-                    RequestInfo = new RequestContent
+                    CommandInfo = new CommandInformation
                     {
                         Operation = RequestOperation.Delete
                     }
@@ -139,8 +139,8 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
             var results = ServiceClient.Execute(arrAuthority);
 
-            if (results.State == ResultState.Fail)
-                throw new Exception(results.ErrorMessage);
+            if (ServiceClient.State == ResultState.Fail)
+                throw new Exception(ServiceClient.ErrorMessage);
 
             Reset();
         }
@@ -161,12 +161,12 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
         {
             //获取EMP基本信息
             var result = ServiceClient.GetAllAuthorities();
-            if (result.State != ResultState.Success)
+            if (ServiceClient.State != ResultState.Success)
             {
-                throw new Exception(result.ErrorMessage);
+                throw new Exception(ServiceClient.ErrorMessage);
             }
 
-            var authReturn = result.ResultObject.Cast<Authority>().ToList();
+            var authReturn = result.Cast<Authority>().ToList();
 
             //写入基本信息
             var authorityList = authReturn.Select(auth => new AuthorityModel

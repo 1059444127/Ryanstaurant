@@ -118,7 +118,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                     {
                         ID = r.ID
                     }).ToList(),
-                    RequestInfo = new RequestContent
+                    CommandInfo = new CommandInformation
                     {
                         Operation = RequestOperation.Add
                     }
@@ -127,8 +127,8 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
             var results = ServiceClient.Execute(arrEmployee);
 
-            if (results.State == ResultState.Fail)
-                throw new Exception(results.ErrorMessage);
+            if (ServiceClient.State == ResultState.Fail)
+                throw new Exception(ServiceClient.ErrorMessage);
 
             Refresh();
         }
@@ -142,7 +142,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                 {
                     ID = ID,
                     Name = Name,
-                    RequestInfo = new RequestContent
+                    CommandInfo = new CommandInformation
                     {
                         Operation=RequestOperation.Query
                     }
@@ -150,10 +150,10 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             };
 
             var results = ServiceClient.Query(arrEmployee);
-            if (results.State == ResultState.Fail)
-                throw new Exception(results.ErrorMessage);
+            if (ServiceClient.State == ResultState.Fail)
+                throw new Exception(ServiceClient.ErrorMessage);
 
-            var empReturn = results.ResultObject.FirstOrDefault() as Employee;
+            var empReturn = results.FirstOrDefault() as Employee;
 
 
             if (empReturn == null)
@@ -187,7 +187,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                     {
                         ID = r.ID
                     }).ToList(),
-                    RequestInfo=new RequestContent
+                    CommandInfo=new CommandInformation
                     {
                         Operation = RequestOperation.Modify
                     }
@@ -198,8 +198,8 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
             var results = ServiceClient.Execute(arrEmployee);
 
-            if (results.State == ResultState.Fail)
-                throw new Exception(results.ErrorMessage);
+            if (ServiceClient.State == ResultState.Fail)
+                throw new Exception(ServiceClient.ErrorMessage);
 
             Refresh();
         }
@@ -220,7 +220,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                     {
                         ID = r.ID
                     }).ToList(),
-                    RequestInfo = new RequestContent
+                    CommandInfo = new CommandInformation
                     {
                         Operation = RequestOperation.Delete
                     }
@@ -231,8 +231,8 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
             var results = ServiceClient.Execute(arrEmployee);
 
-            if (results.State == ResultState.Fail)
-                throw new Exception(results.ErrorMessage);
+            if (ServiceClient.State == ResultState.Fail)
+                throw new Exception(ServiceClient.ErrorMessage);
 
            Reset();
         }
@@ -255,12 +255,12 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
             var results = ServiceClient.GetAllEmployees();
 
-            if (results.State == ResultState.Fail)
-                throw new Exception(results.ErrorMessage);
+            if (ServiceClient.State == ResultState.Fail)
+                throw new Exception(ServiceClient.ErrorMessage);
 
             Reset();
 
-            return (from e in results.ResultObject.Cast<Employee>().ToList()
+            return (from e in results.Cast<Employee>().ToList()
                 select new EmployeeModel
                 {
                     Description = e.Description,

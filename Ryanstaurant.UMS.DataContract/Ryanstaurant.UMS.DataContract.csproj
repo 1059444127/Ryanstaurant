@@ -43,10 +43,8 @@
     <Compile Include="Authority.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="Utility\ItemContent.cs" />
-    <Compile Include="Utility\RequestContent.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utility\ResultContent.cs" />
+    <Compile Include="Utility\RequestEntity.cs" />
+    <Compile Include="Utility\CommandInformation.cs" />
     <Compile Include="Utility\ResultEntity.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

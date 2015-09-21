@@ -27,5 +27,11 @@ namespace Ryanstaurant.UMS.DataContract.Utility
         public string InnerErrorMessage { get; set; }
 
 
+        [DataMember]
+        public string SessionToken { get; set; }
+
+
+        [DataMember]
+        public string Verification { get; set; }
     }
 }

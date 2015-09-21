@@ -22,7 +22,7 @@ namespace Ryanstaurant.UMS.Test
                     new Role
                     {
                         ID = 1,
-                        RequestInfo=new RequestContent
+                        CommandInfo=new CommandInformation
                         {
                             Operation = RequestOperation.Query
                         }
@@ -30,7 +30,7 @@ namespace Ryanstaurant.UMS.Test
                     new Role
                     {
                         Name = "ADMINISTRATOR",
-                        RequestInfo=new RequestContent
+                        CommandInfo=new CommandInformation
                         {
                             Operation = RequestOperation.Query
                         }
@@ -60,7 +60,7 @@ namespace Ryanstaurant.UMS.Test
                         ID = 4,
                         Name = "TestAdd",
                         Description = "TestAdd",
-                        RequestInfo =new RequestContent
+                        CommandInfo =new CommandInformation
                         {
                             Operation = RequestOperation.Add
                         }
@@ -68,8 +68,8 @@ namespace Ryanstaurant.UMS.Test
                 });
 
                 Assert.AreEqual(1, result.Count, "返回了错误的查询个数:" + result.Count);
-                Assert.AreEqual(ResultState.Success, result[0].ResultInfo.State,
-                    "返回了错误的添加状态:" + result[0].ResultInfo.Exception);
+                Assert.AreEqual(ResultState.Success, result[0].CommandInfo.State,
+                    "返回了错误的添加状态:" + result[0].CommandInfo.Exception);
                 trans.Dispose();
             }
         }
@@ -86,7 +86,7 @@ namespace Ryanstaurant.UMS.Test
                     new Role
                     {
                         ID = 7,
-                        RequestInfo = new RequestContent
+                        CommandInfo = new CommandInformation
                         {
                             Operation = RequestOperation.Query
                         }
@@ -109,15 +109,15 @@ namespace Ryanstaurant.UMS.Test
                     {
                         ID = 7,
                         Description = "Chef1",
-                        RequestInfo = new RequestContent
+                        CommandInfo = new CommandInformation
                         {
                             Operation = RequestOperation.Query
                         }
                     }
                 });
 
-                Assert.AreEqual(ResultState.Success, result[0].ResultInfo.State,
-                    "返回了错误的修改状态:" + result[0].ResultInfo.Exception);
+                Assert.AreEqual(ResultState.Success, result[0].CommandInfo.State,
+                    "返回了错误的修改状态:" + result[0].CommandInfo.Exception);
 
                 Assert.AreEqual(1, result.Count, "返回了错误的查询个数:" + result.Count);
                 Assert.AreEqual("Chef1", (aimRole[0] as Role).Description,
@@ -138,7 +138,7 @@ namespace Ryanstaurant.UMS.Test
                     new Role
                     {
                         ID = 7,
-                        RequestInfo = new RequestContent
+                        CommandInfo = new CommandInformation
                         {
                             Operation = RequestOperation.Query
                         }
@@ -159,7 +159,7 @@ namespace Ryanstaurant.UMS.Test
                     new Role
                     {
                         ID = 7,
-                        RequestInfo = new RequestContent
+                        CommandInfo = new CommandInformation
                         {
                             Operation = RequestOperation.Query
                         }
@@ -167,8 +167,8 @@ namespace Ryanstaurant.UMS.Test
                 });
 
                 Assert.AreEqual(1, result.Count, "返回了错误的查询个数:" + result.Count);
-                Assert.AreEqual(ResultState.Success, result[0].ResultInfo.State,
-                    "返回了错误的删除状态:" + result[0].ResultInfo.Exception);
+                Assert.AreEqual(ResultState.Success, result[0].CommandInfo.State,
+                    "返回了错误的删除状态:" + result[0].CommandInfo.Exception);
                 Assert.AreEqual(0, aimRole.Count, "返回了错误的查询个数:" + result.Count);
 
                 trans.Dispose();

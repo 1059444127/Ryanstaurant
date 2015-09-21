@@ -8,9 +8,19 @@ using Ryanstaurant.UMS.DataContract.Utility;
 
 namespace Ryanstaurant.UMS.Client
 {
-    public class UMSClient
+    public class UMSClient:IUMSClient
     {
         private readonly ServiceClient _serviceClient;
+
+
+        public string SessionToken { get; protected set; }
+
+        public string ErrorMessage { get; private set; }
+
+        public ResultState State { get; private set; }
+
+        public string InnerErrorMessage { get; private set; }
+
 
 
         public UMSClient()
@@ -58,44 +68,65 @@ namespace Ryanstaurant.UMS.Client
         }
 
 
-        public ResultEntity Execute(List<ItemContent> requestEntitiy)
+
+        protected List<ItemContent> LoadServiceMethod(List<ItemContent> requestObjects, Func<RequestEntity, ResultEntity> serviceMethodHandler)
         {
-            return _serviceClient.Execute(requestEntitiy);
+            var request = new RequestEntity
+            {
+                RequestObjects = requestObjects,
+                SessionToken = SessionToken
+            };
+
+            var result = serviceMethodHandler(request);
+            ErrorMessage = result.ErrorMessage;
+            InnerErrorMessage = result.InnerErrorMessage;
+            SessionToken = result.SessionToken;
+            State = result.State;
+            return result.ResultObject;
         }
 
-        public ResultEntity Query(List<ItemContent> requestEntitiy)
+
+
+        public List<ItemContent> Execute(List<ItemContent> requestObjects)
         {
-            return _serviceClient.Query(requestEntitiy);
+            return LoadServiceMethod(requestObjects, _serviceClient.Execute);
+
+        }
+
+        public List<ItemContent> Query(List<ItemContent> requestObjects)
+        {
+            return LoadServiceMethod(requestObjects, _serviceClient.Query);
         }
 
 
-        public ResultEntity GetAllEmployees()
+        public List<ItemContent> GetAllEmployees()
         {
-            return _serviceClient.Query(new List<ItemContent>
+            return LoadServiceMethod(new List<ItemContent>
             {
                 new Employee()
-            });
+            }, _serviceClient.Query);
+
         }
-        public ResultEntity GetAllAuthorities()
+        public List<ItemContent> GetAllAuthorities()
         {
-            return _serviceClient.Query(new List<ItemContent>
+            return LoadServiceMethod(new List<ItemContent>
             {
                 new Authority()
-            });
+            }, _serviceClient.Query);
         }
 
-        public ResultEntity GetAllRoles()
+        public List<ItemContent> GetAllRoles()
         {
-            return _serviceClient.Query(new List<ItemContent>
+            return LoadServiceMethod(new List<ItemContent>
             {
                 new Role()
-            });
+            }, _serviceClient.Query);
         }
 
         public bool Login(string userName, string password)
         {
-            _serviceClient.Login(userName, password);
-            return !string.IsNullOrEmpty(_serviceClient.SessionToken);
+            var result = _serviceClient.Login(userName, password);
+            return !string.IsNullOrEmpty(result.SessionToken);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                     ID = ID,
                     Name = Name,
                     Authority = Authority,
-                    RequestInfo = new RequestContent
+                    CommandInfo = new CommandInformation
                     {
                         Operation = RequestOperation.Add
                     }
@@ -46,8 +46,8 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
             var results = ServiceClient.Execute(arrRoles);
 
-            if (results.State == ResultState.Fail)
-                throw new Exception(results.ErrorMessage);
+            if (ServiceClient.State == ResultState.Fail)
+                throw new Exception(ServiceClient.ErrorMessage);
 
             Refresh();
         }
@@ -62,7 +62,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                     ID = ID,
                     Name = Name,
                     Authority = Authority,
-                    RequestInfo=new RequestContent
+                    CommandInfo=new CommandInformation
                     {
                         Operation = RequestOperation.Query
                     }
@@ -70,10 +70,10 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             };
 
             var results = ServiceClient.Query(arrRoles);
-            if (results.State == ResultState.Fail)
-                throw new Exception(results.ErrorMessage);
+            if (ServiceClient.State == ResultState.Fail)
+                throw new Exception(ServiceClient.ErrorMessage);
 
-            var authReturn = results.ResultObject.FirstOrDefault() as Role;
+            var authReturn = results.FirstOrDefault() as Role;
 
 
             if (authReturn == null)
@@ -100,7 +100,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                     Name = Name,
                     Description = Description,
                     Authority = Authority,
-                    RequestInfo = new RequestContent
+                    CommandInfo = new CommandInformation
                     {
                         Operation = RequestOperation.Modify
                     }
@@ -110,8 +110,8 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
             var results = ServiceClient.Execute(arrRole);
 
-            if (results.State == ResultState.Fail)
-                throw new Exception(results.ErrorMessage);
+            if (ServiceClient.State == ResultState.Fail)
+                throw new Exception(ServiceClient.ErrorMessage);
 
             Refresh();
         }
@@ -126,7 +126,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                     ID = ID,
                     Name = Name,
                     Authority = Authority,
-                    RequestInfo = new RequestContent
+                    CommandInfo = new CommandInformation
                     {
                         Operation = RequestOperation.Delete
                     }
@@ -137,8 +137,8 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
             var results = ServiceClient.Execute(arrRole);
 
-            if (results.State == ResultState.Fail)
-                throw new Exception(results.ErrorMessage);
+            if (ServiceClient.State == ResultState.Fail)
+                throw new Exception(ServiceClient.ErrorMessage);
 
             Reset();
         }
@@ -158,12 +158,12 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
         {
             //获取EMP基本信息
             var result = ServiceClient.GetAllRoles();
-            if (result.State != ResultState.Success)
+            if (ServiceClient.State != ResultState.Success)
             {
-                throw new Exception(result.ErrorMessage);
+                throw new Exception(ServiceClient.ErrorMessage);
             }
 
-            var roleReturn = result.ResultObject.Cast<Role>().ToList();
+            var roleReturn = result.Cast<Role>().ToList();
 
             //写入基本信息
             var employeeList = roleReturn.Select(role => new RoleModel
