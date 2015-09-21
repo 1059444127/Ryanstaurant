@@ -10,7 +10,21 @@ namespace Ryanstaurant.UMS.Client
 {
     public class UMSClient:IUMSClient
     {
-        private readonly ServiceClient _serviceClient;
+        private ServiceClient _serviceClient;
+
+
+        public ServiceClient ServiceClient
+        {
+            get
+            {
+                return _serviceClient;
+            }
+            set
+            {
+                _serviceClient = value;
+            }
+        }
+
 
 
         public string SessionToken { get; protected set; }

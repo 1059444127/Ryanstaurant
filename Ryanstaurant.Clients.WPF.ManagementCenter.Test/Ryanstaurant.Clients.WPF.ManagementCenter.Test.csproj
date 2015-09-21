@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ADF566B7-041A-4EFD-AA28-FB2BE5BB75CF}</ProjectGuid>
+    <ProjectGuid>{C5F5C6EC-8670-4EC2-B871-538FFBB7851C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ryanstaurant.UMS.Test</RootNamespace>
-    <AssemblyName>Ryanstaurant.UMS.Test</AssemblyName>
+    <RootNamespace>Ryanstaurant.Clients.WPF.ManagementCenter.Test</RootNamespace>
+    <AssemblyName>Ryanstaurant.Clients.WPF.ManagementCenter.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,23 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Ryanstaurant.UMS.Client.Fakes">
+      <HintPath>FakesAssemblies\Ryanstaurant.UMS.Client.Fakes.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Transactions" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -66,40 +60,26 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Client\UMSClientTest.cs" />
-    <Compile Include="WorkSpace\BllAuthorityTest.cs" />
-    <Compile Include="WorkSpace\BllEmployeeTest.cs" />
-    <Compile Include="WorkSpace\BLLLoginTest.cs" />
-    <Compile Include="WorkSpace\BllRoleTest.cs" />
-    <Compile Include="WorkSpace\BllTestBase.cs" />
+    <Compile Include="Model\RoleModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ryanstaurant.Clients.WPF.ManagementCenter.Model\Ryanstaurant.Clients.WPF.ManagementCenter.Model.csproj">
+      <Project>{2900143c-faf0-49a0-ad66-b2f338396cdc}</Project>
+      <Name>Ryanstaurant.Clients.WPF.ManagementCenter.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ryanstaurant.UMS.Client\Ryanstaurant.UMS.Client.csproj">
       <Project>{13270d87-87a3-4337-965c-6540838d9bbb}</Project>
       <Name>Ryanstaurant.UMS.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ryanstaurant.UMS.DataAccess\Ryanstaurant.UMS.DataAccess.csproj">
-      <Project>{5143bd0e-df9a-4425-9178-075f55e6bfb9}</Project>
-      <Name>Ryanstaurant.UMS.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ryanstaurant.UMS.DataContract\Ryanstaurant.UMS.DataContract.csproj">
       <Project>{f2fe3d45-0fed-4072-9c04-7636d4df6589}</Project>
       <Name>Ryanstaurant.UMS.DataContract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ryanstaurant.UMS.Interface\Ryanstaurant.UMS.Interface.csproj">
-      <Project>{24fe75a4-4d04-4006-8518-4340cbd19942}</Project>
-      <Name>Ryanstaurant.UMS.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ryanstaurant.UMS.WorkSpace\Ryanstaurant.UMS.WorkSpace.csproj">
-      <Project>{f013490b-fa44-4158-97ae-656168deae4a}</Project>
-      <Name>Ryanstaurant.UMS.WorkSpace</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <Fakes Include="Fakes\Ryanstaurant.UMS.Client.fakes" />
   </ItemGroup>
-  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
