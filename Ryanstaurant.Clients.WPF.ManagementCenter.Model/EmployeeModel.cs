@@ -14,12 +14,26 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
         private string _loginName = string.Empty;
         private string _password = string.Empty;
         private string _description = string.Empty;
-        protected readonly UMSClient ServiceClient = new UMSClient();
+        protected IUMSClient ServiceClient = new UMSClient();
 
         public EmployeeModel()
         {
             EmpAuthority = 0;
         }
+
+
+        public IUMSClient UmsClient
+        {
+            get
+            {
+                return ServiceClient;
+            }
+            set
+            {
+                ServiceClient = value;
+            }
+        }
+
 
         #region 属性
         public int ID { get { return _id; } set { _id = value; } }

@@ -145,7 +145,6 @@ namespace Ryanstaurant.UMS.Test.Client
 
 
 
-        [TestInitialize]
         public void Initial()
         {
             umsServiceMock.Setup(service => service.Execute(_normalExuteEmployeeEntity))
@@ -159,7 +158,6 @@ namespace Ryanstaurant.UMS.Test.Client
         }
 
 
-        [TestMethod]
         public void QueryTest()
         {
 
@@ -178,7 +176,6 @@ namespace Ryanstaurant.UMS.Test.Client
     "错误操作返回了不同的ID");
         }
 
-        [TestMethod]
         public void ExecuteTest()
         {
             var umsClient = new UMSClient { ServiceClient = umsServiceMock.Object };

@@ -10,7 +10,21 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
     public class AuthorityModel
     {
 
-        protected readonly UMSClient ServiceClient = new UMSClient();
+        protected IUMSClient ServiceClient = new UMSClient();
+
+        public IUMSClient UmsClient
+        {
+            get
+            {
+                return ServiceClient;
+            }
+            set
+            {
+                ServiceClient = value;
+            }
+        }
+
+
 
         #region 属性
 

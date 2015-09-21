@@ -9,7 +9,32 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 {
     public class RoleModel
     {
-        protected readonly UMSClient ServiceClient = new UMSClient();
+        public RoleModel(IUMSClient client)
+        {
+            ServiceClient = client;
+        }
+
+        [Obsolete("单元测试使用，正常情况下请勿使用")]
+        public RoleModel()
+        { }
+
+
+        protected IUMSClient ServiceClient;
+
+        public IUMSClient UmsClient
+        {
+            get
+            {
+                return ServiceClient;
+            }
+            set
+            {
+                ServiceClient = value;
+            }
+        }
+
+
+
 
         private int _id = -1;
 
@@ -48,6 +73,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
             if (ServiceClient.State == ResultState.Fail)
                 throw new Exception(ServiceClient.ErrorMessage);
+
 
             Refresh();
         }
@@ -177,7 +203,6 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             return employeeList;
 
         }
-
 
 
     }

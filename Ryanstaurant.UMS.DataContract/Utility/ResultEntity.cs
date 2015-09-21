@@ -5,8 +5,9 @@ namespace Ryanstaurant.UMS.DataContract.Utility
 {
     public enum ResultState
     {
-        Success = 1,
-        Fail = 0
+        Success = 2,
+        Fail = 1,
+        Unknown = 0
     }
 
     [DataContract]
