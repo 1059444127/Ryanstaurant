@@ -184,7 +184,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
         {
             //获取EMP基本信息
             var result = ServiceClient.GetAllRoles();
-            if (ServiceClient.State != ResultState.Success)
+            if (ServiceClient.State == ResultState.Fail)
             {
                 throw new Exception(ServiceClient.ErrorMessage);
             }

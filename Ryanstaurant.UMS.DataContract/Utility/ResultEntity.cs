@@ -7,7 +7,7 @@ namespace Ryanstaurant.UMS.DataContract.Utility
     {
         Success = 2,
         Fail = 1,
-        Unknown = 0
+        Unknown=0
     }
 
     [DataContract]

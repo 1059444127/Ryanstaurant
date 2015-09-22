@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ryanstaurant.Clients.WPF.ManagementCenter.Model;
@@ -10,52 +12,42 @@ using Ryanstaurant.UMS.DataContract.Utility;
 namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
 {
     [TestClass]
-    public class RoleModelTest
+    public class AuthorityModelTest
     {
         private Mock<IUMSClient> serviceClientMock = new Mock<IUMSClient>();
 
 
-        private List<Role> SimDB = new List<Role>
+        private List<Authority> SimDB = new List<Authority>
         {
-            new Role
+            new Authority
             {
-                Authority = 3,
                 ID = 1,
-                Name = "Administrator",
-                Description = "Administrator"
+                Name = "PrintCheck",
+                Description = "PrintCheck"
             },
-            new Role
+            new Authority
             {
-                Authority = 1,
-                ID = 4,
-                Name = "Server",
-                Description = "Server"
-            },
-            new Role
-            {
-                Authority = 2,
-                ID = 7,
-                Name = "Chef",
-                Description = "Chef"
+                ID = 2,
+                Name = "PrintReport",
+                Description = "PrintReport"
             }
         };
 
 
-        private List<Role> _currentModels;
+        private List<Authority> _currentModels;
 
 
 
         [TestMethod]
         public void AddTest()
         {
-            _currentModels = new List<Role>
+            _currentModels = new List<Authority>
             {
-                new Role
+                new Authority
                 {
-                    Description = "",
+                    Description = "test",
                     ID = 1,
-                    Name = "Administrator",
-                    Authority = 3,
+                    Name = "test",
                     CommandInfo = new CommandInformation
                     {
                         Operation = RequestOperation.Add,
@@ -69,7 +61,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
 
             serviceClientMock.Setup(s => s.Execute(It.IsAny<List<ItemContent>>())).Returns(() =>
             {
-                if (_currentModels == null || _currentModels.Count==0)
+                if (_currentModels == null || _currentModels.Count == 0)
                     return null;
 
                 var resultModels = new List<ItemContent>();
@@ -84,17 +76,16 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
                         existModel.CommandInfo.State = ResultState.Fail;
                         continue;
                     }
-                    
-                    resultModels.Add(new Role
+
+                    resultModels.Add(new Authority
                     {
-                        Authority = currentModel.Authority,
                         ID = currentModel.ID,
                         Description = currentModel.Description,
                         Name = currentModel.Name,
                         CommandInfo = new CommandInformation
                         {
                             Operation = RequestOperation.Add,
-                            State=ResultState.Success
+                            State = ResultState.Success
                         }
                     });
                 }
@@ -127,25 +118,24 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
 
             });
 
-            var rolemodel = new RoleModel {UmsClient = serviceClientMock.Object};
+            var model = new AuthorityModel { UmsClient = serviceClientMock.Object };
 
-            rolemodel.Add();
+            model.Add();
 
-            Assert.AreEqual(1, rolemodel.ID, "添加操作返回错误ID号");
+            Assert.AreEqual(1, model.ID, "添加操作返回错误ID号");
 
         }
 
         [TestMethod]
         public void ModifyTest()
         {
-            _currentModels = new List<Role>
+            _currentModels = new List<Authority>
             {
-                new Role
+                new Authority
                 {
-                    Description = "",
+                    Description = "PrintCheck",
                     ID = 1,
-                    Name = "Administrator",
-                    Authority = 3,
+                    Name = "PrintCheck",
                     CommandInfo = new CommandInformation
                     {
                         Operation = RequestOperation.Modify,
@@ -156,9 +146,9 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
 
 
 
-            serviceClientMock.Setup(s => s.Execute(It.IsAny<List<ItemContent>>())).Returns(()=>
+            serviceClientMock.Setup(s => s.Execute(It.IsAny<List<ItemContent>>())).Returns(() =>
             {
-                if (_currentModels == null || _currentModels.Count==0)
+                if (_currentModels == null || _currentModels.Count == 0)
                     return null;
 
 
@@ -174,7 +164,6 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
                     }
 
 
-                    existModel.Authority = currentModel.Authority;
                     existModel.ID = currentModel.ID;
                     existModel.Description = currentModel.Description;
                     existModel.Name = currentModel.Name;
@@ -197,7 +186,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
 
                 foreach (var currentModel in _currentModels)
                 {
-                    var role = (from r in SimDB where r.ID==currentModel.ID select r).FirstOrDefault();
+                    var role = (from r in SimDB where r.ID == currentModel.ID select r).FirstOrDefault();
                     if (role == null)
                         continue;
 
@@ -209,11 +198,11 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
             });
 
 
-            var rolemodel = new RoleModel { UmsClient = serviceClientMock.Object };
+            var model = new AuthorityModel { UmsClient = serviceClientMock.Object };
 
-            rolemodel.Modify();
+            model.Modify();
 
-            Assert.AreEqual(1, rolemodel.ID, "修改操作返回错误ID号");
+            Assert.AreEqual(1, model.ID, "修改操作返回错误ID号");
 
         }
 
@@ -224,9 +213,9 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
             {
                 new Role
                 {
-                    Description = "",
+                    Description = "PrintCheck",
                     ID = 1,
-                    Name = "ADMINISTRATOR",
+                    Name = "PrintCheck",
                     Authority = 3,
                     CommandInfo = new CommandInformation
                     {
@@ -236,30 +225,28 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
                 }
             });
 
+            var model = new AuthorityModel { UmsClient = serviceClientMock.Object };
 
-            var rolemodel = new RoleModel { UmsClient = serviceClientMock.Object };
+            model.Delete();
 
-            rolemodel.Delete();
-
-            Assert.AreEqual(-1, rolemodel.ID, "修改操作返回错误ID号");
+            Assert.AreEqual(-1, model.ID, "修改操作返回错误ID号");
 
         }
 
 
         [TestMethod]
-        public void GetAllRolesTest()
+        public void GetAllAuthorityTest()
         {
-            serviceClientMock.Setup(s => s.GetAllRoles()).Returns(() =>
+            serviceClientMock.Setup(s => s.GetAllAuthorities()).Returns(() =>
             {
                 var re = new List<ItemContent>();
-                foreach (var role in SimDB)
+                foreach (var auth in SimDB)
                 {
-                    re.Add(new Role
+                    re.Add(new Authority
                     {
-                        Authority=role.Authority,
-                        Description = role.Description,
-                        ID = role.ID,
-                        Name = role.Name,
+                        Description = auth.Description,
+                        ID = auth.ID,
+                        Name = auth.Name,
                         CommandInfo = new CommandInformation
                         {
                             Operation = RequestOperation.Query,
@@ -270,14 +257,12 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
                 return re;
             });
 
-            var model = new RoleModel { UmsClient = serviceClientMock.Object };
+            var model = new AuthorityModel { UmsClient = serviceClientMock.Object };
 
-            var result = model.GetAllRoles();
+            var result = model.GetAllAuthorities();
 
             Assert.AreEqual(SimDB.Count, result.Count, "查询所有记录返回错误的数据个数");
         }
-
-
 
 
 

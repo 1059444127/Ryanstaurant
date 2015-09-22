@@ -117,7 +117,13 @@ namespace Ryanstaurant.UMS.Client
         {
             return LoadServiceMethod(new List<ItemContent>
             {
-                new Employee()
+                new Employee
+                {
+                    CommandInfo = new CommandInformation
+                    {
+                        Operation = RequestOperation.Query
+                    }
+                }
             }, _serviceClient.Query);
 
         }
@@ -125,7 +131,13 @@ namespace Ryanstaurant.UMS.Client
         {
             return LoadServiceMethod(new List<ItemContent>
             {
-                new Authority()
+                new Authority
+                {
+                    CommandInfo = new CommandInformation
+                    {
+                        Operation = RequestOperation.Query
+                    }
+                }
             }, _serviceClient.Query);
         }
 
@@ -133,7 +145,13 @@ namespace Ryanstaurant.UMS.Client
         {
             return LoadServiceMethod(new List<ItemContent>
             {
-                new Role()
+                new Role
+                {
+                    CommandInfo = new CommandInformation
+                    {
+                        Operation = RequestOperation.Query
+                    }
+                }
             }, _serviceClient.Query);
         }
 

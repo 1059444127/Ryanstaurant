@@ -10,7 +10,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
     public class AuthorityModel
     {
 
-        protected IUMSClient ServiceClient = new UMSClient();
+        protected IUMSClient ServiceClient;
 
         public IUMSClient UmsClient
         {
@@ -23,6 +23,21 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                 ServiceClient = value;
             }
         }
+
+
+
+         public AuthorityModel(IUMSClient client)
+        {
+            ServiceClient = client;
+        }
+
+        [Obsolete("单元测试使用，正常情况下请勿使用")]
+         public AuthorityModel()
+        { }
+
+
+
+
 
 
 
@@ -175,7 +190,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
         {
             //获取EMP基本信息
             var result = ServiceClient.GetAllAuthorities();
-            if (ServiceClient.State != ResultState.Success)
+            if (ServiceClient.State == ResultState.Fail)
             {
                 throw new Exception(ServiceClient.ErrorMessage);
             }

@@ -14,12 +14,19 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
         private string _loginName = string.Empty;
         private string _password = string.Empty;
         private string _description = string.Empty;
-        protected IUMSClient ServiceClient = new UMSClient();
+        protected IUMSClient ServiceClient;
 
-        public EmployeeModel()
+
+        public EmployeeModel(IUMSClient client)
         {
+            ServiceClient = client;
             EmpAuthority = 0;
         }
+
+        [Obsolete("单元测试使用，正常情况下请勿使用")]
+        public EmployeeModel()
+        { }
+
 
 
         public IUMSClient UmsClient
@@ -91,7 +98,8 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
         {
             get
             {
-                return EmpAuthority | Roles.Aggregate((long) 0, (current, r) => current | r.Authority);
+                return EmpAuthority |
+                       (Roles == null ? 0 : Roles.Aggregate((long) 0, (current, r) => current | r.Authority));
             }
         }
 
