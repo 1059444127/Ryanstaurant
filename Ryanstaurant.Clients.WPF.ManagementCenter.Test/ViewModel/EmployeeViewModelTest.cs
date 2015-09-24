@@ -11,7 +11,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.ViewModel
 
         private Mock<EmployeeModel> modelMock = new Mock<EmployeeModel>();
 
-        [TestMethod]
+        
         public void RefreshTest()
         {
             modelMock.Object.Name = "TEST1";
@@ -20,13 +20,6 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.ViewModel
             modelMock.Object.Password = "TEST1";
             modelMock.Object.Description = "TEST1";
             modelMock.Object.EmpAuthority = 1;
-            modelMock.Object.Roles.Add(new RoleModel
-            {
-                Authority = 2,
-                Description = "testRole",
-                ID = 1,
-                Name = "a"
-            });
 
 
             var vm = new EmployeeViewModel

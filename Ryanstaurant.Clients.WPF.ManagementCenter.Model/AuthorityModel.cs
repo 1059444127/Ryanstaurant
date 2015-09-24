@@ -12,28 +12,16 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
 
         protected IUMSClient ServiceClient;
 
-        public IUMSClient UmsClient
-        {
-            get
-            {
-                return ServiceClient;
-            }
-            set
-            {
-                ServiceClient = value;
-            }
-        }
-
-
 
          public AuthorityModel(IUMSClient client)
         {
             ServiceClient = client;
         }
 
-        [Obsolete("单元测试使用，正常情况下请勿使用")]
-         public AuthorityModel()
-        { }
+        public AuthorityModel()
+        {
+            ServiceClient = new UMSClient();
+        }
 
 
 
@@ -198,7 +186,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             var authReturn = result.Cast<Authority>().ToList();
 
             //写入基本信息
-            var authorityList = authReturn.Select(auth => new AuthorityModel
+            var authorityList = authReturn.Select(auth => new AuthorityModel(ServiceClient)
             {
                 Description = auth.Description,
                 ID = auth.ID,

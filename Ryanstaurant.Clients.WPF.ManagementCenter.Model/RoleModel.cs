@@ -14,24 +14,13 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             ServiceClient = client;
         }
 
-        [Obsolete("单元测试使用，正常情况下请勿使用")]
         public RoleModel()
-        { }
+        {
+            ServiceClient = new UMSClient();
+        }
 
 
         protected IUMSClient ServiceClient;
-
-        public IUMSClient UmsClient
-        {
-            get
-            {
-                return ServiceClient;
-            }
-            set
-            {
-                ServiceClient = value;
-            }
-        }
 
 
 
@@ -192,7 +181,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             var roleReturn = result.Cast<Role>().ToList();
 
             //写入基本信息
-            var employeeList = roleReturn.Select(role => new RoleModel
+            var employeeList = roleReturn.Select(role => new RoleModel(ServiceClient)
             {
                 Description = role.Description,
                 ID = role.ID,

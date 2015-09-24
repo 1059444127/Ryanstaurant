@@ -127,7 +127,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
 
             });
 
-            var rolemodel = new RoleModel {UmsClient = serviceClientMock.Object};
+            var rolemodel = new RoleModel(serviceClientMock.Object);
 
             rolemodel.Add();
 
@@ -209,7 +209,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
             });
 
 
-            var rolemodel = new RoleModel { UmsClient = serviceClientMock.Object };
+            var rolemodel = new RoleModel(serviceClientMock.Object);
 
             rolemodel.Modify();
 
@@ -237,7 +237,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
             });
 
 
-            var rolemodel = new RoleModel { UmsClient = serviceClientMock.Object };
+            var rolemodel = new RoleModel(serviceClientMock.Object);
 
             rolemodel.Delete();
 
@@ -270,7 +270,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
                 return re;
             });
 
-            var model = new RoleModel { UmsClient = serviceClientMock.Object };
+            var model = new RoleModel(serviceClientMock.Object);
 
             var result = model.GetAllRoles();
 

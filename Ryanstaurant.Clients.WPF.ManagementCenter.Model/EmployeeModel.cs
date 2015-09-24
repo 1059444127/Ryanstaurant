@@ -23,23 +23,11 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             EmpAuthority = 0;
         }
 
-        [Obsolete("单元测试使用，正常情况下请勿使用")]
         public EmployeeModel()
-        { }
-
-
-
-        public IUMSClient UmsClient
         {
-            get
-            {
-                return ServiceClient;
-            }
-            set
-            {
-                ServiceClient = value;
-            }
+            ServiceClient = new UMSClient();
         }
+
 
 
         #region 属性
@@ -283,7 +271,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
             Reset();
 
             return (from e in results.Cast<Employee>().ToList()
-                select new EmployeeModel
+                    select new EmployeeModel(ServiceClient)
                 {
                     Description = e.Description,
                     ID = e.ID,
@@ -292,7 +280,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Model
                     EmpAuthority = e.EmpAuthority,
                     Name = e.Name,
                     Roles = (from r in e.Roles
-                        select new RoleModel
+                             select new RoleModel(ServiceClient)
                         {
                             Authority = r.Authority,
                             Description = r.Description,

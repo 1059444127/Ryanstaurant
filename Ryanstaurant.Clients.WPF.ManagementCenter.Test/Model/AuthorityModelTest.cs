@@ -118,7 +118,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
 
             });
 
-            var model = new AuthorityModel { UmsClient = serviceClientMock.Object };
+            var model = new AuthorityModel(serviceClientMock.Object);
 
             model.Add();
 
@@ -198,7 +198,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
             });
 
 
-            var model = new AuthorityModel { UmsClient = serviceClientMock.Object };
+            var model = new AuthorityModel(serviceClientMock.Object);
 
             model.Modify();
 
@@ -225,7 +225,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
                 }
             });
 
-            var model = new AuthorityModel { UmsClient = serviceClientMock.Object };
+            var model = new AuthorityModel(serviceClientMock.Object);
 
             model.Delete();
 
@@ -257,7 +257,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
                 return re;
             });
 
-            var model = new AuthorityModel { UmsClient = serviceClientMock.Object };
+            var model = new AuthorityModel(serviceClientMock.Object);
 
             var result = model.GetAllAuthorities();
 

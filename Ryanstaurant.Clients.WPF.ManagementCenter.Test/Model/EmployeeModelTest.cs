@@ -118,7 +118,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
 
             });
 
-            var model = new EmployeeModel { UmsClient = serviceClientMock.Object };
+            var model = new EmployeeModel(serviceClientMock.Object);
 
             model.Add();
 
@@ -200,7 +200,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
             });
 
 
-            var model = new EmployeeModel { UmsClient = serviceClientMock.Object };
+            var model = new EmployeeModel(serviceClientMock.Object);
 
             model.Modify();
 
@@ -228,7 +228,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
             });
 
 
-            var model = new EmployeeModel { UmsClient = serviceClientMock.Object };
+            var model = new EmployeeModel(serviceClientMock.Object);
 
             model.Delete();
 
@@ -263,7 +263,7 @@ namespace Ryanstaurant.Clients.WPF.ManagementCenter.Test.Model
                 return re;
             });
 
-            var model = new EmployeeModel { UmsClient = serviceClientMock.Object };
+            var model = new EmployeeModel(serviceClientMock.Object);
 
             var result = model.GetAllEmmployees();
 
