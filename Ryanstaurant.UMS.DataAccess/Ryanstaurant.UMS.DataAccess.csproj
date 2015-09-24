@@ -51,18 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF\Models\authority.cs" />
-    <Compile Include="EF\Models\Dishes.cs" />
     <Compile Include="EF\Models\employee.cs" />
     <Compile Include="EF\Models\emp_role.cs" />
-    <Compile Include="EF\Models\menu.cs" />
-    <Compile Include="EF\Models\navigator.cs" />
     <Compile Include="EF\Models\role.cs" />
-    <Compile Include="EF\Models\seatimageconfig.cs" />
-    <Compile Include="EF\Models\SeatList.cs" />
     <Compile Include="EF\Models\sysconfig.cs" />
-    <Compile Include="EF\Models\tableimageconfig.cs" />
-    <Compile Include="EF\Models\tablelist.cs" />
-    <Compile Include="EF\Models\table_seats.cs" />
     <Compile Include="EF\Models\UserToken.cs" />
     <Compile Include="EF\UmsEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

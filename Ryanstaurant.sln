@@ -69,6 +69,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryanstaurant.UMS.Test", "Ry
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryanstaurant.Clients.WPF.ManagementCenter.Test", "Ryanstaurant.Clients.WPF.ManagementCenter.Test\Ryanstaurant.Clients.WPF.ManagementCenter.Test.csproj", "{C5F5C6EC-8670-4EC2-B871-538FFBB7851C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OMS", "OMS", "{A1470738-E28A-494B-9380-5CD1B6E62E25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
