@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Ryanstaurant.OMS.DataContract
 {
+    [DataContract]
     public class Change
     {
         [Flags]

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Ryanstaurant.OMS.DataContract
 {
+    [DataContract]
     public class Item
     {
         [Flags]
@@ -18,12 +20,19 @@ namespace Ryanstaurant.OMS.DataContract
         }
 
 
+        [DataMember]
         public string ID { get; set; }
+        [DataMember]
         public string Name { get; set; }
+        [DataMember]
         public string Price { get; set; }
+        [DataMember]
         public string Quantity { get; set; }
+        [DataMember]
         public string Description { get; set; }
+        [DataMember]
         public ItemType Type { get; set; }
+        [DataMember]
         public IList<Item> Items { get; set; } 
 
 

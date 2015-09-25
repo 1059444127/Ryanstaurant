@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Ryanstaurant.OMS.DataContract
 {
+    [DataContract]
     public class Check:Bill
     {
         public Check(Bill bill)
@@ -19,8 +18,10 @@ namespace Ryanstaurant.OMS.DataContract
 
         internal Check() { }
 
+        [DataMember]
         public List<Charge> Charge { get; set; }
 
+        [DataMember]
         public List<Change> Change { get; set; }
 
     }
