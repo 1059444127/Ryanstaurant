@@ -115,3 +115,6 @@ UserService/obj/
 /Ryanstaurant.UMS.Test/obj/Debug
 /Ryanstaurant.Clients.WPF.ManagementCenter.Test/obj/Debug
 /Ryanstaurant.Clients.WPF.ManagementCenter.Test/bin/Debug
+/Ryanstaurant.OMS.DataContract
+/Ryanstaurant.OMS.Interface
+/Ryanstaurant.OMS.Test
