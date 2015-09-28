@@ -18,6 +18,15 @@ namespace Ryanstaurant.OMS.DataContract
         [DataMember]
         public TableInfo Information { get; set; }
 
+        public bool IsInUse
+        {
+            get
+            {
+                return Information.CurrentStatus == TableInfo.TableStatus.Spare
+                       || Information.CurrentStatus == TableInfo.TableStatus.Reserved
+                       || Information.CurrentStatus == TableInfo.TableStatus.Occupied;
+            }
+        }
 
     }
 }

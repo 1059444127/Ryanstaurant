@@ -1,20 +1,36 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Net.Mail;
+using System.ServiceModel;
 using Ryanstaurant.OMS.DataContract;
 
 namespace Ryanstaurant.OMS.Interface
 {
+    [ServiceContract]
     public interface ILayoutService
     {
+        [OperationContract(Name = "GetAllTables")]
         IList<Table> GetTables();
+        [OperationContract]
         IList<Table> GetTables(IList<string> tableIdList);
 
-        Table PutTable(Table table);
-        Table DisableTable(string tableId);
-        Table EnableTable(string tableId);
-        void RemoveTable(string tableId);
+        [OperationContract]
+        void SetTable(List<Table> tables);
 
-        Table CombineTable(List<Table> tables);
-        List<Table> SplitTable(Table table);
+        [OperationContract]
+        void RemoveTable(List<string> tableId);
+
+        [OperationContract]
+        Table CombineTable(List<Table> tables,Table combineTable);
+
+        [OperationContract]
+        List<Table> SplitTable(Table table, List<Table> splitTables);
+
+        [OperationContract]
+        IList<Table> UnCombineTable(Table combineTable);
+
+        [OperationContract]
+        Table UnSplitTable(List<Table> splitedTable);
 
     }
 }

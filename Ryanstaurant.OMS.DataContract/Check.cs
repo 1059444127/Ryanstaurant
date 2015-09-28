@@ -10,10 +10,9 @@ namespace Ryanstaurant.OMS.DataContract
         {
             this.ID = bill.ID;
             this.Items = bill.Items;
-            this.Derate = bill.Derate;
+            this.Derates = bill.Derates;
             this.SubTotal = bill.SubTotal;
             this.Total = bill.Total;
-            this.Discount = bill.Discount;
         }
 
         internal Check() { }
@@ -22,7 +21,7 @@ namespace Ryanstaurant.OMS.DataContract
         public List<Charge> Charge { get; set; }
 
         [DataMember]
-        public List<Change> Change { get; set; }
+        public List<Change> Changes { get; set; }
 
     }
 }

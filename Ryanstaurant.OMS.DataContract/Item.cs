@@ -10,13 +10,13 @@ namespace Ryanstaurant.OMS.DataContract
         [Flags]
         public enum ItemType
         {
-            Drink ,
+            Other,
+            Drink,
             MainCourse,
-            Appetizer ,
-            Dessert ,
-            Snack ,
-            Set,
-            Other
+            Appetizer,
+            Dessert,
+            Snack,
+            Set
         }
 
 

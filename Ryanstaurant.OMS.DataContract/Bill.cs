@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Ryanstaurant.OMS.DataContract
 {
@@ -14,10 +15,7 @@ namespace Ryanstaurant.OMS.DataContract
         internal Bill() { }
 
         [DataMember]
-        public decimal Discount { get; set; }
-
-        [DataMember]
-        public decimal Derate { get; set; }
+        public IList<Derate> Derates { get; set; }
 
         [DataMember]
         public decimal SubTotal { get; set; }
