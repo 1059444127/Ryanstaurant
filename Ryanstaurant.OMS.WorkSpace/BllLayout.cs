@@ -8,155 +8,121 @@ using Ryanstaurant.OMS.IWorkSpace;
 
 namespace Ryanstaurant.OMS.WorkSpace
 {
-    public class BllLayout:IBllLayout
+    public class BllLayout : IBllLayout
     {
+
+        private readonly OmsEntity _entity;
+
+        public BllLayout(OmsEntity omsEntity)
+        {
+            _entity = omsEntity;
+        }
+
+
         public IList<Table> GetTables(IList<string> tableIdList)
         {
-            using (var entity = new OmsEntity())
+            var tables = new List<Table>();
+            if (tableIdList == null || !tableIdList.Any())
+                tables.AddRange(from t in _entity.Tables
+                    where t.IsInUse
+                    select Table.ConvertFromEntity(t));
+            else
             {
-                var tables = new List<Table>();
-                if (!tableIdList.Any())
-                    tables.AddRange(from t in entity.Tables where t.IsInUse
-                        select new Table
-                        {
-                            ID = t.ID.ToString(),
-                            No = t.DisplayNo,
-                            Information = new TableInfo
-                            {
-                                CurrentStatus = (TableInfo.TableStatus)Enum.Parse(typeof(TableInfo.TableStatus), t.CurrentStatus.ToString(CultureInfo.InvariantCulture)),
-                                Length=int.Parse(t.Length.ToString(CultureInfo.InvariantCulture)),
-                                PosX = int.Parse(t.PosX.ToString(CultureInfo.InvariantCulture)),
-                                PosY = int.Parse(t.PosY.ToString(CultureInfo.InvariantCulture)),
-                                Width = int.Parse(t.Width.ToString(CultureInfo.InvariantCulture))
-                            }
-                        });
-                else
-                {
-                    tables.AddRange(from t in entity.Tables
-                                    where tableIdList.Contains(t.ID.ToString()) && t.IsInUse
-                                    select new Table
-                                    {
-                                        ID = t.ID.ToString(),
-                                        No = t.DisplayNo,
-                                        Information = new TableInfo
-                                        {
-                                            CurrentStatus = (TableInfo.TableStatus)Enum.Parse(typeof(TableInfo.TableStatus), t.CurrentStatus.ToString(CultureInfo.InvariantCulture)),
-                                            Length = int.Parse(t.Length.ToString(CultureInfo.InvariantCulture)),
-                                            PosX = int.Parse(t.PosX.ToString(CultureInfo.InvariantCulture)),
-                                            PosY = int.Parse(t.PosY.ToString(CultureInfo.InvariantCulture)),
-                                            Width = int.Parse(t.Width.ToString(CultureInfo.InvariantCulture))
-                                        }
-                                    });
-                }
-                return tables;
+                tables.AddRange(from t in _entity.Tables
+                    where tableIdList.Contains(t.ID.ToString()) && t.IsInUse
+                    select Table.ConvertFromEntity(t));
             }
+            return tables;
+
         }
 
 
         public IList<Table> SaveTables(IList<Table> tables)
         {
-            using (var entity = new OmsEntity())
+            foreach (var table in tables)
             {
-                foreach (var table in tables)
+                var tableInDb = (from t in _entity.Tables
+                    where string.Equals(table.ID, t.ID.ToString(), StringComparison.InvariantCultureIgnoreCase)
+                          && t.IsInUse
+                    select t).FirstOrDefault();
+
+                if (tableInDb == null)
                 {
-                    var tableInDb = (from t in entity.Tables
-                        where string.Equals(table.ID, t.ID.ToString(), StringComparison.InvariantCultureIgnoreCase)
-                        && t.IsInUse
-                        select t).FirstOrDefault();
-
-                    if (tableInDb == null)
-                    {
-                        entity.Tables.Add(new Tables
-                        {
-                            DisplayNo = table.No,
-                            Length = table.Information.Length,
-                            PosX = table.Information.PosX,
-                            PosY = table.Information.PosY,
-                            Width = table.Information.Width,
-                            CurrentStatus = table.Information.CurrentStatus.ToInt()
-                        });
-                    }
-                    else
-                    {
-                        tableInDb.DisplayNo = table.No;
-                        tableInDb.Length = table.Information.Length;
-                        tableInDb.PosX = table.Information.PosX;
-                        tableInDb.PosY = table.Information.PosY;
-                        tableInDb.Width = table.Information.Width;
-                        tableInDb.CurrentStatus = table.Information.CurrentStatus.ToInt();
-                    }
+                    _entity.Tables.Add(table.ToEntity<Tables>());
                 }
-
-                entity.SaveChanges();
-                var idList = (from t in tables select t.ID).ToList();
-
-                return GetTables(idList);
-
+                else
+                {
+                    tableInDb.DisplayNo = table.No;
+                    tableInDb.Length = table.Length;
+                    tableInDb.PosX = table.PosX;
+                    tableInDb.PosY = table.PosY;
+                    tableInDb.Width = table.Width;
+                    tableInDb.CurrentStatus = table.CurrentStatus;
+                }
             }
+
+            _entity.SaveChanges();
+            var idList = (from t in tables select t.ID.ToUpper()).ToList();
+            var returnTables = (from t in _entity.Tables
+                where t.IsInUse
+                      && idList.Contains(t.ID.ToString().ToUpper())
+                select Table.ConvertFromEntity(t)).ToList();
+
+            return returnTables;
+
         }
 
 
         public void RemoveTables(IList<string> tableIds)
         {
-            using (var entity = new OmsEntity())
+            foreach (var tableId in tableIds)
             {
-                foreach (var tableId in tableIds)
-                {
-                    var tablesInDb = (from t in entity.Tables
-                        where string.Equals(tableId, t.ID.ToString(), StringComparison.InvariantCultureIgnoreCase)
-                        select t).FirstOrDefault();
+                var tablesInDb = (from t in _entity.Tables
+                    where string.Equals(tableId, t.ID.ToString(), StringComparison.InvariantCultureIgnoreCase)
+                    select t).FirstOrDefault();
 
-                    if (tablesInDb == null) continue;
-                    tablesInDb.Disabled = 1;
-                }
-
-                entity.SaveChanges();
+                if (tablesInDb == null) continue;
+                tablesInDb.Disabled = 1;
             }
+
+            _entity.SaveChanges();
+
         }
 
         public Table CombineTable(IList<Table> tables, Table combineTable)
         {
             //验证状态，如果有已经合并或者拆分的桌子，则抛出异常，恢复需要使用UncombineTable
 
-            using (var entity = new OmsEntity())
+            //添加新的合并桌
+            var newTable = _entity.Tables.Add(combineTable.ToEntity<Tables>());
+
+            if (newTable != null)
+                combineTable.ID = newTable.ToString();
+
+            foreach (var table in tables)
             {
-                //添加新的合并桌
-                var newTable = SaveTables(new List<Table>
+                var tableInDb = (from t in _entity.Tables
+                    where string.Equals(t.ID.ToString(), table.ID, StringComparison.InvariantCultureIgnoreCase)
+                          && t.IsInUse
+                    select t).FirstOrDefault();
+
+                if (tableInDb == null)
+                    continue;
+
+                tableInDb.CurrentStatus = (int)Table.TableStatus.Combined;
+
+                _entity.TableRelations.Add(new TableRelations
                 {
-                    combineTable
-                }).FirstOrDefault();
-
-                if (newTable == null)
-                    return null;
-
-                combineTable.ID = newTable.ID;
-                combineTable.Information = newTable.Information;
-                combineTable.No = newTable.No;
-
-                foreach (var table in tables)
-                {
-                    var tableInDb = (from t in entity.Tables
-                        where string.Equals(t.ID.ToString(), table.ID, StringComparison.InvariantCultureIgnoreCase)
-                              && t.IsInUse
-                        select t).FirstOrDefault();
-
-                    if (tableInDb == null)
-                        continue;
-
-                    tableInDb.CurrentStatus = TableInfo.TableStatus.Combined.ToInt();
-
-                    entity.TableRelations.Add(new TableRelations
-                    {
-                        Disabled = 0,
-                        TableID = Guid.Parse(combineTable.ID),
-                        RelateTableID = tableInDb.ID
-                    });
-                }
-
-                entity.SaveChanges();
-
-                return combineTable;
+                    Disabled = 0,
+                    TableID = Guid.Parse(combineTable.ID),
+                    RelateTableID = tableInDb.ID
+                });
             }
+
+            _entity.SaveChanges();
+
+            return combineTable;
+
         }
 
         public IList<Table> SplitTables(Table table, List<Table> splitTables)
@@ -164,37 +130,35 @@ namespace Ryanstaurant.OMS.WorkSpace
             //验证状态，如果有已经合并或者拆分的桌子，则抛出异常，恢复需要使用UnsplitTable
 
 
-            using (var entity = new OmsEntity())
+            //新增分开的桌子
+            splitTables = SaveTables(splitTables).ToList();
+
+
+            var tableInDb = (from t in _entity.Tables
+                where string.Equals(t.ID.ToString(), table.ID, StringComparison.InvariantCultureIgnoreCase)
+                      && t.IsInUse
+                select t).FirstOrDefault();
+
+
+            if (tableInDb == null) return null;
+
+            tableInDb.CurrentStatus = (int)Table.TableStatus.Splited;
+
+            foreach (var splitTable in splitTables)
             {
-                //新增分开的桌子
-                splitTables = SaveTables(splitTables).ToList();
-
-
-                var tableInDb = (from t in entity.Tables
-                    where string.Equals(t.ID.ToString(), table.ID, StringComparison.InvariantCultureIgnoreCase)
-                          && t.IsInUse
-                    select t).FirstOrDefault();
-
-
-                if (tableInDb == null) return null;
-
-                tableInDb.CurrentStatus = TableInfo.TableStatus.Splited.ToInt();
-
-                foreach (var splitTable in splitTables)
+                _entity.TableRelations.Add(new TableRelations
                 {
-                    entity.TableRelations.Add(new TableRelations
-                    {
-                        Disabled = 0,
-                        RelateTableID = Guid.Parse(splitTable.ID),
-                        TableID = tableInDb.ID
-                    });
-                }
-
-
-                entity.SaveChanges();
-                return splitTables;
-
+                    Disabled = 0,
+                    RelateTableID = Guid.Parse(splitTable.ID),
+                    TableID = tableInDb.ID
+                });
             }
+
+
+            _entity.SaveChanges();
+            return splitTables;
+
+
         }
 
 
@@ -202,12 +166,65 @@ namespace Ryanstaurant.OMS.WorkSpace
 
         public IList<Table> UnCombineTable(Table combinedTable)
         {
-            throw new NotImplementedException();
+            var orgTables = new List<Table>();
+
+            var combineTableIds = (from tr in _entity.TableRelations
+                where
+                    tr.Disabled == 0 &&
+                    string.Equals(tr.TableID.ToString(), combinedTable.ID,
+                        StringComparison.InvariantCultureIgnoreCase)
+                select tr.RelateTableID).ToList();
+
+            foreach (var combineTableId in combineTableIds)
+            {
+                var orgTable = (from t in _entity.Tables
+                    where t.CurrentStatus == (int)Table.TableStatus.Combined
+                          && t.ID == combineTableId
+                    select t).FirstOrDefault();
+
+                if (orgTable == null)
+                    continue;
+
+                orgTable.CurrentStatus = (int)Table.TableStatus.Spare;
+
+                orgTables.Add(Table.ConvertFromEntity(orgTable));
+            }
+
+            var tableInDb = _entity.Tables.Find(Guid.Parse(combinedTable.ID));
+            tableInDb.Disabled = 1;
+
+            _entity.SaveChanges();
+            return orgTables;
+
+
         }
 
-        public Table UnSpliTables(List<Table> splitedTables)
+        public Table UnSplitTables(Table splitedTable)
         {
-            throw new NotImplementedException();
+            var splitTableRelation = (from tr in _entity.TableRelations
+                where tr.Disabled == 0
+                      &&
+                      string.Equals(tr.RelateTableID.ToString(), splitedTable.ID,
+                          StringComparison.InvariantCultureIgnoreCase)
+                select new
+                {
+                    tr.TableID,
+                    tr.RelateTableID
+                }).ToList();
+
+
+            var orgTable = _entity.Tables.Find(splitTableRelation[0].TableID);
+            orgTable.CurrentStatus = (int)Table.TableStatus.Spare;
+
+            foreach (var tr in splitTableRelation)
+            {
+                _entity.Tables.Find(tr.RelateTableID).Disabled = 1;
+            }
+
+            _entity.SaveChanges();
+
+            return Table.ConvertFromEntity(orgTable);
+
         }
     }
 }

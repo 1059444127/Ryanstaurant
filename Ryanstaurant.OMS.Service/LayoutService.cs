@@ -47,5 +47,11 @@ namespace Ryanstaurant.OMS.Service
         {
             throw new NotImplementedException();
         }
+
+
+        public Table UnSplitTable(Table splitedTable)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

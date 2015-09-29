@@ -23,7 +23,7 @@ namespace Ryanstaurant.OMS.IWorkSpace
 
         IList<Table> UnCombineTable(Table combinedTable);
 
-        Table UnSpliTables(List<Table> splitedTables);
+        Table UnSplitTables(Table splitedTable);
 
 
     }

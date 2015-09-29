@@ -30,7 +30,7 @@ namespace Ryanstaurant.OMS.Interface
         IList<Table> UnCombineTable(Table combineTable);
 
         [OperationContract]
-        Table UnSplitTable(List<Table> splitedTable);
+        Table UnSplitTable(Table splitedTable);
 
     }
 }

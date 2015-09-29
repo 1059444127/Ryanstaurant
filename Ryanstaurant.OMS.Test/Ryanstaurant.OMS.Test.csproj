@@ -35,7 +35,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -53,7 +65,31 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BLL\BllLayoutTest.cs" />
+    <Compile Include="DataContract\DataContractAdaptorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ryanstaurant.OMS.DataAccess\Ryanstaurant.OMS.DataAccess.csproj">
+      <Project>{3013bcea-3e06-4820-a58c-bca0eb87c58c}</Project>
+      <Name>Ryanstaurant.OMS.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ryanstaurant.OMS.DataContract\Ryanstaurant.OMS.DataContract.csproj">
+      <Project>{801f2b32-1f2e-49af-bd3e-0f8bda573e70}</Project>
+      <Name>Ryanstaurant.OMS.DataContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ryanstaurant.OMS.IWorkSpace\Ryanstaurant.OMS.IWorkSpace.csproj">
+      <Project>{18B8F7E9-E22D-4C0F-87CC-E16996F38B59}</Project>
+      <Name>Ryanstaurant.OMS.IWorkSpace</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ryanstaurant.OMS.WorkSpace\Ryanstaurant.OMS.WorkSpace.csproj">
+      <Project>{02e35091-977d-40a7-a4ee-14d5146310d2}</Project>
+      <Name>Ryanstaurant.OMS.WorkSpace</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
