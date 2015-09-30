@@ -7,15 +7,15 @@ namespace Ryanstaurant.UMS.WorkSpace
 {
     public class BllLogin:BllBase
     {
-        public UmsEntities Entities
+        public UmsEntity Entities
         {
             get
             {
-                return base.Entities;
+                return base.Entity;
             }
             set
             {
-                base.Entities = value;
+                base.Entity = value;
             }
         }
 
@@ -23,7 +23,7 @@ namespace Ryanstaurant.UMS.WorkSpace
         public string GetToken(string userName, string password)
         {
             var employee =
-                (from e in Entities.employee where e.LoginName == userName && e.Password == password select e)
+                (from e in Entities.UMS_Employees where e.LoginName == userName && e.Password == password select e)
                     .FirstOrDefault();
 
 

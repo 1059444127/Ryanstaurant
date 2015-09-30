@@ -1,4 +1,4 @@
-namespace Ryanstaurant.UMS.DataAccess.EF
+namespace Ryanstaurant.UMS.DataAccess
 {
     using System;
     using System.Collections.Generic;
@@ -6,18 +6,15 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("role")]
-    public partial class role
+    public partial class UMS_Authorities
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public long id { get; set; }
 
         [StringLength(50)]
         public string Name { get; set; }
 
         [StringLength(500)]
         public string Description { get; set; }
-
-        public long? Authority { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ryanstaurant.UMS.DataAccess;
 using Ryanstaurant.UMS.DataAccess.EF;
 using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.DataContract.Utility;
@@ -10,15 +11,15 @@ namespace Ryanstaurant.UMS.WorkSpace
     public class BllAuthority:BllBase
     {
 
-        public new UmsEntities Entities
+        public UmsEntity Entities
         {
             get
             {
-                return base.Entities;
+                return Entity;
             }
             set
             {
-                base.Entities = value;
+                Entity = value;
             }
         }
 
@@ -49,13 +50,13 @@ namespace Ryanstaurant.UMS.WorkSpace
             var resultEntity = new List<ItemContent>();
 
 
-                List<authority> authList;
+                List<UMS_Authorities> authList;
 
 
                 //没有指定，则返回所有查询结果
                 if (itemContents == null)
                 {
-                    authList = (from e in Entities.authority select e).ToList();
+                    authList = (from e in Entities.UMS_Authorities select e).ToList();
                 }
                 else//有指定，则从传送的数据处进行查询
                 {
@@ -67,7 +68,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                                         select e.Name).ToList();
 
                     authList =
-                        (from e in Entities.authority
+                        (from e in Entities.UMS_Authorities
                             where authIDList.Contains(e.id) || authNameList.Contains(e.Name)
                             select e).ToList();
                 }
@@ -193,7 +194,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
 
 
-            var authorityInDb = (from e in Entities.authority where e.id == authority.ID select e).FirstOrDefault();
+            var authorityInDb = (from e in Entities.UMS_Authorities where e.id == authority.ID select e).FirstOrDefault();
 
             if (authorityInDb == null)
             {
@@ -214,7 +215,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
 
             //去除所有角色中的当前权限
-            var roles = from e in Entities.role select e;
+            var roles = from e in Entities.UMS_Roles select e;
 
             foreach (var role in roles)
             {
@@ -222,13 +223,13 @@ namespace Ryanstaurant.UMS.WorkSpace
             }
 
             //去除所有人员中的当前权限
-            var employees = from e in Entities.employee select e;
+            var employees = from e in Entities.UMS_Employees select e;
             foreach (var employee in employees)
             {
                 employee.Authority &= ~authority.ID;
             }
 
-            Entities.authority.Remove(authorityInDb);
+            Entities.UMS_Authorities.Remove(authorityInDb);
 
             Entities.SaveChanges();
 
@@ -269,7 +270,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             }
 
 
-            var authorityInDb = (from e in Entities.authority where e.id == authority.ID select e).FirstOrDefault();
+            var authorityInDb = (from e in Entities.UMS_Authorities where e.id == authority.ID select e).FirstOrDefault();
 
             if (authorityInDb == null)
             {
@@ -315,7 +316,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
         private long GetAvailableAuthId()
         {
-            var idList = (from i in Entities.authority orderby i.id select i.id).ToList();
+            var idList = (from i in Entities.UMS_Authorities orderby i.id select i.id).ToList();
             for (long i = 1; i < long.MaxValue; i = i << 1)
             {
                 if (idList.Contains(i)) continue;
@@ -347,14 +348,14 @@ namespace Ryanstaurant.UMS.WorkSpace
             }
 
 
-            var authToAdd = new authority
+            var authToAdd = new UMS_Authorities
             {
                 id = GetAvailableAuthId(),
                 Description = authority.Description,
                 Name = authority.Name
             };
 
-            Entities.authority.Add(authToAdd);
+            Entities.UMS_Authorities.Add(authToAdd);
 
             Entities.SaveChanges();
 

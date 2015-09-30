@@ -8,20 +8,20 @@ namespace Ryanstaurant.UMS.WorkSpace
 {
     public class BllBase
     {
-        protected UmsEntities Entities;
+        protected UmsEntity Entity;
 
 
         public BllBase()
         {
-            Entities = new UmsEntities();
+            Entity = new UmsEntity();
         }
 
 
 
         ~BllBase()
         {
-            if (Entities!=null)
-                Entities.Dispose();
+            if (Entity!=null)
+                Entity.Dispose();
         }
 
 

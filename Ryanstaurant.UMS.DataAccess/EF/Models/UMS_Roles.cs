@@ -1,4 +1,4 @@
-namespace Ryanstaurant.UMS.DataAccess.EF
+namespace Ryanstaurant.UMS.DataAccess
 {
     using System;
     using System.Collections.Generic;
@@ -6,17 +6,17 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("sysconfig")]
-    public partial class sysconfig
+    public partial class UMS_Roles
     {
-        [Key]
-        [StringLength(200)]
-        public string ShortCall { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int id { get; set; }
+
+        [StringLength(50)]
+        public string Name { get; set; }
 
         [StringLength(500)]
         public string Description { get; set; }
 
-        [StringLength(500)]
-        public string ConfigValue { get; set; }
+        public long? Authority { get; set; }
     }
 }

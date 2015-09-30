@@ -16,7 +16,7 @@ namespace Ryanstaurant.UMS.Test
 
             using (var trans = new TransactionScope())
             {
-                var bllRole = new BllRole { Entities = base.Entities };
+                var bllRole = new BllRole { Entity = base.Entities };
                 var result = bllRole.QueryRole(new List<ItemContent>
                 {
                     new Role
@@ -51,7 +51,7 @@ namespace Ryanstaurant.UMS.Test
         {
             using (var trans = new TransactionScope())
             {
-                var bllRole = new BllRole { Entities = base.Entities };
+                var bllRole = new BllRole { Entity = base.Entities };
 
                 var result = bllRole.ExecuteRole(new List<ItemContent>
                 {
@@ -80,7 +80,7 @@ namespace Ryanstaurant.UMS.Test
         {
             using (var trans = new TransactionScope())
             {
-                var bllRole = new BllRole { Entities = base.Entities };
+                var bllRole = new BllRole { Entity = base.Entities };
                 var aimRole = bllRole.QueryRole(new List<ItemContent>
                 {
                     new Role
@@ -132,7 +132,7 @@ namespace Ryanstaurant.UMS.Test
         {
             using (var trans = new TransactionScope())
             {
-                var bllRole = new BllRole { Entities = base.Entities };
+                var bllRole = new BllRole { Entity = base.Entities };
                 var aimRole = bllRole.QueryRole(new List<ItemContent>
                 {
                     new Role

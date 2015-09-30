@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ryanstaurant.UMS.DataAccess;
 using Ryanstaurant.UMS.DataAccess.EF;
 using Ryanstaurant.UMS.DataContract;
 using Ryanstaurant.UMS.DataContract.Utility;
@@ -9,15 +10,15 @@ namespace Ryanstaurant.UMS.WorkSpace
 {
     public class BllRole:BllBase
     {
-        public new UmsEntities Entities
+        public new UmsEntity Entity
         {
             get
             {
-                return base.Entities;
+                return base.Entity;
             }
             set
             {
-                base.Entities = value;
+                base.Entity = value;
             }
         }
 
@@ -49,14 +50,14 @@ namespace Ryanstaurant.UMS.WorkSpace
         {
             var resultEntity = new List<ItemContent>();
 
-                List<role> roleList;
+                List<UMS_Roles> roleList;
 
 
 
                 //没有指定，则返回所有查询结果
                 if (itemContents == null)
                 {
-                    roleList = (from e in Entities.role select e).ToList();
+                    roleList = (from e in Entity.UMS_Roles select e).ToList();
                 }
                 else//有指定，则从传送的数据处进行查询
                 {
@@ -68,7 +69,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                                        select e.Name).ToList();
 
 
-                    roleList = (from e in Entities.role where roleIDList.Contains(e.id)||roleNameList.Contains(e.Name) select e).ToList();
+                    roleList = (from e in Entity.UMS_Roles where roleIDList.Contains(e.id) || roleNameList.Contains(e.Name) select e).ToList();
 
                 }
 
@@ -190,7 +191,7 @@ namespace Ryanstaurant.UMS.WorkSpace
                 };
             }
 
-            var roleInDb = (from e in Entities.role where e.id == role.ID select e).FirstOrDefault();
+            var roleInDb = (from e in Entity.UMS_Roles where e.id == role.ID select e).FirstOrDefault();
 
             if (roleInDb == null)
             {
@@ -204,18 +205,18 @@ namespace Ryanstaurant.UMS.WorkSpace
             }
 
 
-            Entities.role.Remove(roleInDb);
+            Entity.UMS_Roles.Remove(roleInDb);
 
             //删除人员角色关联
-            var roleInEmpRole = from e in Entities.emp_role where e.role_id == role.ID select e;
+            var roleInEmpRole = from e in Entity.UMS_EmpRoles where e.role_id == role.ID select e;
 
             if (roleInEmpRole.Any())
             {
-                Entities.emp_role.RemoveRange(roleInEmpRole.ToList());
+                Entity.UMS_EmpRoles.RemoveRange(roleInEmpRole.ToList());
             }
 
 
-            Entities.SaveChanges();
+            Entity.SaveChanges();
 
 
             role.CommandInfo = new CommandInformation
@@ -248,7 +249,7 @@ namespace Ryanstaurant.UMS.WorkSpace
 
 
 
-            var roleInDb = (from e in Entities.role where e.id == role.ID select e).FirstOrDefault();
+            var roleInDb = (from e in Entity.UMS_Roles where e.id == role.ID select e).FirstOrDefault();
 
             if (roleInDb == null)
             {
@@ -269,7 +270,7 @@ namespace Ryanstaurant.UMS.WorkSpace
             roleInDb.Authority = role.Authority;
 
 
-            Entities.SaveChanges();
+            Entity.SaveChanges();
 
             role.CommandInfo = new CommandInformation
             {
@@ -301,18 +302,18 @@ namespace Ryanstaurant.UMS.WorkSpace
 
 
 
-            var roleToAdd = new role
+            var roleToAdd = new UMS_Roles
             {
                 Description = role.Description,
                 Name = role.Name,
                 Authority = role.Authority
             };
 
-            Entities.role.Add(roleToAdd);
+            Entity.UMS_Roles.Add(roleToAdd);
 
 
 
-            Entities.SaveChanges();
+            Entity.SaveChanges();
 
 
             return new Role

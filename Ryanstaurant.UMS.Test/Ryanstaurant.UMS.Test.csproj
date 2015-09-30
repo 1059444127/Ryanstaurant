@@ -69,7 +69,6 @@
     <Compile Include="Client\UMSClientTest.cs" />
     <Compile Include="WorkSpace\BllAuthorityTest.cs" />
     <Compile Include="WorkSpace\BllEmployeeTest.cs" />
-    <Compile Include="WorkSpace\BLLLoginTest.cs" />
     <Compile Include="WorkSpace\BllRoleTest.cs" />
     <Compile Include="WorkSpace\BllTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

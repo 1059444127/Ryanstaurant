@@ -70,16 +70,16 @@ namespace Ryanstaurant.UMS.Service
         {
             try
             {
-                var result = new BllLogin().GetToken(userName, password);
+                //var result = new BllLogin().GetToken(userName, password);
 
-                if (string.IsNullOrEmpty(result))
-                    return new ResultEntity
-                    {
-                        InnerErrorMessage = "Login",
-                        ErrorMessage = "登录失败",
-                        ResultObject = null ,
-                        State = ResultState.Fail
-                    };
+                //if (string.IsNullOrEmpty(result))
+                //    return new ResultEntity
+                //    {
+                //        InnerErrorMessage = "Login",
+                //        ErrorMessage = "登录失败",
+                //        ResultObject = null ,
+                //        State = ResultState.Fail
+                //    };
 
                 return new ResultEntity
                     {
@@ -89,7 +89,7 @@ namespace Ryanstaurant.UMS.Service
                         {
                             new Login
                             {
-                                SessionToken=result,
+                                SessionToken=null,
                             }
                         } ,
                         State = ResultState.Success

@@ -1,4 +1,4 @@
-namespace Ryanstaurant.UMS.DataAccess.EF
+namespace Ryanstaurant.UMS.DataAccess
 {
     using System;
     using System.Collections.Generic;
@@ -6,8 +6,7 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("employee")]
-    public partial class employee
+    public partial class UMS_Employees
     {
         public int ID { get; set; }
 

@@ -10,13 +10,13 @@ namespace Ryanstaurant.UMS.Test
     [TestClass]
     public class BllTestBase
     {
-        protected UmsEntities Entities;
+        protected UmsEntity Entities;
 
 
         [TestInitialize]
         public void Initial()
         {
-            Entities = new UmsEntities();
+            Entities = new UmsEntity();
         }
 
         [TestCleanup]

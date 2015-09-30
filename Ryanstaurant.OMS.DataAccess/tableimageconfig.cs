@@ -1,4 +1,4 @@
-namespace Ryanstaurant.UMS.DataAccess.EF
+namespace Ryanstaurant.OMS.DataAccess
 {
     using System;
     using System.Collections.Generic;
@@ -6,16 +6,14 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class emp_role
+    [Table("tableimageconfig")]
+    public partial class tableimageconfig
     {
         [Key]
-        [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int emp_id { get; set; }
+        public int Status { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int role_id { get; set; }
+        [StringLength(200)]
+        public string PicURL { get; set; }
     }
 }
