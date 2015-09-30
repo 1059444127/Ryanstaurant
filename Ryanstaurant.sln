@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB", "DB", "{F25DA500-0427-
 	ProjectSection(SolutionItems) = preProject
 		DB\ryanstaurant.bak = DB\ryanstaurant.bak
 		DB\ryanstaurant.sql = DB\ryanstaurant.sql
+		DB\Ryanstaurant.xls = DB\Ryanstaurant.xls
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ORG", "ORG", "{94919789-C925-42DE-A994-44F5205C8A9F}"
