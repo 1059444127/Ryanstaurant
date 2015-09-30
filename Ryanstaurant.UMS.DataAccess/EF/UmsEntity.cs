@@ -8,7 +8,7 @@ namespace Ryanstaurant.UMS.DataAccess.EF
     public partial class UmsEntity : DbContext
     {
         public UmsEntity()
-            : base("name=UmsEntity")
+            : base("name=Ums")
         {
         }
 

@@ -27,5 +27,11 @@ namespace Ryanstaurant.UMS.Client
         {
             return Channel.Login(userName, password);
         }
+
+
+        public void NewToken(string tokenKey, string clientToken)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

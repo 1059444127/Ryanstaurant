@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F013490B-FA44-4158-97AE-656168DEAE4A}</ProjectGuid>
+    <ProjectGuid>{2E027BB2-B565-4FED-962A-22ED5E7A6E49}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ryanstaurant.UMS.WorkSpace</RootNamespace>
-    <AssemblyName>Ryanstaurant.UMS.WorkSpace</AssemblyName>
+    <RootNamespace>Ryanstaurant.GMS.WorkSpace</RootNamespace>
+    <AssemblyName>Ryanstaurant.GMS.WorkSpace</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,13 +31,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Activities" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,28 +49,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BllAuthority.cs" />
     <Compile Include="BllBase.cs" />
-    <Compile Include="BllEmployee.cs" />
-    <Compile Include="BllRole.cs" />
     <Compile Include="BllToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ryanstaurant.UMS.DataAccess\Ryanstaurant.UMS.DataAccess.csproj">
-      <Project>{5143bd0e-df9a-4425-9178-075f55e6bfb9}</Project>
-      <Name>Ryanstaurant.UMS.DataAccess</Name>
+    <ProjectReference Include="..\Ryanstaurant.GMS.DataAccess\Ryanstaurant.GMS.DataAccess.csproj">
+      <Project>{3a7ca991-c804-471f-999d-a00468b6a22c}</Project>
+      <Name>Ryanstaurant.GMS.DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ryanstaurant.UMS.DataContract\Ryanstaurant.UMS.DataContract.csproj">
-      <Project>{f2fe3d45-0fed-4072-9c04-7636d4df6589}</Project>
-      <Name>Ryanstaurant.UMS.DataContract</Name>
+    <ProjectReference Include="..\Ryanstaurant.GMS.DataContract\Ryanstaurant.GMS.DataContract.csproj">
+      <Project>{e2da114b-9798-43a6-864c-5aca82a6868a}</Project>
+      <Name>Ryanstaurant.GMS.DataContract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ryanstaurant.Utility\Ryanstaurant.Utility.csproj">
-      <Project>{da98a705-f472-4ece-a15a-0d75dc7b4655}</Project>
-      <Name>Ryanstaurant.Utility</Name>
+    <ProjectReference Include="..\Ryanstaurant.GMS.IWorkSpace\Ryanstaurant.GMS.IWorkSpace.csproj">
+      <Project>{261c01ff-d713-4586-a984-26606c380931}</Project>
+      <Name>Ryanstaurant.GMS.IWorkSpace</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

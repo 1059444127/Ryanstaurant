@@ -13,7 +13,6 @@ namespace Ryanstaurant.UMS.Service
     public class UMSService:IUMSService
     {
 
-
         protected ResultEntity LoadBusinessMethod(Func<List<ItemContent>> methodHandler)
         {
             try
@@ -162,6 +161,12 @@ namespace Ryanstaurant.UMS.Service
                     .GetMethod("Query" + requestTypeName)
                     .Invoke(bllModule, new object[] { requestEntitiy.RequestObjects }) as List<ItemContent>;
             });
+        }
+
+
+        public void NewToken(string tokenKey, string clientToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

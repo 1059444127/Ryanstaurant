@@ -16,5 +16,9 @@ namespace Ryanstaurant.UMS.Interface
         [OperationContract]
         ResultEntity Login(string userName, string password);
 
+
+        [OperationContract]
+        void NewToken(string tokenKey, string clientToken);
+
     }
 }
