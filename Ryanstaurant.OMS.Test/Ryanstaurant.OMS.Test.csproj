@@ -84,10 +84,6 @@
       <Project>{72225290-3B7F-468F-AE62-50AECC031B74}</Project>
       <Name>Ryanstaurant.OMS.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ryanstaurant.OMS.IWorkSpace\Ryanstaurant.OMS.IWorkSpace.csproj">
-      <Project>{18B8F7E9-E22D-4C0F-87CC-E16996F38B59}</Project>
-      <Name>Ryanstaurant.OMS.IWorkSpace</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ryanstaurant.OMS.Service\Ryanstaurant.OMS.Service.csproj">
       <Project>{df53b040-9a06-406a-9779-2a94db3011cc}</Project>
       <Name>Ryanstaurant.OMS.Service</Name>

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Ryanstaurant.OMS.DataAccess;
 using Ryanstaurant.OMS.DataContract;
-using Ryanstaurant.OMS.DataContract.Utility;
 
 namespace Ryanstaurant.OMS.WorkSpace
 {
@@ -23,28 +22,22 @@ namespace Ryanstaurant.OMS.WorkSpace
 
         public IList<Table> GetTables(IList<string> tableIdList)
         {
-            try
+            var tables = new List<Table>();
+            if (tableIdList == null || !tableIdList.Any())
             {
-                var tables = new List<Table>();
-                if (tableIdList == null || !tableIdList.Any())
-                {
-                    tables.AddRange((from t in _entity.OMS_Tables
-                        where t.Disabled == 0 && (t.CurrentStatus == 0 || t.CurrentStatus == 1 || t.CurrentStatus == 2)
-                        select t).ToList().ConvertAll(Table.ConvertFromEntity));
-                }
-                else
-                {
-                    tables.AddRange((from t in _entity.OMS_Tables
-                                    where tableIdList.Contains(t.ID.ToString()) && (t.Disabled == 0 && (t.CurrentStatus == 0 || t.CurrentStatus == 1 || t.CurrentStatus == 2))
-                                     select t).ToList().ConvertAll(Table.ConvertFromEntity));
-                }
-                return tables;
+                tables.AddRange((from t in _entity.OMS_Tables
+                    where t.Disabled == 0 && (t.CurrentStatus == 0 || t.CurrentStatus == 1 || t.CurrentStatus == 2)
+                    select t).ToList().ConvertAll(Table.ConvertFromEntity));
             }
-            catch (Exception ex)
+            else
             {
-                throw ex;
+                tables.AddRange((from t in _entity.OMS_Tables
+                    where
+                        tableIdList.Contains(t.ID.ToString()) &&
+                        (t.Disabled == 0 && (t.CurrentStatus == 0 || t.CurrentStatus == 1 || t.CurrentStatus == 2))
+                    select t).ToList().ConvertAll(Table.ConvertFromEntity));
             }
-           
+            return tables;
 
         }
 
