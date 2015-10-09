@@ -68,6 +68,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="OMS\OMSService.svc" />
     <Content Include="UMS\UMSService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -86,6 +87,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ryanstaurant.OMS.DataContract\Ryanstaurant.OMS.DataContract.csproj">
+      <Project>{801f2b32-1f2e-49af-bd3e-0f8bda573e70}</Project>
+      <Name>Ryanstaurant.OMS.DataContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ryanstaurant.OMS.Service\Ryanstaurant.OMS.Service.csproj">
+      <Project>{df53b040-9a06-406a-9779-2a94db3011cc}</Project>
+      <Name>Ryanstaurant.OMS.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ryanstaurant.UMS.DataContract\Ryanstaurant.UMS.DataContract.csproj">
       <Project>{f2fe3d45-0fed-4072-9c04-7636d4df6589}</Project>
       <Name>Ryanstaurant.UMS.DataContract</Name>

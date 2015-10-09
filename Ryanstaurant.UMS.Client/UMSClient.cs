@@ -160,5 +160,13 @@ namespace Ryanstaurant.UMS.Client
             var result = _serviceClient.Login(userName, password);
             return !string.IsNullOrEmpty(result.SessionToken);
         }
+
+
+        public bool NewToken(string tokenKey, byte[] clientTokenBytes)
+        {
+            return _serviceClient.NewToken(tokenKey, clientTokenBytes);
+        }
+
+
     }
 }

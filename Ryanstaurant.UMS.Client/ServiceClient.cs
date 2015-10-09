@@ -32,7 +32,7 @@ namespace Ryanstaurant.UMS.Client
 
         public bool NewToken(string tokenKey, byte[] clientTokenBytes)
         {
-            throw new System.NotImplementedException();
+            return Channel.NewToken(tokenKey, clientTokenBytes);
         }
     }
 }

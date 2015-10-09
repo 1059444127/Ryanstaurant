@@ -104,6 +104,7 @@ namespace Ryanstaurant.OMS.DataContract
 
 
 
+
         public static Table ConvertFromEntity<T>(T entity) where T : new()
         {
             return DataContractAdaptor.LoadFrom<Table>(entity, typeof(T));

@@ -8,7 +8,7 @@ namespace Ryanstaurant.OMS.DataAccess
     public partial class OmsEntity : DbContext
     {
         public OmsEntity()
-            : base("name=OmsEntity")
+            : base("name=Oms")
         {
         }
 

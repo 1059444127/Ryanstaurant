@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Ryanstaurant.OMS.DataAccess;
 using Ryanstaurant.OMS.DataContract;
-using Ryanstaurant.OMS.IWorkSpace;
+using Ryanstaurant.OMS.DataContract.Utility;
 
 namespace Ryanstaurant.OMS.WorkSpace
 {
-    public class BllLayout : IBllLayout
+    public class BllLayout
     {
 
         private readonly OmsEntity _entity = new OmsEntity();
@@ -23,18 +23,28 @@ namespace Ryanstaurant.OMS.WorkSpace
 
         public IList<Table> GetTables(IList<string> tableIdList)
         {
-            var tables = new List<Table>();
-            if (tableIdList == null || !tableIdList.Any())
-                tables.AddRange(from t in _entity.OMS_Tables
-                    where t.IsInUse
-                    select Table.ConvertFromEntity(t));
-            else
+            try
             {
-                tables.AddRange(from t in _entity.OMS_Tables
-                    where tableIdList.Contains(t.ID.ToString()) && t.IsInUse
-                    select Table.ConvertFromEntity(t));
+                var tables = new List<Table>();
+                if (tableIdList == null || !tableIdList.Any())
+                {
+                    tables.AddRange((from t in _entity.OMS_Tables
+                        where t.Disabled == 0 && (t.CurrentStatus == 0 || t.CurrentStatus == 1 || t.CurrentStatus == 2)
+                        select t).ToList().ConvertAll(Table.ConvertFromEntity));
+                }
+                else
+                {
+                    tables.AddRange((from t in _entity.OMS_Tables
+                                    where tableIdList.Contains(t.ID.ToString()) && (t.Disabled == 0 && (t.CurrentStatus == 0 || t.CurrentStatus == 1 || t.CurrentStatus == 2))
+                                     select t).ToList().ConvertAll(Table.ConvertFromEntity));
+                }
+                return tables;
             }
-            return tables;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+           
 
         }
 
@@ -45,7 +55,7 @@ namespace Ryanstaurant.OMS.WorkSpace
             {
                 var tableInDb = (from t in _entity.OMS_Tables
                     where string.Equals(table.ID, t.ID.ToString(), StringComparison.InvariantCultureIgnoreCase)
-                          && t.IsInUse
+                          && t.Disabled == 0 && (t.CurrentStatus == 0 || t.CurrentStatus == 1 || t.CurrentStatus == 2)
                     select t).FirstOrDefault();
 
                 if (tableInDb == null)
@@ -65,10 +75,10 @@ namespace Ryanstaurant.OMS.WorkSpace
 
             _entity.SaveChanges();
             var idList = (from t in tables select t.ID.ToUpper()).ToList();
-            var returnTables = (from t in _entity.OMS_Tables
-                where t.IsInUse
+            var returnTables = ((from t in _entity.OMS_Tables
+                                where t.Disabled == 0 && (t.CurrentStatus == 0 || t.CurrentStatus == 1 || t.CurrentStatus == 2)
                       && idList.Contains(t.ID.ToString().ToUpper())
-                select Table.ConvertFromEntity(t)).ToList();
+                                 select t).ToList().ConvertAll(Table.ConvertFromEntity)).ToList();
 
             return returnTables;
 
@@ -105,7 +115,7 @@ namespace Ryanstaurant.OMS.WorkSpace
             {
                 var tableInDb = (from t in _entity.OMS_Tables
                     where string.Equals(t.ID.ToString(), table.ID, StringComparison.InvariantCultureIgnoreCase)
-                          && t.IsInUse
+                          && (t.Disabled == 0 && (t.CurrentStatus == 0 || t.CurrentStatus == 1 || t.CurrentStatus == 2))
                     select t).FirstOrDefault();
 
                 if (tableInDb == null)
@@ -138,7 +148,7 @@ namespace Ryanstaurant.OMS.WorkSpace
 
             var tableInDb = (from t in _entity.OMS_Tables
                 where string.Equals(t.ID.ToString(), table.ID, StringComparison.InvariantCultureIgnoreCase)
-                      && t.IsInUse
+                      && (t.Disabled == 0 && (t.CurrentStatus == 0 || t.CurrentStatus == 1 || t.CurrentStatus == 2))
                 select t).FirstOrDefault();
 
 

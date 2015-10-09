@@ -9,7 +9,7 @@ namespace Ryanstaurant.OMS.Interface
     {
         [OperationContract]
         Order Create(Order order, IList<Item> items);
-        [OperationContract]
+        [OperationContract(Name = "QueryById")]
         Order Query(string orderId);
         [OperationContract]
         Order Change(Order order);
@@ -25,7 +25,7 @@ namespace Ryanstaurant.OMS.Interface
         Bill GetBill(Order order);
         [OperationContract]
         Check PayCheck(Bill bill, List<Charge> charges);
-        [OperationContract]
+        [OperationContract(Name = "QueryByTime")]
         IList<Order> Query(string startDateTime, string endDateTime);
 
     }

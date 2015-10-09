@@ -1,57 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Ryanstaurant.OMS.Interface;
 using Ryanstaurant.OMS.DataContract;
+using Ryanstaurant.OMS.WorkSpace;
 
 namespace Ryanstaurant.OMS.Service
 {
     public class LayoutService:ILayoutService
     {
+        protected BllLayout BllLayout;
+
+
+        public LayoutService()
+        {
+            BllLayout = new BllLayout();
+        }
+
+
 
         public IList<Table> GetTables()
         {
-            throw new NotImplementedException();
+            return BllLayout.GetTables(null);
         }
 
         public IList<Table> GetTables(IList<string> tableIdList)
         {
-            throw new NotImplementedException();
+            return BllLayout.GetTables(tableIdList);
         }
 
         public void SetTable(List<Table> tables)
         {
-            throw new NotImplementedException();
+            BllLayout.SaveTables(tables);
         }
 
         public void RemoveTable(List<string> tableId)
         {
-            throw new NotImplementedException();
+            BllLayout.RemoveTables(tableId);
         }
 
         public Table CombineTable(List<Table> tables, Table combineTable)
         {
-            throw new NotImplementedException();
+            return BllLayout.CombineTable(tables, combineTable);
         }
 
-        public List<Table> SplitTable(Table table, List<Table> splitTables)
+        public IList<Table> SplitTable(Table table, List<Table> splitTables)
         {
-            throw new NotImplementedException();
+            return BllLayout.SplitTables(table, splitTables);
         }
 
         public IList<Table> UnCombineTable(Table combineTable)
         {
-            throw new NotImplementedException();
+            return BllLayout.UnCombineTable(combineTable);
         }
-
-        public Table UnSplitTable(List<Table> splitedTable)
-        {
-            throw new NotImplementedException();
-        }
-
 
         public Table UnSplitTable(Table splitedTable)
         {
-            throw new NotImplementedException();
+            return BllLayout.UnSplitTables(splitedTable);
         }
     }
 }

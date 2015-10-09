@@ -61,10 +61,6 @@
       <Project>{801f2b32-1f2e-49af-bd3e-0f8bda573e70}</Project>
       <Name>Ryanstaurant.OMS.DataContract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ryanstaurant.OMS.IWorkSpace\Ryanstaurant.OMS.IWorkSpace.csproj">
-      <Project>{18b8f7e9-e22d-4c0f-87cc-e16996f38b59}</Project>
-      <Name>Ryanstaurant.OMS.IWorkSpace</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

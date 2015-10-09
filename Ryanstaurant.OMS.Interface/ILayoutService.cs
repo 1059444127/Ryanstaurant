@@ -24,7 +24,7 @@ namespace Ryanstaurant.OMS.Interface
         Table CombineTable(List<Table> tables,Table combineTable);
 
         [OperationContract]
-        List<Table> SplitTable(Table table, List<Table> splitTables);
+        IList<Table> SplitTable(Table table, List<Table> splitTables);
 
         [OperationContract]
         IList<Table> UnCombineTable(Table combineTable);

@@ -8,7 +8,13 @@ namespace Ryanstaurant.GMS.WorkSpace
 {
     public class BllBase
     {
-        protected GmsEntity Entity;
+        protected GmsEntity Entity = new GmsEntity();
+
+        public BllBase()
+        {
+            
+        }
+
 
         public BllBase(GmsEntity entity)
         {

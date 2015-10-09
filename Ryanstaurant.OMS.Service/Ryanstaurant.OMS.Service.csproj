@@ -40,6 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LayoutService.cs" />
+    <Compile Include="MenuService.cs" />
+    <Compile Include="OMSService.cs" />
+    <Compile Include="OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +53,10 @@
     <ProjectReference Include="..\Ryanstaurant.OMS.Interface\Ryanstaurant.OMS.Interface.csproj">
       <Project>{72225290-3b7f-468f-ae62-50aecc031b74}</Project>
       <Name>Ryanstaurant.OMS.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ryanstaurant.OMS.WorkSpace\Ryanstaurant.OMS.WorkSpace.csproj">
+      <Project>{02e35091-977d-40a7-a4ee-14d5146310d2}</Project>
+      <Name>Ryanstaurant.OMS.WorkSpace</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

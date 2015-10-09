@@ -14,8 +14,12 @@ namespace Ryanstaurant.GMS.WorkSpace
     public class BllToken:BllBase, IBllToken
     {
 
+        public BllToken() { }
+
+
         public BllToken(GmsEntity entity) : base(entity)
         {
+
         }
 
 

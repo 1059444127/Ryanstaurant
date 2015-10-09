@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3013BCEA-3E06-4820-A58C-BCA0EB87C58C}</ProjectGuid>
+    <ProjectGuid>{469F3851-06FB-4647-9AAE-925835409940}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ryanstaurant.OMS.DataAccess</RootNamespace>
-    <AssemblyName>Ryanstaurant.OMS.DataAccess</AssemblyName>
+    <RootNamespace>Ryanstaurant.OMS.Client</RootNamespace>
+    <AssemblyName>Ryanstaurant.OMS.Client</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,19 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,25 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OmsEntity.cs" />
-    <Compile Include="OMS_Derates.cs" />
-    <Compile Include="OMS_ItemDerates.cs" />
-    <Compile Include="OMS_Items.cs" />
-    <Compile Include="OMS_Menu.cs" />
-    <Compile Include="OMS_MenuDetail.cs" />
-    <Compile Include="OMS_OrderDetail.cs" />
-    <Compile Include="OMS_Orders.cs" />
-    <Compile Include="OMS_SpecialRequests.cs" />
-    <Compile Include="OMS_TableRelations.cs" />
-    <Compile Include="OMS_Tables.cs" />
-    <Compile Include="OMS_Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Ryanstaurant.OMS.DataContract\Ryanstaurant.OMS.DataContract.csproj">
+      <Project>{801f2b32-1f2e-49af-bd3e-0f8bda573e70}</Project>
+      <Name>Ryanstaurant.OMS.DataContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ryanstaurant.OMS.Interface\Ryanstaurant.OMS.Interface.csproj">
+      <Project>{72225290-3b7f-468f-ae62-50aecc031b74}</Project>
+      <Name>Ryanstaurant.OMS.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
