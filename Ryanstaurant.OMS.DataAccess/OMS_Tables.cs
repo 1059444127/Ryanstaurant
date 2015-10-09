@@ -6,10 +6,11 @@ namespace Ryanstaurant.OMS.DataAccess
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Tables
+    public partial class OMS_Tables
     {
         public Guid ID { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string DisplayNo { get; set; }
 

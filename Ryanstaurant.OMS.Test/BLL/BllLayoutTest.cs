@@ -68,9 +68,9 @@ namespace Ryanstaurant.OMS.Test
         [TestMethod]
         public void TestGetTables()
         {
-            var data = new List<Tables>
+            var data = new List<OMS_Tables>
             {
-                new Tables
+                new OMS_Tables
                 {
                     ID = Guid.Parse("8C536DBB-F806-4AAD-A0F1-A43C3E686C54"),
                     CurrentStatus = 1,
@@ -81,7 +81,7 @@ namespace Ryanstaurant.OMS.Test
                     PosY = 0,
                     Width = 50
                 },
-                new Tables
+                new OMS_Tables
                 {
                     ID = Guid.Parse("8C536DBB-F806-4AAD-A0F1-A43C3E686C55"),
                     CurrentStatus = 1,
@@ -92,7 +92,7 @@ namespace Ryanstaurant.OMS.Test
                     PosY = 0,
                     Width = 50
                 },
-                new Tables
+                new OMS_Tables
                 {
                     ID = Guid.Parse("8C536DBB-F806-4AAD-A0F1-A43C3E686C56"),
                     CurrentStatus = 1,
@@ -105,14 +105,14 @@ namespace Ryanstaurant.OMS.Test
                 }
             }.AsQueryable();
 
-            var mockSet = new Mock<DbSet<Tables>>();
-            mockSet.As<IQueryable<Tables>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Tables>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Tables>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Tables>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            var mockSet = new Mock<DbSet<OMS_Tables>>();
+            mockSet.As<IQueryable<OMS_Tables>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<OMS_Tables>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<OMS_Tables>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<OMS_Tables>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
             var mockContext = new Mock<OmsEntity>();
-            mockContext.Setup(c => c.Tables).Returns(mockSet.Object);
+            mockContext.Setup(c => c.OMS_Tables).Returns(mockSet.Object);
 
 
             var bll = new BllLayout(mockContext.Object);
@@ -138,24 +138,24 @@ namespace Ryanstaurant.OMS.Test
 
 
 
-            var data = new List<Tables>().AsQueryable();
+            var data = new List<OMS_Tables>().AsQueryable();
 
-            var mockSet = new Mock<DbSet<Tables>>();
-            mockSet.As<IQueryable<Tables>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Tables>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Tables>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Tables>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            var mockSet = new Mock<DbSet<OMS_Tables>>();
+            mockSet.As<IQueryable<OMS_Tables>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<OMS_Tables>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<OMS_Tables>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<OMS_Tables>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
 
             var mockContext = new Mock<OmsEntity>();
-            mockContext.Setup(c => c.Tables).Returns(mockSet.Object);
+            mockContext.Setup(c => c.OMS_Tables).Returns(mockSet.Object);
 
 
             var bll = new BllLayout(mockContext.Object);
              bll.SaveTables(tables);
 
 
-            mockSet.Verify(m => m.Add(It.IsAny<Tables>()), Times.AtLeastOnce);
+            mockSet.Verify(m => m.Add(It.IsAny<OMS_Tables>()), Times.AtLeastOnce);
             mockContext.Verify(m => m.SaveChanges(), Times.AtLeastOnce()); 
 
         }
@@ -175,18 +175,18 @@ namespace Ryanstaurant.OMS.Test
             var combtable = Table.GetDefault("8C536DBB-F806-4AAD-A0F1-A43C3E686C57", "4");
 
 
-            var data = new List<TableRelations>().AsQueryable();
+            var data = new List<OMS_TableRelations>().AsQueryable();
 
-            var mockSet = new Mock<DbSet<TableRelations>>();
-            mockSet.As<IQueryable<TableRelations>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<TableRelations>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<TableRelations>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<TableRelations>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            var mockSet = new Mock<DbSet<OMS_TableRelations>>();
+            mockSet.As<IQueryable<OMS_TableRelations>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<OMS_TableRelations>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<OMS_TableRelations>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<OMS_TableRelations>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
 
-            var data1 = new List<Tables>
+            var data1 = new List<OMS_Tables>
             {
-                new Tables
+                new OMS_Tables
                 {
                     ID = Guid.Parse("8C536DBB-F806-4AAD-A0F1-A43C3E686C54"),
                     CurrentStatus = 1,
@@ -198,7 +198,7 @@ namespace Ryanstaurant.OMS.Test
                     Width = 50
                 },
 
-                new Tables
+                new OMS_Tables
                 {
                     ID = Guid.Parse("8C536DBB-F806-4AAD-A0F1-A43C3E686C55"),
                     CurrentStatus = 1,
@@ -209,7 +209,7 @@ namespace Ryanstaurant.OMS.Test
                     PosY = 0,
                     Width = 50
                 },
-                new Tables
+                new OMS_Tables
                 {
                     ID = Guid.Parse("8C536DBB-F806-4AAD-A0F1-A43C3E686C56"),
                     CurrentStatus = 1,
@@ -222,24 +222,24 @@ namespace Ryanstaurant.OMS.Test
                 }
             }.AsQueryable();
 
-            var mockSet1 = new Mock<DbSet<Tables>>();
-            mockSet1.As<IQueryable<Tables>>().Setup(m => m.Provider).Returns(data1.Provider);
-            mockSet1.As<IQueryable<Tables>>().Setup(m => m.Expression).Returns(data1.Expression);
-            mockSet1.As<IQueryable<Tables>>().Setup(m => m.ElementType).Returns(data1.ElementType);
-            mockSet1.As<IQueryable<Tables>>().Setup(m => m.GetEnumerator()).Returns(data1.GetEnumerator());
+            var mockSet1 = new Mock<DbSet<OMS_Tables>>();
+            mockSet1.As<IQueryable<OMS_Tables>>().Setup(m => m.Provider).Returns(data1.Provider);
+            mockSet1.As<IQueryable<OMS_Tables>>().Setup(m => m.Expression).Returns(data1.Expression);
+            mockSet1.As<IQueryable<OMS_Tables>>().Setup(m => m.ElementType).Returns(data1.ElementType);
+            mockSet1.As<IQueryable<OMS_Tables>>().Setup(m => m.GetEnumerator()).Returns(data1.GetEnumerator());
 
 
 
             var mockContext = new Mock<OmsEntity>();
-            mockContext.Setup(c => c.TableRelations).Returns(mockSet.Object);
-            mockContext.Setup(c => c.Tables).Returns(mockSet1.Object);
+            mockContext.Setup(c => c.OMS_TableRelations).Returns(mockSet.Object);
+            mockContext.Setup(c => c.OMS_Tables).Returns(mockSet1.Object);
 
 
             var bll = new BllLayout(mockContext.Object);
             bll.CombineTable(tables, combtable);
 
-            mockSet1.Verify(m => m.Add(It.IsAny<Tables>()), Times.Once);
-            mockSet.Verify(m => m.Add(It.IsAny<TableRelations>()), Times.Exactly(tables.Count));
+            mockSet1.Verify(m => m.Add(It.IsAny<OMS_Tables>()), Times.Once);
+            mockSet.Verify(m => m.Add(It.IsAny<OMS_TableRelations>()), Times.Exactly(tables.Count));
             mockContext.Verify(m => m.SaveChanges(), Times.Once);
 
         }

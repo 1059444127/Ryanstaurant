@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Ryanstaurant.OMS.DataAccess;
 using Ryanstaurant.OMS.DataContract;
@@ -11,7 +10,10 @@ namespace Ryanstaurant.OMS.WorkSpace
     public class BllLayout : IBllLayout
     {
 
-        private readonly OmsEntity _entity;
+        private readonly OmsEntity _entity = new OmsEntity();
+
+        public BllLayout() { }
+
 
         public BllLayout(OmsEntity omsEntity)
         {
@@ -23,12 +25,12 @@ namespace Ryanstaurant.OMS.WorkSpace
         {
             var tables = new List<Table>();
             if (tableIdList == null || !tableIdList.Any())
-                tables.AddRange(from t in _entity.Tables
+                tables.AddRange(from t in _entity.OMS_Tables
                     where t.IsInUse
                     select Table.ConvertFromEntity(t));
             else
             {
-                tables.AddRange(from t in _entity.Tables
+                tables.AddRange(from t in _entity.OMS_Tables
                     where tableIdList.Contains(t.ID.ToString()) && t.IsInUse
                     select Table.ConvertFromEntity(t));
             }
@@ -41,14 +43,14 @@ namespace Ryanstaurant.OMS.WorkSpace
         {
             foreach (var table in tables)
             {
-                var tableInDb = (from t in _entity.Tables
+                var tableInDb = (from t in _entity.OMS_Tables
                     where string.Equals(table.ID, t.ID.ToString(), StringComparison.InvariantCultureIgnoreCase)
                           && t.IsInUse
                     select t).FirstOrDefault();
 
                 if (tableInDb == null)
                 {
-                    _entity.Tables.Add(table.ToEntity<Tables>());
+                    _entity.OMS_Tables.Add(table.ToEntity<OMS_Tables>());
                 }
                 else
                 {
@@ -63,7 +65,7 @@ namespace Ryanstaurant.OMS.WorkSpace
 
             _entity.SaveChanges();
             var idList = (from t in tables select t.ID.ToUpper()).ToList();
-            var returnTables = (from t in _entity.Tables
+            var returnTables = (from t in _entity.OMS_Tables
                 where t.IsInUse
                       && idList.Contains(t.ID.ToString().ToUpper())
                 select Table.ConvertFromEntity(t)).ToList();
@@ -77,7 +79,7 @@ namespace Ryanstaurant.OMS.WorkSpace
         {
             foreach (var tableId in tableIds)
             {
-                var tablesInDb = (from t in _entity.Tables
+                var tablesInDb = (from t in _entity.OMS_Tables
                     where string.Equals(tableId, t.ID.ToString(), StringComparison.InvariantCultureIgnoreCase)
                     select t).FirstOrDefault();
 
@@ -94,14 +96,14 @@ namespace Ryanstaurant.OMS.WorkSpace
             //验证状态，如果有已经合并或者拆分的桌子，则抛出异常，恢复需要使用UncombineTable
 
             //添加新的合并桌
-            var newTable = _entity.Tables.Add(combineTable.ToEntity<Tables>());
+            var newTable = _entity.OMS_Tables.Add(combineTable.ToEntity<OMS_Tables>());
 
             if (newTable != null)
                 combineTable.ID = newTable.ToString();
 
             foreach (var table in tables)
             {
-                var tableInDb = (from t in _entity.Tables
+                var tableInDb = (from t in _entity.OMS_Tables
                     where string.Equals(t.ID.ToString(), table.ID, StringComparison.InvariantCultureIgnoreCase)
                           && t.IsInUse
                     select t).FirstOrDefault();
@@ -111,7 +113,7 @@ namespace Ryanstaurant.OMS.WorkSpace
 
                 tableInDb.CurrentStatus = (int)Table.TableStatus.Combined;
 
-                _entity.TableRelations.Add(new TableRelations
+                _entity.OMS_TableRelations.Add(new OMS_TableRelations
                 {
                     Disabled = 0,
                     TableID = Guid.Parse(combineTable.ID),
@@ -134,7 +136,7 @@ namespace Ryanstaurant.OMS.WorkSpace
             splitTables = SaveTables(splitTables).ToList();
 
 
-            var tableInDb = (from t in _entity.Tables
+            var tableInDb = (from t in _entity.OMS_Tables
                 where string.Equals(t.ID.ToString(), table.ID, StringComparison.InvariantCultureIgnoreCase)
                       && t.IsInUse
                 select t).FirstOrDefault();
@@ -146,7 +148,7 @@ namespace Ryanstaurant.OMS.WorkSpace
 
             foreach (var splitTable in splitTables)
             {
-                _entity.TableRelations.Add(new TableRelations
+                _entity.OMS_TableRelations.Add(new OMS_TableRelations
                 {
                     Disabled = 0,
                     RelateTableID = Guid.Parse(splitTable.ID),
@@ -168,7 +170,7 @@ namespace Ryanstaurant.OMS.WorkSpace
         {
             var orgTables = new List<Table>();
 
-            var combineTableIds = (from tr in _entity.TableRelations
+            var combineTableIds = (from tr in _entity.OMS_TableRelations
                 where
                     tr.Disabled == 0 &&
                     string.Equals(tr.TableID.ToString(), combinedTable.ID,
@@ -177,7 +179,7 @@ namespace Ryanstaurant.OMS.WorkSpace
 
             foreach (var combineTableId in combineTableIds)
             {
-                var orgTable = (from t in _entity.Tables
+                var orgTable = (from t in _entity.OMS_Tables
                     where t.CurrentStatus == (int)Table.TableStatus.Combined
                           && t.ID == combineTableId
                     select t).FirstOrDefault();
@@ -190,7 +192,7 @@ namespace Ryanstaurant.OMS.WorkSpace
                 orgTables.Add(Table.ConvertFromEntity(orgTable));
             }
 
-            var tableInDb = _entity.Tables.Find(Guid.Parse(combinedTable.ID));
+            var tableInDb = _entity.OMS_Tables.Find(Guid.Parse(combinedTable.ID));
             tableInDb.Disabled = 1;
 
             _entity.SaveChanges();
@@ -201,7 +203,7 @@ namespace Ryanstaurant.OMS.WorkSpace
 
         public Table UnSplitTables(Table splitedTable)
         {
-            var splitTableRelation = (from tr in _entity.TableRelations
+            var splitTableRelation = (from tr in _entity.OMS_TableRelations
                 where tr.Disabled == 0
                       &&
                       string.Equals(tr.RelateTableID.ToString(), splitedTable.ID,
@@ -213,12 +215,12 @@ namespace Ryanstaurant.OMS.WorkSpace
                 }).ToList();
 
 
-            var orgTable = _entity.Tables.Find(splitTableRelation[0].TableID);
+            var orgTable = _entity.OMS_Tables.Find(splitTableRelation[0].TableID);
             orgTable.CurrentStatus = (int)Table.TableStatus.Spare;
 
             foreach (var tr in splitTableRelation)
             {
-                _entity.Tables.Find(tr.RelateTableID).Disabled = 1;
+                _entity.OMS_Tables.Find(tr.RelateTableID).Disabled = 1;
             }
 
             _entity.SaveChanges();

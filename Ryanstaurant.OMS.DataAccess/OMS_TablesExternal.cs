@@ -1,6 +1,6 @@
 ﻿namespace Ryanstaurant.OMS.DataAccess
 {
-    public partial class Tables
+    public partial class OMS_Tables
     {
         public bool IsInUse
         {

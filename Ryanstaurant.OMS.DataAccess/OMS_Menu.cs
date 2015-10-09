@@ -6,8 +6,7 @@ namespace Ryanstaurant.OMS.DataAccess
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Menu")]
-    public partial class Menu
+    public partial class OMS_Menu
     {
         public Guid ID { get; set; }
 

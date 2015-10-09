@@ -6,7 +6,7 @@ namespace Ryanstaurant.OMS.DataAccess
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Orders
+    public partial class OMS_Orders
     {
         public Guid ID { get; set; }
 
@@ -24,17 +24,20 @@ namespace Ryanstaurant.OMS.DataAccess
 
         public Guid ChangeID { get; set; }
 
-        public string PendingReason { get; set; }
+        public Guid TableID { get; set; }
 
-        public string RevokeReason { get; set; }
-
-        public string CancelReason { get; set; }
-
-        public Guid TableId { get; set; }
+        public int IsReserved { get; set; }
 
         public int Status { get; set; }
 
-        public int IsReserved { get; set; }
+        [StringLength(250)]
+        public string PendingReason { get; set; }
+
+        [StringLength(250)]
+        public string RevokeReason { get; set; }
+
+        [StringLength(250)]
+        public string CancelReason { get; set; }
 
         public int Disabled { get; set; }
     }

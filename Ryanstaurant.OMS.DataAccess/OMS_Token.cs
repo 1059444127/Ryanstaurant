@@ -6,15 +6,11 @@ namespace Ryanstaurant.OMS.DataAccess
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("MenuItem")]
-    public partial class MenuItem
+    public partial class OMS_Token
     {
         [Key]
-        [Column(Order = 0)]
-        public Guid MenuID { get; set; }
+        public Guid TokenKey { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        public Guid ItemID { get; set; }
+        public DateTime ExpireTime { get; set; }
     }
 }

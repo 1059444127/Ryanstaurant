@@ -29,7 +29,8 @@ namespace Ryanstaurant.UMS.Client
         }
 
 
-        public void NewToken(string tokenKey, string clientToken)
+
+        public bool NewToken(string tokenKey, byte[] clientTokenBytes)
         {
             throw new System.NotImplementedException();
         }

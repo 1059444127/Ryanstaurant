@@ -6,8 +6,7 @@ namespace Ryanstaurant.OMS.DataAccess
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("OrderDetail")]
-    public partial class OrderDetail
+    public partial class OMS_OrderDetail
     {
         [Key]
         [Column(Order = 0)]
@@ -18,15 +17,19 @@ namespace Ryanstaurant.OMS.DataAccess
         public Guid ItemID { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal? OraginPrice { get; set; }
+        public decimal OraginPrice { get; set; }
 
         public Guid? DiscountID { get; set; }
 
         public Guid? DerateID { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal? Price { get; set; }
+        public decimal Price { get; set; }
 
-        public int? Disabled { get; set; }
+        public int Disabled { get; set; }
+
+        public int SpecialRequest { get; set; }
+
+        public decimal Quantity { get; set; }
     }
 }

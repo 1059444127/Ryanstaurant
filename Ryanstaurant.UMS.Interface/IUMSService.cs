@@ -18,7 +18,7 @@ namespace Ryanstaurant.UMS.Interface
 
 
         [OperationContract]
-        void NewToken(string tokenKey, string clientToken);
+        bool NewToken(string tokenKey, byte[] clientTokenBytes);
 
     }
 }

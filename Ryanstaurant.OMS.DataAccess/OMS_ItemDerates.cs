@@ -6,7 +6,7 @@ namespace Ryanstaurant.OMS.DataAccess
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class ItemDerates
+    public partial class OMS_ItemDerates
     {
         [Key]
         [Column(Order = 0)]

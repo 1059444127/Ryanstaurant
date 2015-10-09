@@ -50,16 +50,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Derates.cs" />
-    <Compile Include="ItemDerates.cs" />
-    <Compile Include="Menu.cs" />
-    <Compile Include="MenuItem.cs" />
     <Compile Include="OmsEntity.cs" />
-    <Compile Include="OrderDetail.cs" />
+    <Compile Include="OMS_Derates.cs" />
+    <Compile Include="OMS_ItemDerates.cs" />
+    <Compile Include="OMS_Items.cs" />
+    <Compile Include="OMS_Menu.cs" />
+    <Compile Include="OMS_MenuDetail.cs" />
+    <Compile Include="OMS_OrderDetail.cs" />
+    <Compile Include="OMS_Orders.cs" />
+    <Compile Include="OMS_SpecialRequests.cs" />
+    <Compile Include="OMS_TableRelations.cs" />
+    <Compile Include="OMS_Tables.cs" />
+    <Compile Include="OMS_Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TableRelations.cs" />
-    <Compile Include="Tables.cs" />
-    <Compile Include="TablesExternal.cs" />
+    <Compile Include="OMS_TablesExternal.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

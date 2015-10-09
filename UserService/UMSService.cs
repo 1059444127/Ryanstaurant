@@ -13,6 +13,7 @@ namespace Ryanstaurant.UMS.Service
     public class UMSService:IUMSService
     {
 
+
         protected ResultEntity LoadBusinessMethod(Func<List<ItemContent>> methodHandler)
         {
             try
@@ -164,9 +165,9 @@ namespace Ryanstaurant.UMS.Service
         }
 
 
-        public void NewToken(string tokenKey, string clientToken)
+        public bool NewToken(string tokenKey,byte[] clientTokenBytes)
         {
-            throw new NotImplementedException();
+            return new BllToken().NewToken(tokenKey, clientTokenBytes);
         }
     }
 }

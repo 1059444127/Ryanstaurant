@@ -6,14 +6,19 @@ namespace Ryanstaurant.OMS.DataAccess
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("tableimageconfig")]
-    public partial class tableimageconfig
+    public partial class OMS_SpecialRequests
     {
-        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Status { get; set; }
+        public int ID { get; set; }
 
-        [StringLength(200)]
-        public string PicURL { get; set; }
+        [Required]
+        [StringLength(250)]
+        public string Name { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string RequestGroup { get; set; }
+
+        public int Disabled { get; set; }
     }
 }

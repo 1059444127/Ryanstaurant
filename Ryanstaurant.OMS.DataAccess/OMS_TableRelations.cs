@@ -6,7 +6,7 @@ namespace Ryanstaurant.OMS.DataAccess
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class TableRelations
+    public partial class OMS_TableRelations
     {
         [Key]
         [Column(Order = 0)]

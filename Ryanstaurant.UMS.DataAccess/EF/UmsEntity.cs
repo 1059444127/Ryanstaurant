@@ -16,6 +16,7 @@ namespace Ryanstaurant.UMS.DataAccess.EF
         public virtual DbSet<UMS_Employees> UMS_Employees { get; set; }
         public virtual DbSet<UMS_EmpRoles> UMS_EmpRoles { get; set; }
         public virtual DbSet<UMS_Roles> UMS_Roles { get; set; }
+        public virtual DbSet<UMS_Token> UMS_Tokens { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

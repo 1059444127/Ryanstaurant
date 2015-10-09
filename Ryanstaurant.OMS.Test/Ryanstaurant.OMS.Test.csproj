@@ -66,6 +66,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BLL\BllLayoutTest.cs" />
+    <Compile Include="BLL\BllTokenTest.cs" />
     <Compile Include="DataContract\DataContractAdaptorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
