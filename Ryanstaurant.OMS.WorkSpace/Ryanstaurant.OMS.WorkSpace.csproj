@@ -48,7 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BllBase.cs" />
     <Compile Include="BllLayout.cs" />
+    <Compile Include="BllMenu.cs" />
     <Compile Include="BllToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -15,7 +15,7 @@ namespace Ryanstaurant.OMS.DataAccess
         public virtual DbSet<OMS_Derates> OMS_Derates { get; set; }
         public virtual DbSet<OMS_ItemDerates> OMS_ItemDerates { get; set; }
         public virtual DbSet<OMS_Items> OMS_Items { get; set; }
-        public virtual DbSet<OMS_Menu> OMS_Menu { get; set; }
+        public virtual DbSet<OMS_Menus> OMS_Menus { get; set; }
         public virtual DbSet<OMS_MenuDetail> OMS_MenuDetail { get; set; }
         public virtual DbSet<OMS_OrderDetail> OMS_OrderDetail { get; set; }
         public virtual DbSet<OMS_Orders> OMS_Orders { get; set; }
@@ -58,15 +58,15 @@ namespace Ryanstaurant.OMS.DataAccess
                 .Property(e => e.ChildIdList)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<OMS_Menu>()
+            modelBuilder.Entity<OMS_Menus>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<OMS_Menu>()
+            modelBuilder.Entity<OMS_Menus>()
                 .Property(e => e.Description)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<OMS_Menu>()
+            modelBuilder.Entity<OMS_Menus>()
                 .Property(e => e.SubDescription)
                 .IsUnicode(false);
 

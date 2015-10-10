@@ -19,5 +19,11 @@ namespace Ryanstaurant.OMS.DataContract
         [DataMember]
         public string Description { get; set; }
 
+        [DataMember]
+        public string SubDescription { get; set; }
+
+        [DataMember]
+        public string SortOrder { get; set; }
+
     }
 }

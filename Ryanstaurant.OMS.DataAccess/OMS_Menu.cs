@@ -6,7 +6,7 @@ namespace Ryanstaurant.OMS.DataAccess
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class OMS_Menu
+    public partial class OMS_Menus
     {
         public Guid ID { get; set; }
 
@@ -19,8 +19,8 @@ namespace Ryanstaurant.OMS.DataAccess
         [StringLength(500)]
         public string SubDescription { get; set; }
 
-        public Guid? ParentID { get; set; }
-
         public int? SortOrder { get; set; }
+
+        public int Disabled { get; set; }
     }
 }
