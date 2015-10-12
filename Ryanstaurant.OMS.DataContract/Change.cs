@@ -15,15 +15,7 @@ namespace Ryanstaurant.OMS.DataContract
             /// <summary>
             /// 现金
             /// </summary>
-            Cash,
-            /// <summary>
-            /// 充值卡
-            /// </summary>
-            DebitCard,
-            /// <summary>
-            /// 优惠券
-            /// </summary>
-            Coupon
+            Cash
         }
 
         [DataMember]

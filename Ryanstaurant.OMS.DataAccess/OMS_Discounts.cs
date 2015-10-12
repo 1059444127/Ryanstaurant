@@ -6,18 +6,21 @@ namespace Ryanstaurant.OMS.DataAccess
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class OMS_SpecialRequests
+    public partial class OMS_Discounts
     {
         public Guid ID { get; set; }
 
-        [Required]
-        [StringLength(250)]
+        [StringLength(100)]
         public string Name { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string RequestGroup { get; set; }
+        [StringLength(250)]
+        public string Description { get; set; }
 
-        public int Disabled { get; set; }
+        public decimal? Volumn { get; set; }
+
+        [Column(TypeName = "money")]
+        public decimal? DiscountLine { get; set; }
+
+        public int? DiscountType { get; set; }
     }
 }

@@ -8,15 +8,21 @@ namespace Ryanstaurant.OMS.Interface
     public interface IOrderService
     {
         [OperationContract]
-        Order Create(Order order, IList<Item> items);
-        [OperationContract(Name = "QueryById")]
-        Order Query(string orderId);
+        Order CreateReservation(Order order);
         [OperationContract]
-        Order Change(Order order);
+        Order CreateOrder(Order order, IList<Item> items);
+        [OperationContract(Name = "QueryOrderById")]
+        Order QueryOrder(string orderId);
         [OperationContract]
-        Order Attach(string orderId, IList<Item> items);
+        void ChangeOrder(Order order, IList<Item> items);
         [OperationContract]
-        Order Revoke(string orderId);
+        void AttachOrder(string orderId, IList<Item> items);
+        [OperationContract]
+        void PendingOrder(string orderId, string pendingReason);
+        [OperationContract]
+        void RevokeOrder(string orderId, string revokeReason);
+        [OperationContract]
+        void CancelOrder(string orderId, string cancelReason);
         [OperationContract]
         Order CombineOrder(List<Order> orders);
         [OperationContract]
@@ -25,8 +31,8 @@ namespace Ryanstaurant.OMS.Interface
         Bill GetBill(Order order);
         [OperationContract]
         Check PayCheck(Bill bill, List<Charge> charges);
-        [OperationContract(Name = "QueryByTime")]
-        IList<Order> Query(string startDateTime, string endDateTime);
+        [OperationContract(Name = "QueryOrderByTime")]
+        IList<Order> QueryOrder(string startDateTime, string endDateTime);
 
     }
 }

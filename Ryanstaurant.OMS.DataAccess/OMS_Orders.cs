@@ -10,19 +10,11 @@ namespace Ryanstaurant.OMS.DataAccess
     {
         public Guid ID { get; set; }
 
-        public Guid DiscountID { get; set; }
-
-        public Guid DerateID { get; set; }
-
         [Column(TypeName = "money")]
         public decimal SubTotal { get; set; }
 
         [Column(TypeName = "money")]
         public decimal Total { get; set; }
-
-        public Guid ChargeID { get; set; }
-
-        public Guid ChangeID { get; set; }
 
         public Guid TableID { get; set; }
 

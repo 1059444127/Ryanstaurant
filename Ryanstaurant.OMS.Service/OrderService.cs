@@ -2,59 +2,78 @@
 using System.Collections.Generic;
 using Ryanstaurant.OMS.DataContract;
 using Ryanstaurant.OMS.Interface;
+using Ryanstaurant.OMS.WorkSpace;
 
 namespace Ryanstaurant.OMS.Service
 {
     public class OrderService:IOrderService
     {
-        public Order Create(Order order, IList<Item> items)
+        private readonly BllOrder bllOrder = new BllOrder();
+
+
+        public Order CreateReservation(Order order)
         {
-            throw new NotImplementedException();
+            return bllOrder.Reserve(order);
         }
 
-        public Order Query(string orderId)
+        public Order CreateOrder(Order order, IList<Item> items)
         {
-            throw new NotImplementedException();
+            return bllOrder.Add(order, items);
         }
 
-        public Order Change(Order order)
+        public Order QueryOrder(string orderId)
         {
-            throw new NotImplementedException();
+            return bllOrder.Get(orderId);
         }
 
-        public Order Attach(string orderId, IList<Item> items)
+        public void ChangeOrder(Order order, IList<Item> items)
         {
-            throw new NotImplementedException();
+            bllOrder.Save(order, items);
         }
 
-        public Order Revoke(string orderId)
+        public void AttachOrder(string orderId, IList<Item> items)
         {
-            throw new NotImplementedException();
+            bllOrder.Save(orderId, items);
+        }
+
+        public void PendingOrder(string orderId, string pendingReason)
+        {
+            bllOrder.Pending(orderId, pendingReason);
+        }
+
+        public void RevokeOrder(string orderId, string revokeReason)
+        {
+            bllOrder.Revoke(orderId, revokeReason);
+        }
+
+        public void CancelOrder(string orderId, string cancelReason)
+        {
+            bllOrder.Cancel(orderId, cancelReason);
         }
 
         public Order CombineOrder(List<Order> orders)
         {
-            throw new NotImplementedException();
+            return bllOrder.Combine(orders);
         }
 
         public IList<Order> SplitOrder(string orderId, IList<Order> orders)
         {
-            throw new NotImplementedException();
+            return bllOrder.Split(orderId, orders);
         }
 
         public Bill GetBill(Order order)
         {
-            throw new NotImplementedException();
+            return bllOrder.GetBill(order);
         }
 
         public Check PayCheck(Bill bill, List<Charge> charges)
         {
-            throw new NotImplementedException();
+            return bllOrder.Pay(bill, charges);
         }
 
-        public IList<Order> Query(string startDateTime, string endDateTime)
+        public IList<Order> QueryOrder(string startDateTime, string endDateTime)
         {
-            throw new NotImplementedException();
+            return bllOrder.Get(startDateTime, endDateTime);
         }
     }
 }

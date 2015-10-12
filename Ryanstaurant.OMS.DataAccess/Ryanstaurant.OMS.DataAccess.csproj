@@ -51,13 +51,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OmsEntity.cs" />
+    <Compile Include="OMS_Changes.cs" />
+    <Compile Include="OMS_Charges.cs" />
     <Compile Include="OMS_Derates.cs" />
+    <Compile Include="OMS_Discounts.cs" />
     <Compile Include="OMS_ItemDerates.cs" />
     <Compile Include="OMS_Items.cs" />
-    <Compile Include="OMS_Menu.cs" />
     <Compile Include="OMS_MenuDetail.cs" />
+    <Compile Include="OMS_Menus.cs" />
+    <Compile Include="OMS_OrderChanges.cs" />
+    <Compile Include="OMS_OrderCharges.cs" />
     <Compile Include="OMS_OrderDetail.cs" />
+    <Compile Include="OMS_OrderDiscounts.cs" />
     <Compile Include="OMS_Orders.cs" />
+    <Compile Include="OMS_SpecialRequestDetail.cs" />
     <Compile Include="OMS_SpecialRequests.cs" />
     <Compile Include="OMS_TableRelations.cs" />
     <Compile Include="OMS_Tables.cs" />

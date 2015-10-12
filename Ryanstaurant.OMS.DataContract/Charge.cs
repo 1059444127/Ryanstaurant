@@ -13,13 +13,13 @@ namespace Ryanstaurant.OMS.DataContract
         public enum ChargeType
         {
             /// <summary>
-            /// 信用卡
-            /// </summary>
-            CreditCard,
-            /// <summary>
             /// 现金
             /// </summary>
             Cash,
+            /// <summary>
+            /// 信用卡
+            /// </summary>
+            CreditCard,
             /// <summary>
             /// 支票
             /// </summary>

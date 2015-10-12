@@ -22,56 +22,6 @@ namespace Ryanstaurant.OMS.Service
 
 
 
-        public Order Create(Order order, IList<Item> items)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Order Query(string orderId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Order Change(Order order)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Order Attach(string orderId, IList<Item> items)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Order Revoke(string orderId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Order CombineOrder(List<Order> orders)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<Order> SplitOrder(string orderId, IList<Order> orders)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Bill GetBill(Order order)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Check PayCheck(Bill bill, List<Charge> charges)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<Order> Query(string startDateTime, string endDateTime)
-        {
-            throw new NotImplementedException();
-        }
-
         public IList<Table> GetTables()
         {
             return _layoutService.GetTables();
@@ -114,32 +64,97 @@ namespace Ryanstaurant.OMS.Service
 
         public IList<Menu> GetMenus()
         {
-            throw new NotImplementedException();
+            return _menuService.GetMenus();
         }
 
         public Menu AddMenu(Menu menu)
         {
-            throw new NotImplementedException();
+            return _menuService.AddMenu(menu);
         }
 
         public Menu ChangeMenu(Menu menu)
         {
-            throw new NotImplementedException();
+            return _menuService.ChangeMenu(menu);
         }
 
         public Menu DisableMenu(Menu menu)
         {
-            throw new NotImplementedException();
+            return _menuService.DisableMenu(menu);
         }
 
         public Menu EnableMenu(Menu menu)
         {
-            throw new NotImplementedException();
+            return _menuService.EnableMenu(menu);
         }
 
         public void RemoveMenu(Menu menu)
         {
-            throw new NotImplementedException();
+            _menuService.RemoveMenu(menu);
+        }
+
+        public Order CreateReservation(Order order)
+        {
+            return _orderService.CreateReservation(order);
+        }
+
+        public Order CreateOrder(Order order, IList<Item> items)
+        {
+            return _orderService.CreateOrder(order, items);
+        }
+
+        public Order QueryOrder(string orderId)
+        {
+            return _orderService.QueryOrder(orderId);
+        }
+
+        public void ChangeOrder(Order order, IList<Item> items)
+        {
+            _orderService.ChangeOrder(order, items);
+        }
+
+        public void AttachOrder(string orderId, IList<Item> items)
+        {
+            _orderService.AttachOrder(orderId, items);
+        }
+
+        public void PendingOrder(string orderId, string pendingReason)
+        {
+            _orderService.PendingOrder(orderId, pendingReason);
+        }
+
+        public void RevokeOrder(string orderId, string revokeReason)
+        {
+            _orderService.RevokeOrder(orderId, revokeReason);
+        }
+
+        public void CancelOrder(string orderId, string cancelReason)
+        {
+            _orderService.CancelOrder(orderId, cancelReason);
+        }
+
+        public Order CombineOrder(List<Order> orders)
+        {
+            return _orderService.CombineOrder(orders);
+        }
+
+        public IList<Order> SplitOrder(string orderId, IList<Order> orders)
+        {
+            return _orderService.SplitOrder(orderId, orders);
+        }
+
+        public Bill GetBill(Order order)
+        {
+            return _orderService.GetBill(order);
+        }
+
+        public Check PayCheck(Bill bill, List<Charge> charges)
+        {
+            return _orderService.PayCheck(bill, charges);
+        }
+
+        public IList<Order> QueryOrder(string startDateTime, string endDateTime)
+        {
+            return _orderService.QueryOrder(startDateTime, endDateTime);
         }
     }
 }

@@ -19,17 +19,19 @@ namespace Ryanstaurant.OMS.DataAccess
         [Column(TypeName = "money")]
         public decimal OraginPrice { get; set; }
 
-        public Guid? DiscountID { get; set; }
-
-        public Guid? DerateID { get; set; }
-
         [Column(TypeName = "money")]
         public decimal Price { get; set; }
 
         public int Disabled { get; set; }
 
-        public int SpecialRequest { get; set; }
-
         public decimal Quantity { get; set; }
+
+        [StringLength(250)]
+        public string RevokeReason { get; set; }
+
+        [StringLength(250)]
+        public string CancelReason { get; set; }
+
+        public int Status { get; set; }
     }
 }
