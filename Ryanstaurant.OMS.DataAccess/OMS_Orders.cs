@@ -26,9 +26,6 @@ namespace Ryanstaurant.OMS.DataAccess
         public string PendingReason { get; set; }
 
         [StringLength(250)]
-        public string RevokeReason { get; set; }
-
-        [StringLength(250)]
         public string CancelReason { get; set; }
 
         public int Disabled { get; set; }

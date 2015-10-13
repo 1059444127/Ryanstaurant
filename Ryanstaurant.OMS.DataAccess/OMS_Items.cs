@@ -26,7 +26,5 @@ namespace Ryanstaurant.OMS.DataAccess
         public int ItemType { get; set; }
 
         public int Disabled { get; set; }
-
-        public string ChildIdList { get; set; }
     }
 }

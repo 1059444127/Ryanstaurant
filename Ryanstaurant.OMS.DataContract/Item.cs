@@ -7,6 +7,15 @@ namespace Ryanstaurant.OMS.DataContract
     [DataContract]
     public class Item
     {
+        public enum OrderItemStatus
+        {
+            Normal=0,
+            Pending=1,
+            Cancel=2
+        }
+
+
+
         [Flags]
         public enum ItemType
         {
@@ -33,7 +42,9 @@ namespace Ryanstaurant.OMS.DataContract
         [DataMember]
         public ItemType Type { get; set; }
         [DataMember]
-        public IList<Item> Items { get; set; } 
+        public IList<Item> Items { get; set; }
+        [DataMember]
+        public OrderItemStatus Status { get; set; }
 
 
     }

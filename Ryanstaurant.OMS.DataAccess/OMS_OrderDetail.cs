@@ -27,9 +27,6 @@ namespace Ryanstaurant.OMS.DataAccess
         public decimal Quantity { get; set; }
 
         [StringLength(250)]
-        public string RevokeReason { get; set; }
-
-        [StringLength(250)]
         public string CancelReason { get; set; }
 
         public int Status { get; set; }

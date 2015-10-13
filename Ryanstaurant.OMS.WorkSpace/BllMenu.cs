@@ -35,19 +35,19 @@ namespace Ryanstaurant.OMS.WorkSpace
             item.Price = dbItem.Price.ToString(CultureInfo.InvariantCulture);
             item.Type = (Item.ItemType) Enum.Parse(typeof (Item.ItemType), dbItem.ItemType.ToString(CultureInfo.InvariantCulture));
 
-            if (string.IsNullOrEmpty(dbItem.ChildIdList))
-                return item;
+            //if (string.IsNullOrEmpty(dbItem.ChildIdList))
+            //    return item;
 
-            foreach (var childId in dbItem.ChildIdList.Split(new char[]{','},StringSplitOptions.RemoveEmptyEntries))
-            {
-                if (item.Items==null) item.Items = new List<Item>();
+            //foreach (var childId in dbItem.ChildIdList.Split(new char[]{','},StringSplitOptions.RemoveEmptyEntries))
+            //{
+            //    if (item.Items==null) item.Items = new List<Item>();
 
-                var childItem = LoadItems(dbItemses, new Item {ID = childId});
+            //    var childItem = LoadItems(dbItemses, new Item {ID = childId});
 
-                if (childItem != null)
-                    item.Items.Add(childItem);
+            //    if (childItem != null)
+            //        item.Items.Add(childItem);
 
-            }
+            //}
 
             return item;
 

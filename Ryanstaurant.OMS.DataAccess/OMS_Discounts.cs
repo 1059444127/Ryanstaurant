@@ -16,11 +16,15 @@ namespace Ryanstaurant.OMS.DataAccess
         [StringLength(250)]
         public string Description { get; set; }
 
-        public decimal? Volumn { get; set; }
+        public decimal Quota { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal? DiscountLine { get; set; }
+        public decimal DiscountLine { get; set; }
 
-        public int? DiscountType { get; set; }
+        public int DiscountType { get; set; }
+
+        public DateTime StartTime { get; set; }
+
+        public DateTime EndTime { get; set; }
     }
 }

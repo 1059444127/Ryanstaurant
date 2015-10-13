@@ -6,30 +6,20 @@ namespace Ryanstaurant.OMS.DataAccess
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class OMS_Derates
+    public partial class OMS_Combos
     {
         public Guid ID { get; set; }
 
-        [StringLength(100)]
+        [Required]
+        [StringLength(150)]
         public string Name { get; set; }
-
-        [Column(TypeName = "money")]
-        public decimal? Amount { get; set; }
-
-        public int? DerateType { get; set; }
-
-        public int? AimType { get; set; }
 
         [StringLength(250)]
         public string Description { get; set; }
 
-        public DateTime StartTime { get; set; }
-
-        public DateTime EndTime { get; set; }
+        public int Disabled { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal? DerateLine { get; set; }
-
-        public int Disabled { get; set; }
+        public decimal Price { get; set; }
     }
 }

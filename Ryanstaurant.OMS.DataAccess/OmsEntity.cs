@@ -14,7 +14,8 @@ namespace Ryanstaurant.OMS.DataAccess
 
         public virtual DbSet<OMS_Changes> OMS_Changes { get; set; }
         public virtual DbSet<OMS_Charges> OMS_Charges { get; set; }
-        public virtual DbSet<OMS_Derates> OMS_Derates { get; set; }
+        public virtual DbSet<OMS_ComboDetails> OMS_ComboDetails { get; set; }
+        public virtual DbSet<OMS_Combos> OMS_Combos { get; set; }
         public virtual DbSet<OMS_Discounts> OMS_Discounts { get; set; }
         public virtual DbSet<OMS_ItemDerates> OMS_ItemDerates { get; set; }
         public virtual DbSet<OMS_Items> OMS_Items { get; set; }
@@ -49,16 +50,16 @@ namespace Ryanstaurant.OMS.DataAccess
                 .Property(e => e.Description)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<OMS_Derates>()
-                .Property(e => e.Amount)
-                .HasPrecision(19, 4);
+            modelBuilder.Entity<OMS_Combos>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
 
-            modelBuilder.Entity<OMS_Derates>()
+            modelBuilder.Entity<OMS_Combos>()
                 .Property(e => e.Description)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<OMS_Derates>()
-                .Property(e => e.DerateLine)
+            modelBuilder.Entity<OMS_Combos>()
+                .Property(e => e.Price)
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<OMS_Discounts>()
@@ -89,10 +90,6 @@ namespace Ryanstaurant.OMS.DataAccess
                 .Property(e => e.Description)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<OMS_Items>()
-                .Property(e => e.ChildIdList)
-                .IsUnicode(false);
-
             modelBuilder.Entity<OMS_Menus>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
@@ -114,10 +111,6 @@ namespace Ryanstaurant.OMS.DataAccess
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<OMS_OrderDetail>()
-                .Property(e => e.RevokeReason)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<OMS_OrderDetail>()
                 .Property(e => e.CancelReason)
                 .IsUnicode(false);
 
@@ -131,10 +124,6 @@ namespace Ryanstaurant.OMS.DataAccess
 
             modelBuilder.Entity<OMS_Orders>()
                 .Property(e => e.PendingReason)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<OMS_Orders>()
-                .Property(e => e.RevokeReason)
                 .IsUnicode(false);
 
             modelBuilder.Entity<OMS_Orders>()

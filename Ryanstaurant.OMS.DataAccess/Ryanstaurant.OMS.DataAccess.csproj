@@ -53,7 +53,8 @@
     <Compile Include="OmsEntity.cs" />
     <Compile Include="OMS_Changes.cs" />
     <Compile Include="OMS_Charges.cs" />
-    <Compile Include="OMS_Derates.cs" />
+    <Compile Include="OMS_ComboDetails.cs" />
+    <Compile Include="OMS_Combos.cs" />
     <Compile Include="OMS_Discounts.cs" />
     <Compile Include="OMS_ItemDerates.cs" />
     <Compile Include="OMS_Items.cs" />
